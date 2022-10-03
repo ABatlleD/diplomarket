@@ -1,11 +1,14 @@
 import React from 'react'
+import TopBar from '../components/layouts/TopBar'
+import BottomOptions from '../components/layouts/BottomOptions'
 
 function Footer() {
   return (
     <>
-      <h1 className="text-3xl font-bold underline">
-        NavBar
-      </h1>
+      <div className='flex flex-col'>
+        <TopBar />
+        <BottomOptions />
+      </div>
     </>
   )
 }

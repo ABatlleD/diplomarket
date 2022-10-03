@@ -1,0 +1,14 @@
+{
+  "layout": {
+    "navbar": {
+      "allProducts": "All Products",
+      "about": "About us",
+      "contact": "Contact us",
+      "categories": "Categories",
+      "lang": {
+        "es": "Spanish",
+        "en": "English"
+      }
+    }
+  }
+}

@@ -1,11 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import MainLayout from '../layouts/MainLayout.jsx'
+import { getRequest } from '../config/restapi'
 
 function Home() {
+  const [products, setProducts] = useState({
+    data: []
+  })
+  const [apiError, setApiError] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  async function fetchProducts() {
+    try {
+      setLoading(true)
+      setProducts(await getRequest('products'))
+      setLoading(false)
+    } catch (error) {
+      setApiError(error.message)
+    }
+  }
+
+  useEffect(() => {
+    fetchProducts()
+  }, [setProducts])
+
   return (
-    <h1 className="text-3xl font-bold underline">
-      Home
-    </h1>
+    <>
+      {loading
+        ? <>
+            Loading...
+          </>
+        : <>
+            {apiError &&
+              <h2>{apiError}</h2>
+            }
+            {products && products.data.map((product) => (
+              <h2 key={product.id}>{product.title}</h2>
+            ))}
+          </>
+      }
+    </>
   )
 }
 
