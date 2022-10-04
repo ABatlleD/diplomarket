@@ -1,4 +1,7 @@
 {
+  "pages": {
+    "home": "Home"
+  },
   "layout": {
     "navbar": {
       "allProducts": "All Products",
@@ -8,7 +11,44 @@
       "lang": {
         "es": "Spanish",
         "en": "English"
-      }
+      },
+      "search": "Search"
     }
+  },
+  "home": {
+    "allProducts": "All Products",
+    "addCart": "Add Cart",
+    "prices": {
+      "title": "Prices",
+      "description": "Cheapest on the market"
+    },
+    "customer": {
+      "title": "The best customer service",
+      "description": "Dedicated to your satisfaction"
+    },
+    "payments": {
+      "title": "Secure payments",
+      "description": "With credit or debit cards"
+    }
+  },
+  "footer": {
+    "description": "Diplomarket is an online store developed by CUSPINERA SURL, in order to satisfy your purchases and deliveries, both for you and dearest. We are pleased to bring you the BEST! .... ALWAYS!!!",
+    "about": {
+      "title": "ABOUT",
+      "aboutUs": "About Us",
+      "privacyPolicy": "Privacy Policy",
+      "terms": "Terms & Conditions",
+      "contact": "Contact Us",
+      "help": "Help"
+    },
+    "account": {
+      "title": "MY ACCOUNT",
+      "signOut": "Sign Out",
+      "cart": "View Cart",
+      "wishes": "My Wish List",
+      "orders": "Track My Orders"
+    },
+    "app": "INSTALL APP",
+    "bottom": "© 2022 Diplomarket is a Web/Logo with all rights reserved."
   }
 }

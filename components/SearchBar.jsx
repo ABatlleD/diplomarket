@@ -6,6 +6,7 @@ import AppButton from './AppButton'
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined'
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined'
 import useWindowSize from '../hooks/WindowSize'
+import { useTranslation } from 'react-i18next'
 
 const theme = createTheme({
   palette: {
@@ -18,6 +19,7 @@ const theme = createTheme({
 
 function SearchBar() {
   const size = useWindowSize()
+  const { t } = useTranslation()
 
   return (
     <>
@@ -46,7 +48,7 @@ function SearchBar() {
               backgroundColor: 'white',
               width: '85%'
             }}
-            placeholder='Search'
+            placeholder={t('layout.navbar.search')}
             color='error'
             size={size.width < 768 || size.width > 1024 ? 'small' : 'medium'}
           />

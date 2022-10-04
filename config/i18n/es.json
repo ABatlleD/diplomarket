@@ -1,4 +1,7 @@
 {
+  "pages": {
+    "home": "Inicio"
+  },
   "layout": {
     "navbar": {
       "allProducts": "Todos los productos",
@@ -8,7 +11,44 @@
       "lang": {
         "es": "Español",
         "en": "Inglés"
-      }
+      },
+      "search": "Buscar"
     }
+  },
+  "home": {
+    "allProducts": "Todos los Productos",
+    "addCart": "Añadir al Carrito",
+    "prices": {
+      "title": "Precios",
+      "description": "Más baratos del mercado"
+    },
+    "customer": {
+      "title": "El mejor servicio al cliente",
+      "description": "Dedicados a tu satisfacción"
+    },
+    "payments": {
+      "title": "Pagos seguros",
+      "description": "Con tarjetas de crédito o débito"
+    }
+  },
+  "footer": {
+    "description": "Diplomarket es una tienda Online desarrollada por CUSPINERA SURL, en función de satisfacer sus compras y entregas, tanto para usted como para sus familiares. Nos place llevarles LO MEJOR….SIEMPRE!!!",
+    "about": {
+      "title": "ACERCA DE",
+      "aboutUs": "¿Quienes somos?",
+      "privacyPolicy": "Políticas de privacidad",
+      "terms": "Términos & Condiciones",
+      "contact": "Contáctenos",
+      "help": "Ayuda"
+    },
+    "account": {
+      "title": "MI CUENTA",
+      "signOut": "Registrarse",
+      "cart": "Ver Carrito",
+      "wishes": "Mi lista de deseos",
+      "orders": "Mis pedidos"
+    },
+    "app": "NUESTRA APP",
+    "bottom": "© 2022 Diplomarket es una Web/Logo con todos los derechos reservados."
   }
 }

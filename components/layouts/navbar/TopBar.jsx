@@ -2,7 +2,6 @@ import React from 'react'
 import DensityMediumIcon from '@mui/icons-material/DensityMedium'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { Badge, Divider } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import LangSelector from './LangSelector'
@@ -12,6 +11,7 @@ import AppButton from '../../AppButton'
 import { useTranslation } from 'react-i18next'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import SearchBar from '../../SearchBar'
+import AccountMenu from './AccountMenu'
 
 const theme = createTheme({
   palette: {
@@ -32,7 +32,7 @@ function TopBar() {
         <div className='flex flex-row justify-between md:ml-6 w-1/2 md:w-1/5 xl:w-[12%]'>
           <DensityMediumIcon
             fontSize='large'
-            className='mt-3 xl:hidden'
+            className='mt-2 xl:hidden'
           />
           <img src="/logo-preloader0.png" className="max-w-max h-14" alt="..." />
         </div>
@@ -59,8 +59,8 @@ function TopBar() {
             <SearchBar />
           </div>
         </div>
-        <div className='flex flex-row justify-between md:justify-around w-5/12 md:w-4/12 xl:w-3/12'>
-          <div className='hidden md:flex mt-3 md:mt-5 mr-[-7px] md:mr-[-20px]'>
+        <div className='flex flex-row justify-between md:justify-around w-5/12 md:w-4/12 xl:w-3/12 md:mt-[-5px]'>
+          <div className='hidden md:flex mt-3 md:mt-7 mr-[-7px] md:mr-[-20px]'>
             <LangSelector />
           </div>
           <Divider orientation="vertical" flexItem className='hidden md:flex' />
@@ -71,14 +71,36 @@ function TopBar() {
             USD <span className='mt-[-3px]'><LockIcon fontSize={size.width < 1024 ? 'large' : 'small'} /></span>
           </div>
           <ThemeProvider theme={theme}>
-            <Badge badgeContent={2} color='error' className='mt-3'>
+            <Badge
+              badgeContent={2}
+              color='error'
+              sx={{
+                marginTop: {
+                  xs: '0.5rem',
+                  sm: '0.5rem',
+                  md: '0.75rem'
+                }
+              }}
+            >
               <FavoriteBorderIcon fontSize='large' />
             </Badge>
-            <Badge badgeContent={1} color="error" className='mt-3'>
+            <Badge
+              badgeContent={1}
+              color='error'
+              sx={{
+                marginTop: {
+                  xs: '0.5rem',
+                  sm: '0.5rem',
+                  md: '0.75rem'
+                }
+              }}
+            >
               <ShoppingCartOutlinedIcon fontSize='large' />
             </Badge>
           </ThemeProvider>
-          <AccountCircleIcon fontSize='large' className='mt-3' />
+          <div className='mt-1'>
+            <AccountMenu />
+          </div>
         </div>
       </div>
     </>

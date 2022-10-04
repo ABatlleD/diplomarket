@@ -64,7 +64,7 @@ function BottomOptions() {
           </div>
         </div>
         <div className='hidden xl:flex flex-row justify-between w-full mx-4'>
-          <div className='flex flex-row w-1/3'>
+          <div className='flex flex-row w-2/3'>
             <DensityMediumIcon
               fontSize='small'
             />
