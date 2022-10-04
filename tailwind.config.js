@@ -15,7 +15,8 @@ module.exports = {
       text: {
         100: '#6e717a'
       },
-      button: '#b12024'
+      button: '#b12024',
+      whatsapp: '#49c95a'
     },
     extend: {}
   },

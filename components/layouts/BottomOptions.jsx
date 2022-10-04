@@ -8,6 +8,8 @@ import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDown
 import LockIcon from '@mui/icons-material/Lock'
 import { Divider } from '@mui/material'
 import LangSelector from './LangSelector'
+import DensityMediumIcon from '@mui/icons-material/DensityMedium'
+import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 
 function BottomOptions() {
   const [t] = useTranslation()
@@ -15,7 +17,7 @@ function BottomOptions() {
   return (
     <>
       <div className='bg-background-300 flex flex-col md:flex-row md:justify-between p-2 md:p-4'>
-        <div className='hidden md:flex'>
+        <div className='hidden md:flex xl:hidden'>
           <AppButton
             sx={{
               fontSize: {
@@ -31,7 +33,7 @@ function BottomOptions() {
             {t('layout.navbar.categories')} <span className='mt-[-1px]'><ArrowForwardIosIcon fontSize='small' /></span>
           </AppButton>
         </div>
-        <div className='md:w-[86%]'>
+        <div className='md:w-[86%] xl:hidden'>
           <SearchBar />
         </div>
         <div className='flex md:hidden flex-row justify-around mt-4'>
@@ -59,6 +61,31 @@ function BottomOptions() {
           <Divider orientation="vertical" flexItem />
           <div className='flex flex-row mt-3 ml-1 text-text-100' onClick={() => {}}>
             USD <span className='mt-[-3px]'><LockIcon fontSize='small' /></span>
+          </div>
+        </div>
+        <div className='hidden xl:flex flex-row justify-between w-full'>
+          <div className='flex flex-row justify-around w-1/3'>
+            <DensityMediumIcon
+              fontSize='small'
+            />
+            <div>
+              {t('layout.navbar.allProducts')}
+            </div>
+            <div>
+              {t('layout.navbar.about')}
+            </div>
+            <div>
+              {t('layout.navbar.contact')}
+            </div>
+          </div>
+          <div className='flex flex-row'>
+            <WhatsAppIcon
+              sx={{
+                color: '#49c95a',
+                fontSize: 25
+              }}
+            />
+            <p className='ml-1'>+1 305 337 7539</p>
           </div>
         </div>
       </div>

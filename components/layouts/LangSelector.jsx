@@ -25,7 +25,6 @@ function LangSelector () {
   }
 
   const handleSelectLanguage = (e, lang) => {
-    console.log(lang)
     if (lang === 'es' && language === 'en') {
       i18n.changeLanguage('es')
       setLanguage(lang)

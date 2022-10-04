@@ -5,6 +5,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import AppButton from './AppButton'
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined'
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined'
+import useWindowSize from '../hooks/WindowSize'
 
 const theme = createTheme({
   palette: {
@@ -16,17 +17,20 @@ const theme = createTheme({
 })
 
 function SearchBar() {
+  const size = useWindowSize()
+
   return (
     <>
       <ThemeProvider theme={theme}>
         <div className='flex flex-row'>
-          <div className='hidden md:flex md'>
+          <div className='hidden md:flex'>
             <AppButton
                 sx={{
                   fontSize: {
                     xs: 10,
                     sm: 10,
-                    md: 15
+                    md: 15,
+                    lg: 10
                   },
                   borderTopRightRadius: 0,
                   borderBottomRightRadius: 0
@@ -44,7 +48,7 @@ function SearchBar() {
             }}
             placeholder='Search'
             color='error'
-            size={'small'}
+            size={size.width < 768 || size.width > 1024 ? 'small' : 'medium'}
           />
           <AppButton
             sx={{
