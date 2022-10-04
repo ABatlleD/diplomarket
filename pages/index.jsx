@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import MainLayout from '../layouts/MainLayout.jsx'
 import { getRequest } from '../config/restapi'
 import ProductsCarousel from '../components/products/ProductsSwiper.jsx'
 import PropTypes from 'prop-types'
 function Home({ products, apiError }) {
   // const [allProducts] = useState({})
-  const [loading] = useState(false)
+  // const [loading] = useState(false)
 
   // async function fetchProducts() {
   //   try {
@@ -23,13 +23,13 @@ function Home({ products, apiError }) {
 
   return (
     <>
-      {apiError &&
+      {/* {apiError &&
         <h2>{apiError}</h2>
-      }
+      } */}
       <div className='flex flex-col'>
-        <div className='AllProducts flex flex-col'>
-          <div className='flex mx-2 mt-4 flex-row justify-between'>
-            <div className=''>All Products</div>
+        <div className='AllProducts mx-4 flex flex-col'>
+          <div className='flex mt-4 flex-row justify-between'>
+            <div className='font-bold text-xl'>All Products</div>
           </div>
           <div>
             <ProductsCarousel products={products} />

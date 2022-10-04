@@ -3,10 +3,84 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import PropTypes from 'prop-types'
 import ProductItem from './ProductItem'
 
+const test = [
+  {
+    id: 1,
+    title: 'Test title',
+    image: 'https://cdn.pixabay.com/photo/2014/06/03/19/38/road-sign-361514_960_720.png',
+    category: 'Test Category',
+    description: 'Lorem Ipsum',
+    price: 100
+  },
+  {
+    id: 2,
+    title: 'Test title',
+    image: 'https://cdn.pixabay.com/photo/2014/06/03/19/38/road-sign-361514_960_720.png',
+    category: 'Test Category',
+    description: 'Lorem Ipsum',
+    price: 100
+  },
+  {
+    id: 3,
+    title: 'Test title',
+    image: 'https://cdn.pixabay.com/photo/2014/06/03/19/38/road-sign-361514_960_720.png',
+    category: 'Test Category',
+    description: 'Lorem Ipsum',
+    price: 100
+  },
+  {
+    id: 4,
+    title: 'Test title',
+    image: 'https://cdn.pixabay.com/photo/2014/06/03/19/38/road-sign-361514_960_720.png',
+    category: 'Test Category',
+    description: 'Lorem Ipsum',
+    price: 100
+  },
+  {
+    id: 5,
+    title: 'Test title',
+    image: 'https://cdn.pixabay.com/photo/2014/06/03/19/38/road-sign-361514_960_720.png',
+    category: 'Test Category',
+    description: 'Lorem Ipsum',
+    price: 100
+  },
+  {
+    id: 6,
+    title: 'Test title',
+    image: 'https://cdn.pixabay.com/photo/2014/06/03/19/38/road-sign-361514_960_720.png',
+    category: 'Test Category',
+    description: 'Lorem Ipsum',
+    price: 100
+  },
+  {
+    id: 7,
+    title: 'Test title',
+    image: 'https://cdn.pixabay.com/photo/2014/06/03/19/38/road-sign-361514_960_720.png',
+    category: 'Test Category',
+    description: 'Lorem Ipsum',
+    price: 100
+  },
+  {
+    id: 8,
+    title: 'Test title',
+    image: 'https://cdn.pixabay.com/photo/2014/06/03/19/38/road-sign-361514_960_720.png',
+    category: 'Test Category',
+    description: 'Lorem Ipsum',
+    price: 100
+  },
+  {
+    id: 9,
+    title: 'Test title',
+    image: 'https://cdn.pixabay.com/photo/2014/06/03/19/38/road-sign-361514_960_720.png',
+    category: 'Test Category',
+    description: 'Lorem Ipsum',
+    price: 100
+  }
+]
+
 function ProductsSwiper({ products }) {
   return (
     <Swiper
-      className='mx-1 md:mx-4'
       autoplay={{
         delay: 1000,
         disableOnInteraction: false,
@@ -39,7 +113,7 @@ function ProductsSwiper({ products }) {
         }
       }}
     >
-      {products.map((product) => (
+      {test.map((product) => (
         <SwiperSlide key={product.id}>
           <ProductItem
             title={product.title}

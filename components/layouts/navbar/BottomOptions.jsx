@@ -1,6 +1,6 @@
 import React from 'react'
-import SearchBar from '../SearchBar'
-import AppButton from '../AppButton'
+import SearchBar from '../../SearchBar'
+import AppButton from '../../AppButton'
 import { useTranslation } from 'react-i18next'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined'
@@ -63,15 +63,15 @@ function BottomOptions() {
             USD <span className='mt-[-3px]'><LockIcon fontSize='small' /></span>
           </div>
         </div>
-        <div className='hidden xl:flex flex-row justify-between w-full'>
-          <div className='flex flex-row justify-around w-1/3'>
+        <div className='hidden xl:flex flex-row justify-between w-full mx-4'>
+          <div className='flex flex-row w-1/3'>
             <DensityMediumIcon
               fontSize='small'
             />
-            <div>
+            <div className='mx-4'>
               {t('layout.navbar.allProducts')}
             </div>
-            <div>
+            <div className='mr-4'>
               {t('layout.navbar.about')}
             </div>
             <div>

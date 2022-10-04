@@ -7,11 +7,11 @@ import { Badge, Divider } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import LangSelector from './LangSelector'
 import LockIcon from '@mui/icons-material/Lock'
-import useWindowSize from '../../hooks/WindowSize'
-import AppButton from '../AppButton'
+import useWindowSize from '../../../hooks/WindowSize'
+import AppButton from '../../AppButton'
 import { useTranslation } from 'react-i18next'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import SearchBar from '../SearchBar'
+import SearchBar from '../../SearchBar'
 
 const theme = createTheme({
   palette: {
@@ -29,15 +29,15 @@ function TopBar() {
   return (
     <>
       < div className='bg-background-100 flex flex-row justify-around md:justify-between my-2 xl:mt-1 xl:mb-2'>
-        <div className='flex flex-row justify-between md:justify-around w-1/2 md:w-1/5 xl:w-2/12'>
+        <div className='flex flex-row justify-between md:ml-6 w-1/2 md:w-1/5 xl:w-[12%]'>
           <DensityMediumIcon
             fontSize='large'
             className='mt-3 xl:hidden'
           />
           <img src="/logo-preloader0.png" className="max-w-max h-14" alt="..." />
         </div>
-        <div className='hidden md:hidden xl:flex xl:w-7/12 flex-row justify-between mt-3'>
-          <div className=''>
+        <div className='hidden md:hidden xl:flex xl:w-9/12 flex-row mt-2'>
+          <div className='mr-2'>
             <AppButton
               sx={{
                 fontSize: {
@@ -55,17 +55,17 @@ function TopBar() {
               {t('layout.navbar.categories')} <span className='mt-[-1px]'><ArrowForwardIosIcon fontSize='small' /></span>
             </AppButton>
           </div>
-          <div className='md:w-[86%]'>
+          <div className='md:w-[88%]'>
             <SearchBar />
           </div>
         </div>
         <div className='flex flex-row justify-between md:justify-around w-5/12 md:w-4/12 xl:w-3/12'>
-          <div className='hidden md:flex mt-1 md:mt-3 mr-[-7px] md:mr-[-20px]'>
+          <div className='hidden md:flex mt-3 md:mt-5 mr-[-7px] md:mr-[-20px]'>
             <LangSelector />
           </div>
           <Divider orientation="vertical" flexItem className='hidden md:flex' />
           <div
-            className='hidden md:flex flex-row mt-3 md:mt-5 ml-1 md:ml-[-10px] text-text-100 xl:text-sm'
+            className='hidden md:flex flex-row mt-4 md:mt-6 ml-1 md:ml-[-10px] text-text-100 xl:text-sm'
             onClick={() => {}}
           >
             USD <span className='mt-[-3px]'><LockIcon fontSize={size.width < 1024 ? 'large' : 'small'} /></span>

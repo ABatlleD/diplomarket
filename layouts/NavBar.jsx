@@ -1,6 +1,6 @@
 import React from 'react'
-import TopBar from '../components/layouts/TopBar'
-import BottomOptions from '../components/layouts/BottomOptions'
+import TopBar from '../components/layouts/navbar/TopBar'
+import BottomOptions from '../components/layouts/navbar/BottomOptions'
 
 function Footer() {
   return (

@@ -1,12 +1,13 @@
 import React from 'react'
+import FooterBox from '../components/layouts/footer/FooterBox'
+import BrandBar from '../components/layouts/footer/BrandBar'
 
 function Footer() {
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">
-        Footer
-      </h1>
-    </>
+    <div className='flex flex-col'>
+      <FooterBox />
+      <BrandBar />
+    </div>
   )
 }
 
