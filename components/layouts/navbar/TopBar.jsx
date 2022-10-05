@@ -33,7 +33,7 @@ function TopBar() {
         <div className='flex flex-row justify-between md:ml-6 w-1/2 md:w-1/5 xl:w-[12%]'>
           <DensityMediumIcon
             fontSize='large'
-            className='mt-2 xl:hidden'
+            className='mt-2 lg:hidden'
           />
           <Link href="/">
             <img src="/logo-preloader0.png" className="max-w-max h-14 hover:cursor-pointer" alt="..." />
