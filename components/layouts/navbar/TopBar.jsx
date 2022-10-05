@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import SearchBar from '../../SearchBar'
 import AccountMenu from './AccountMenu'
+import Link from 'next/link'
 
 const theme = createTheme({
   palette: {
@@ -34,7 +35,9 @@ function TopBar() {
             fontSize='large'
             className='mt-2 xl:hidden'
           />
-          <img src="/logo-preloader0.png" className="max-w-max h-14" alt="..." />
+          <Link href="/">
+            <img src="/logo-preloader0.png" className="max-w-max h-14 hover:cursor-pointer" alt="..." />
+          </Link>
         </div>
         <div className='hidden md:hidden xl:flex xl:w-9/12 flex-row mt-2'>
           <div className='mr-2'>

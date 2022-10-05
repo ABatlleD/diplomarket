@@ -1,6 +1,7 @@
 {
   "pages": {
-    "home": "Home"
+    "home": "Home",
+    "products": "Products"
   },
   "layout": {
     "navbar": {
@@ -30,6 +31,10 @@
       "title": "Secure payments",
       "description": "With credit or debit cards"
     }
+  },
+  "products": {
+    "category": "Category",
+    "description": "Description"
   },
   "footer": {
     "description": "Diplomarket is an online store developed by CUSPINERA SURL, in order to satisfy your purchases and deliveries, both for you and dearest. We are pleased to bring you the BEST! .... ALWAYS!!!",

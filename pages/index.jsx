@@ -1,4 +1,4 @@
-import React, from 'react'
+import React from 'react'
 import MainLayout from '../layouts/MainLayout.jsx'
 import { getRequest } from '../config/restapi'
 import ProductsCarousel from '../components/products/ProductsSwiper.jsx'

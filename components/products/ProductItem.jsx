@@ -5,6 +5,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { useTranslation } from 'react-i18next'
+import Link from 'next/link'
 
 const theme = createTheme({
   palette: {
@@ -15,16 +16,27 @@ const theme = createTheme({
   }
 })
 
-function ProductItem({ title, price, category, image }) {
+function ProductItem({ id, title, price, category, image }) {
   const { t } = useTranslation()
+
+  const resizeTitle = (string, maxLength) => {
+    console.log(string.length > maxLength)
+    return string.length > maxLength ? `${string.slice(0, maxLength)}...` : string
+  }
 
   return (
     <>
-      <div className='flex flex-col hover:cursor-pointer my-4 hover:shadow-button w-full border-2 border-background-300 rounded-lg h-[22rem] md:h-[26rem] xl:h-[28rem]'>
+      <div className='flex flex-col my-4 hover:shadow-button w-full border-2 border-background-300 rounded-lg h-[24rem] md:h-[26rem] xl:h-[28rem]'>
         <div className='my-2 w-100 flex flex-row justify-center h-16 md:h-28 xl:h-36'>
-          <img src={image} className="max-w-max h-full" alt="..." />
+          <Link href={`/products/${id}`}>
+            <img src={image} className="max-w-max hover:cursor-pointer h-full" alt="..." />
+          </Link>
         </div>
-        <div className='mx-2 mt-2 mb-1 md:my-2 text-text-100 h-14'>{title}</div>
+        <div className='mx-2 mt-2 mb-1 md:my-2 text-text-100 h-24 md:h-14'>
+          <Link href={`/products/${id}`}>
+            {resizeTitle(title, 40)}
+          </Link>
+        </div>
         <div className='mx-2 my-1 md:my-2 text-button'>{category}</div>
         <div className='mx-2 my-1 md:my-2 text-button font-bold'>$ {price} USD</div>
         <ThemeProvider theme={theme}>
@@ -55,6 +67,7 @@ function ProductItem({ title, price, category, image }) {
 }
 
 ProductItem.propTypes = {
+  id: PropTypes.number,
   title: PropTypes.string,
   price: PropTypes.number,
   description: PropTypes.string,
