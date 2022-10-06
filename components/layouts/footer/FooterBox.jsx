@@ -31,10 +31,26 @@ function FooterBox() {
               {t('footer.about.aboutUs')}
             </p>
           </Link>
-          <p className='mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>{t('footer.about.privacyPolicy')}</p>
-          <p className='mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>{t('footer.about.terms')}</p>
-          <p className='mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>{t('footer.about.contact')}</p>
-          <p className='transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>{t('footer.about.help')}</p>
+          <Link href='/privacy'>
+            <p className='mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>
+              {t('footer.about.privacyPolicy')}
+            </p>
+          </Link>
+          <Link href='/terms'>
+            <p className='mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>
+              {t('footer.about.terms')}
+            </p>
+          </Link>
+          <Link href='/contact'>
+            <p className='mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>
+              {t('footer.about.contact')}
+            </p>
+          </Link>
+          <Link href='/help'>
+            <p className='transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>
+              {t('footer.about.help')}
+            </p>
+          </Link>
         </div>
         <div className='flex flex-col md:w-5/12 text-text-200 font-semibold mb-6'>
           <h2 className='mb-3 font-bold text-background-100'>{t('footer.account.title')}</h2>

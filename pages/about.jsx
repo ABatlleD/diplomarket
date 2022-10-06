@@ -12,7 +12,6 @@ function About() {
       <div className='flex flex-col mt-8 mb-8 xl:mb-80 mx-4 lg:mx-40'>
         <h1 className='font-bold text-[2rem] text-footer-background-200 mb-4'>{t('about.title')}</h1>
         <p className='text-xl text-justify'>{t('about.text')}</p>
-        <p></p>
       </div>
     </>
   )

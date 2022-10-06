@@ -2,7 +2,11 @@
   "pages": {
     "home": "Home",
     "products": "Products",
-    "about": "About Us"
+    "about": "About Us",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy",
+    "contact": "Contact Us",
+    "help": "Help"
   },
   "layout": {
     "navbar": {
@@ -40,6 +44,158 @@
   "about": {
     "title": "ABOUT US",
     "text": "Diplomarket is an online store developed by CUSPINERA SURL in order to satisfy your purchases and deliveries, for you and dearest. We are pleased to bring you the BEST...ALWAYS!!!. The company works under the laws of the United States, which also includes all economic actors, such as suppliers, traders, according to their licenses and regulations. Everything you buy here is exported."
+  },
+  "privacy": {
+    "sections": {
+      "1": {
+        "title": "ABOUT THIS WEBSITE",
+        "text": {
+          "1": "Any information provided or process performed outside the scope...",
+          "2": "is foreign to our company."
+        }
+      },
+      "2": {
+        "title": "PRIVACY POLICY",
+        "text": "It is a priority at Diplomarket to guarantee the security and reliability of the information offered by its clients. We respect the privacy of all those who use our system, so its protection is of vital importance in it. When a client registers on the site, their data is stored on our servers, but that information is only used for the authentication of their registration and for the personalization of our service, which includes the updating of special offers and new services, if you request it. choose. We ensure the confidentiality of the data provided by you, and we guarantee that only the parties involved in the operational process will have access to the data necessary to guarantee our work. In no case will they be transferred to third parties or companies outside Diplomarket."
+      },
+      "3": {
+        "title": "THE PURCHASE PROCESS, DATA PROVIDED AND HOW THEY ARE STORED",
+        "text": "To carry out the purchase process you need to register. In this first step you must provide your personal information (full name, email, password, address, telephone, country and city) that is obtained in the registration form. Through your email address, your account is confirmed, your orders are notified and the state in which they are found. It also provides information when you fill out the form about the recipient's data, which are recorded in your recipient list for future purchases. These are used only to make the delivery. The rest of the information that you provide, such as that related to your credit card at the time you make the payment, is not stored on our site since only the payment gateway is involved in this process."
+      },
+      "4": {
+        "title": "COOKIES",
+        "text": "Cookies are small pieces of information that the site needs to know the interests of our customers and do not contain any personal information. Most browsers automatically accept cookies. If you are registered, you can view and/or update your data whenever you want by clicking on the My Account section."
+      },
+      "5": {
+        "title": "OTHER ISSUES ABOUT YOUR PRIVACY",
+        "text": "This site advocates the right to disclose the information of its clients, in case it is considered extremely necessary, a personal emergency, protection of the rights or properties of the site, identification, contact or legal actions against someone who interferes with our rights or properties, intentionally or not, and when someone is affected by said activities. Changes in the use of personal information will be communicated in future versions of this Privacy Policy."
+      }
+    }
+  },
+  "terms": {
+    "sections": {
+      "1": {
+        "title": "LEGAL INFORMATION",
+        "text": "All products and services that are made on this website, the relationship with suppliers, the destination of the final product, the use of these and their beneficiaries, are in accordance with different licenses and exception of these, which have been obtained by the different entities. Federal, State, Local in the United States."
+      },
+      "2": {
+        "title": "PAGE INFORMATION",
+        "text": {
+          "1": "is a store that includes several producers and marketers, who put their products and services to meet the needs of you, family and friends. No matter where you are, we take your purchases to your final destination.",
+          "2": "We make it easy for you, you can pay us by Zelle, Paypal, Visa or MasterCard, with 100% security in your transactions through this method. Each transaction is reviewed and confirmed by our team.",
+          "3": "Delivery times are from 3 to 5 days, our products and services will be available.",
+          "4": "From the group of producers, marketers within this web page, there are those who distribute their purchases to the door of their house or theirs. We are all responsible that your final delivery arrives in the best condition."
+        }
+      },
+      "3": {
+        "title": "IN DIPLOMARKET THE VARIETY OF PRODUCTS ARE",
+        "text": {
+          "1": "In this website you will also be able to access products that have already been imported from abroad, according to the current regulations, and that are already in function for you and your family, as soon as your payment is confirmed. Many of these products are known to you, and you want them to be consumed by you, your family and friends.",
+          "2": "Our product and service variety is the goal, and that they are permanent at more affordable prices. All products have guaranteed quality, conservation, valid date for consumption, and have been registered with trade regulatory entities.",
+          "3": "Choose our Online website to make your shipments. We have more than 1000 products that we put at your disposal to deliver them, from the comfort of your home, in a fast and safe way.",
+          "4": "As a customer, you will also be able to count on 24-hour help support, where we will assist you in the purchase process or with any questions or concerns. It will be our pleasure to assist you, contact us by phone or email."
+        }
+      },
+      "4": {
+        "title": "PRODUCTS AND PRICES",
+        "text": {
+          "1": "Additional charges you may pay are those related to home delivery, installation or other charges that will be explained before they are finally paid. If there are any extra charges on these items, which are needed after your payment, you will be contacted immediately by a representative. You will be able to finally confirm the purchase with the amount to be paid with your prompt refund.",
+          "2": "If you wish to purchase other types of products or services that you do not find on this website, please do not hesitate to contact us, we are here to find legal, supply and logistic solutions."
+        }
+      },
+      "5": {
+        "title": "WHO CAN BUY ON THIS WEBSITE*.",
+        "text": "- due to the interest of the parties involved in this website, the limited quantities of products or services available, the need to have specific licenses in the U.S.A., the type of currency charged (USD) authorized by foreign banks, this website is limited to specific customers only. Contact us for more information."
+      },
+      "6": {
+        "title": "PROHIBITIONS/LIMITATIONS TO PURCHASE ON THIS WEBSITE",
+        "text": {
+          "1": "In addition to those entities restricted by U.S. Department of State regulations, for more information please contact",
+          "2": "Click Here",
+          "3": "Our companies or associates are not responsible for the negative outcome of your purchases, which may include blocking buyer accounts by federal institutions, order cancellations, delays of refunds to the buyer, non-delivery of goods to final destinations, among others that may affect you. Please, unless you are on the WHO CAN BUY ON THIS WEBSITE* list, please do not make transactions.",
+          "4": "However, because there are regulations that apply to specific cases, whether for natural or foreign persons, state or private, our companies are willing to work together and according to regulations in force in the U.S.A. at the time you read our website, please contact us."
+        }
+      },
+      "7": {
+        "title": "ABOUT THE WEBSITE",
+        "text": {
+          "1": "Any information provided or process performed outside the scope of...",
+          "2": "is foreign to our company."
+        }
+      }
+    }
+  },
+  "help": {
+    "questionTitle": "",
+    "questions": {
+      "1": {
+        "question": "Can I pay cash when I receive the products?",
+        "answer": "We do not accept cash payments. The entire transaction is done online at the time of purchase."
+      },
+      "2": {
+        "question": "What cities do you deliver to?",
+        "answer": "At the moment we are only available from miami"
+      },
+      "3": {
+        "question": "Does my family member have to pay anything?",
+        "answer": "Payments are not made."
+      },
+      "4": {
+        "question": "How many days does it take to deliver orders?",
+        "answer": "Orders have 3 to 5 days to be delivered"
+      },
+      "5": {
+        "question": "When in doubt, who to turn to?",
+        "answer": "We have customer service through the email support@diplomarket.com and through the contact section. we also have an online chat available 24 hours a day."
+      },
+      "6": {
+        "question": "How do i know if my order was completed?",
+        "answer": "When making a purchase you will have access to a purchase history. completed purchases will appear with a 'COMPLETED' status. we also send a notification to your email (with which you registered)"
+      },
+      "7": {
+        "question": "I placed an order and did not receive the mail?",
+        "answer": "If you placed an order and did not receive the email, please contact us through our chat on the website or by email support@diplomarket.com. send us name, surnames, email, and amount of the order."
+      },
+      "8": {
+        "question": "How much is the shippin cost?",
+        "answer": "The shipping cost is determined by the place of delivery"
+      },
+      "9": {
+        "question": "How does my family member know that the order will be delivered?",
+        "answer": "Your relative will receive a notice by mail of the purchase made. the customer who places the order is responsible for providing the contact information as well as for notifying the recipient when they receive the order shipping email, otherwise it may mean delivery delays."
+      }
+    },
+    "how": {
+      "title": "How to Use"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "If having any problem or need assistance, please contact us",
+    "phones": {
+      "title": "Phones:",
+      "text": "About questions in general"
+    },
+    "emails": {
+      "title": "Emails",
+      "1": "Purchase orders:",
+      "2": "Home deliveries:",
+      "3": "Market your products with us:",
+      "4": "Technical details of the website:"
+    },
+    "address": {
+      "title": "Address:",
+      "subtitle": "Miami Office:",
+      "text": "7921 nw 68 street miami, fl 33166, united states ,so that you feel cared for or respond to your needs, with a physical presence. this office does not deal with matters to confirm purchases, only for cargo storage"
+    },
+    "chat": {
+      "title": "Online Chat Service:",
+      "text": "9am - 6pm. To attend any kind of doubt or problem."
+    },
+    "inputs": {
+      "email": "EMAIL",
+      "message": "MESSAGE"
+    }
   },
   "footer": {
     "description": "Diplomarket is an online store developed by CUSPINERA SURL, in order to satisfy your purchases and deliveries, both for you and dearest. We are pleased to bring you the BEST! .... ALWAYS!!!",

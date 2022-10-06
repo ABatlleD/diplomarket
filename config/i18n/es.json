@@ -2,7 +2,11 @@
   "pages": {
     "home": "Inicio",
     "products": "Productos",
-    "about": "Sobre Nosotros"
+    "about": "Sobre Nosotros",
+    "terms": "Términos y Condiciones",
+    "privacy": "Política de Privacidad",
+    "contact": "Contáctenos",
+    "help": "Ayuda"
   },
   "layout": {
     "navbar": {
@@ -40,6 +44,158 @@
   "about": {
     "title": "SOBRE NOSOTROS",
     "text": "Diplomarket es una tienda Online desarrollada por CUSPINERA SURL en función de satisfacer sus compras y entregas, tanto para usted como para sus familiares. Nos place llevarles LO MEJOR… SIEMPRE!!!. La empresa trabaja bajo las leyes de los Estados Unidos, donde también se incluyen a todos los actores económicos, tales como proveedores, comercializadores, según sus licencias y regulaciones. Todo lo que usted compre aquí, se exporta."
+  },
+  "privacy": {
+    "sections": {
+      "1": {
+        "title": "SOBRE LA WEB",
+        "text": {
+          "1": "Cualquier información brindada o proceso realizado fuera del ámbito...",
+          "2": "es ajeno a nuestra empresa."
+        }
+      },
+      "2": {
+        "title": "POLÍTICA DE PRIVACIDAD",
+        "text": "Es prioridad en Diplomarket garantizar la seguridad y confiabilidad de la información que ofrecen sus clientes. Respetamos la privacidad de todos aquellos que utilizan nuestro sistema, por lo que su protección resulta de vital importancia en el mismo. Cuando un cliente se registra en el sitio, quedan guardados sus datos en nuestros servidores, pero esa información solo es utilizada para la autenticación de su registro y para la personalización de nuestro servicio que incluye la actualización de ofertas especiales y nuevos servicios, si usted lo elige. Aseguramos la confidencialidad de los datos aportados por usted, y garantizamos que solo las partes que intervienen en el proceso operacional, tendrán acceso a los datos necesarios para garantizar nuestro trabajo. En ningún caso serán cedidos a terceras personas o empresas ajenas a Diplomarket."
+      },
+      "3": {
+        "title": "EL PROCESO DE COMPRA, DATOS APORTADOS Y CÓMO SON GUARDADOS",
+        "text": "Para realizar el proceso de compra usted necesita registrarse. En este primer paso debe brindar su información personal (nombre completo, correo, contraseña, dirección,telefono, país y ciudad) que se obtiene en la formulario de registro. A través de su dirección de correo, se confirma su cuenta, se le notifican sus órdenes y como el estado en que se encuentran. También aporta información cuando llena el formulario sobre los datos del destinatario, que quedan registrados en su lista de destinatarios para futuras compras. Estos son utilizados únicamente para efectuar la entrega. El resto de la información que usted brinda, como la relacionada con su tarjeta de crédito en el momento en que efectúa el pago, no es almacenada en nuestro sitio ya que en este proceso solo interviene la pasarela de pago."
+      },
+      "4": {
+        "title": "COOKIES",
+        "text": "Las cookies son pequeñas piezas de información que el sitio necesita para conocer los intereses de nuestros clientes y que no contienen ningún tipo de información personal. La mayoría de los navegadores aceptan automáticamente cookies. Si usted se encuentra registrado puede ver y/o actualizar sus datos, cada vez que desee, haciendo clic en la sección Mi cuenta."
+      },
+      "5": {
+        "title": "OTRAS CUESTIONES ACERCA DE SU PRIVACIDAD",
+        "text": "Este sitio aboga el derecho de divulgar la información de sus clientes, en caso de considerarlo extremadamente necesario, una emergencia personal, protección de los derechos o propiedades del sitio, identificación, contacto o acciones legales contra alguien que interfiera en nuestros derechos o propiedades, intencionalmente o no, y cuando alguna persona sea afectada por dichas actividades. Los cambios en el uso de la información personal seran comunicados en versiones futuras de esta Política de Privacidad."
+      }
+    }
+  },
+  "terms": {
+    "sections": {
+      "1": {
+        "title": "INFORMACIÓN LEGAL",
+        "text": "Todos los productos y servicios que se realizan en esta página web, la relación con proveedores, el destino del producto final, el uso de estos y sus beneficiarios, son acorde a diferentes licencias y excepción de estas, que se han obtenido por las distintas entidades Federales, Estatales, Locales en los Estados Unidos"
+      },
+      "2": {
+        "title": "INFORMACIÓN DE LA PÁGINA",
+        "text": {
+          "1": "es una tienda que abarca varios productores y comercializadores, que ponen sus productos y servicios para satisfacer las necesidades de usted, familiares y amigos. No importa donde usted se encuentre, le llevamos sus compras a su destino final.",
+          "2": "Lo hacemos fácil para usted, puede pagarnos por Zelle, Paypal, Visa o MasterCard, con 100% de seguridad en sus transacciones por esta vía. Por nuestro equipo se revisan y confirman cada transacción.",
+          "3": "Los tiempos de entregas son de 3 a 5 días, nuestros productos y servicios estarán disponibles.",
+          "4": "Del grupo de productores, comercializadores dentro de esta página web, se encuentran aquellos que realizan la distribución de sus compras hasta la puerta de su casa o de los suyos. Todos estamos responsabilizados que su entrega final llegue en el mejor estado."
+        }
+      },
+      "3": {
+        "title": "EN DIPLOMARKET LA VARIEDAD DE PRODUCTOS SON",
+        "text": {
+          "1": "En esta web también usted podrá acceder a productos que ya han sido importados desde el exterior, según las regulaciones vigentes, y que ya están en función para usted y su familia, tan pronto sea confirmado su pago. Muchos de esos productos son conocidos por usted, y que desea que sean también consumidos por usted, sus familiares y amigos.",
+          "2": "Nuestra variedad de producto y servicios es la meta, y que sean permanente a precios más asequibles. Todos los productos tienen garantizada su calidad, conservación, fecha válida para su consumo, y han sido registrados ante entidades reguladoras del comercio.",
+          "3": "Escoja nuestra web Online para realizar sus envíos. Tenemos más de 1000 productos que ponemos a su disposición para hacerlos llegar, desde la comodidad de su casa, de un modo rápido y seguro.",
+          "4": "Como cliente, podrá contar también con soporte de ayuda las 24 horas del día, donde le ayudaremos en el proceso de compra o ante cualquier duda o inquietud. Será nuestro placer atenderle, contáctenos por teléfono o por email."
+        }
+      },
+      "4": {
+        "title": "PRODUCTOS Y PRECIOS",
+        "text": {
+          "1": "Los precios adicionales que usted podrá pagar son aquellos relacionados con la entrega a domicilio, por instalación u otros cargos que serán explicados antes de ser pagados finalmente. Si existiese algún cargo extra sobre estos temas, que se necesite después de su pago, será contactado inmediatamente por un representante. Usted podrá confirmar finalmente la compra con el monto a cancelar con su rápido reembolso.",
+          "2": "Si desea comprar otros tipos de productos o de servicios que no encuentra en esta página web, por favor no dude en contactarnos, estamos aquí para buscar soluciones legales, de suministros y logísticos."
+        }
+      },
+      "5": {
+        "title": "QUIEN PUEDE COMPRAR EN ESTA WEB*",
+        "text": "- debido al interés de las partes que intervienen dentro de esta web, las limitadas cantidades de productos o servicios disponibles, la necesidad de tener licencias específicas en E.U.A., el tipo de moneda cobrar (USD) autorizadas por bancos extranjeros, esta web está limitada solo a los clientes específicos. Contacte para más información"
+      },
+      "6": {
+        "title": "PROHIBICIONES/LIMITACIONES DE COMPRAR EN ESTA PÁGINA WEB",
+        "text": {
+          "1": "Además de aquellas entidades restringidas por las regulaciones del Departamento de Estado de los EUA, para saber más por favor",
+          "2": "Click Aqui",
+          "3": "Nuestras empresas o asociados no somos responsables del resultado negativo de sus compras, que podrá incluir bloquear cuentas de compradores por instituciones federales, cancelaciones de órdenes, demoras de reembolsos al comprador, no entrega de mercancías a destinos finales, entre otras que lo puede afectar. Por favor, al menos que se encuentre dentro de la lista de QUIEN PUEDE COMPRAR EN ESTA WEB*, por favor no realizar transacciones.",
+          "4": "No obstante, debido a que existe regulaciones que aplican para casos específicos, sean para personas naturales o extranjeras, estatales o privadas, nuestras empresas están dispuestas a trabajar de conjunto y según regulaciones vigentes en E.U.A. al momento que usted lea nuestra web, por favor contáctenos"
+        }
+      },
+      "7": {
+        "title": "SOBRE LA WEB",
+        "text": {
+          "1": "Cualquier información brindada o proceso realizado fuera del ámbito...",
+          "2": "es ajeno a nuestra empresa."
+        }
+      }
+    }
+  },
+  "help": {
+    "questionTitle": "Preguntas Frecuentes",
+    "questions": {
+      "1": {
+        "question": "¿Puedo pagar en efectivo cuando reciba los productos?",
+        "answer": "No aceptamos pagos en efectivo. Toda la transacción se realiza online en el momento de la compra."
+      },
+      "2": {
+        "question": "¿En qué ciudades entregan?",
+        "answer": "De momento solo estamos disponibles desde Miami"
+      },
+      "3": {
+        "question": "¿Mifamiliar tiene que pagar algo?",
+        "answer": "No se efectuan pagos."
+      },
+      "4": {
+        "question": "¿Cuántos días demora la entrega de las órdenes?",
+        "answer": "Las órdenes tienen de 3 a 5 días para ser entregadas"
+      },
+      "5": {
+        "question": "¿Ante cualquier duda a quién acudir?",
+        "answer": "Tenemos servicio de atención al cliente a través del correo soporte@diplomarket.com y  a través de la sección Contacto. Además contamos con un chat en linea disponible las 24hrs."
+      },
+      "6": {
+        "question": "¿Cómo saber si mi orden se completó satisfactoriamente?",
+        "answer": "Al realizar una compra usted tendra acceso  a un historial de compras. Las compras completadas aparecerán con el estado 'COMPLETED'. Además le enviamos una  notificación a su correo (con el cual se registró)"
+      },
+      "7": {
+        "question": "¿Hice una orden y no recibí el correo electrónico?",
+        "answer": "Si realizó una orden y no recibió el email , por favor comuníquese con nosotros a través de nuestro chat en el sitio web o por el email soporte@diplomarket.com. Envíenos nombre, apellidos, correo electrónico, y monto de la orden."
+      },
+      "8": {
+        "question": "¿Cuánto es el costo de envío?",
+        "answer": "El costo de envio está determinado por el lugar de entrega"
+      },
+      "9": {
+        "question": "¿Cómo sabe mi familiar que le llevaran la orden?",
+        "answer": "Su familiar recibirá una noticiación por correo de la compra realizada. El cliente que realiza la orden es responsable de proveer los datos de contacto así como de notificar al estinatario cuando reciba el email de Envío de la orden, de lo contrario puede significar atrasos en la entrega."
+      }
+    },
+    "how": {
+      "title": "Cómo Usar"
+    }
+  },
+  "contact": {
+    "title": "Contáctenos",
+    "subtitle": "Debido al alto volumen de clientes que nos contactan y porque deseamos escribirle en tiempo real, preferimos que nos escriba a los teléfonos siguientes y según la categoría del tema por el que nos contacta:",
+    "phones": {
+      "title": "Teléfonos:",
+      "text": "Sobre preguntas en general"
+    },
+    "emails": {
+      "title": "Correos",
+      "1": "Órdenes de compra:",
+      "2": "Entregas a domicilio:",
+      "3": "Comercializar sus productos con nosotros:",
+      "4": "Detalles técnicos de la web:"
+    },
+    "address": {
+      "title": "Dirección:",
+      "subtitle": "Oficina en Miami:",
+      "text": "7921 NW 68 Street Miami, FL 33166, Estados Unidos ,para que usted se sienta atendido o responda a sus necesidades, con presencia física. Esta oficina no atiende asuntos para confirmar compras, solo para alamacenamiento de cargas"
+    },
+    "chat": {
+      "title": "Servicio Chat en línea:",
+      "text": "9am - 6pm. Para atender cualquier tipo de duda o problema."
+    },
+    "inputs": {
+      "email": "CORREO",
+      "message": "MENSAJE"
+    }
   },
   "footer": {
     "description": "Diplomarket es una tienda Online desarrollada por CUSPINERA SURL, en función de satisfacer sus compras y entregas, tanto para usted como para sus familiares. Nos place llevarles LO MEJOR….SIEMPRE!!!",
