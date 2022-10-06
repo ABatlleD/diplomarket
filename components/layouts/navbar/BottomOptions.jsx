@@ -10,6 +10,7 @@ import { Divider } from '@mui/material'
 import LangSelector from './LangSelector'
 import DensityMediumIcon from '@mui/icons-material/DensityMedium'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
+import Link from 'next/link'
 
 function BottomOptions() {
   const [t] = useTranslation()
@@ -72,7 +73,9 @@ function BottomOptions() {
               {t('layout.navbar.allProducts')}
             </div>
             <div className='mr-4'>
-              {t('layout.navbar.about')}
+              <Link href='/about'>
+                {t('layout.navbar.about')}
+              </Link>
             </div>
             <div>
               {t('layout.navbar.contact')}

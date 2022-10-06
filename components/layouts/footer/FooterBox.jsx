@@ -4,6 +4,7 @@ import TwitterIcon from '@mui/icons-material/Twitter'
 import TelegramIcon from '@mui/icons-material/Telegram'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import { useTranslation } from 'react-i18next'
+import Link from 'next/link'
 
 function FooterBox() {
   const { t } = useTranslation()
@@ -25,7 +26,11 @@ function FooterBox() {
       <div className='flex flex-row justify-between md:w-4/12'>
         <div className='flex flex-col md:w-5/12 text-text-200 font-semibold mb-6'>
           <h2 className='mb-3 font-bold text-background-100'>{t('footer.about.title')}</h2>
-          <p className='mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>{t('footer.about.aboutUs')}</p>
+          <Link href='/about'>
+            <p className='mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>
+              {t('footer.about.aboutUs')}
+            </p>
+          </Link>
           <p className='mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>{t('footer.about.privacyPolicy')}</p>
           <p className='mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>{t('footer.about.terms')}</p>
           <p className='mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>{t('footer.about.contact')}</p>
