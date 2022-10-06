@@ -126,7 +126,7 @@
     }
   },
   "help": {
-    "questionTitle": "",
+    "questionTitle": "FAQ",
     "questions": {
       "1": {
         "question": "Can I pay cash when I receive the products?",
@@ -166,7 +166,7 @@
       }
     },
     "how": {
-      "title": "How to Use"
+      "title": "How to Use?"
     }
   },
   "contact": {
