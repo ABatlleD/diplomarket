@@ -6,7 +6,12 @@ import PropTypes from 'prop-types'
 function AppAccordion({ title, text }) {
   return (
     <>
-      <Accordion className='bg-background-300 shadow-xl'>
+      <Accordion
+        sx={{
+          backgroundColor: '#f3f4f6',
+          boxShadow: 7
+        }}
+      >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
