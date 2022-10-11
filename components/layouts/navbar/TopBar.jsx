@@ -13,6 +13,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import SearchBar from '../../SearchBar'
 import AccountMenu from './AccountMenu'
 import Link from 'next/link'
+import PropTypes from 'prop-types'
 
 const theme = createTheme({
   palette: {
@@ -23,7 +24,7 @@ const theme = createTheme({
   }
 })
 
-function TopBar() {
+function TopBar({ categoriesSideBar, setCategoriesSideBar, mainSideBar, setMainSideBar, cartSideBar, setCartSideBar }) {
   const [t] = useTranslation()
   const size = useWindowSize()
 
@@ -31,7 +32,11 @@ function TopBar() {
     <>
       < div className='bg-background-100 flex flex-row justify-around md:justify-between my-2 xl:mt-1 xl:mb-2'>
         <div className='flex flex-row justify-between md:ml-6 w-1/2 md:w-1/5 xl:w-[12%]'>
-          <div className='mt-2 lg:hidden'>
+          <div
+            className='mt-2
+            lg:hidden'
+            onClick={() => setMainSideBar((mainSideBar) => !mainSideBar)}
+          >
             <DensityMediumIcon
               fontSize='large'
             />
@@ -55,6 +60,7 @@ function TopBar() {
                 paddingX: 1
               }}
               className='bg-button'
+              onClick={() => setCategoriesSideBar((categoriesSideBar) => !categoriesSideBar)}
             >
               {t('layout.navbar.categories')} <span className='mt-[-1px]'><ArrowForwardIosIcon fontSize='small' /></span>
             </AppButton>
@@ -98,6 +104,7 @@ function TopBar() {
                   md: '0.75rem'
                 }
               }}
+              onClick={() => setCartSideBar((cartSideBar) => !cartSideBar)}
             >
               <ShoppingCartOutlinedIcon fontSize='large' />
             </Badge>
@@ -109,6 +116,15 @@ function TopBar() {
       </div>
     </>
   )
+}
+
+TopBar.propTypes = {
+  categoriesSideBar: PropTypes.bool,
+  setCategoriesSideBar: PropTypes.func,
+  mainSideBar: PropTypes.bool,
+  setMainSideBar: PropTypes.func,
+  cartSideBar: PropTypes.bool,
+  setCartSideBar: PropTypes.func
 }
 
 export default TopBar

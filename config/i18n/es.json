@@ -18,7 +18,11 @@
         "es": "Español",
         "en": "Inglés"
       },
-      "search": "Buscar"
+      "search": "Buscar",
+      "account": {
+        "signin": "Iniciar Sesión",
+        "signup": "Registrarse"
+      }
     }
   },
   "home": {

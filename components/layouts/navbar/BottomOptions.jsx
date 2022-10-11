@@ -11,8 +11,9 @@ import LangSelector from './LangSelector'
 import DensityMediumIcon from '@mui/icons-material/DensityMedium'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import Link from 'next/link'
+import PropTypes from 'prop-types'
 
-function BottomOptions() {
+function BottomOptions({ categoriesSideBar, setCategoriesSideBar, mainSideBar, setMainSideBar }) {
   const [t] = useTranslation()
 
   return (
@@ -30,6 +31,7 @@ function BottomOptions() {
               paddingX: 1
             }}
             className='bg-button'
+            onClick={() => setCategoriesSideBar((categoriesSideBar) => !categoriesSideBar)}
           >
             {t('layout.navbar.categories')} <span className='mt-[-1px]'><ArrowForwardIosIcon fontSize='small' /></span>
           </AppButton>
@@ -45,6 +47,7 @@ function BottomOptions() {
               paddingX: 1
             }}
             className='bg-button'
+            onClick={() => setCategoriesSideBar((categoriesSideBar) => !categoriesSideBar)}
           >
             {t('layout.navbar.categories')} <span className='mt-[-1px]'><ArrowForwardIosIcon fontSize='small' /></span>
           </AppButton>
@@ -66,9 +69,14 @@ function BottomOptions() {
         </div>
         <div className='hidden xl:flex flex-row justify-between w-full mx-4'>
           <div className='flex flex-row w-2/3'>
-            <DensityMediumIcon
-              fontSize='small'
-            />
+            <div
+              className='hover:cursor-pointer'
+              onClick={() => setMainSideBar((mainSideBar) => !mainSideBar)}
+            >
+              <DensityMediumIcon
+                fontSize='small'
+              />
+            </div>
             <div className='mx-4'>
               {t('layout.navbar.allProducts')}
             </div>
@@ -94,6 +102,13 @@ function BottomOptions() {
       </div>
     </>
   )
+}
+
+BottomOptions.propTypes = {
+  categoriesSideBar: PropTypes.bool,
+  setCategoriesSideBar: PropTypes.func,
+  mainSideBar: PropTypes.bool,
+  setMainSideBar: PropTypes.func
 }
 
 export default BottomOptions

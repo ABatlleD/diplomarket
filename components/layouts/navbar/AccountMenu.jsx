@@ -6,9 +6,11 @@ import MenuItem from '@mui/material/MenuItem'
 import PersonIcon from '@mui/icons-material/Person'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import { useTranslation } from 'react-i18next'
 
 function AccountMenu () {
   const [anchorElAccount, setAnchorElAccount] = useState(null)
+  const { t } = useTranslation()
 
   const handleOpenAccountMenu = (event) => {
     setAnchorElAccount(event.currentTarget)
@@ -48,7 +50,7 @@ function AccountMenu () {
                 <span className='pr-2'>
                   <PersonIcon />
                 </span>
-                <span>Sign In</span>
+                <span>{t('layout.navbar.account.signin')}</span>
               </div>
           </MenuItem>
           <MenuItem onClick={handleCloseAccountMenu}>
@@ -56,7 +58,7 @@ function AccountMenu () {
                 <span className='pr-2'>
                   <PersonAddIcon />
                 </span>
-                <span>Sign Out</span>
+                <span>{t('layout.navbar.account.signup')}</span>
               </div>
           </MenuItem>
       </Menu>
