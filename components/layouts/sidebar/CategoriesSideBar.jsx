@@ -17,7 +17,7 @@ function CategoriesSideBar ({ categoriesSideBar = false, setCategoriesSideBar = 
               x: '-100%'
             }}
             transition={{ type: 'spring', bounce: 0, duration: 1 }}
-            className="fixed bg-background-100 text-text-100 shadow-lg top-0 left-0 w-full max-w-sm h-screen p-5"
+            className="fixed z-50 bg-background-100 text-text-100 shadow-lg top-0 left-0 w-full max-w-sm h-screen p-5"
           >
             <div className='flex flex-row justify-between'>
               <h2 className="text-4xl capitalize leading-loose">Categories</h2>
