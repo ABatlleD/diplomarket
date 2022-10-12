@@ -1,16 +1,25 @@
 import React from 'react'
-import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import PropTypes from 'prop-types'
 import { Divider } from '@mui/material'
-import AppBackdrop from '../../AppBackdrop'
+import HighlightOffIcon from '@mui/icons-material/HighlightOff'
+import RemoveShoppingCartOutlinedIcon from '@mui/icons-material/RemoveShoppingCartOutlined'
 
 function CartSideBar ({ cartSideBar = false, setCartSideBar = () => {} }) {
   return (
-    <AnimateSharedLayout>
+    <AnimatePresence>
       {cartSideBar && (
         <>
+          <div className="flex flex-row">
             <motion.div
-              layout
+              onClick={() => setCartSideBar((cartSideBar) => false)}
+              animate={{
+                opacity: 0.5
+              }}
+              transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
+              className='fixed top-0 left-0 w-full h-screen opacity-100'
+            />
+            <motion.div
               initial={{ x: '100%' }}
               animate={{
                 x: 0
@@ -21,25 +30,35 @@ function CartSideBar ({ cartSideBar = false, setCartSideBar = () => {} }) {
               transition={{ type: 'spring', bounce: 0, duration: 1 }}
               className="fixed z-50 bg-background-100 text-text-100 shadow-lg top-0 right-0 w-full max-w-sm h-screen p-5"
             >
-              <div className='flex flex-row justify-between'>
-                <h2 className="text-4xl capitalize leading-loose">My Cart</h2>
-                <button
-                  onClick={() => setCartSideBar((cartSideBar) => !cartSideBar)}
-                  className="bg-white text-black h-4 w-4 pt-7 block rounded-full"
-                >
-                  &times;
-                </button>
+              <div className='flex flex-col justify-between h-full'>
+                <div>
+                  <div className='flex flex-row justify-between'>
+                    <h2 className="text-xl font-semibold text-button capitalize leading-loose">0 Products in Cart</h2>
+                    <button
+                      onClick={() => setCartSideBar((cartSideBar) => !cartSideBar)}
+                      className="bg-white text-button h-4 w-4 pt-2 mr-2 block rounded-full"
+                    >
+                      <HighlightOffIcon />
+                    </button>
+                  </div>
+                  <Divider sx={{ bgcolor: '#111b3c' }} />
+                </div>
+                <div className='flex flex-col items-center'>
+                  <RemoveShoppingCartOutlinedIcon sx={{ fontSize: '10rem' }} />
+                  <h1 className='mt-4 text-2xl font-bold'>NO PRODUCTS</h1>
+                </div>
+                <div className="flex flex-row justify-between p-2 hover:cursor-pointer rounded-full bg-button mt-4">
+                  <h1 className='text-background-100 text-2xl ml-6 mt-1'>Pay</h1>
+                  <div className='bg-background-100 py-2 px-4 rounded-full text-lg font-semibold text-button'>
+                    $123.45
+                  </div>
+                </div>
               </div>
-              <Divider />
-              <p className="leading-relaxed text-justify mt-4">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry&apos;s standard dummy text
-                ever since the 1500s.
-              </p>
             </motion.div>
+          </div>
         </>
       )}
-    </AnimateSharedLayout>
+    </AnimatePresence>
   )
 }
 

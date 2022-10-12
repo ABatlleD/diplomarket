@@ -94,20 +94,22 @@ function TopBar({ categoriesSideBar, setCategoriesSideBar, mainSideBar, setMainS
             >
               <FavoriteBorderIcon fontSize='large' />
             </Badge>
-            <Badge
-              badgeContent={1}
-              color='error'
-              sx={{
-                marginTop: {
-                  xs: '0.5rem',
-                  sm: '0.5rem',
-                  md: '0.75rem'
-                }
-              }}
-              onClick={() => setCartSideBar((cartSideBar) => !cartSideBar)}
-            >
-              <ShoppingCartOutlinedIcon fontSize='large' />
-            </Badge>
+            <div className='hover:cursor-pointer'>
+              <Badge
+                badgeContent={1}
+                color='error'
+                sx={{
+                  marginTop: {
+                    xs: '0.5rem',
+                    sm: '0.5rem',
+                    md: '0.75rem'
+                  }
+                }}
+                onClick={() => setCartSideBar((cartSideBar) => !cartSideBar)}
+              >
+                <ShoppingCartOutlinedIcon fontSize='large' />
+              </Badge>
+            </div>
           </ThemeProvider>
           <div className='mt-1'>
             <AccountMenu />

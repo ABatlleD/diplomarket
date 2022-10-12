@@ -16,7 +16,6 @@ function MainLayout({ children }) {
     <>
       <motion.div
         animate={{
-          // scale: categoriesSideBar || mainSideBar || cartSideBar ? 0.8 : 1,
           opacity: categoriesSideBar || mainSideBar || cartSideBar ? 0.5 : 1
         }}
         transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
