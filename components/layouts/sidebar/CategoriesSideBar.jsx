@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import PropTypes from 'prop-types'
 import { Divider } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
+import CategoriesAccordion from '../../categories/CategoriesAccordion'
 
 function CategoriesSideBar ({ categoriesSideBar = false, setCategoriesSideBar = () => {} }) {
   return (
@@ -31,11 +32,11 @@ function CategoriesSideBar ({ categoriesSideBar = false, setCategoriesSideBar = 
                 </button>
               </div>
               <Divider sx={{ bgcolor: '#b12024' }} />
-              <p className="leading-relaxed text-justify mt-4">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry&apos;s standard dummy text
-                ever since the 1500s.
-              </p>
+              <div className='mt-8'>
+                {categories.map((category) => (
+                  <CategoriesAccordion key={categories.id} title={category.title} items={category.subcategories} />
+                ))}
+              </div>
             </motion.div>
             <motion.div
               onClick={() => setCategoriesSideBar((categoriesSideBar) => false)}
@@ -56,5 +57,92 @@ CategoriesSideBar.propTypes = {
   categoriesSideBar: PropTypes.bool,
   setCategoriesSideBar: PropTypes.func
 }
+
+const categories = [
+  {
+    id: 1,
+    title: 'Category 1',
+    subcategories: [
+      {
+        id: 1,
+        title: 'Subcategory 1'
+      },
+      {
+        id: 2,
+        title: 'Subcategory 2'
+      },
+      {
+        id: 3,
+        title: 'Subcategory 3'
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: 'Category 1',
+    subcategories: [
+      {
+        id: 1,
+        title: 'Subcategory 1'
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: 'Category 1',
+    subcategories: [
+      {
+        id: 1,
+        title: 'Subcategory 1'
+      },
+      {
+        id: 2,
+        title: 'Subcategory 2'
+      },
+      {
+        id: 3,
+        title: 'Subcategory 3'
+      }
+    ]
+  },
+  {
+    id: 4,
+    title: 'Category 1',
+    subcategories: [
+      {
+        id: 1,
+        title: 'Subcategory 1'
+      },
+      {
+        id: 2,
+        title: 'Subcategory 2'
+      }
+    ]
+  },
+  {
+    id: 5,
+    title: 'Category 1',
+    subcategories: [
+      {
+        id: 1,
+        title: 'Subcategory 1'
+      }
+    ]
+  },
+  {
+    id: 6,
+    title: 'Category 1',
+    subcategories: [
+      {
+        id: 1,
+        title: 'Subcategory 1'
+      },
+      {
+        id: 2,
+        title: 'Subcategory 2'
+      }
+    ]
+  }
+]
 
 export default CategoriesSideBar
