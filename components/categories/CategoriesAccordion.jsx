@@ -10,7 +10,7 @@ function CategoriesAccordion({ title, items }) {
         sx={{
           backgroundColor: '#f3f4f6',
           boxShadow: 7,
-          marginY: 4
+          marginY: 1
         }}
       >
         <AccordionSummary
@@ -18,14 +18,14 @@ function CategoriesAccordion({ title, items }) {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <div className='text-footer-background-200 font-semibold text-lg'>
+          <div className='text-footer-background-200 font-semibold'>
             {title}
           </div>
         </AccordionSummary>
         <Divider />
         {items.map((item) => (
           <AccordionDetails key={item.id}>
-            <div className='text-footer-background-200 font-semibold'>
+            <div className='text-footer-background-200'>
               {item.title}
             </div>
           </AccordionDetails>
