@@ -16,11 +16,10 @@ const theme = createTheme({
   }
 })
 
-function ProductItem({ id, title, price, category, image }) {
+function ProductItem({ product }) {
   const { t } = useTranslation()
 
   const resizeTitle = (string, maxLength) => {
-    console.log(string.length > maxLength)
     return string.length > maxLength ? `${string.slice(0, maxLength)}...` : string
   }
 
@@ -28,20 +27,23 @@ function ProductItem({ id, title, price, category, image }) {
     <>
       <div className='flex flex-col my-4 hover:shadow-button w-full border-2 border-background-300 rounded-lg h-[24rem] md:h-[26rem] xl:h-[28rem]'>
         <div className='my-2 w-100 flex flex-row justify-center h-16 md:h-28 xl:h-36'>
-          <Link href={`/products/${id}`}>
-            <img src={image} className="max-w-max hover:cursor-pointer h-full" alt="..." />
+          <Link href={`/products/${product.id}`}>
+            <img src={`https://www.diplomarket.com${product.img_principal}`} className="max-w-max hover:cursor-pointer h-full" alt="..." />
           </Link>
         </div>
         <div className='mx-2 mt-2 mb-1 md:my-2 text-text-100 h-24 md:h-14'>
-          <Link href={`/products/${id}`}>
-            {resizeTitle(title, 40)}
+          <Link href={`/products/${product.id}`}>
+            {resizeTitle(product.nombre, 40)}
           </Link>
         </div>
-        <div className='mx-2 my-1 md:my-2 text-button'>{category}</div>
-        <div className='mx-2 my-1 md:my-2 text-button font-bold'>$ {price} USD</div>
+        <div className='mx-2 my-1 md:my-2 text-button'>{product.marca.nombre}</div>
+        <div className='mx-2 my-1 md:my-2 text-button'>{product.proveedor.nombre}</div>
+        <div className='mx-2 my-1 md:my-2 text-button font-bold'>$ {product.precio.cantidad} {product.precio.moneda}</div>
         <ThemeProvider theme={theme}>
-          <div className='mx-2 my-1 md:my-2'>
-            <Chip label="Nuevo" color="error" />
+          <div className='felx flex-row mx-2 my-1 md:my-2'>
+            {product.etiquetas.map((tag) => (
+              <Chip key={tag.pk} sx={{ marginRight: 1, marginBottom: 1 }} label={tag.nombre} color="error" />
+            ))}
           </div>
         </ThemeProvider>
         <Divider
@@ -67,12 +69,14 @@ function ProductItem({ id, title, price, category, image }) {
 }
 
 ProductItem.propTypes = {
-  id: PropTypes.number,
-  title: PropTypes.string,
-  price: PropTypes.number,
-  description: PropTypes.string,
-  category: PropTypes.string,
-  image: PropTypes.string
+  product: PropTypes.object
+  // id: PropTypes.number,
+  // title: PropTypes.string,
+  // price: PropTypes.number,
+  // description: PropTypes.string,
+  // brand: PropTypes.string,
+  // provider: PropTypes.string,
+  // image: PropTypes.string
 }
 
 export default ProductItem

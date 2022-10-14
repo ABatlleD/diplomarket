@@ -27,6 +27,9 @@
   },
   "home": {
     "allProducts": "All Products",
+    "featuredProducts": "Featured Products",
+    "recentlySold": "Most Recently Sold",
+    "todayRecomendation": "Today's Recomendations",
     "addCart": "Add Cart",
     "prices": {
       "title": "Prices",

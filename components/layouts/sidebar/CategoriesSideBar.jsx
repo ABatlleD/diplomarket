@@ -10,7 +10,7 @@ function CategoriesSideBar ({ categoriesSideBar = false, setCategoriesSideBar = 
     <AnimatePresence>
       {categoriesSideBar && (
         <>
-          <div className="flex flex-row sticky">
+          <div className="flex flex-row absolute">
             <motion.div
               initial={{ x: '-100%' }}
               animate={{
@@ -44,7 +44,7 @@ function CategoriesSideBar ({ categoriesSideBar = false, setCategoriesSideBar = 
                 opacity: 0.5
               }}
               transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
-              className='fixed top-0 right-0 w-full h-screen opacity-100'
+              className='absolute top-0 right-0 w-full h-screen opacity-100'
             />
           </div>
         </>
