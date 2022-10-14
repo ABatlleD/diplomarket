@@ -2,6 +2,9 @@ import { ENDPOINTS } from './endpoints'
 import { getRequest } from '.'
 
 const resources = {
+  carousel: {
+    all: async () => await getRequest(`${ENDPOINTS.CAROUSEL}`)
+  },
   products: {
     all: async () => await getRequest(`${ENDPOINTS.PRODUCTS}/`),
     one: async (id) => await getRequest(`${ENDPOINTS.PRODUCTS}/${id}/`)
