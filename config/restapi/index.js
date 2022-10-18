@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getCookie } from 'cookies-next'
 
 const axiosClient = axios.create()
 
@@ -9,7 +10,8 @@ axiosClient.defaults.headers = {
   Authorization: `Token ${process.env.NEXT_PUBLIC_TOKEN_API_ENDPOINT}`,
   Accept: 'application/json',
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+  'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+  Cookie: `NEXT_LOCALE=${getCookie('NEXT_LOCALE')};`
 }
 
 axiosClient.defaults.timeout = 100000

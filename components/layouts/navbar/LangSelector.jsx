@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import Tooltip from '@mui/material/Tooltip'
 import IconButton from '@mui/material/IconButton'
@@ -6,15 +6,45 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import { US, ES } from 'country-flag-icons/react/1x1'
 import { useTranslation } from 'react-i18next'
+import { setCookie } from 'cookies-next'
 
 const languages = ['en', 'es']
 
 function LangSelector () {
-  const [language, setLanguage] = useState('en')
-
+  const [language, setLanguage] = useState('es')
   const [t, i18n] = useTranslation()
-
   const [anchorElLanguage, setAnchorElLanguage] = useState(null)
+
+  useEffect(() => {
+    console.log(localStorage.getItem('lang'))
+    const lang = localStorage.getItem('lang')
+    console.log(lang)
+    if (!language) {
+      console.log('null')
+      localStorage.setItem('lang', 'es')
+      setLanguage('es')
+      i18n.changeLanguage('es')
+      setCookie('NEXT_LOCALE', 'es-es', {
+        path: '/'
+      })
+    } else if (lang === 'es') {
+      console.log('entra es')
+      localStorage.setItem('lang', 'es')
+      setLanguage('es')
+      i18n.changeLanguage('es')
+      setCookie('NEXT_LOCALE', 'es-es', {
+        path: '/'
+      })
+    } else if (lang === 'en') {
+      console.log('entra en')
+      localStorage.setItem('lang', 'en')
+      setLanguage('en')
+      i18n.changeLanguage('en')
+      setCookie('NEXT_LOCALE', 'en-en', {
+        path: '/'
+      })
+    }
+  }, [language])
 
   const handleOpenLanguageMenu = (event) => {
     setAnchorElLanguage(event.currentTarget)
@@ -26,14 +56,25 @@ function LangSelector () {
 
   const handleSelectLanguage = (e, lang) => {
     if (lang === 'es' && language === 'en') {
+      localStorage.setItem('lang', 'es')
+      setLanguage('es')
       i18n.changeLanguage('es')
-      setLanguage(lang)
+      setCookie('NEXT_LOCALE', 'es-es', {
+        path: '/'
+      })
+      setAnchorElLanguage(null)
+      return window.location.reload()
     }
     if (lang === 'en' && language === 'es') {
+      localStorage.setItem('lang', 'en')
+      setLanguage('en')
       i18n.changeLanguage('en')
-      setLanguage(lang)
+      setCookie('NEXT_LOCALE', 'en-en', {
+        path: '/'
+      })
+      setAnchorElLanguage(null)
+      return window.location.reload()
     }
-    setAnchorElLanguage(null)
   }
 
   return (
