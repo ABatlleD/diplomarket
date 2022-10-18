@@ -26,16 +26,16 @@ function ProductsSwiper({ products }) {
           slidesPerView: 3, spaceBetween: 5
         },
         640: {
-          slidesPerView: 2, spaceBetween: 5
+          slidesPerView: 3, spaceBetween: 5
         },
         780: {
-          slidesPerView: 4, spaceBetween: 10
+          slidesPerView: 3, spaceBetween: 10
         },
         1200: {
           slidesPerView: 4, spaceBetween: 20
         },
         1400: {
-          slidesPerView: 5, spaceBetween: 20
+          slidesPerView: 4, spaceBetween: 20
         }
       }}
       loop={products.length > 3}

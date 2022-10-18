@@ -41,7 +41,7 @@ function Home({
         <div className=''>
           <MainCarousel carousel={carousel} />
         </div>
-        <div className='FeaturedProducts mx-2 md:mx-4 mt-20 flex flex-col'>
+        <div className='FeaturedProducts mx-2 md:mx-4 mt-20 mb-10 flex flex-col'>
           <div className='flex mb-1 flex-col md:flex-row md:justify-between'>
             <div className='font-bold mb-4 md:mb-0 text-4xl'>{t('home.featuredProducts')}</div>
             <div className='flex flex-row mt-2'>
@@ -69,7 +69,7 @@ function Home({
             <ProductsCarousel products={featureds} />
           </div>
         </div>
-        <div className='RecentlySoldProducts mx-4 mb-20 flex flex-col'>
+        <div className='RecentlySoldProducts mx-4 mb-10 flex flex-col'>
           <div className='flex mb-8 flex-row justify-between'>
             <div className='font-bold text-4xl'>{t('home.recentlySold')}</div>
           </div>
@@ -171,7 +171,6 @@ async function fetchCarousel() {
   let carousel = []
   try {
     carousel = await (await resources.carousel.all()).data
-    console.log(carousel)
   } catch (error) {
     carouselError = error.message
   }

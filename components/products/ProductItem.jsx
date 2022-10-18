@@ -25,8 +25,8 @@ function ProductItem({ product }) {
 
   return (
     <>
-      <div className='flex flex-col my-4 hover:shadow-button w-full border-2 border-background-300 rounded-lg h-[24rem] md:h-[26rem] xl:h-[38rem]'>
-        <div className='my-2 w-100 flex flex-row justify-center h-16 md:h-28 xl:h-72'>
+      <div className='flex flex-col my-4 hover:shadow-button w-full border-2 border-background-300 rounded-lg h-[30rem] md:h-[33rem] xl:h-[38rem]'>
+        <div className='my-2 w-100 flex flex-row justify-center h-32 md:h-52 xl:h-72'>
           <Link href={`/products/${product.id}`}>
             <img src={`https://www.diplomarket.com${product.img_principal}`} className="max-w-full hover:cursor-pointer h-full" alt="..." />
           </Link>
