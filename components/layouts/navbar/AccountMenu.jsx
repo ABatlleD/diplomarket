@@ -7,6 +7,7 @@ import PersonIcon from '@mui/icons-material/Person'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { useTranslation } from 'react-i18next'
+import Link from 'next/link'
 
 function AccountMenu () {
   const [anchorElAccount, setAnchorElAccount] = useState(null)
@@ -45,22 +46,26 @@ function AccountMenu () {
         open={Boolean(anchorElAccount)}
         onClose={handleCloseAccountMenu}
       >
-          <MenuItem onClick={handleCloseAccountMenu}>
+        <MenuItem onClick={handleCloseAccountMenu}>
+          <Link href={'/auth/signin'}>
               <div className='flex flex-row'>
                 <span className='pr-2'>
                   <PersonIcon />
                 </span>
                 <span>{t('layout.navbar.account.signin')}</span>
               </div>
-          </MenuItem>
-          <MenuItem onClick={handleCloseAccountMenu}>
-              <div className='flex flex-row'>
-                <span className='pr-2'>
-                  <PersonAddIcon />
-                </span>
-                <span>{t('layout.navbar.account.signup')}</span>
-              </div>
-          </MenuItem>
+          </Link>
+        </MenuItem>
+        <MenuItem onClick={handleCloseAccountMenu}>
+          <Link href={'/auth/signup'}>
+            <div className='flex flex-row'>
+              <span className='pr-2'>
+                <PersonAddIcon />
+              </span>
+              <span>{t('layout.navbar.account.signup')}</span>
+            </div>
+          </Link>
+        </MenuItem>
       </Menu>
     </div>
   )
