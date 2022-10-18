@@ -25,10 +25,10 @@ function ProductItem({ product }) {
 
   return (
     <>
-      <div className='flex flex-col my-4 hover:shadow-button w-full border-2 border-background-300 rounded-lg h-[24rem] md:h-[26rem] xl:h-[28rem]'>
-        <div className='my-2 w-100 flex flex-row justify-center h-16 md:h-28 xl:h-36'>
+      <div className='flex flex-col my-4 hover:shadow-button w-full border-2 border-background-300 rounded-lg h-[24rem] md:h-[26rem] xl:h-[38rem]'>
+        <div className='my-2 w-100 flex flex-row justify-center h-16 md:h-28 xl:h-72'>
           <Link href={`/products/${product.id}`}>
-            <img src={`https://www.diplomarket.com${product.img_principal}`} className="max-w-max hover:cursor-pointer h-full" alt="..." />
+            <img src={`https://www.diplomarket.com${product.img_principal}`} className="max-w-full hover:cursor-pointer h-full" alt="..." />
           </Link>
         </div>
         <div className='mx-2 mt-2 mb-1 md:my-2 text-text-100 h-24 md:h-14'>
@@ -40,7 +40,7 @@ function ProductItem({ product }) {
         <div className='mx-2 my-1 md:my-2 text-button'>{product.proveedor.nombre}</div>
         <div className='mx-2 my-1 md:my-2 text-button font-bold'>$ {product.precio.cantidad} {product.precio.moneda}</div>
         <ThemeProvider theme={theme}>
-          <div className='felx flex-row mx-2 my-1 md:my-2'>
+          <div className='felx flex-row mx-2 my-1 md:my-2 h-8'>
             {product.etiquetas.map((tag) => (
               <Chip key={tag.pk} sx={{ marginRight: 1, marginBottom: 1 }} label={tag.nombre} color="error" />
             ))}

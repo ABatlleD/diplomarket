@@ -41,16 +41,16 @@ function Home({
         <div className=''>
           <MainCarousel carousel={carousel} />
         </div>
-        <div className='FeaturedProducts mx-4 my-20 flex flex-col'>
-          <div className='flex mb-8 flex-row justify-between'>
-            <div className='font-bold text-4xl'>{t('home.featuredProducts')}</div>
+        <div className='FeaturedProducts mx-2 md:mx-4 mt-20 flex flex-col'>
+          <div className='flex mb-1 flex-col md:flex-row md:justify-between'>
+            <div className='font-bold mb-4 md:mb-0 text-4xl'>{t('home.featuredProducts')}</div>
             <div className='flex flex-row mt-2'>
               {categories.map((item, _idx) => (
                 <div
                   key={_idx}
                   onClick={() => handleChangeCategory(item)}
                   className={
-                    `pt-1 px-2 ml-4 font-semibold hover:cursor-pointer ${
+                    `md:pt-1 px-2 md:ml-4 h-8 mr-1 font-semibold hover:cursor-pointer ${
                       item === category
                       ? 'text-background-100 bg-button rounded-lg'
                       : 'text-button'
