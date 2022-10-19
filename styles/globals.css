@@ -46,6 +46,20 @@ a {
   box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
 }
 
-.Mui-focused{
-  border-color: aqua !important;
+.MuiDrawer-paper {
+  width: 100% !important;
+  max-width: 24rem;
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.MuiDrawer-paper::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.MuiDrawer-paper {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
