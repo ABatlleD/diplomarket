@@ -62,4 +62,11 @@ a {
   scrollbar-width: none;  /* Firefox */
 }
 
+.Mui-focused {
+  color: #15224b !important
+}
+
+div.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #15224b !important;
+}
 
