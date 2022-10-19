@@ -11,7 +11,7 @@ function CartSideBar ({ cartSideBar = false, setCartSideBar = () => {} }) {
       <Drawer
         anchor={'right'}
         open={cartSideBar}
-        onClose={setCartSideBar((cartSideBar) => !cartSideBar)}
+        onClose={() => setCartSideBar(false)}
       >
         <div className='flex flex-col justify-between h-full m-4'>
           <div>

@@ -14,6 +14,7 @@ import SearchBar from '../../SearchBar'
 import AccountMenu from './AccountMenu'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
+import SelectPlace from '../../modals/SelectPlace'
 
 const theme = createTheme({
   palette: {
@@ -24,7 +25,16 @@ const theme = createTheme({
   }
 })
 
-function TopBar({ categoriesSideBar, setCategoriesSideBar, mainSideBar, setMainSideBar, cartSideBar, setCartSideBar }) {
+function TopBar({
+  categoriesSideBar,
+  setCategoriesSideBar,
+  mainSideBar,
+  setMainSideBar,
+  cartSideBar,
+  setCartSideBar,
+  openSelectPlace,
+  setOpenSelectPlace
+}) {
   const [t] = useTranslation()
   const size = useWindowSize()
 
@@ -35,7 +45,7 @@ function TopBar({ categoriesSideBar, setCategoriesSideBar, mainSideBar, setMainS
           <div
             className='mt-2
             lg:hidden'
-            onClick={() => setMainSideBar((mainSideBar) => !mainSideBar)}
+            onClick={() => setMainSideBar(true)}
           >
             <DensityMediumIcon
               fontSize='large'
@@ -60,13 +70,13 @@ function TopBar({ categoriesSideBar, setCategoriesSideBar, mainSideBar, setMainS
                 paddingX: 1
               }}
               className='bg-button'
-              onClick={() => setCategoriesSideBar((categoriesSideBar) => !categoriesSideBar)}
+              onClick={() => setCategoriesSideBar(true)}
             >
               {t('layout.navbar.categories')} <span className='mt-[-1px]'><ArrowForwardIosIcon fontSize='small' /></span>
             </AppButton>
           </div>
           <div className='md:w-[88%]'>
-            <SearchBar />
+            <SearchBar {...{ openSelectPlace, setOpenSelectPlace }} />
           </div>
         </div>
         <div className='flex flex-row justify-between md:justify-around w-5/12 md:w-4/12 xl:w-3/12 md:mt-[-5px]'>
@@ -105,7 +115,7 @@ function TopBar({ categoriesSideBar, setCategoriesSideBar, mainSideBar, setMainS
                     md: '0.75rem'
                   }
                 }}
-                onClick={() => setCartSideBar((cartSideBar) => !cartSideBar)}
+                onClick={() => setCartSideBar(true)}
               >
                 <ShoppingCartOutlinedIcon fontSize='large' />
               </Badge>
@@ -116,6 +126,7 @@ function TopBar({ categoriesSideBar, setCategoriesSideBar, mainSideBar, setMainS
           </div>
         </div>
       </div>
+      <SelectPlace {...{ openSelectPlace, setOpenSelectPlace }}></SelectPlace>
     </>
   )
 }
@@ -126,7 +137,9 @@ TopBar.propTypes = {
   mainSideBar: PropTypes.bool,
   setMainSideBar: PropTypes.func,
   cartSideBar: PropTypes.bool,
-  setCartSideBar: PropTypes.func
+  setCartSideBar: PropTypes.func,
+  openSelectPlace: PropTypes.bool,
+  setOpenSelectPlace: PropTypes.func
 }
 
 export default TopBar

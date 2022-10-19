@@ -20,7 +20,7 @@ function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {} }) {
       <Drawer
         anchor={'left'}
         open={mainSideBar}
-        onClose={setMainSideBar((mainSideBar) => !mainSideBar)}
+        onClose={() => setMainSideBar(false)}
       >
         <div className='flex flex-row justify-between mx-4 mt-4'>
           <div className='flex mt-3 mr-[-7px]'>

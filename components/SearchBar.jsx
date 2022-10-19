@@ -7,6 +7,7 @@ import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlin
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined'
 import useWindowSize from '../hooks/WindowSize'
 import { useTranslation } from 'react-i18next'
+import { PropTypes } from 'prop-types'
 
 const theme = createTheme({
   palette: {
@@ -17,7 +18,7 @@ const theme = createTheme({
   }
 })
 
-function SearchBar() {
+function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
   const size = useWindowSize()
   const { t } = useTranslation()
 
@@ -38,6 +39,7 @@ function SearchBar() {
                   borderBottomRightRadius: 0
                 }}
                 className='bg-button'
+                onClick={() => setOpenSelectPlace(true)}
               >
                 <span className='mt-[-1px] mr-1'><AddLocationAltOutlinedIcon fontSize='small' /></span> Miami <span className='mt-[-1px]'><KeyboardArrowDownOutlinedIcon fontSize='small' /></span>
             </AppButton>
@@ -67,6 +69,11 @@ function SearchBar() {
       </ThemeProvider>
     </>
   )
+}
+
+SearchBar.propTypes = {
+  openSelectPlace: PropTypes.bool,
+  setOpenSelectPlace: PropTypes.func
 }
 
 export default SearchBar

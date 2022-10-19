@@ -11,6 +11,7 @@ function MainLayout({ children }) {
   const [categoriesSideBar, setCategoriesSideBar] = useState(false)
   const [mainSideBar, setMainSideBar] = useState(false)
   const [cartSideBar, setCartSideBar] = useState(false)
+  const [openSelectPlace, setOpenSelectPlace] = useState(false)
 
   return (
     <>
@@ -20,7 +21,16 @@ function MainLayout({ children }) {
         }}
         transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
       >
-        <NavBar {...{ categoriesSideBar, setCategoriesSideBar, mainSideBar, setMainSideBar, cartSideBar, setCartSideBar }}/>
+        <NavBar {...{
+          categoriesSideBar,
+          setCategoriesSideBar,
+          mainSideBar,
+          setMainSideBar,
+          cartSideBar,
+          setCartSideBar,
+          openSelectPlace,
+          setOpenSelectPlace
+        }}/>
         <main>{children}</main>
         <Footer />
       </motion.div>

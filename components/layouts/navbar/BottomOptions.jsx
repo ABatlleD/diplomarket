@@ -13,7 +13,14 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
 
-function BottomOptions({ categoriesSideBar, setCategoriesSideBar, mainSideBar, setMainSideBar }) {
+function BottomOptions({
+  categoriesSideBar,
+  setCategoriesSideBar,
+  mainSideBar,
+  setMainSideBar,
+  openSelectPlace,
+  setOpenSelectPlace
+}) {
   const [t] = useTranslation()
 
   return (
@@ -37,7 +44,7 @@ function BottomOptions({ categoriesSideBar, setCategoriesSideBar, mainSideBar, s
           </AppButton>
         </div>
         <div className='md:w-[86%] xl:hidden'>
-          <SearchBar />
+          <SearchBar {...{ openSelectPlace, setOpenSelectPlace }} />
         </div>
         <div className='flex md:hidden flex-row justify-around mt-4'>
           <AppButton
@@ -108,7 +115,9 @@ BottomOptions.propTypes = {
   categoriesSideBar: PropTypes.bool,
   setCategoriesSideBar: PropTypes.func,
   mainSideBar: PropTypes.bool,
-  setMainSideBar: PropTypes.func
+  setMainSideBar: PropTypes.func,
+  openSelectPlace: PropTypes.bool,
+  setOpenSelectPlace: PropTypes.func
 }
 
 export default BottomOptions

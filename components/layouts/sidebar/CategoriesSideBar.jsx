@@ -11,7 +11,7 @@ function CategoriesSideBar ({ categoriesSideBar = false, setCategoriesSideBar = 
       <Drawer
         anchor={'left'}
         open={categoriesSideBar}
-        onClose={setCategoriesSideBar((categoriesSideBar) => !categoriesSideBar)}
+        onClose={() => setCategoriesSideBar(false)}
       >
         <div className='flex flex-row justify-between m-4'>
           <h2 className="text-4xl text-footer-background-100 capitalize leading-loose">Categories</h2>
