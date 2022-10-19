@@ -1,8 +1,32 @@
-import React from 'react'
-import { TextField, Button } from '@mui/material'
+import React, { useState } from 'react'
+import { TextField, Button, InputAdornment, IconButton } from '@mui/material'
 import Link from 'next/link'
+import Visibility from '@mui/icons-material/Visibility'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
 function SignIn() {
+  const [values, setValues] = useState({
+    confirmPassword: '',
+    password: '',
+    showConfirmPassword: false,
+    showPassword: false
+  })
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value })
+  }
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword
+    })
+  }
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault()
+  }
+
   return (
     <>
       <div className='flex flex-col items-center justify-center h-screen'>
@@ -25,8 +49,22 @@ function SignIn() {
             required
             id="outlined-password-input"
             label="Password"
-            type="password"
+            type={values.showPassword ? 'text' : 'password'}
+            value={values.password}
+            onChange={handleChange('password')}
             autoComplete="current-password"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">
+                              <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                              >
+                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                              </IconButton>
+                            </InputAdornment>
+            }}
             sx={{
               width: '100%'
             }}

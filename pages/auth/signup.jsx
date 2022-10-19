@@ -1,8 +1,39 @@
-import React from 'react'
-import { TextField, Button, Checkbox } from '@mui/material'
+import React, { useState } from 'react'
+import { InputAdornment, IconButton, TextField, Button, Checkbox } from '@mui/material'
 import Link from 'next/link'
+import Visibility from '@mui/icons-material/Visibility'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
 function SignUp() {
+  const [values, setValues] = useState({
+    confirmPassword: '',
+    password: '',
+    showConfirmPassword: false,
+    showPassword: false
+  })
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value })
+  }
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword
+    })
+  }
+
+  const handleClickShowConfirmPassword = () => {
+    setValues({
+      ...values,
+      showConfirmPassword: !values.showConfirmPassword
+    })
+  }
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault()
+  }
+
   const privacy = (
     <Link href={'/privacy'}>
       <span className='text-footer-background-200 underline hover:cursor-pointer font-bold'>privacy policy</span>
@@ -48,8 +79,22 @@ function SignUp() {
             required
             id="outlined-password-input"
             label="Password"
-            type="password"
+            type={values.showPassword ? 'text' : 'password'}
+            value={values.password}
+            onChange={handleChange('password')}
             autoComplete="current-password"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">
+                              <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                              >
+                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                              </IconButton>
+                            </InputAdornment>
+            }}
             sx={{
               width: '100%'
             }}
@@ -60,8 +105,22 @@ function SignUp() {
             required
             id="outlined-password-input"
             label="Confirm Password"
-            type="password"
+            type={values.showConfirmPassword ? 'text' : 'password'}
+            value={values.confirmPassword}
+            onChange={handleChange('confirmPassword')}
             autoComplete="current-password"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">
+                              <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowConfirmPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                              >
+                                {values.showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                              </IconButton>
+                            </InputAdornment>
+            }}
             sx={{
               width: '100%'
             }}
