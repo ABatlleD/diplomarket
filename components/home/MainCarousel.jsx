@@ -24,7 +24,7 @@ function MainCarousel({ carousel }) {
       default:
         setSlideHeight(35)
     }
-  }, slideHeight)
+  }, [slideHeight])
 
   return (
     <>

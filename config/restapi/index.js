@@ -1,22 +1,17 @@
 import axios from 'axios'
-import { getCookie } from 'cookies-next'
 
-const axiosClient = axios.create()
-
-axiosClient.defaults.baseURL = process.env.NEXT_PUBLIC_API_ENDPOINT
-
-axiosClient.defaults.headers = {
-  'Content-Type': 'application/json',
-  Authorization: `Token ${process.env.NEXT_PUBLIC_TOKEN_API_ENDPOINT}`,
-  Accept: 'application/json',
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-  Cookie: `NEXT_LOCALE=${getCookie('NEXT_LOCALE')};`
-}
-
-axiosClient.defaults.timeout = 100000
-
-axiosClient.defaults.withCredentials = true
+const axiosClient = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_ENDPOINT,
+  timeout: 100000,
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Token ${process.env.NEXT_PUBLIC_TOKEN_API_ENDPOINT}`,
+    Accept: 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+  }
+})
 
 // Axios Verbs
 

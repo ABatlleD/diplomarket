@@ -113,11 +113,11 @@ function Home({
   )
 }
 
-export async function getStaticProps() {
-  const { featuredProducts, featuredProductsError } = await fetchFeaturedProducts()
-  const { recentlySolds, recentlySoldsError } = await fetchRecentlySolds()
-  const { todayRecomendations, todayRecomendationsError } = await fetchTodayRecomendations()
-  const { carousel, carouselError } = await fetchCarousel()
+export async function getServerSideProps(context) {
+  const { featuredProducts, featuredProductsError } = await fetchFeaturedProducts(context.req.headers.cookie)
+  const { recentlySolds, recentlySoldsError } = await fetchRecentlySolds(context.req.headers.cookie)
+  const { todayRecomendations, todayRecomendationsError } = await fetchTodayRecomendations(context.req.headers.cookie)
+  const { carousel, carouselError } = await fetchCarousel(context.req.headers.cookie)
 
   return {
     props: {
