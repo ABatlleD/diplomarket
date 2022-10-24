@@ -6,6 +6,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const theme = createTheme({
   palette: {
@@ -28,7 +29,14 @@ function ProductItem({ product }) {
       <div className='flex flex-col my-4 hover:shadow-button w-full border-2 border-background-300 rounded-lg h-[30rem] md:h-[32rem] xl:h-[36rem]'>
         <div className='my-2 w-100 flex flex-row justify-center h-44 md:h-48 xl:h-64'>
           <Link href={`/products/${product.id}`}>
-            <img src={`https://www.diplomarket.com${product.img_principal}`} className="max-w-full hover:cursor-pointer h-full" alt="..." />
+            <Image
+              src={`https://www.diplomarket.com${product.img_principal}`}
+              width={180}
+              height={10}
+              placeholder='blur'
+              blurDataURL='/loading.gif'
+              className='hover:cursor-pointer'
+            />
           </Link>
         </div>
         <div className='mx-2 mt-2 mb-2 md:my-2 text-text-100 h-16 md:h-14'>
