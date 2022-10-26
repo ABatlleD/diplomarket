@@ -190,7 +190,7 @@ Home.propTypes = {
 
 Home.getLayout = function getLayout(page) {
   return (
-    <MainLayout>
+    <MainLayout pageProps={page}>
       {page}
     </MainLayout>
   )

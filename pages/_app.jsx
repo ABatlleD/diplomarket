@@ -1,10 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import NextNProgress from 'nextjs-progressbar'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import '../config/i18n'
 import 'swiper/css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/globals.css'
+
+const queryClient = new QueryClient()
 
 function MyApp({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page)
@@ -12,7 +15,9 @@ function MyApp({ Component, pageProps }) {
   return getLayout(
     <>
       <NextNProgress color="#b12024" />
-      <Component {...pageProps} />
+      <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
+      </QueryClientProvider>
     </>
   )
 }

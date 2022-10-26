@@ -16,11 +16,8 @@ function LangSelector () {
   const [anchorElLanguage, setAnchorElLanguage] = useState(null)
 
   useEffect(() => {
-    console.log(localStorage.getItem('lang'))
     const lang = localStorage.getItem('lang')
-    console.log(lang)
     if (!language) {
-      console.log('null')
       localStorage.setItem('lang', 'es')
       setLanguage('es')
       i18n.changeLanguage('es')
@@ -28,7 +25,6 @@ function LangSelector () {
         path: '/'
       })
     } else if (lang === 'es') {
-      console.log('entra es')
       localStorage.setItem('lang', 'es')
       setLanguage('es')
       i18n.changeLanguage('es')
@@ -36,7 +32,6 @@ function LangSelector () {
         path: '/'
       })
     } else if (lang === 'en') {
-      console.log('entra en')
       localStorage.setItem('lang', 'en')
       setLanguage('en')
       i18n.changeLanguage('en')

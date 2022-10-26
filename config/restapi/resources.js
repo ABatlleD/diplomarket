@@ -18,6 +18,9 @@ const resources = {
   recently_solds: {
     all: async (municipalityId) => await getRequest(`${ENDPOINTS.PRODUCTS_BEST_SELLERS}/${municipalityId}/`)
   },
+  categories: {
+    paths: async () => await getRequest(`${ENDPOINTS.CATEGORIES_TREE}`)
+  },
   place: {
     district: {
       all: async () => {

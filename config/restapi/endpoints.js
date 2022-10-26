@@ -12,7 +12,7 @@ export const ENDPOINTS = {
   USERS: '/usuario',
   AUTH: '/autenticacion/',
   CATEGORIES: '/producto/arbol',
-  CATEGORIES_ARBOL: '/categoria/arbol/',
+  CATEGORIES_TREE: '/categoria/arbol/',
   CATEGORY_SPECIAL: '/categoria',
   GET_BRANDS: '/marca',
   BRANDS: '/marca/arbol/',
