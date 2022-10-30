@@ -67,7 +67,7 @@ function ProductItem({ product }) {
           >
             <span><AddShoppingCartIcon /></span> <span className='hidden md:inline'>{t('home.addCart')}</span>
           </div>
-          <div className='text-button mt-1 mr-2'>
+          <div className='text-button mt-1 mr-2 hover:cursor-pointer'>
             <FavoriteBorderIcon fontSize='large' />
           </div>
         </div>

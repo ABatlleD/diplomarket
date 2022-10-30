@@ -24,9 +24,9 @@ function CategoriesAccordion({ title, items }) {
         </AccordionSummary>
         <Divider />
         {items.map((item) => (
-          <AccordionDetails key={item.id}>
+          <AccordionDetails key={item.name}>
             <div className='text-footer-background-200'>
-              {item.title}
+              {item.label}
             </div>
           </AccordionDetails>
         ))}

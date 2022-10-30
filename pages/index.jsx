@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import MainLayout from '../layouts/MainLayout.jsx'
 import ProductsCarousel from '../components/products/ProductsSwiper.jsx'
-import resources from '../config/restapi/resources.js'
+import resources from '../restapi/resources.js'
 import PropTypes from 'prop-types'
 import PriceCheckIcon from '@mui/icons-material/PriceCheck'
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt'

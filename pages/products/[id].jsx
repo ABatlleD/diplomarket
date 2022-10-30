@@ -6,11 +6,12 @@ import { Chip, Divider } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import AppHeader from '../../components/layouts/AppHeader'
 import { useTranslation } from 'react-i18next'
-import resources from '../../config/restapi/resources'
+import resources from '../../restapi/resources'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { Carousel } from 'react-responsive-carousel'
+import ProductsCarousel from '../../components/products/ProductsSwiper.jsx'
 
 const theme = createTheme({
   palette: {
@@ -23,6 +24,8 @@ const theme = createTheme({
 
 function Product({ product, apiError }) {
   const router = useRouter()
+  const [relatedProducts, setRelatedProducts] = useState([])
+  const [isLoading, setLoading] = useState(false)
 
   const { t } = useTranslation()
 
@@ -31,6 +34,10 @@ function Product({ product, apiError }) {
   useEffect(() => {
     if (product) {
       setImages([product.img_principal, ...product.galeria])
+      setLoading(true)
+      resources.products_related.all(product.id, 1)
+        .then(response => setRelatedProducts(response.data))
+      setLoading(false)
     }
   }, [product])
 
@@ -50,7 +57,7 @@ function Product({ product, apiError }) {
             showStatus={false}
             preventMovementUntilSwipeScrollTolerance
             swipeScrollTolerance={100}
-            className={'border w-full rounded-lg h-44 md:h-[22rem]'}
+            className={'border w-full rounded-lg h-[20rem] md:h-[19rem]'}
           >
             {images.map((item) => (
               <div className='active-resource-card' key={item}>
@@ -58,7 +65,7 @@ function Product({ product, apiError }) {
                   src={`https://www.diplomarket.com${item}`}
                   alt="..."
                   style={{
-                    maxHeight: '350px',
+                    maxHeight: '300px',
                     borderRadius: '6px',
                     objectFit: 'contain'
                   }}
@@ -67,7 +74,7 @@ function Product({ product, apiError }) {
             ))}
           </Carousel>
         </div>
-        <div className='flex flex-col md:w-1/2'>
+        <div className='flex flex-col mt-28 md:mt-0 md:w-1/2'>
           <p className='font-bold text-xl text-text-100 mb-2 mt-8 md:mt-0'>{product.nombre}</p>
           <p className='mb-3 text-button text-lg font-bold'>${product.precio} {product.precio_currency}</p>
           <ThemeProvider theme={theme}>
@@ -82,11 +89,11 @@ function Product({ product, apiError }) {
             <span className='font-semibold'>Proveedor: </span> <span className='font-semibold text-text-100 underline'>{product.proveedor.nombre}</span>
           </p>
           <p className='mb-4'>
-            <span className='font-semibold'>{t('products.category')}: </span> <span className='font-semibold text-text-100 underline'>{product.marca.nombre}</span>
+            <span className='font-semibold'>Marca: </span> <span className='font-semibold text-text-100 underline'>{product.marca.nombre}</span>
           </p>
           {product.sku &&
             <p className='mb-8'>
-              <span className='font-semibold'>SKU: </span> <span className='font-semibold text-text-100 underline'>{product.sku}</span>
+              <span className='font-semibold'>SKU: </span> <span className='font-semibold'>{product.sku}</span>
             </p>
           }
           <div className='flex flex-row justify-between'>
@@ -95,7 +102,7 @@ function Product({ product, apiError }) {
             >
               <span><AddShoppingCartIcon /></span> <span className='hidden md:inline'>{t('home.addCart')}</span>
             </div>
-            <div className='text-button mt-1 mr-2'>
+            <div className='text-button mt-1 mr-2 hover:cursor-pointer'>
               <FavoriteBorderIcon fontSize='large' />
             </div>
           </div>
@@ -113,6 +120,13 @@ function Product({ product, apiError }) {
             `${item.nombre}, `
           ))}</p>
         </div>
+      </div>
+      {isLoading &&
+        <>Loading...</>
+      }
+      <div className='mx-3 mb-4'>
+        <p className='font-bold text-4xl'>Related Product</p>
+        <ProductsCarousel products={relatedProducts} />
       </div>
     </>
   )

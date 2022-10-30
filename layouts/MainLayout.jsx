@@ -6,10 +6,10 @@ import CategoriesSideBar from '../components/layouts/sidebar/CategoriesSideBar'
 import MainSideBar from '../components/layouts/sidebar/MainSideBar'
 import CartSideBar from '../components/layouts/sidebar/CartSideBar'
 import { motion } from 'framer-motion'
-import { QueryClient, QueryClientProvider, Hydrate } from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-function MainLayout({ pageProps, children }) {
+function MainLayout({ children }) {
   const [categoriesSideBar, setCategoriesSideBar] = useState(false)
   const [mainSideBar, setMainSideBar] = useState(false)
   const [cartSideBar, setCartSideBar] = useState(false)
@@ -20,30 +20,28 @@ function MainLayout({ pageProps, children }) {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <motion.div
-            animate={{
-              opacity: categoriesSideBar || mainSideBar || cartSideBar ? 0.5 : 1
-            }}
-            transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
-          >
-            <NavBar {...{
-              categoriesSideBar,
-              setCategoriesSideBar,
-              mainSideBar,
-              setMainSideBar,
-              cartSideBar,
-              setCartSideBar,
-              openSelectPlace,
-              setOpenSelectPlace
-            }}/>
-            <main>{children}</main>
-            <Footer />
-          </motion.div>
-          <CategoriesSideBar {...{ categoriesSideBar, setCategoriesSideBar }} />
-          <MainSideBar {...{ mainSideBar, setMainSideBar }} />
-          <CartSideBar {...{ cartSideBar, setCartSideBar }} />
-        </Hydrate>
+        <motion.div
+          animate={{
+            opacity: categoriesSideBar || mainSideBar || cartSideBar ? 0.5 : 1
+          }}
+          transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
+        >
+          <NavBar {...{
+            categoriesSideBar,
+            setCategoriesSideBar,
+            mainSideBar,
+            setMainSideBar,
+            cartSideBar,
+            setCartSideBar,
+            openSelectPlace,
+            setOpenSelectPlace
+          }}/>
+          <main>{children}</main>
+          <Footer />
+        </motion.div>
+        <CategoriesSideBar {...{ categoriesSideBar, setCategoriesSideBar }} />
+        <MainSideBar {...{ mainSideBar, setMainSideBar }} />
+        <CartSideBar {...{ cartSideBar, setCartSideBar }} />
         <ReactQueryDevtools />
       </QueryClientProvider>
     </>
@@ -51,8 +49,7 @@ function MainLayout({ pageProps, children }) {
 }
 
 MainLayout.propTypes = {
-  children: PropTypes.node,
-  pageProps: PropTypes.object
+  children: PropTypes.node
 }
 
 export default MainLayout
