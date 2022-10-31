@@ -37,7 +37,10 @@ function MainLayout({ children }) {
             setOpenSelectPlace
           }}/>
           <main>{children}</main>
-          <Footer />
+          <Footer {...{
+            cartSideBar,
+            setCartSideBar
+          }} />
         </motion.div>
         <CategoriesSideBar {...{ categoriesSideBar, setCategoriesSideBar }} />
         <MainSideBar {...{ mainSideBar, setMainSideBar }} />

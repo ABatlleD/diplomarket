@@ -5,8 +5,9 @@ import TelegramIcon from '@mui/icons-material/Telegram'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
+import PropTypes from 'prop-types'
 
-function FooterBox() {
+function FooterBox({ cartSideBar, setCartSideBar }) {
   const { t } = useTranslation()
 
   return (
@@ -54,10 +55,16 @@ function FooterBox() {
         </div>
         <div className='flex flex-col md:w-5/12 text-text-200 font-semibold mb-6'>
           <h2 className='mb-3 font-bold text-background-100'>{t('footer.account.title')}</h2>
-          <p className='mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>{t('footer.account.signOut')}</p>
-          <p className='mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>{t('footer.account.cart')}</p>
-          <p className='mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>{t('footer.account.wishes')}</p>
-          <p className='transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>{t('footer.account.orders')}</p>
+          <Link href={'/auth/signup'}>
+            <p className='mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>{t('footer.account.signOut')}</p>
+          </Link>
+          <p onClick={() => setCartSideBar(true)} className='mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>{t('footer.account.cart')}</p>
+          <Link href={'/wishlist'}>
+            <p className='mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>{t('footer.account.wishes')}</p>
+          </Link>
+          <Link href={'/account/orders'}>
+            <p className='transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500'>{t('footer.account.orders')}</p>
+          </Link>
         </div>
       </div>
       <div className='flex flex-col md:w-3/12 text-background-100'>
@@ -71,6 +78,11 @@ function FooterBox() {
       </div>
     </div>
   )
+}
+
+FooterBox.propTypes = {
+  cartSideBar: PropTypes.bool,
+  setCartSideBar: PropTypes.func
 }
 
 export default FooterBox

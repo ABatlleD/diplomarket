@@ -85,7 +85,9 @@ function BottomOptions({
               />
             </div>
             <div className='mx-4'>
-              {t('layout.navbar.allProducts')}
+              <Link href='/products/all'>
+                {t('layout.navbar.allProducts')}
+              </Link>
             </div>
             <div className='mr-4'>
               <Link href='/about'>
@@ -93,7 +95,9 @@ function BottomOptions({
               </Link>
             </div>
             <div>
-              {t('layout.navbar.contact')}
+              <Link href='/contact'>
+                {t('layout.navbar.contact')}
+              </Link>
             </div>
           </div>
           <div className='flex flex-row'>
@@ -103,7 +107,7 @@ function BottomOptions({
                 fontSize: 25
               }}
             />
-            <p className='ml-1'>+1 305 337 7539</p>
+            <a href='https://api.whatsapp.com/send?phone=+13053377539&text=Hola,%20Diplomarket%E2%84%A2' className='ml-1'>+1 305 337 7539</a>
           </div>
         </div>
       </div>

@@ -91,19 +91,23 @@ function TopBar({
             USD <span className='mt-[-3px]'><LockIcon fontSize={size.width < 1024 ? 'large' : 'small'} /></span>
           </div>
           <ThemeProvider theme={theme}>
-            <Badge
-              badgeContent={2}
-              color='error'
-              sx={{
-                marginTop: {
-                  xs: '0.5rem',
-                  sm: '0.5rem',
-                  md: '0.75rem'
-                }
-              }}
-            >
-              <FavoriteBorderIcon fontSize='large' />
-            </Badge>
+            <Link href={'/wishlist'}>
+              <div className='hover:cursor-pointer'>
+                <Badge
+                  badgeContent={2}
+                  color='error'
+                  sx={{
+                    marginTop: {
+                      xs: '0.5rem',
+                      sm: '0.5rem',
+                      md: '0.75rem'
+                    }
+                  }}
+                >
+                  <FavoriteBorderIcon fontSize='large' />
+                </Badge>
+              </div>
+            </Link>
             <div className='hover:cursor-pointer'>
               <Badge
                 badgeContent={1}
