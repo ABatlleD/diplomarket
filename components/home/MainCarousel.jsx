@@ -13,13 +13,13 @@ function MainCarousel({ carousel }) {
   useEffect(() => {
     switch (true) {
       case size.width < 768:
-        setSlideHeight(140)
+        setSlideHeight(150)
         break
       case size.width > 768 && size.width < 1200:
         setSlideHeight(38)
         break
       case size.width >= 1200:
-        setSlideHeight(35)
+        setSlideHeight(38)
         break
       default:
         setSlideHeight(35)
@@ -43,8 +43,8 @@ function MainCarousel({ carousel }) {
                 <Link href={result.enlace}>
                   <img
                     src={size.width >= 768
-                      ? `https://www.diplomarket.com${result.imagen}`
-                      : `https://www.diplomarket.com${result.img_movil}`
+                      ? `http://localhost:8000${result.imagen}`
+                      : `http://localhost:8000${result.img_movil}`
                     }
                     className="w-full hover:cursor-pointer h-full" alt="..."
                   />

@@ -25,7 +25,7 @@ function BottomOptions({
 
   return (
     <>
-      <div className='bg-background-300 flex flex-col md:flex-row md:justify-between p-2 md:p-4'>
+      <div className='bg-background-300 md:bg-background-100 flex flex-col md:flex-row md:justify-between p-2 md:p-4'>
         <div className='hidden md:flex xl:hidden'>
           <AppButton
             sx={{
@@ -75,7 +75,7 @@ function BottomOptions({
           </div>
         </div>
         <div className='hidden xl:flex flex-row justify-between w-full mx-4'>
-          <div className='flex flex-row w-2/3'>
+          <div className='flex flex-row w-2/3 text-footer-background-200 font-bold'>
             <div
               className='hover:cursor-pointer'
               onClick={() => setMainSideBar((mainSideBar) => !mainSideBar)}
@@ -84,17 +84,17 @@ function BottomOptions({
                 fontSize='small'
               />
             </div>
-            <div className='mx-4'>
+            <div className='mx-4 text-footer-background-200 font-bold'>
               <Link href='/products/all'>
                 {t('layout.navbar.allProducts')}
               </Link>
             </div>
-            <div className='mr-4'>
+            <div className='mr-4 text-footer-background-200 font-bold'>
               <Link href='/about'>
                 {t('layout.navbar.about')}
               </Link>
             </div>
-            <div>
+            <div className='text-footer-background-200 font-bold'>
               <Link href='/contact'>
                 {t('layout.navbar.contact')}
               </Link>

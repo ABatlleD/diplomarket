@@ -7,7 +7,6 @@ import MainSideBar from '../components/layouts/sidebar/MainSideBar'
 import CartSideBar from '../components/layouts/sidebar/CartSideBar'
 import { motion } from 'framer-motion'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 function MainLayout({ children }) {
   const [categoriesSideBar, setCategoriesSideBar] = useState(false)
@@ -45,7 +44,6 @@ function MainLayout({ children }) {
         <CategoriesSideBar {...{ categoriesSideBar, setCategoriesSideBar }} />
         <MainSideBar {...{ mainSideBar, setMainSideBar }} />
         <CartSideBar {...{ cartSideBar, setCartSideBar }} />
-        <ReactQueryDevtools />
       </QueryClientProvider>
     </>
   )

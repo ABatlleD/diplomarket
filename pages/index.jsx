@@ -38,19 +38,19 @@ function Home({
     <>
       <AppHeader title={t('pages.home')} />
       <div className='flex flex-col'>
-        <div className=''>
+        <div className='mb-4 md:mb-0'>
           <MainCarousel carousel={carousel} />
         </div>
-        <div className='FeaturedProducts mx-2 md:mx-4 mt-20 mb-10 flex flex-col'>
-          <div className='flex mb-1 flex-col md:flex-row md:justify-between'>
-            <div className='font-bold mb-4 md:mb-0 text-4xl'>{t('home.featuredProducts')}</div>
+        <div className='FeaturedProducts mx-2 md:mx-4 mt-4 mb-10 flex flex-col'>
+          <div className='flex mb-1 flex-col items-center'>
+            <div className='font-bold mb-2 md:mb-0 text-2xl md:text-3xl'>{t('home.featuredProducts')}</div>
             <div className='flex flex-row mt-2'>
               {categories.map((item, _idx) => (
                 <div
                   key={_idx}
                   onClick={() => handleChangeCategory(item)}
                   className={
-                    `md:pt-1 px-2 md:ml-4 h-8 mr-1 font-semibold hover:cursor-pointer ${
+                    `md:pt-1 px-1 md:px-2 md:ml-4 md:h-8 mr-1 font-semibold hover:cursor-pointer ${
                       item === category
                       ? 'text-background-100 bg-button rounded-lg'
                       : 'text-button'
@@ -70,8 +70,8 @@ function Home({
           </div>
         </div>
         <div className='RecentlySoldProducts mx-4 mb-10 flex flex-col'>
-          <div className='flex mb-8 flex-row justify-between'>
-            <div className='font-bold text-4xl'>{t('home.recentlySold')}</div>
+          <div className='flex mb-2 flex-row justify-center'>
+            <div className='font-bold text-xl md:text-3xl'>{t('home.recentlySold')}</div>
           </div>
           {recentlySoldsError &&
             <h2>{recentlySoldsError}</h2>
@@ -81,8 +81,8 @@ function Home({
           </div>
         </div>
         <div className='TodayRecomendationProducts mx-4 flex flex-col'>
-          <div className='flex mb-8 flex-row justify-between'>
-            <div className='font-bold text-4xl'>{t('home.todayRecomendation')}</div>
+          <div className='flex mb-2 flex-row justify-center'>
+            <div className='font-bold text-2xl md:text-3xl'>{t('home.todayRecomendation')}</div>
           </div>
           {todayRecomendationsError &&
             <h2>{todayRecomendationsError}</h2>

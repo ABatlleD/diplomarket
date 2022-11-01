@@ -62,7 +62,7 @@ function Product({ product, apiError }) {
             {images.map((item) => (
               <div className='active-resource-card' key={item}>
                 <img
-                  src={`https://www.diplomarket.com${item}`}
+                  src={`http://127.0.0.1:8000${item}`}
                   alt="..."
                   style={{
                     maxHeight: '300px',
