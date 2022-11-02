@@ -8,6 +8,7 @@ import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDown
 import useWindowSize from '../hooks/WindowSize'
 import { useTranslation } from 'react-i18next'
 import { PropTypes } from 'prop-types'
+import { getCookie } from 'cookies-next'
 
 const theme = createTheme({
   palette: {
@@ -21,6 +22,7 @@ const theme = createTheme({
 function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
   const size = useWindowSize()
   const { t } = useTranslation()
+  const NEXT_DISTRICT = getCookie('NEXT_DISTRICT')
 
   return (
     <>
@@ -41,7 +43,7 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
                 className='bg-button'
                 onClick={() => setOpenSelectPlace(true)}
               >
-                <span className='mt-[-1px] mr-1'><AddLocationAltOutlinedIcon fontSize='small' /></span> Miami <span className='mt-[-1px]'><KeyboardArrowDownOutlinedIcon fontSize='small' /></span>
+                <span className='mt-[-1px] mr-1'><AddLocationAltOutlinedIcon fontSize='small' /></span> {NEXT_DISTRICT} <span className='mt-[-1px]'><KeyboardArrowDownOutlinedIcon fontSize='small' /></span>
             </AppButton>
           </div>
           <OutlinedInput

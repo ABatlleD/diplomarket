@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import NavBar from './NavBar.jsx'
 import Footer from './Footer.jsx'
@@ -7,12 +7,20 @@ import MainSideBar from '../components/layouts/sidebar/MainSideBar'
 import CartSideBar from '../components/layouts/sidebar/CartSideBar'
 import { motion } from 'framer-motion'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { getCookie } from 'cookies-next'
 
 function MainLayout({ children }) {
   const [categoriesSideBar, setCategoriesSideBar] = useState(false)
   const [mainSideBar, setMainSideBar] = useState(false)
   const [cartSideBar, setCartSideBar] = useState(false)
   const [openSelectPlace, setOpenSelectPlace] = useState(false)
+  const NEXT_MUNICIPALITY = getCookie('NEXT_MUNICIPALITY')
+
+  useEffect(() => {
+    if (!NEXT_MUNICIPALITY) {
+      setOpenSelectPlace(true)
+    }
+  }, [])
 
   const queryClient = new QueryClient()
 

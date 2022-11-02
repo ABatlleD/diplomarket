@@ -31,6 +31,15 @@ const resources = {
       return response.data
     }
   },
+  brands: {
+    all: async () => await getRequest(ENDPOINTS.GET_BRANDS)
+  },
+  suppliers: {
+    all: async () => await getRequest(ENDPOINTS.GET_SUPPLIER)
+  },
+  tags: {
+    all: async () => await getRequest(ENDPOINTS.GET_TAGS)
+  },
   products_by: {
     supplier: async (provider, municipio, page, filter) => {
       const response = await AxiosApiClient.get(
@@ -56,15 +65,11 @@ const resources = {
   },
   place: {
     district: {
-      all: async () => {
-        await getRequest(ENDPOINTS.MUNICIPALITY)
-      },
-      one: async (id) => {
-        await getRequest(`${ENDPOINTS.MUNICIPALITY}${id}`)
-      }
+      all: async () => await getRequest(ENDPOINTS.MUNICIPALITY),
+      one: async (id) => await getRequest(`${ENDPOINTS.MUNICIPALITY}${id}`)
     },
     city: {
-      all: async () => { await getRequest(ENDPOINTS.PROVINCES) }
+      all: async () => await getRequest(ENDPOINTS.PROVINCES)
     }
   }
 }

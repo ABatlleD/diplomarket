@@ -70,3 +70,7 @@ div.Mui-focused .MuiOutlinedInput-notchedOutline {
   border-color: #15224b !important;
 }
 
+.MuiSlider-root {
+  color: #15224b !important;
+}
+

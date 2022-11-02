@@ -25,6 +25,49 @@ export function useTreeCategories() {
   }
 }
 
+export function useSuppliers() {
+  const { data, isSuccess, error, isFetching } = useQuery(
+    [ENDPOINTS.GET_SUPPLIER],
+    () => resources.suppliers.all()
+  )
+
+  const [suppliers, setSuppliers] = useState({})
+
+  useEffect(() => {
+    if (data && isSuccess) {
+      setSuppliers(data)
+    }
+  }, [data])
+
+  return {
+    suppliers,
+    isSuccess,
+    error,
+    isFetching
+  }
+}
+export function useBrands() {
+  const { data, isSuccess, error, isFetching } = useQuery(
+    [ENDPOINTS.GET_BRANDS],
+    () => resources.brands.all()
+  )
+
+  const [brands, setBrands] = useState({})
+
+  useEffect(() => {
+    if (data && isSuccess) {
+      setBrands(data)
+    }
+  }, [data])
+
+  return {
+    brands,
+    isSuccess,
+    error,
+    isFetching
+  }
+}
+
 export function useRelatedProducts(productId, municipalityId) {
   const { data, isSuccess, error, isFetching } = useQuery(
     [ENDPOINTS.PRODUCTS_RELATED],
@@ -70,6 +113,34 @@ export function useSupplier({ provider, municipality_id, page = 0, filter }) {
   return {
     products: data?.data ?? [],
     total: data?.total ?? 0,
+    isSuccess,
+    isLoading,
+    error
+  }
+}
+
+export function useStates() {
+  const { data, isSuccess, isLoading, error } = useQuery(
+    ['/cities'],
+    () => resources.place.city.all()
+  )
+
+  return {
+    states: data?.data ?? [],
+    isSuccess,
+    isLoading,
+    error
+  }
+}
+
+export function useDistricts() {
+  const { data, isSuccess, isLoading, error } = useQuery(
+    ['/districts'],
+    () => resources.place.district.all()
+  )
+
+  return {
+    districts: data?.data ?? [],
     isSuccess,
     isLoading,
     error
