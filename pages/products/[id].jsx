@@ -2,16 +2,18 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import MainLayout from '../../layouts/MainLayout'
-import { Chip, Divider } from '@mui/material'
+import { Chip, Box, Tabs, Tab } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import AppHeader from '../../components/layouts/AppHeader'
 import { useTranslation } from 'react-i18next'
 import resources from '../../restapi/resources'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { Carousel } from 'react-responsive-carousel'
 import ProductsCarousel from '../../components/products/ProductsSwiper.jsx'
+import AddIcon from '@mui/icons-material/Add'
+import RemoveIcon from '@mui/icons-material/Remove'
+import AppTabPanel from '../../components/AppTabPanel'
 
 const theme = createTheme({
   palette: {
@@ -22,14 +24,37 @@ const theme = createTheme({
   }
 })
 
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`
+  }
+}
+
 function Product({ product, apiError }) {
   const router = useRouter()
   const [relatedProducts, setRelatedProducts] = useState([])
   const [isLoading, setLoading] = useState(false)
+  const [amount, setAmount] = useState(1)
+  const [value, setValue] = React.useState(0)
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue)
+  }
 
   const { t } = useTranslation()
 
   const [images, setImages] = useState([])
+
+  const amountUpDown = (direction) => {
+    if (direction === 'up') {
+      setAmount(amount + 1)
+    } else {
+      if (amount > 1) {
+        setAmount(amount - 1)
+      }
+    }
+  }
 
   useEffect(() => {
     if (product) {
@@ -75,13 +100,22 @@ function Product({ product, apiError }) {
           </Carousel>
         </div>
         <div className='flex flex-col mt-28 md:mt-0 md:w-1/2'>
-          <p className='font-bold text-xl text-text-100 mb-2 mt-8 md:mt-0'>{product.nombre}</p>
-          <p className='mb-3 text-button text-lg font-bold'>${product.precio} {product.precio_currency}</p>
-          <ThemeProvider theme={theme}>
-            <div className='font-semibold md:mb-6'>
-              <Chip label="Nuevo" color="error" />
-            </div>
-          </ThemeProvider>
+          <p className='font-bold text-2xl text-text-100 mb-2 mt-8 md:mt-0'>{product.nombre}</p>
+          <div className='flex flex-row'>
+            <ThemeProvider theme={theme}>
+              <div className='felx flex-row'>
+                {product.etiquetas.map((tag) => (
+                  <Chip key={tag.pk} sx={{ marginRight: 1, marginBottom: 1 }} label={tag.nombre} color="error" />
+                ))}
+              </div>
+            </ThemeProvider>
+            {product.sku &&
+              <p className='ml-6 mt-1'>
+                <span className='font-semibold'>SKU: </span> <span className='font-semibold'>{product.sku}</span>
+              </p>
+            }
+          </div>
+          <p className='mb-3 mt-2 text-button text-xl font-bold'>${product.precio} {product.precio_currency}</p>
           <p className='mb-2'>
             <span className='font-semibold'>Subcategoría: </span> <span className='font-semibold text-text-100 underline'>{product.subcategoria}</span>
           </p>
@@ -91,41 +125,73 @@ function Product({ product, apiError }) {
           <p className='mb-4'>
             <span className='font-semibold'>Marca: </span> <span className='font-semibold text-text-100 underline'>{product.marca.nombre}</span>
           </p>
-          {product.sku &&
-            <p className='mb-8'>
-              <span className='font-semibold'>SKU: </span> <span className='font-semibold'>{product.sku}</span>
-            </p>
-          }
-          <div className='flex flex-row justify-between'>
-            <div
-              className='hover:cursor-pointer p-2 rounded-lg hover:border-button bg-background-100 hover:bg-text-300 border-2 border-background-300 text-button'
-            >
-              <span><AddShoppingCartIcon /></span> <span className='hidden md:inline'>{t('home.addCart')}</span>
+          <div className='flex flex-col'>
+            <div className='flex flex-row w-11/12 mb-4'>
+              <div className='w-4/12 md:w-3/12'>
+                <div className='flex flex-row'>
+                  <div
+                    className='bg-text-100 rounded-md p-1 hover:cursor-pointer hover:opacity-90'
+                    onClick={() => { amountUpDown('down') }}
+                  >
+                    <RemoveIcon />
+                  </div>
+                  <p className='text-lg mt-1 font-semibold w-6 md:w-10 text-center'>{amount}</p>
+                  <div
+                    className='bg-text-100 rounded-md p-1 hover:cursor-pointer hover:opacity-90'
+                    onClick={() => { amountUpDown('up') }}
+                  >
+                    <AddIcon />
+                  </div>
+                </div>
+              </div>
+              <div className='w-8/12 md:w-9/12'>
+                <div className='hover:opacity-90 py-1 w-full hover:cursor-pointer bg-footer-background-100 text-background-100 shadow-md text-center rounded-md'>
+                  Add Cart
+                </div>
+              </div>
             </div>
-            <div className='text-button mt-1 mr-2 hover:cursor-pointer'>
-              <FavoriteBorderIcon fontSize='large' />
+            <div className='bg-whatsapp w-11/12 mb-4 shadow-lg text-background-100 py-1 text-center rounded-md hover:cursor-pointer hover:opacity-90'> Shop Now</div>
+            <div className='flex flex-row text-button mt-1 hover:cursor-pointer hover:opacity-90'>
+              <FavoriteBorderIcon />
+              <p>Add To Wishlist</p>
             </div>
           </div>
-          <div className='mt-8'>
-            <Divider
-              sx={{
-                backgroundColor: '#6e717a'
-              }}
-            />
-          </div>
-          <h1 className='mt-8 mb-2 font-bold'>{t('products.description')}:</h1>
-          <p>{product.descripcion}</p>
-          <h1 className='mt-8 mb-2 font-bold'>Enviado desde:</h1>
-          <p>{product.municipios.map((item) => (
-            `${item.nombre}, `
-          ))}</p>
         </div>
       </div>
       {isLoading &&
         <>Loading...</>
       }
+      <div className='w-full flex flex-col items-center xs:mt-4 md:mt-28 mb-8'>
+        <Box sx={{ width: '95%', borderBottom: 1, borderColor: 'divider' }}>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Tabs
+              value={value}
+              textColor="inherit"
+              onChange={handleChange}
+              aria-label="basic tabs example"
+            >
+              <Tab label={t('products.description')} {...a11yProps(0)} />
+              <Tab label="Envios Desde" {...a11yProps(1)} />
+            </Tabs>
+          </Box>
+          <AppTabPanel value={value} index={0}>
+            {product.descripcion}
+          </AppTabPanel>
+          <AppTabPanel value={value} index={1}>
+            {product.municipios.map((item) => (
+              `${item.nombre}, `
+            ))}
+          </AppTabPanel>
+        </Box>
+        {/* <h1 className='mt-8 mb-2 font-bold'>{t('products.description')}:</h1>
+        <p>{product.descripcion}</p>
+        <h1 className='mt-8 mb-2 font-bold'>Enviado desde:</h1>
+        <p>{product.municipios.map((item) => (
+          `${item.nombre}, `
+        ))}</p> */}
+      </div>
       <div className='mx-3 mb-4'>
-        <p className='font-bold text-4xl'>Related Product</p>
+        <p className='font-bold text-center text-3xl'>Related Product</p>
         <ProductsCarousel products={relatedProducts} />
       </div>
     </>
