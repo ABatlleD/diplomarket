@@ -16,9 +16,7 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
     resources.place.city.all()
       .then(response => setCities(response.data))
     resources.place.district.all()
-      .then(response => {
-        return setPivots(response.data)
-      })
+      .then(response => setPivots(response.data))
   }, [])
 
   const handleStateChange = (event) => {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { OutlinedInput } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
@@ -23,6 +23,11 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
   const size = useWindowSize()
   const { t } = useTranslation()
   const NEXT_DISTRICT = getCookie('NEXT_DISTRICT')
+  const [district, setDistrict] = useState('')
+
+  useEffect(() => {
+    setDistrict(NEXT_DISTRICT)
+  }, [NEXT_DISTRICT])
 
   return (
     <>
@@ -43,7 +48,7 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
                 className='bg-button'
                 onClick={() => setOpenSelectPlace(true)}
               >
-                <span className='mt-[-1px] mr-1'><AddLocationAltOutlinedIcon fontSize='small' /></span> {NEXT_DISTRICT} <span className='mt-[-1px]'><KeyboardArrowDownOutlinedIcon fontSize='small' /></span>
+                <span className='mt-[-1px] mr-1'><AddLocationAltOutlinedIcon fontSize='small' /></span> {district} <span className='mt-[-1px]'><KeyboardArrowDownOutlinedIcon fontSize='small' /></span>
             </AppButton>
           </div>
           <OutlinedInput

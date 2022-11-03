@@ -6,7 +6,10 @@ const resources = {
     all: async () => await getRequest(`${ENDPOINTS.CAROUSEL}`)
   },
   products: {
-    all: async () => await getRequest(`${ENDPOINTS.PRODUCTS}/`),
+    all: async (offset, limit, municipality_id) => {
+      console.log(`${ENDPOINTS.PRODUCTS}/?offset=${offset}&limit=${limit}&municipios=${municipality_id}`)
+      return await getRequest(`${ENDPOINTS.PRODUCTS}/?offset=${offset}&limit=${limit}&municipios=${municipality_id}`)
+    },
     one: async (id) => await getRequest(`${ENDPOINTS.PRODUCTS}/${id}/`)
   },
   featured_products: {

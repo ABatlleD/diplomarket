@@ -30,19 +30,20 @@ function ProductItem({ product }) {
 
   return (
     <>
-      <div className='flex flex-col my-4 hover:shadow-button w-full border-2 border-background-300 rounded-lg h-[27rem] md:h-[26rem] xl:h-[29.5rem]'>
-        <div className='my-2 w-100 flex flex-row justify-center h-44 md:h-44 xl:h-60'>
+      <div className='flex flex-col hover:shadow-button w-full border-2 border-background-300 rounded-lg h-[27rem] md:h-[26rem] xl:h-[29.5rem]'>
+        <div className='my-2 w-100 relative flex flex-row justify-center h-44 md:h-44 xl:h-60'>
           <Link href={`/products/${product.id}`}>
             <Image
               src={`http://127.0.0.1:8000${product.img_principal}`}
               width={180}
               height={10}
+              fill
               placeholder='blur'
               blurDataURL='/loading.gif'
               className='hover:cursor-pointer'
             />
           </Link>
-          <div className='absolute top-8 right-4'>
+          <div className='absolute right-1'>
             <Tooltip title='Quick View' placement='right'>
               <div
                 className='rounded-lg mb-2 hover:cursor-pointer hover:text-background-100 hover:bg-button bg-background-100'

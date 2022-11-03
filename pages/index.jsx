@@ -65,7 +65,7 @@ function Home({
           {featuredProductsError &&
             <h2>{featuredProductsError}</h2>
           }
-          <div>
+          <div className='my-4'>
             <ProductsCarousel products={featureds} />
           </div>
         </div>
@@ -76,7 +76,7 @@ function Home({
           {recentlySoldsError &&
             <h2>{recentlySoldsError}</h2>
           }
-          <div>
+          <div className='my-4'>
             <ProductsCarousel products={recentlySolds} />
           </div>
         </div>
@@ -87,7 +87,7 @@ function Home({
           {todayRecomendationsError &&
             <h2>{todayRecomendationsError}</h2>
           }
-          <div>
+          <div className='my-4'>
             <ProductsCarousel products={todayRecomendations} />
           </div>
         </div>
