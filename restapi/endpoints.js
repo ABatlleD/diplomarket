@@ -13,7 +13,7 @@ export const ENDPOINTS = {
   AUTH: '/autenticacion/',
   CATEGORIES: '/producto/arbol',
   CATEGORIES_TREE: '/categoria/arbol/',
-  CATEGORY_SPECIAL: '/categoria',
+  CATEGORY_SPECIAL: '/categoria/',
   GET_BRANDS: '/marca/',
   BRANDS: '/marca/arbol/',
   SUPPLIER: '/producto/proveedor/',

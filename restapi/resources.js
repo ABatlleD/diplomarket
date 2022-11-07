@@ -25,7 +25,7 @@ const resources = {
     all: async (productId, municipalityId) => await getRequest(`${ENDPOINTS.PRODUCTS_RELATED}/${municipalityId}/${productId}`)
   },
   categories: {
-    all: async (municipalityId) => await getRequest(`${ENDPOINTS.CATEGORIES}/${municipalityId}/`),
+    all: async (municipalityId) => await getRequest(ENDPOINTS.CATEGORY_SPECIAL),
     paths: async () => await getRequest(`${ENDPOINTS.CATEGORIES_TREE}`),
     products: async (slug, municipality_id, page = 0, filter) => {
       const response = await AxiosApiClient.get(

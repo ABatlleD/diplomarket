@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import MainLayout from '../layouts/MainLayout.jsx'
 import ProductsCarousel from '../components/products/ProductsSwiper.jsx'
+import CategoriesCarousel from '../components/categories/CategoriesSwiper.jsx'
 import resources from '../restapi/resources.js'
 import PropTypes from 'prop-types'
 import PriceCheckIcon from '@mui/icons-material/PriceCheck'
@@ -13,8 +14,8 @@ import MainCarousel from '../components/home/MainCarousel.jsx'
 function Home({
   featuredProducts,
   featuredProductsError,
-  recentlySolds,
-  recentlySoldsError,
+  categories,
+  categoriesError,
   todayRecomendations,
   todayRecomendationsError,
   carousel,
@@ -22,7 +23,7 @@ function Home({
 }) {
   const { t } = useTranslation()
   const [category, setCategory] = useState(Object.keys(featuredProducts)[0])
-  const [categories] = useState(Object.keys(featuredProducts))
+  const [categoriesFilter] = useState(Object.keys(featuredProducts))
   const [featureds, setFeatureds] = useState([])
 
   useEffect(() => {
@@ -45,7 +46,7 @@ function Home({
           <div className='flex mb-1 flex-col items-center'>
             <div className='font-bold mb-2 md:mb-0 text-2xl md:text-3xl'>{t('home.featuredProducts')}</div>
             <div className='flex flex-row mt-2'>
-              {categories.map((item, _idx) => (
+              {categoriesFilter.map((item, _idx) => (
                 <div
                   key={_idx}
                   onClick={() => handleChangeCategory(item)}
@@ -70,14 +71,11 @@ function Home({
           </div>
         </div>
         <div className='RecentlySoldProducts mx-4 mb-10 flex flex-col'>
-          <div className='flex mb-2 flex-row justify-center'>
-            <div className='font-bold text-xl md:text-3xl'>{t('home.recentlySold')}</div>
-          </div>
-          {recentlySoldsError &&
-            <h2>{recentlySoldsError}</h2>
+          {categoriesError &&
+            <h2>{categoriesError}</h2>
           }
-          <div className='my-4'>
-            <ProductsCarousel products={recentlySolds} />
+          <div className='my-4 w-full'>
+            <CategoriesCarousel categories={categories} />
           </div>
         </div>
         <div className='TodayRecomendationProducts mx-4 flex flex-col'>
@@ -114,17 +112,17 @@ function Home({
 }
 
 export async function getServerSideProps(context) {
-  const { featuredProducts, featuredProductsError } = await fetchFeaturedProducts(context.req.headers.cookie)
-  const { recentlySolds, recentlySoldsError } = await fetchRecentlySolds(context.req.headers.cookie)
-  const { todayRecomendations, todayRecomendationsError } = await fetchTodayRecomendations(context.req.headers.cookie)
-  const { carousel, carouselError } = await fetchCarousel(context.req.headers.cookie)
+  const { featuredProducts, featuredProductsError } = await fetchFeaturedProducts()
+  const { categories, categoriesError } = await fetchCategories()
+  const { todayRecomendations, todayRecomendationsError } = await fetchTodayRecomendations()
+  const { carousel, carouselError } = await fetchCarousel()
 
   return {
     props: {
       featuredProducts,
       featuredProductsError,
-      recentlySolds,
-      recentlySoldsError,
+      categories,
+      categoriesError,
       todayRecomendations,
       todayRecomendationsError,
       carousel,
@@ -144,15 +142,15 @@ async function fetchFeaturedProducts() {
   return { featuredProducts, featuredProductsError }
 }
 
-async function fetchRecentlySolds() {
-  let recentlySoldsError = ''
-  let recentlySolds = []
+async function fetchCategories() {
+  let categoriesError = ''
+  let categories = []
   try {
-    recentlySolds = await (await resources.recently_solds.all(1)).data
+    categories = await (await resources.categories.all(1)).data
   } catch (error) {
-    recentlySoldsError = error.message
+    categoriesError = error.message
   }
-  return { recentlySolds, recentlySoldsError }
+  return { categories, categoriesError }
 }
 
 async function fetchTodayRecomendations() {
@@ -180,8 +178,8 @@ async function fetchCarousel() {
 Home.propTypes = {
   featuredProducts: PropTypes.array,
   featuredProductsError: PropTypes.string,
-  recentlySolds: PropTypes.array,
-  recentlySoldsError: PropTypes.string,
+  categories: PropTypes.array,
+  categoriesError: PropTypes.string,
   todayRecomendations: PropTypes.array,
   todayRecomendationsError: PropTypes.string,
   carousel: PropTypes.array,

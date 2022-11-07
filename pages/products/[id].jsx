@@ -14,6 +14,7 @@ import ProductsCarousel from '../../components/products/ProductsSwiper.jsx'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
 import AppTabPanel from '../../components/AppTabPanel'
+import ImageMagnifier from '../../components/ImageMagnifier'
 
 const theme = createTheme({
   palette: {
@@ -84,18 +85,15 @@ function Product({ product, apiError }) {
             swipeScrollTolerance={100}
             className={'border w-full rounded-lg h-[20rem] md:h-[19rem]'}
           >
-            {images.map((item) => (
-              <div className='active-resource-card' key={item}>
-                <img
-                  src={`http://127.0.0.1:8000${item}`}
-                  alt="..."
-                  style={{
-                    maxHeight: '300px',
-                    borderRadius: '6px',
-                    objectFit: 'contain'
-                  }}
-                />
-              </div>
+            {images && images.map((item) => (
+              <ImageMagnifier
+                key={item}
+                src={`http://127.0.0.1:8000${item}`}
+                width={'200px'}
+                magnifierHeight={100}
+                magnifieWidth={100}
+                zoomLevel={1.5}
+              />
             ))}
           </Carousel>
         </div>

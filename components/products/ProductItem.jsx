@@ -37,7 +37,6 @@ function ProductItem({ product }) {
               src={`http://127.0.0.1:8000${product.img_principal}`}
               width={180}
               height={10}
-              fill
               placeholder='blur'
               blurDataURL='/loading.gif'
               className='hover:cursor-pointer'
