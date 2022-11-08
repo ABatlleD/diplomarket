@@ -31,6 +31,8 @@
     "recentlySold": "Más Vendidos Recientemente",
     "todayRecomendation": "Recomendaciones de Hoy",
     "addCart": "Añadir al Carrito",
+    "addWishList": "Añadir a la Lista de Deseos",
+    "shopNow": "Comprar Ahora",
     "prices": {
       "title": "Precios",
       "description": "Más baratos del mercado"
@@ -45,8 +47,13 @@
     }
   },
   "products": {
+    "subcategory": "Subcategoría",
+    "provider": "Proveedeor",
+    "brand": "Marca",
     "category": "Categoría",
-    "description": "Descripción"
+    "description": "Descripción",
+    "shipmentsFrom": "Envios Desde",
+    "relatedProducts": "Productos Relacionados"
   },
   "about": {
     "title": "SOBRE NOSOTROS",
@@ -132,46 +139,11 @@
       }
     }
   },
+  "wishlist": {
+    "title": "Mis Favoritos"
+  },
   "help": {
     "questionTitle": "Preguntas Frecuentes",
-    "questions": {
-      "1": {
-        "question": "¿Puedo pagar en efectivo cuando reciba los productos?",
-        "answer": "No aceptamos pagos en efectivo. Toda la transacción se realiza online en el momento de la compra."
-      },
-      "2": {
-        "question": "¿En qué ciudades entregan?",
-        "answer": "De momento solo estamos disponibles desde Miami"
-      },
-      "3": {
-        "question": "¿Mifamiliar tiene que pagar algo?",
-        "answer": "No se efectuan pagos."
-      },
-      "4": {
-        "question": "¿Cuántos días demora la entrega de las órdenes?",
-        "answer": "Las órdenes tienen de 3 a 5 días para ser entregadas"
-      },
-      "5": {
-        "question": "¿Ante cualquier duda a quién acudir?",
-        "answer": "Tenemos servicio de atención al cliente a través del correo soporte@diplomarket.com y  a través de la sección Contacto. Además contamos con un chat en linea disponible las 24hrs."
-      },
-      "6": {
-        "question": "¿Cómo saber si mi orden se completó satisfactoriamente?",
-        "answer": "Al realizar una compra usted tendra acceso  a un historial de compras. Las compras completadas aparecerán con el estado 'COMPLETED'. Además le enviamos una  notificación a su correo (con el cual se registró)"
-      },
-      "7": {
-        "question": "¿Hice una orden y no recibí el correo electrónico?",
-        "answer": "Si realizó una orden y no recibió el email , por favor comuníquese con nosotros a través de nuestro chat en el sitio web o por el email soporte@diplomarket.com. Envíenos nombre, apellidos, correo electrónico, y monto de la orden."
-      },
-      "8": {
-        "question": "¿Cuánto es el costo de envío?",
-        "answer": "El costo de envio está determinado por el lugar de entrega"
-      },
-      "9": {
-        "question": "¿Cómo sabe mi familiar que le llevaran la orden?",
-        "answer": "Su familiar recibirá una noticiación por correo de la compra realizada. El cliente que realiza la orden es responsable de proveer los datos de contacto así como de notificar al estinatario cuando reciba el email de Envío de la orden, de lo contrario puede significar atrasos en la entrega."
-      }
-    },
     "how": {
       "title": "¿Cómo Usar?"
     }

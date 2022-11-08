@@ -31,6 +31,8 @@
     "recentlySold": "Most Recently Sold",
     "todayRecomendation": "Today's Recomendations",
     "addCart": "Add Cart",
+    "shopNow": "Shop Now",
+    "addWishList": "Add To Wishlist",
     "prices": {
       "title": "Prices",
       "description": "Cheapest on the market"
@@ -45,8 +47,13 @@
     }
   },
   "products": {
+    "subcategory": "Subcategory",
+    "provider": "Provider",
+    "brand": "Brand",
     "category": "Category",
-    "description": "Description"
+    "description": "Description",
+    "shipmentsFrom": "Shipments From",
+    "relatedProducts": "Related Products"
   },
   "about": {
     "title": "ABOUT US",
@@ -132,46 +139,11 @@
       }
     }
   },
+  "wishlist": {
+    "title": "Wish List"
+  },
   "help": {
     "questionTitle": "FAQ",
-    "questions": {
-      "1": {
-        "question": "Can I pay cash when I receive the products?",
-        "answer": "We do not accept cash payments. The entire transaction is done online at the time of purchase."
-      },
-      "2": {
-        "question": "What cities do you deliver to?",
-        "answer": "At the moment we are only available from miami"
-      },
-      "3": {
-        "question": "Does my family member have to pay anything?",
-        "answer": "Payments are not made."
-      },
-      "4": {
-        "question": "How many days does it take to deliver orders?",
-        "answer": "Orders have 3 to 5 days to be delivered"
-      },
-      "5": {
-        "question": "When in doubt, who to turn to?",
-        "answer": "We have customer service through the email support@diplomarket.com and through the contact section. we also have an online chat available 24 hours a day."
-      },
-      "6": {
-        "question": "How do i know if my order was completed?",
-        "answer": "When making a purchase you will have access to a purchase history. completed purchases will appear with a 'COMPLETED' status. we also send a notification to your email (with which you registered)"
-      },
-      "7": {
-        "question": "I placed an order and did not receive the mail?",
-        "answer": "If you placed an order and did not receive the email, please contact us through our chat on the website or by email support@diplomarket.com. send us name, surnames, email, and amount of the order."
-      },
-      "8": {
-        "question": "How much is the shippin cost?",
-        "answer": "The shipping cost is determined by the place of delivery"
-      },
-      "9": {
-        "question": "How does my family member know that the order will be delivered?",
-        "answer": "Your relative will receive a notice by mail of the purchase made. the customer who places the order is responsible for providing the contact information as well as for notifying the recipient when they receive the order shipping email, otherwise it may mean delivery delays."
-      }
-    },
     "how": {
       "title": "How to Use?"
     }

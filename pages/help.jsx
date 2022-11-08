@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next'
 import MainLayout from '../layouts/MainLayout'
 import AppHeader from '../components/layouts/AppHeader'
 import AppAccordion from '../components/AppAccordion'
+import resources from '../restapi/resources'
+import PropTypes from 'prop-types'
 
-function Help() {
-  const questions = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-
-  const { t } = useTranslation()
+function Help({ faq, help, fetchError }) {
+  const { t, i18n } = useTranslation()
   const [view, setView] = useState('faq')
 
   const handleChangeView = (option) => {
@@ -35,11 +35,11 @@ function Help() {
         </div>
       </div>
       {view === 'faq' &&
-        questions.map((question) => (
+        faq.results.map((question) => (
           <AppAccordion
-            key={question}
-            title={t(`help.questions.${question}.question`)}
-            text={t(`help.questions.${question}.answer`)}
+            key={question.id}
+            title={i18n.language === 'es' ? question.pregunta : question.pregunta_ingles}
+            text={i18n.language === 'es' ? question.respuesta : question.respuesta_ingles}
           />
         ))
       }
@@ -49,6 +49,37 @@ function Help() {
      </div>
     </>
   )
+}
+
+export async function getServerSideProps() {
+  const { faq, help, fetchError } = await fetchData()
+
+  return {
+    props: {
+      faq,
+      help,
+      fetchError
+    }
+  }
+}
+
+async function fetchData() {
+  let fetchError = ''
+  let faq = []
+  let help = []
+  try {
+    faq = await (await resources.faq.all()).data
+    help = await (await resources.help.all()).data
+  } catch (error) {
+    fetchError = error.message
+  }
+  return { faq, help, fetchError }
+}
+
+Help.propTypes = {
+  faq: PropTypes.object,
+  help: PropTypes.object,
+  fetchError: PropTypes.string
 }
 
 Help.getLayout = function getLayout(page) {

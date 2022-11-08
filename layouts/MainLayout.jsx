@@ -8,6 +8,7 @@ import CartSideBar from '../components/layouts/sidebar/CartSideBar'
 import { motion } from 'framer-motion'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { getCookie } from 'cookies-next'
+import { FavProvider } from '../store/fav/fav.context.jsx'
 
 function MainLayout({ children }) {
   const [categoriesSideBar, setCategoriesSideBar] = useState(false)
@@ -26,33 +27,35 @@ function MainLayout({ children }) {
 
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <motion.div
-          animate={{
-            opacity: categoriesSideBar || mainSideBar || cartSideBar ? 0.5 : 1
-          }}
-          transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
-        >
-          <NavBar {...{
-            categoriesSideBar,
-            setCategoriesSideBar,
-            mainSideBar,
-            setMainSideBar,
-            cartSideBar,
-            setCartSideBar,
-            openSelectPlace,
-            setOpenSelectPlace
-          }}/>
-          <main>{children}</main>
-          <Footer {...{
-            cartSideBar,
-            setCartSideBar
-          }} />
-        </motion.div>
-        <CategoriesSideBar {...{ categoriesSideBar, setCategoriesSideBar }} />
-        <MainSideBar {...{ mainSideBar, setMainSideBar }} />
-        <CartSideBar {...{ cartSideBar, setCartSideBar }} />
-      </QueryClientProvider>
+      <FavProvider>
+        <QueryClientProvider client={queryClient}>
+          <motion.div
+            animate={{
+              opacity: categoriesSideBar || mainSideBar || cartSideBar ? 0.5 : 1
+            }}
+            transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
+          >
+            <NavBar {...{
+              categoriesSideBar,
+              setCategoriesSideBar,
+              mainSideBar,
+              setMainSideBar,
+              cartSideBar,
+              setCartSideBar,
+              openSelectPlace,
+              setOpenSelectPlace
+            }}/>
+            <main>{children}</main>
+            <Footer {...{
+              cartSideBar,
+              setCartSideBar
+            }} />
+          </motion.div>
+          <CategoriesSideBar {...{ categoriesSideBar, setCategoriesSideBar }} />
+          <MainSideBar {...{ mainSideBar, setMainSideBar }} />
+          <CartSideBar {...{ cartSideBar, setCartSideBar }} />
+        </QueryClientProvider>
+      </FavProvider>
     </>
   )
 }

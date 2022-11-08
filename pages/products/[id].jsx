@@ -14,7 +14,6 @@ import ProductsCarousel from '../../components/products/ProductsSwiper.jsx'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
 import AppTabPanel from '../../components/AppTabPanel'
-import ImageMagnifier from '../../components/ImageMagnifier'
 
 const theme = createTheme({
   palette: {
@@ -43,7 +42,7 @@ function Product({ product, apiError }) {
     setValue(newValue)
   }
 
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   const [images, setImages] = useState([])
 
@@ -85,25 +84,28 @@ function Product({ product, apiError }) {
             swipeScrollTolerance={100}
             className={'border w-full rounded-lg h-[20rem] md:h-[19rem]'}
           >
-            {images && images.map((item) => (
-              <ImageMagnifier
-                key={item}
-                src={`http://127.0.0.1:8000${item}`}
-                width={'200px'}
-                magnifierHeight={100}
-                magnifieWidth={100}
-                zoomLevel={1.5}
-              />
+            {images.map((item) => (
+              <div className='active-resource-card' key={item}>
+                <img
+                  src={`http://localhost:8000${item}`}
+                  alt="..."
+                  style={{
+                    maxHeight: '300px',
+                    borderRadius: '6px',
+                    objectFit: 'contain'
+                  }}
+                />
+              </div>
             ))}
           </Carousel>
         </div>
         <div className='flex flex-col mt-28 md:mt-0 md:w-1/2'>
-          <p className='font-bold text-2xl text-text-100 mb-2 mt-8 md:mt-0'>{product.nombre}</p>
+          <p className='font-bold text-2xl text-text-100 mb-2 mt-8 md:mt-0'>{i18n.language === 'es' ? product.nombre : product.nombre_ingles}</p>
           <div className='flex flex-row'>
             <ThemeProvider theme={theme}>
               <div className='felx flex-row'>
                 {product.etiquetas.map((tag) => (
-                  <Chip key={tag.pk} sx={{ marginRight: 1, marginBottom: 1 }} label={tag.nombre} color="error" />
+                  <Chip key={tag.pk} sx={{ marginRight: 1, marginBottom: 1 }} label={i18n.language === 'es' ? tag.nombre : tag.ingles} color="error" />
                 ))}
               </div>
             </ThemeProvider>
@@ -115,13 +117,13 @@ function Product({ product, apiError }) {
           </div>
           <p className='mb-3 mt-2 text-button text-xl font-bold'>${product.precio} {product.precio_currency}</p>
           <p className='mb-2'>
-            <span className='font-semibold'>Subcategoría: </span> <span className='font-semibold text-text-100 underline'>{product.subcategoria}</span>
+            <span className='font-semibold'>{t('products.subcategory')}:</span> <span className='font-semibold text-text-100 underline'>{product.subcategoria}</span>
           </p>
           <p className='mb-2'>
-            <span className='font-semibold'>Proveedor: </span> <span className='font-semibold text-text-100 underline'>{product.proveedor.nombre}</span>
+            <span className='font-semibold'>{t('products.provider')}:</span> <span className='font-semibold text-text-100 underline'>{product.proveedor.nombre}</span>
           </p>
           <p className='mb-4'>
-            <span className='font-semibold'>Marca: </span> <span className='font-semibold text-text-100 underline'>{product.marca.nombre}</span>
+            <span className='font-semibold'>{t('products.brand')}:</span> <span className='font-semibold text-text-100 underline'>{product.marca.nombre}</span>
           </p>
           <div className='flex flex-col'>
             <div className='flex flex-row w-11/12 mb-4'>
@@ -144,14 +146,16 @@ function Product({ product, apiError }) {
               </div>
               <div className='w-8/12 md:w-9/12'>
                 <div className='hover:opacity-90 py-1 w-full hover:cursor-pointer bg-footer-background-100 text-background-100 shadow-md text-center rounded-md'>
-                  Add Cart
+                  {t('home.addCart')}
                 </div>
               </div>
             </div>
-            <div className='bg-whatsapp w-11/12 mb-4 shadow-lg text-background-100 py-1 text-center rounded-md hover:cursor-pointer hover:opacity-90'> Shop Now</div>
+            <div className='bg-whatsapp w-11/12 mb-4 shadow-lg text-background-100 py-1 text-center rounded-md hover:cursor-pointer hover:opacity-90'>
+              {t('home.shopNow')}
+            </div>
             <div className='flex flex-row text-button mt-1 hover:cursor-pointer hover:opacity-90'>
               <FavoriteBorderIcon />
-              <p>Add To Wishlist</p>
+              <p>{t('home.addWishList')}</p>
             </div>
           </div>
         </div>
@@ -169,11 +173,11 @@ function Product({ product, apiError }) {
               aria-label="basic tabs example"
             >
               <Tab label={t('products.description')} {...a11yProps(0)} />
-              <Tab label="Envios Desde" {...a11yProps(1)} />
+              <Tab label={t('products.shipmentsFrom')} {...a11yProps(1)} />
             </Tabs>
           </Box>
           <AppTabPanel value={value} index={0}>
-            {product.descripcion}
+            {i18n.language === 'es' ? product.descripcion : product.descripcion_ingles}
           </AppTabPanel>
           <AppTabPanel value={value} index={1}>
             {product.municipios.map((item) => (
@@ -181,15 +185,9 @@ function Product({ product, apiError }) {
             ))}
           </AppTabPanel>
         </Box>
-        {/* <h1 className='mt-8 mb-2 font-bold'>{t('products.description')}:</h1>
-        <p>{product.descripcion}</p>
-        <h1 className='mt-8 mb-2 font-bold'>Enviado desde:</h1>
-        <p>{product.municipios.map((item) => (
-          `${item.nombre}, `
-        ))}</p> */}
       </div>
       <div className='mx-3 mb-4'>
-        <p className='font-bold text-center text-3xl'>Related Product</p>
+        <p className='font-bold text-center text-3xl mb-4'>{t('products.relatedProducts')}</p>
         <ProductsCarousel products={relatedProducts} />
       </div>
     </>
@@ -236,6 +234,7 @@ async function fetchOneProduct(id) {
   } catch (error) {
     apiError = error.message
   }
+  console.log('🚀 ~ file: [id].jsx ~ line 236 ~ fetchOneProduct ~ product', product)
   return { product, apiError }
 }
 

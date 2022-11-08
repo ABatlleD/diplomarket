@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import MainLayout from '../layouts/MainLayout'
+import FavList from '../components/fav/FavList'
+import { useFav } from '../store/fav/fav.context'
+import { useTranslation } from 'react-i18next'
 
 function Wishlist() {
+  const { items } = useFav()
+  const [loading] = useState(false)
+  const { t } = useTranslation()
+
   return (
-    <div className='flex flex-col items-center mt-44 mb-44'>
-      <p className='font-bold text-footer-background-200 text-4xl'>MY WISH LIST VIEW</p>
+    <div className='flex flex-col items-center my-10'>
+      <div className='flex mb-4 flex-row justify-center'>
+        <div className='font-bold text-2xl md:text-3xl'>{t('wishlist.title')}</div>
+      </div>
+      <FavList products={items} loading={loading} />
     </div>
   )
 }

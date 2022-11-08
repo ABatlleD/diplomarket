@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import DensityMediumIcon from '@mui/icons-material/DensityMedium'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
@@ -15,6 +15,7 @@ import AccountMenu from './AccountMenu'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
 import SelectPlace from '../../modals/SelectPlace'
+import { useFav } from '../../../store/fav/fav.context'
 
 const theme = createTheme({
   palette: {
@@ -37,6 +38,12 @@ function TopBar({
 }) {
   const [t] = useTranslation()
   const size = useWindowSize()
+  const { totalUniqueItemsFav } = useFav()
+  const [totalFav, setTotalFav] = useState(0)
+
+  useEffect(() => {
+    setTotalFav(totalUniqueItemsFav)
+  }, [totalUniqueItemsFav])
 
   return (
     <>
@@ -94,7 +101,7 @@ function TopBar({
             <Link href={'/wishlist'}>
               <div className='hover:cursor-pointer'>
                 <Badge
-                  badgeContent={2}
+                  badgeContent={totalFav}
                   color='error'
                   sx={{
                     marginTop: {

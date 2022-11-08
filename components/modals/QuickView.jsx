@@ -32,8 +32,10 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
     }
   }
 
+  console.log(product)
+
   useEffect(() => {
-    if (product) {
+    if (product.img_principal && product.galeria) {
       setImages([product.img_principal, ...product.galeria])
     }
   }, [product])
@@ -84,20 +86,22 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
               <div className='flex flex-col w-full md:w-[46%]'>
                 <p className='text-lg mb-2'>{product.nombre}</p>
                 <div className='flex flex-row mb-2'>
-                  <ThemeProvider theme={theme}>
-                    <div className='felx flex-row mr-2 my-1 md:my-2 h-7'>
-                      {product.etiquetas.map((tag) => (
-                        <Chip key={tag.pk} sx={{ marginRight: 1, marginBottom: 1, borderRadius: '6px' }} label={tag.nombre} color="error" />
-                      ))}
-                    </div>
-                  </ThemeProvider>
+                  {product.etiquetas && (
+                    <ThemeProvider theme={theme}>
+                      <div className='felx flex-row mr-2 my-1 md:my-2 h-7'>
+                        {product.etiquetas.map((tag) => (
+                          <Chip key={tag.pk} sx={{ marginRight: 1, marginBottom: 1, borderRadius: '6px' }} label={tag.nombre} color="error" />
+                        ))}
+                      </div>
+                    </ThemeProvider>
+                  )}
                   {product.sku &&
                     <p className='mb-8'>
                       <span className='font-semibold'>SKU: </span> <span className='font-semibold'>{product.sku}</span>
                     </p>
                   }
                 </div>
-                <p className='text-button mb-2 text-xl font-semibold'>{product.precio.cantidad} {product.precio.moneda}</p>
+                <p className='text-button mb-2 text-xl font-semibold'>{product.precio?.cantidad} {product.precio?.moneda}</p>
                 <p className='text-xs text-text-100 mb-3'>{product.descripcion}</p>
                 <div className='flex flex-row w-full'>
                   <div className='w-4/12'>

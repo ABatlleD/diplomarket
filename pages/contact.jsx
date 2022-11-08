@@ -6,8 +6,10 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import MailOutlineIcon from '@mui/icons-material/MailOutline'
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined'
 import { TextField, Button } from '@mui/material'
+import resources from '../restapi/resources'
+import PropTypes from 'prop-types'
 
-function Contact() {
+function Contact({ contact, fetchError }) {
   const { t } = useTranslation()
 
   return (
@@ -111,6 +113,34 @@ const mails = [
     mail: 'soporte@diplomarket.com'
   }
 ]
+
+export async function getServerSideProps() {
+  const { contact, fetchError } = await fetchData()
+
+  return {
+    props: {
+      contact,
+      fetchError
+    }
+  }
+}
+
+async function fetchData() {
+  let fetchError = ''
+  let contact = []
+  try {
+    contact = await (await resources.contact.get()).data
+  } catch (error) {
+    fetchError = error.message
+  }
+  console.log('🚀 ~ file: contact.jsx ~ line 133 ~ fetchData ~ contact', contact)
+  return { contact, fetchError }
+}
+
+Contact.propTypes = {
+  contact: PropTypes.object,
+  fetchError: PropTypes.string
+}
 
 Contact.getLayout = function getLayout(page) {
   return (

@@ -13,6 +13,7 @@ function AllProducts({ products, productsError }) {
   const [page, setPage] = useState(1)
 
   const handleChange = async (event, value) => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
     setLoading(true)
     setPage(value)
     try {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Chip, Divider, Tooltip } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
@@ -10,6 +10,7 @@ import ZoomInIcon from '@mui/icons-material/ZoomIn'
 import CompareIcon from '@mui/icons-material/Compare'
 import QuickView from '../modals/QuickView'
 import AddToFav from '../fav/AddFav'
+import resources from '../../restapi/resources'
 
 const theme = createTheme({
   palette: {
@@ -20,28 +21,36 @@ const theme = createTheme({
   }
 })
 
-function ProductItem({ product }) {
+function FavItem({ id }) {
   const { t, i18n } = useTranslation()
   const [openQuickView, setOpenQuickView] = useState(false)
+  const [product, setProduct] = useState({})
+
+  useEffect(() => {
+    resources.products.one(id)
+      .then(response => setProduct(response.data))
+  }, [])
 
   const resizeTitle = (string, maxLength) => {
-    return string.length > maxLength ? `${string.slice(0, maxLength)}...` : string
+    return string?.length > maxLength ? `${string?.slice(0, maxLength)}...` : string
   }
 
   return (
     <>
       <div className='flex flex-col hover:shadow-button w-full border-2 border-background-300 rounded-lg h-[27rem] md:h-[26rem] xl:h-[29.5rem]'>
         <div className='my-2 w-100 relative flex flex-row justify-center h-44 md:h-44 xl:h-60'>
-          <Link href={`/products/${product.id}`}>
-            <Image
-              src={`http://127.0.0.1:8000${product.img_principal}`}
-              width={180}
-              height={10}
-              placeholder='blur'
-              blurDataURL='/loading.gif'
-              className='hover:cursor-pointer'
-            />
-          </Link>
+          {product.img_principal && (
+            <Link href={`/products/${product.id}`}>
+              <Image
+                src={`http://127.0.0.1:8000${product.img_principal}`}
+                width={180}
+                height={10}
+                placeholder='blur'
+                blurDataURL='/loading.gif'
+                className='hover:cursor-pointer'
+              />
+            </Link>
+          )}
           <div className='absolute right-1'>
             <Tooltip title='Quick View' placement='right'>
               <div
@@ -61,20 +70,24 @@ function ProductItem({ product }) {
           </div>
         </div>
         <div className='mx-2 mt-2 mb-2 md:my-2 text-text-100 h-10 md:h-6'>
-          <Link href={`/products/${product.id}`}>
-            {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, 20)}
-          </Link>
+          {product.id && (
+            <Link href={`/products/${product.id}`}>
+              {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, 20)}
+            </Link>
+          )}
         </div>
-        <div className='mx-2 my-0 md:my-0 text-button'>{product.marca.nombre}</div>
-        <div className='mx-2 my-0 md:my-0 text-button'>{product.proveedor.nombre}</div>
-        <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold'>$ {product.precio.cantidad} {product.precio.moneda}</div>
-        <ThemeProvider theme={theme}>
-          <div className='felx flex-row mx-1 md:mx-2 my-1 md:my-2 h-7'>
-            {product.etiquetas.map((tag) => (
-              <Chip key={tag.pk} sx={{ marginRight: 1, marginBottom: 1 }} label={i18n.language === 'es' ? tag.nombre : tag.ingles} color="error" />
-            ))}
-          </div>
-        </ThemeProvider>
+        <div className='mx-2 my-0 md:my-0 text-button'>{product.marca?.nombre}</div>
+        <div className='mx-2 my-0 md:my-0 text-button'>{product.proveedor?.nombre}</div>
+        <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold'>$ {product.precio} {product.precio_currency}</div>
+        {product.etiquetas && (
+          <ThemeProvider theme={theme}>
+            <div className='felx flex-row mx-1 md:mx-2 my-1 md:my-2 h-7'>
+              {product.etiquetas?.map((tag) => (
+                <Chip key={tag.pk} sx={{ marginRight: 1, marginBottom: 1 }} label={i18n.language === 'es' ? tag.nombre : tag.ingles} color="error" />
+              ))}
+            </div>
+          </ThemeProvider>
+        )}
         <Divider
           sx={{
             marginX: 2,
@@ -96,15 +109,8 @@ function ProductItem({ product }) {
   )
 }
 
-ProductItem.propTypes = {
-  product: PropTypes.object
-  // id: PropTypes.number,
-  // title: PropTypes.string,
-  // price: PropTypes.number,
-  // description: PropTypes.string,
-  // brand: PropTypes.string,
-  // provider: PropTypes.string,
-  // image: PropTypes.string
+FavItem.propTypes = {
+  id: PropTypes.number
 }
 
-export default ProductItem
+export default FavItem
