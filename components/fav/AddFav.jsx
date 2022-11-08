@@ -20,7 +20,6 @@ function AddToFav({
   const handleAddClick = (
     e
   ) => {
-    console.log('🚀 ~ file: AddFav.jsx ~ line 26 ~ item', item)
     e.stopPropagation()
     addItemToFav(item, 1)
   }

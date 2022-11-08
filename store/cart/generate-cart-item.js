@@ -11,6 +11,7 @@ export function generateCartItem(item, variation) {
     cant_inventario,
     max
   } = item
+
   return {
     id: `${id}`,
     name: nombre,

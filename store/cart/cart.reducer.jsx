@@ -58,9 +58,6 @@ export function cartReducer(state, action) {
 
 const generateFinalState = (state, items) => {
   const totalUniqueItems = calculateUniqueItems(items)
-  // test items 268
-  // console.log(268)
-  // console.log(totalUniqueItems, items, state);
   return {
     ...state,
     items: calculateItemTotals(items),

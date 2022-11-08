@@ -1,8 +1,8 @@
 import React from 'react'
-import Counter from '../../../components/ui/counter-alt'
-import AddToCartBtn from '../../../components/products/add-to-cart/add-to-cart-btn'
-import { useCart } from '../../../store/quick-cart/cart.context'
-import { generateCartItem } from '../../../store/quick-cart/generate-cart-item'
+import AppCounter from '../AppCounter'
+import AddToCartBtn from './AddCartBtn'
+import { useCart } from '../../store/cart/cart.context'
+import { generateCartItem } from '../../store/cart/generate-cart-item'
 import PropTypes from 'prop-types'
 
 function AddToCart ({
@@ -20,17 +20,20 @@ function AddToCart ({
     isInCart
   } = useCart()
   const item = generateCartItem(data, variation)
+  const outOfStock = isInCart(`${item.id}`) && !isInStock(`${item.id}`)
+
   const handleAddClick = (
     e
   ) => {
     e.stopPropagation()
     addItemToCart(item, 1)
   }
+
   const handleRemoveClick = (e) => {
     e.stopPropagation()
     removeItemFromCart(`${item.id}`)
   }
-  const outOfStock = isInCart(`${item.id}`) && !isInStock(`${item.id}`)
+
   return !isInCart(`${item.id}`)
     ? (
     <AddToCartBtn
@@ -40,7 +43,7 @@ function AddToCart ({
       )
     : (
     <>
-      <Counter
+      <AppCounter
         value={getItemFromCart(`${item.id}`).quantity}
         onDecrement={handleRemoveClick}
         onIncrement={handleAddClick}

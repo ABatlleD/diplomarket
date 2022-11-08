@@ -1,10 +1,10 @@
 import React from 'react'
 import cn from 'classnames'
-import { PlusIcon } from '../../components/icons/plus-icon'
-import { MinusIcon } from '../../components/icons/minus-icon'
+import AddIcon from '@mui/icons-material/Add'
+import RemoveIcon from '@mui/icons-material/Remove'
 import PropTypes from 'prop-types'
 
-function Counter({
+function AppCounter({
   value,
   onDecrement,
   onIncrement,
@@ -26,14 +26,14 @@ function Counter({
         disabled={disabled}
         style={{ backgroundColor: '#E1E8EE', width: '30px', padding: '6px 8px', height: '30px', borderRadius: '6px', border: 'none', cursor: 'pointer' }}
       >
-        <PlusIcon className="md:w-4.5 h-3.5 w-3.5 stroke-2.5 md:h-4.5" />
+        <AddIcon />
       </button>)
         : (<button
         onClick={onDecrement}
         style={{ backgroundColor: '#E1E8EE', width: '30px', padding: '10px 8px', height: '30px', borderRadius: '6px', border: 'none', cursor: 'pointer' }}
       >
         <span className="sr-only">{t('text-minus')}</span>
-        <MinusIcon className="h-3 w-3 stroke-2.5" />
+        <RemoveIcon />
       </button>)}
       <div
         style={{ padding: '0 6px', textAlign: 'center', fontSize: '16px' }}
@@ -46,27 +46,26 @@ function Counter({
         style={{ backgroundColor: '#E1E8EE', width: '30px', padding: '10px 8px', height: '30px', borderRadius: '6px', border: 'none', cursor: 'pointer' }}
       >
         <span className="sr-only">{t('text-minus')}</span>
-        <MinusIcon className="h-3 w-3 stroke-2.5" />
+        <RemoveIcon />
       </button>)
         : (<button
         onClick={onIncrement}
         disabled={disabled}
         style={{ backgroundColor: '#E1E8EE', width: '30px', padding: '6px 8px', height: '30px', borderRadius: '6px', border: 'none', cursor: 'pointer' }}
       >
-        {/* <span className="sr-only">{t('text-plus')}</span> */}
-        <PlusIcon className="md:w-4.5 h-3.5 w-3.5 stroke-2.5 md:h-4.5" />
+        <AddIcon />
       </button>)}
     </div>
   )
-};
+}
 
-Counter.propTypes = {
+AppCounter.propTypes = {
   value: PropTypes.number,
-  onDecrement: PropTypes.any,
-  onIncrement: PropTypes.any,
+  onDecrement: PropTypes.func,
+  onIncrement: PropTypes.func,
   variant: PropTypes.any,
   className: PropTypes.string,
   disabled: PropTypes.bool
 }
 
-export default Counter
+export default AppCounter

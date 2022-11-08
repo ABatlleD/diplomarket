@@ -16,6 +16,7 @@ import Link from 'next/link'
 import PropTypes from 'prop-types'
 import SelectPlace from '../../modals/SelectPlace'
 import { useFav } from '../../../store/fav/fav.context'
+import { useCart } from '../../../store/cart/cart.context'
 
 const theme = createTheme({
   palette: {
@@ -39,11 +40,14 @@ function TopBar({
   const [t] = useTranslation()
   const size = useWindowSize()
   const { totalUniqueItemsFav } = useFav()
+  const { totalUniqueItems } = useCart()
   const [totalFav, setTotalFav] = useState(0)
+  const [totalCart, setTotalCart] = useState(0)
 
   useEffect(() => {
     setTotalFav(totalUniqueItemsFav)
-  }, [totalUniqueItemsFav])
+    setTotalCart(totalUniqueItems)
+  }, [totalUniqueItemsFav, totalUniqueItems])
 
   return (
     <>
@@ -117,7 +121,7 @@ function TopBar({
             </Link>
             <div className='hover:cursor-pointer'>
               <Badge
-                badgeContent={1}
+                badgeContent={totalCart}
                 color='error'
                 sx={{
                   marginTop: {

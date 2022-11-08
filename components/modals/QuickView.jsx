@@ -32,8 +32,6 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
     }
   }
 
-  console.log(product)
-
   useEffect(() => {
     if (product.img_principal && product.galeria) {
       setImages([product.img_principal, ...product.galeria])

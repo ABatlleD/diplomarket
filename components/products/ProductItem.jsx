@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Chip, Divider, Tooltip } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -10,6 +9,7 @@ import ZoomInIcon from '@mui/icons-material/ZoomIn'
 import CompareIcon from '@mui/icons-material/Compare'
 import QuickView from '../modals/QuickView'
 import AddToFav from '../fav/AddFav'
+import AddToCart from '../cart/AddCart'
 
 const theme = createTheme({
   palette: {
@@ -21,7 +21,7 @@ const theme = createTheme({
 })
 
 function ProductItem({ product }) {
-  const { t, i18n } = useTranslation()
+  const { i18n } = useTranslation()
   const [openQuickView, setOpenQuickView] = useState(false)
 
   const resizeTitle = (string, maxLength) => {
@@ -84,9 +84,13 @@ function ProductItem({ product }) {
         />
         <div className='flex flex-row justify-between mx-2'>
           <div
-            className='ml-2 hover:cursor-pointer p-1 rounded-lg hover:border-button bg-background-100 hover:bg-text-300 border-2 border-background-300 text-button'
+            className='ml-2 hover:cursor-pointer'
           >
-            <span><AddShoppingCartIcon /></span> <span className='hidden md:inline'>{t('home.addCart')}</span>
+            {Number(product.cant_inventario) > 0
+              ? (
+                  <AddToCart data={product} />
+                )
+              : <></>}
           </div>
           <AddToFav data={product}/>
         </div>

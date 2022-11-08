@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react'
 import { cartReducer, initialState } from './cart.reducer'
 import { getItem, inStock, available } from './cart.utils'
-import { useLocalStorage } from '../../lib/use-local-storage'
-import { CART_KEY } from '../../lib/constants'
+import { useLocalStorage } from '../../libs/use-local-storage'
+import { CART_KEY } from '../../libs/constants'
 
 export const cartContext = React.createContext(undefined)
 
