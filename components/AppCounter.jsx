@@ -1,5 +1,4 @@
 import React from 'react'
-import cn from 'classnames'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
 import PropTypes from 'prop-types'
@@ -8,63 +7,33 @@ function AppCounter({
   value,
   onDecrement,
   onIncrement,
-  variant,
-  className,
   disabled
 }) {
-  const t = (msg) => {
-    return msg
-  }
-
   return (
-    <div
-      className={cn('flex justify-center align-items-center soverflow-hidden', className)}
-    >
-      {variant === 'pillVertical'
-        ? (<button
-        onClick={onIncrement}
-        disabled={disabled}
-        style={{ backgroundColor: '#E1E8EE', width: '30px', padding: '6px 8px', height: '30px', borderRadius: '6px', border: 'none', cursor: 'pointer' }}
-      >
-        <AddIcon />
-      </button>)
-        : (<button
-        onClick={onDecrement}
-        style={{ backgroundColor: '#E1E8EE', width: '30px', padding: '10px 8px', height: '30px', borderRadius: '6px', border: 'none', cursor: 'pointer' }}
-      >
-        <span className="sr-only">{t('text-minus')}</span>
-        <RemoveIcon />
-      </button>)}
+    <div className='flex flex-row'>
       <div
-        style={{ padding: '0 6px', textAlign: 'center', fontSize: '16px' }}
-      >
-        {value}
-      </div>
-      {variant === 'pillVertical'
-        ? (<button
+        className='bg-background-300 rounded-md p-1 hover:cursor-pointer hover:opacity-90'
         onClick={onDecrement}
-        style={{ backgroundColor: '#E1E8EE', width: '30px', padding: '10px 8px', height: '30px', borderRadius: '6px', border: 'none', cursor: 'pointer' }}
       >
-        <span className="sr-only">{t('text-minus')}</span>
         <RemoveIcon />
-      </button>)
-        : (<button
-        onClick={onIncrement}
-        disabled={disabled}
-        style={{ backgroundColor: '#E1E8EE', width: '30px', padding: '6px 8px', height: '30px', borderRadius: '6px', border: 'none', cursor: 'pointer' }}
-      >
-        <AddIcon />
-      </button>)}
+      </div>
+      <p className='text-lg mt-1 font-semibold w-6 md:w-10 text-center'>{value || 0}</p>
+      {!disabled && (
+        <div
+          className='bg-background-300 rounded-md p-1 hover:cursor-pointer hover:opacity-90'
+          onClick={onIncrement}
+        >
+          <AddIcon />
+        </div>
+      )}
     </div>
   )
 }
 
 AppCounter.propTypes = {
   value: PropTypes.number,
-  onDecrement: PropTypes.func,
-  onIncrement: PropTypes.func,
-  variant: PropTypes.any,
-  className: PropTypes.string,
+  onDecrement: PropTypes.any,
+  onIncrement: PropTypes.any,
   disabled: PropTypes.bool
 }
 

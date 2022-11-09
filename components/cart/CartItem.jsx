@@ -1,7 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import AppCounter from '../AppCounter'
-// import Counter from '../../components/ui/counter';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import { useCart } from '../../store/cart/cart.context'
 import usePrice from '../../libs/use-price'
@@ -9,14 +8,6 @@ import PropTypes from 'prop-types'
 import Image from 'next/image'
 
 function CartItem({ item, variant, calculateDelivery }) {
-  // const currency =
-  //   document.cookie.length > 0
-  //     ? document.cookie
-  //         ?.split(";")
-  //         ?.filter((c) => c.trim().split("=")[0] === "NEXT_CURRENCY")[0]
-  //         ?.trim()
-  //         ?.split("=")[1]
-  //     : "USD";
   const currency = 'USD'
   const t = (msg) => {
     return msg
@@ -55,11 +46,6 @@ function CartItem({ item, variant, calculateDelivery }) {
   }
   const outOfStock = !isInStock(item.id)
   const isNotAvailable = !isAvailable(item.id)
-  /* console.log(isNotAvailable)
-  console.log(item.stock < item.quantity)
-  console.log(item.stock) */
-  /* console.log(item.quantity)
-  console.log(item.stock - item.quantity) */
   return (
     <motion.div
       layout

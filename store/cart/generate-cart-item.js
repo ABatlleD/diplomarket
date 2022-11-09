@@ -20,7 +20,7 @@ export function generateCartItem(item, variation) {
     stock: cant_inventario,
     max,
     free_shipping,
-    price: Number(sale_price || precio),
+    price: Number(sale_price || precio.cantidad),
     discount
   }
 }

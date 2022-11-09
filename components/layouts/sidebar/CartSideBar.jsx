@@ -26,10 +26,10 @@ function CartSideBar ({ cartSideBar = false, setCartSideBar = () => {} }) {
     currencyCode: currency
   })
 
-  function handleCheckout() {
-    // router.push('/checkout')
-    setCartSideBar(false)
-  }
+  // function handleCheckout() {
+  //   // router.push('/checkout')
+  //   setCartSideBar(false)
+  // }
 
   return (
     <React.Fragment>

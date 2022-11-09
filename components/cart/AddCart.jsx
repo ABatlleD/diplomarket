@@ -34,25 +34,27 @@ function AddToCart ({
     removeItemFromCart(`${item.id}`)
   }
 
-  return !isInCart(`${item.id}`)
-    ? (
-    <AddToCartBtn
-      disabled={disabled || outOfStock}
-      onClick={handleAddClick}
-    />
-      )
-    : (
+  //! Hydration error because isInCart method
+  return (
     <>
-      <AppCounter
-        value={getItemFromCart(`${item.id}`).quantity}
-        onDecrement={handleRemoveClick}
-        onIncrement={handleAddClick}
-        className={counterClass}
-        variant={helium ? 'helium' : 'details'}
-        disabled={outOfStock}
+      {!isInCart(`${item.id}`) && (
+      <AddToCartBtn
+        disabled={disabled || outOfStock}
+        onClick={handleAddClick}
       />
+      )}
+      {isInCart(`${item.id}`) && (
+        <AppCounter
+          value={getItemFromCart(`${item.id}`).quantity}
+          onDecrement={handleRemoveClick}
+          onIncrement={handleAddClick}
+          className={counterClass}
+          variant={helium ? 'helium' : 'details'}
+          disabled={outOfStock}
+        />
+      )}
     </>
-      )
+  )
 }
 
 AddToCart.propTypes = {
