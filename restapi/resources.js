@@ -1,13 +1,27 @@
 import { ENDPOINTS } from './endpoints'
-import { getRequest } from '.'
+import { getRequest, postRequest } from '.'
 
 const resources = {
+  auth: {
+    signup: async (data) => await postRequest(`${ENDPOINTS.USERS}`, data)
+  },
   carousel: {
     all: async () => await getRequest(`${ENDPOINTS.CAROUSEL}`)
   },
   products: {
-    all: async (offset, limit, municipality_id) => {
-      return await getRequest(`${ENDPOINTS.PRODUCTS}/?offset=${offset}&limit=${limit}&municipios=${municipality_id}`)
+    all: async (options) => {
+      const { offset, limit, municipality_id, min, max, category, subcategory, brand, provider } = options
+      let filter = `?offset=${offset}&limit=${limit}&municipios=${municipality_id}`
+
+      if (min) filter += `&min=${min}`
+      if (max) filter += `&max=${max}`
+      if (category) filter += `&categoria=${category}`
+      if (subcategory) filter += `&subcategoria=${subcategory}`
+      if (brand) filter += `&marca=${brand}`
+      if (provider) filter += `&proveedor=${provider}`
+      console.log('🚀 ~ file: resources.js ~ line 18 ~ all: ~ filter', filter)
+
+      return await getRequest(`${ENDPOINTS.PRODUCTS}/${filter}`)
     },
     one: async (id) => await getRequest(`${ENDPOINTS.PRODUCTS}/${id}/`)
   },

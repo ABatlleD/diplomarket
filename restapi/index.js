@@ -25,13 +25,13 @@ export async function getRequest(URL) {
 }
 
 export async function postRequest(URL, payload) {
-  return await AxiosBackendClient.post(`/${URL}`, payload).then(response => response)
+  return await AxiosBackendClient.post(`${URL}`, payload).then(response => response)
 }
 
 export async function putRequest(URL, payload) {
-  return await AxiosBackendClient.patch(`/${URL}`, payload).then(response => response)
+  return await AxiosBackendClient.patch(`${URL}`, payload).then(response => response)
 }
 
 export async function deleteRequest(URL) {
-  return await AxiosBackendClient.delete(`/${URL}`).then(response => response)
+  return await AxiosBackendClient.delete(`${URL}`).then(response => response)
 }

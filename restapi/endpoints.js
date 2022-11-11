@@ -9,7 +9,7 @@ export const ENDPOINTS = {
   PRODUCTS_RELATED: '/producto/relacionados',
   MUNICIPALITY: '/municipio/',
   PROVINCES: '/provincia/',
-  USERS: '/usuario',
+  USERS: '/usuario/',
   AUTH: '/autenticacion/',
   CATEGORIES: '/producto/arbol',
   CATEGORIES_TREE: '/categoria/arbol/',
