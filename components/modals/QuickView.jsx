@@ -5,9 +5,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
-import AddIcon from '@mui/icons-material/Add'
-import RemoveIcon from '@mui/icons-material/Remove'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import AddToCart from '../cart/AddCart'
+import AddToFav from '../fav/AddFav'
+import { useTranslation } from 'react-i18next'
 
 const theme = createTheme({
   palette: {
@@ -20,17 +20,7 @@ const theme = createTheme({
 
 function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product }) {
   const [images, setImages] = useState([])
-  const [amount, setAmount] = useState(1)
-
-  const amountUpDown = (direction) => {
-    if (direction === 'up') {
-      setAmount(amount + 1)
-    } else {
-      if (amount > 1) {
-        setAmount(amount - 1)
-      }
-    }
-  }
+  const { t } = useTranslation()
 
   useEffect(() => {
     if (product.img_principal && product.galeria) {
@@ -51,7 +41,7 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
         }}
       >
         <Fade in={openQuickView}>
-          <div className='flex flex-col shadow-2xl bg-background-100 w-11/12 md:4/5 xl:w-3/5 md:mt-10 mx-auto p-2'>
+          <div className='flex flex-col shadow-2xl bg-background-100 w-11/12 md:4/5 xl:w-3/5 mt-4 md:mt-10 mx-auto p-2'>
             <div className='flex flex-row justify-end mb-6'>
               <HighlightOffIcon className='hover:cursor-pointer' onClick={() => setOpenQuickView(false)} />
             </div>
@@ -101,36 +91,28 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
                 </div>
                 <p className='text-button mb-2 text-xl font-semibold'>{product.precio?.cantidad} {product.precio?.moneda}</p>
                 <p className='text-xs text-text-100 mb-3'>{product.descripcion}</p>
-                <div className='flex flex-row w-full'>
-                  <div className='w-4/12'>
-                    <div className='flex flex-row'>
-                      <div
-                        className='bg-text-100 rounded-md p-1 hover:cursor-pointer hover:opacity-90'
-                        onClick={() => { amountUpDown('down') }}
-                      >
-                        <RemoveIcon />
-                      </div>
-                      <p className='text-lg mt-1 font-semibold w-6 md:w-10 text-center'>{amount}</p>
-                      <div
-                        className='bg-text-100 rounded-md p-1 hover:cursor-pointer hover:opacity-90'
-                        onClick={() => { amountUpDown('up') }}
-                      >
-                        <AddIcon />
+                <div className='flex flex-col'>
+                  <div className='flex flex-row w-11/12 mb-4'>
+                    <div className='w-4/12 md:w-3/12'>
+                      <div className='flex flex-row justify-between'>
+                        <div
+                          className='hover:cursor-pointer'
+                        >
+                          {Number(product.cant_inventario) > 0
+                            ? (
+                                <AddToCart data={product} />
+                              )
+                            : <></>}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className='w-8/12'>
-                    <div className='hover:opacity-90 py-1  w-full hover:cursor-pointer bg-footer-background-100 text-background-100 shadow-md text-center rounded-md'>
-                      Add Cart
+                    <div className='bg-footer-background-200 w-6/12 shadow-lg text-background-100 py-1 text-center rounded-md hover:cursor-pointer hover:opacity-90'>
+                      {t('home.shopNow')}
                     </div>
                   </div>
-                </div>
-                <div className='flex flex-row w-full mt-4'>
-                  <div className='flex flex-row text-button w-5/12 mt-1 hover:cursor-pointer hover:opacity-90'>
-                    <FavoriteBorderIcon />
-                    <p>Add To Wishlist</p>
+                  <div className='flex flex-row text-button mt-1 hover:cursor-pointer hover:opacity-90'>
+                    <AddToFav data={product} text={'Añadir a favoritos'} success={'En favoritos'}/>
                   </div>
-                  <div className='bg-whatsapp w-7/12 shadow-lg text-background-100 py-1 text-center rounded-md hover:cursor-pointer hover:opacity-90'> Shop Now</div>
                 </div>
               </div>
             </div>

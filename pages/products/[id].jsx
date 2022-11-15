@@ -8,11 +8,10 @@ import AppHeader from '../../components/layouts/AppHeader'
 import { useTranslation } from 'react-i18next'
 import resources from '../../restapi/resources'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { Carousel } from 'react-responsive-carousel'
 import ProductsCarousel from '../../components/products/ProductsSwiper.jsx'
-import AddIcon from '@mui/icons-material/Add'
-import RemoveIcon from '@mui/icons-material/Remove'
+import AddToCart from '../../components/cart/AddCart'
+import AddToFav from '../../components/fav/AddFav'
 import AppTabPanel from '../../components/AppTabPanel'
 
 const theme = createTheme({
@@ -35,7 +34,6 @@ function Product({ product, apiError }) {
   const router = useRouter()
   const [relatedProducts, setRelatedProducts] = useState([])
   const [isLoading, setLoading] = useState(false)
-  const [amount, setAmount] = useState(1)
   const [value, setValue] = React.useState(0)
 
   const handleChange = (event, newValue) => {
@@ -45,16 +43,6 @@ function Product({ product, apiError }) {
   const { t, i18n } = useTranslation()
 
   const [images, setImages] = useState([])
-
-  const amountUpDown = (direction) => {
-    if (direction === 'up') {
-      setAmount(amount + 1)
-    } else {
-      if (amount > 1) {
-        setAmount(amount - 1)
-      }
-    }
-  }
 
   useEffect(() => {
     if (product) {
@@ -73,9 +61,9 @@ function Product({ product, apiError }) {
   }
 
   return (
-    <>
+    <div className='flex flex-col items-center mx-2'>
       <AppHeader title={t('pages.products')} />
-      <div className='flex flex-col md:flex-row md:justify-between mx-4 my-8'>
+      <div className='flex flex-col md:flex-row w-full 2xl:w-[60%] xl:w-[75%] md:justify-between my-8'>
         <div className='md:w-[45%] flex flex-row justify-center'>
           <Carousel
             showArrows={false}
@@ -110,7 +98,7 @@ function Product({ product, apiError }) {
               </div>
             </ThemeProvider>
             {product.sku &&
-              <p className='ml-6 mt-1'>
+              <p className={`${product.etiquetas.length > 0 ? 'ml-6' : ''} mt-1`}>
                 <span className='font-semibold'>SKU: </span> <span className='font-semibold'>{product.sku}</span>
               </p>
             }
@@ -128,34 +116,24 @@ function Product({ product, apiError }) {
           <div className='flex flex-col'>
             <div className='flex flex-row w-11/12 mb-4'>
               <div className='w-4/12 md:w-3/12'>
-                <div className='flex flex-row'>
+                <div className='flex flex-row justify-between'>
                   <div
-                    className='bg-text-100 rounded-md p-1 hover:cursor-pointer hover:opacity-90'
-                    onClick={() => { amountUpDown('down') }}
+                    className='hover:cursor-pointer'
                   >
-                    <RemoveIcon />
-                  </div>
-                  <p className='text-lg mt-1 font-semibold w-6 md:w-10 text-center'>{amount}</p>
-                  <div
-                    className='bg-text-100 rounded-md p-1 hover:cursor-pointer hover:opacity-90'
-                    onClick={() => { amountUpDown('up') }}
-                  >
-                    <AddIcon />
+                    {Number(product.cant_inventario) > 0
+                      ? (
+                          <AddToCart data={product} />
+                        )
+                      : <></>}
                   </div>
                 </div>
               </div>
-              <div className='w-8/12 md:w-9/12'>
-                <div className='hover:opacity-90 py-1 w-full hover:cursor-pointer bg-footer-background-100 text-background-100 shadow-md text-center rounded-md'>
-                  {t('home.addCart')}
-                </div>
+              <div className='bg-footer-background-200 w-6/12 shadow-lg text-background-100 py-1 text-center rounded-md hover:cursor-pointer hover:opacity-90'>
+                {t('home.shopNow')}
               </div>
-            </div>
-            <div className='bg-whatsapp w-11/12 mb-4 shadow-lg text-background-100 py-1 text-center rounded-md hover:cursor-pointer hover:opacity-90'>
-              {t('home.shopNow')}
             </div>
             <div className='flex flex-row text-button mt-1 hover:cursor-pointer hover:opacity-90'>
-              <FavoriteBorderIcon />
-              <p>{t('home.addWishList')}</p>
+              <AddToFav data={product} text={'Añadir a favoritos'} success={'En favoritos'}/>
             </div>
           </div>
         </div>
@@ -163,7 +141,7 @@ function Product({ product, apiError }) {
       {isLoading &&
         <>Loading...</>
       }
-      <div className='w-full flex flex-col items-center xs:mt-4 md:mt-28 mb-8'>
+      <div className='w-full 2xl:w-[60%] xl:w-[75%] flex flex-col items-center xs:mt-4 md:mt-28 mb-8'>
         <Box sx={{ width: '95%', borderBottom: 1, borderColor: 'divider' }}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs
@@ -186,11 +164,11 @@ function Product({ product, apiError }) {
           </AppTabPanel>
         </Box>
       </div>
-      <div className='mx-3 mb-4'>
-        <p className='font-bold text-center text-3xl mb-4'>{t('products.relatedProducts')}</p>
+      <div className='w-full 2xl:w-[60%] xl:w-[75%] mb-4'>
+        <p className='font-bold text-center text-xl mb-2 md:mb-4'>{t('products.relatedProducts')}</p>
         <ProductsCarousel products={relatedProducts} />
       </div>
-    </>
+    </div>
   )
 }
 

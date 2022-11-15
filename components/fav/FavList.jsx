@@ -4,7 +4,7 @@ import FavItem from './FavItem'
 
 function FavList({ products, loading }) {
   return (
-    <div className='flex flex-wrap justify-center w-[96%]'>
+    <div className='flex flex-wrap justify-center w-[96%] 2xl:w-[60%] xl:w-[75%]'>
       {products?.map((item) => (
         <div className='md:w-1/3 xl:w-[24%] mx-1 mb-4' key={item?.id}>
           <FavItem id={item?.id} />

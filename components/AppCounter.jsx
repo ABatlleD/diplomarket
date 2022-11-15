@@ -10,7 +10,7 @@ function AppCounter({
   disabled
 }) {
   return (
-    <div className='flex flex-row'>
+    <div className='flex flex-row mb-[0.2rem]'>
       <div
         className='bg-background-300 rounded-md p-1 hover:cursor-pointer hover:opacity-90'
         onClick={onDecrement}

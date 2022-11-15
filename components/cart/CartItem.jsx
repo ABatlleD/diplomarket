@@ -52,7 +52,7 @@ function CartItem({ item, variant, calculateDelivery }) {
       initial="from"
       animate="to"
       exit="from"
-      className={`flex items-center py-4 text-sm border-b border-solid border-border-200 justify-around border-opacity-75 ${
+      className={`flex items-center py-1 text-sm bg-background-300 mt-4 rounded-lg justify-around border-opacity-75 ${
         isNotAvailable ? 'bg-red-100' : ''
       }`}
     >
@@ -91,7 +91,6 @@ function CartItem({ item, variant, calculateDelivery }) {
           {!variant
             ? (
             <div className="flex-shrink-0">
-              {/* <img src="/comidas-mundo.jpg" /> */}
               <AppCounter
                 value={item.quantity}
                 onDecrement={handleRemoveClick}
@@ -104,7 +103,6 @@ function CartItem({ item, variant, calculateDelivery }) {
             : (
             <></>
               )}
-          {/* {isNotAvailable ? <h4 className="font-bold text-heading mt-2">No esta disponible</h4> : <></>} */}
           {item.max <= '0'
             ? (
             <h4 className="font-bold text-heading mt-2">Agotado</h4>
@@ -120,14 +118,16 @@ function CartItem({ item, variant, calculateDelivery }) {
                 )}
         </span>
       </div>
-      <span className="font-bold text-heading">{itemPrice} {currency}</span>
-      <button
-        className="w-6 h-6 flex items-center justify-center shrink-0 rounded-full transition-all focus:outline-none hover:bg-accent focus:bg-accent hover:text-light focus:text-light"
-        onClick={() => clearItemFromCart(item.id)}
-      >
-        <span className="sr-only">{t('text-close')}</span>
-        <HighlightOffIcon />
-      </button>
+      <div className='flex flex-col items-end h-[4.7rem] justify-between'>
+        <button
+          className="w-6 h-6 flex items-center justify-center shrink-0 rounded-full transition-all focus:outline-none hover:bg-accent focus:bg-accent hover:text-light focus:text-light"
+          onClick={() => clearItemFromCart(item.id)}
+        >
+          <span className="sr-only mt-[-7px]">{t('text-close')}</span>
+          <HighlightOffIcon />
+        </button>
+        <span className="font-bold text-heading">{itemPrice} {currency}</span>
+      </div>
     </motion.div>
   )
 };

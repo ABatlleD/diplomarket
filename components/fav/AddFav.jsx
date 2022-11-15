@@ -7,6 +7,8 @@ import PropTypes from 'prop-types'
 
 function AddToFav({
   data,
+  text,
+  success,
   counterClass,
   variation,
   disabled
@@ -33,6 +35,9 @@ function AddToFav({
         <FavoriteBorderOutlinedIcon
             fontSize="large"
         />
+        {text && (
+          <span>{text}</span>
+        )}
       </div>
       )
     : (
@@ -40,6 +45,9 @@ function AddToFav({
           <FavoriteOutlinedIcon
               fontSize="large"
           />
+          {success && (
+            <span>{success}</span>
+          )}
         </div>
       )
 }
@@ -47,6 +55,8 @@ function AddToFav({
 AddToFav.propTypes = {
   data: PropTypes.any,
   counterClass: PropTypes.string,
+  text: PropTypes.string,
+  success: PropTypes.string,
   variation: PropTypes.any,
   disabled: PropTypes.bool
 }
