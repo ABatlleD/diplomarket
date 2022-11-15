@@ -72,3 +72,7 @@ div.Mui-focused .MuiOutlinedInput-notchedOutline {
   color: #15224b !important;
 }
 
+.MuiSelect-select {
+  padding: 2px 8px !important;
+}
+

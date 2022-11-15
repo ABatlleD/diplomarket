@@ -3,7 +3,7 @@ import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import PropTypes from 'prop-types'
 
-function CategoriesAccordion({ category, items, handleSubcategoryFilter, handleCategoryFilter }) {
+function CategoriesAccordion({ category, items, handleSubcategoryFilter = () => false, handleCategoryFilter = () => false }) {
   return (
     <>
       <Accordion
@@ -25,17 +25,21 @@ function CategoriesAccordion({ category, items, handleSubcategoryFilter, handleC
             margin: 0
           }}
         >
-          <div className='hover:cursor-pointer hover:underline' onClick={() => { handleCategoryFilter(category.name) }}>
-            {category.label}
+          <div className='hover:cursor-pointer hover:underline' onClick={() => { handleCategoryFilter(category.id) }}>
+            {category.nombre}
           </div>
         </AccordionSummary>
         {items.map((item) => (
-          <AccordionDetails key={item.name} sx={{
-            borderTop: 0,
-            fontSize: '0.9rem'
-          }}>
-            <div className='ml-4 hover:cursor-pointer' onClick={() => handleSubcategoryFilter(item.name)}>
-              {item.label}
+          <AccordionDetails
+            key={item.pk}
+            sx={{
+              borderTop: 0,
+              fontSize: '0.9rem'
+            }}
+            onClick={() => handleSubcategoryFilter(item.pk)}
+          >
+            <div className='ml-4 hover:cursor-pointer'>
+              {item.nombre}
             </div>
           </AccordionDetails>
         ))}

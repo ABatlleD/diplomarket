@@ -3,8 +3,6 @@ import MainLayout from '../../layouts/MainLayout'
 import resources from '../../restapi/resources'
 import PropTypes from 'prop-types'
 import ListProducts from '../../components/products/ListProducts'
-import { useTreeCategories } from '../../restapi/hooks'
-import { serialize } from '../../libs/serialize'
 import CategoriesAccordion from '../../components/categories/CategoriesAccordion'
 import { Slider, FormControlLabel, Pagination, RadioGroup, Radio } from '@mui/material'
 import FilterBar from '../../components/layouts/sidebar/FilterBar'
@@ -18,17 +16,16 @@ function AllProducts({ products, productsError }) {
   const [filterBar, setFilterBar] = useState(false)
   const [pages, setPages] = useState(1)
   const [page, setPage] = useState(1)
-  const { categories } = useTreeCategories()
+  const [categories, setCategories] = useState([])
   const [suppliers, setSuppliers] = useState()
   const [brands, setBrands] = useState()
-  const menuItems = serialize(categories?.data)
   const [prices, setPrices] = useState([0, 1000])
 
   const [category, setCategory] = useState(undefined)
   const [offset, setOffset] = useState(0)
   const [subcategory, setSubcategory] = useState(undefined)
-  const [brand, setBrand] = useState(undefined)
-  const [provider, setProvider] = useState(undefined)
+  const [brand, setBrand] = useState(0)
+  const [provider, setProvider] = useState(0)
   const [min, setMin] = useState(0)
   const [max, setMax] = useState(1000)
 
@@ -37,6 +34,8 @@ function AllProducts({ products, productsError }) {
       .then(response => setBrands(response.data))
     resources.suppliers.all()
       .then(response => setSuppliers(response.data))
+    resources.categories.all()
+      .then(response => setCategories(response.data.results))
   }, [])
 
   const handlePriceChange = (event, newPrices) => {
@@ -67,13 +66,37 @@ function AllProducts({ products, productsError }) {
   }
 
   const handleAllClick = () => {
-    setProvider()
-    setBrand()
+    setProvider(0)
+    setBrand(0)
     setCategory(undefined)
     setSubcategory(undefined)
     setMin(0)
     setMax(1000)
     setPrices([0, 1000])
+  }
+
+  const handleMobileFilter = (mobileFilter) => {
+    console.log('🚀 ~ file: all.jsx ~ line 79 ~ handleMobileFilter ~ mobileFilter', mobileFilter)
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+    setLoading(true)
+    const filter = {
+      offset,
+      municipality_id: 1,
+      limit: 15,
+      category,
+      subcategory,
+      brand: mobileFilter.brand,
+      provider: mobileFilter.provider,
+      min: mobileFilter.min,
+      max: mobileFilter.max
+    }
+    try {
+      resources.products.all(filter)
+        .then(response => setList(response.data))
+    } catch (error) {
+      productsError = error.message
+    }
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -119,9 +142,9 @@ function AllProducts({ products, productsError }) {
 
   return (
     <div className='flex md:flex-row flex-col w-full md:w-[95%] md:mx-auto my-3 md:my-10'>
-      <div className='mx-3 flex md:hidden flex-row justify-between mb-3'>
-        <div className='font-bold mt-1'>
-          Todas las categorías
+      <div className='mx-3 flex md:hidden text-sm flex-row justify-between mb-3'>
+        <div className='font-bold'>
+          Todas las categoías
         </div>
         <div
           onClick={() => setFilterBar(true)}
@@ -133,11 +156,11 @@ function AllProducts({ products, productsError }) {
         <div className='flex flex-col'>
           <p className='font-bold mb-2'>Categories</p>
           <div className=''>
-            {menuItems.map((item) => (
-              <div key={item.name} className='border-2 border-background-100'>
+            {categories.map((item) => (
+              <div key={item.id} className='border-2 border-background-100'>
                 <CategoriesAccordion
                   category={item}
-                  items={item.items}
+                  items={item.subcategorias}
                   {...{
                     handleCategoryFilter,
                     handleSubcategoryFilter
@@ -220,7 +243,7 @@ function AllProducts({ products, productsError }) {
           </div>
         </div>
       </div>
-      <FilterBar {...{ filterBar, setFilterBar }} />
+      <FilterBar {...{ filterBar, setFilterBar, handleMobileFilter }} />
     </div>
   )
 }

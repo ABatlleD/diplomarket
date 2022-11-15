@@ -1,19 +1,56 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Drawer from '@mui/material/Drawer'
 import PropTypes from 'prop-types'
-import LangSelector from '../navbar/LangSelector'
-import LockIcon from '@mui/icons-material/Lock'
-import useWindowSize from '../../../hooks/WindowSize'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
-import AppButton from '../../AppButton'
-import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined'
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined'
-import { useTranslation } from 'react-i18next'
-import Link from 'next/link'
+import resources from '../../../restapi/resources'
+import CategoriesAccordion from '../../categories/CategoriesAccordion'
+import { Slider, FormControlLabel, RadioGroup, Radio } from '@mui/material'
 
-function FilterBar ({ filterBar = false, setFilterBar = () => {} }) {
-  const { t } = useTranslation()
-  const size = useWindowSize()
+function FilterBar ({ filterBar = false, setFilterBar = () => {}, handleMobileFilter = () => {} }) {
+  const [categories, setCategories] = useState([])
+  const [suppliers, setSuppliers] = useState([])
+  const [brands, setBrands] = useState([])
+  const [prices, setPrices] = useState([0, 1000])
+  const [brand, setBrand] = useState(0)
+  const [provider, setProvider] = useState(0)
+
+  useEffect(() => {
+    resources.brands.all()
+      .then(response => setBrands(response.data))
+    resources.suppliers.all()
+      .then(response => setSuppliers(response.data))
+    resources.categories.all()
+      .then(response => setCategories(response.data.results))
+  }, [])
+
+  const handlePriceChange = (event, newPrices) => {
+    setPrices(newPrices)
+  }
+
+  const handleFilter = () => {
+    const filter = {
+      brand,
+      provider,
+      min: prices[0],
+      max: prices[1]
+    }
+    handleMobileFilter(filter)
+    setFilterBar((filterBar) => !filterBar)
+  }
+
+  const handleBrandFilter = (event) => {
+    setBrand(event.target.value)
+  }
+
+  const handleProviderFilter = (event) => {
+    setProvider(event.target.value)
+  }
+
+  const handleAllClick = () => {
+    setProvider(0)
+    setBrand(0)
+    setPrices([0, 1000])
+  }
 
   return (
     <React.Fragment>
@@ -22,62 +59,87 @@ function FilterBar ({ filterBar = false, setFilterBar = () => {} }) {
         open={filterBar}
         onClose={() => setFilterBar(false)}
       >
-        <div className='flex flex-row justify-between mx-4 mt-4'>
-          <div className='flex mt-3 mr-[-7px]'>
-            <LangSelector />
+        <div className='flex flex-col mx-4'>
+          <div className='flex flex-row justify-end mr-5'>
+              <button
+                onClick={() => setFilterBar((filterBar) => !filterBar)}
+                className="bg-white text-black h-4 w-4 pt-[1.3rem] mr-2 block rounded-full"
+              >
+                <HighlightOffIcon />
+              </button>
           </div>
-          <div
-            className='hidden md:flex flex-row mt-4 md:mt-6 ml-1 md:ml-[-10px] text-text-100 xl:text-sm'
-            onClick={() => {}}
-          >
-            USD <span className='mt-[-3px]'><LockIcon fontSize={size.width < 1024 ? 'large' : 'small'} /></span>
+          <div className='flex flex-col mt-10'>
+            <p className='font-bold mb-2'>Categories</p>
+            <div className=''>
+              {categories.map((item) => (
+                <div key={item.id} className='border-2 border-background-100'>
+                  <CategoriesAccordion
+                    category={item}
+                    items={item.subcategorias}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-            <button
-              onClick={() => setFilterBar((filterBar) => !filterBar)}
-              className="bg-white text-black h-4 w-4 pt-[1.3rem] mr-2 block rounded-full"
+          <div className='flex flex-col my-2'>
+            <p className='font-bold mb-2'>Price</p>
+            <div className='w-[92%]'>
+              <Slider
+                getAriaLabel={() => 'Temperature range'}
+                size='small'
+                value={prices}
+                onChange={handlePriceChange}
+                valueLabelDisplay="auto"
+                color='secondary'
+                max={1000}
+              />
+            </div>
+            <div className='flex flex-row justify-between w-[92%]'>
+              <div className=''>
+                <p className='border rounded-sm text-sm px-4'>${prices[0]} - ${prices[1]}</p>
+              </div>
+            </div>
+          </div>
+          <div className='flex flex-col w-[95%]'>
+            <p className='font-bold my-2'>Brands</p>
+            <RadioGroup
+              aria-labelledby="demo-controlled-radio-buttons-group"
+              name="controlled-radio-buttons-group"
+              value={brand}
+              onChange={handleBrandFilter}
             >
-              <HighlightOffIcon />
-            </button>
-        </div>
-        <div className='mt-6 mx-4'>
-          <AppButton
-            sx={{
-              fontSize: 15,
-              borderTopRightRadius: 0,
-              borderBottomRightRadius: 0,
-              width: '100%'
-            }}
-            className='bg-button rounded-full'
-          >
-            <span className='mt-[-3px] mr-1'><AddLocationAltOutlinedIcon fontSize='small' /></span> Miami <span className='mt-[-1px]'><KeyboardArrowDownOutlinedIcon fontSize='small' /></span>
-          </AppButton>
-        </div>
-          <div className='flex flex-col items-center'>
-          <div
-            onClick={() => setFilterBar((filterBar) => false)}
-            className='mt-8 text-footer-background-200 hover:text-footer-background-100 font-semibold text-lg'
-          >
-            <Link href='/products/all'>
-              {t('layout.navbar.allProducts')}
-            </Link>
+              <div className='flex flex-wrap'>
+                {brands?.results?.map((item) => (
+                  <FormControlLabel key={item.id} value={item.id} control={<Radio />} label={item.nombre} />
+                ))}
+              </div>
+            </RadioGroup>
           </div>
-          <div
-            onClick={() => setFilterBar((filterBar) => false)}
-            className='mt-4 text-footer-background-200 hover:text-footer-background-100 font-semibold text-lg'
-          >
-            <Link href='/about'>
-              {t('layout.navbar.about')}
-            </Link>
+          <div className='flex flex-col w-[95%]'>
+            <p className='font-bold my-2'>Providers</p>
+            <RadioGroup
+              aria-labelledby="demo-controlled-radio-buttons-group"
+              name="controlled-radio-buttons-group"
+              value={provider}
+              onChange={handleProviderFilter}
+            >
+              <div className='flex flex-wrap'>
+                {suppliers?.results?.map((item) => (
+                  <FormControlLabel key={item.id} value={item.id} control={<Radio />} label={item.nombre} />
+                ))}
+              </div>
+            </RadioGroup>
           </div>
-          <div
-            onClick={() => setFilterBar((filterBar) => false)}
-            className='mt-4 text-footer-background-200 hover:text-footer-background-100 font-semibold text-lg'
-          >
-            <Link href='/contact'>
-              {t('layout.navbar.contact')}
-            </Link>
+          <div className='flex flex-row justify-between'>
+            <div className='my-2 underline hover:cursor-pointer' onClick={handleAllClick}>Clear</div>
+            <div
+              className='bg-footer-background-200 py-1 h-7 mt-1 text-background-100 text-sm px-2 font-bold shadow-sm rounded-sm hover:cursor-pointer hover:opacity-90'
+              onClick={handleFilter}
+            >
+              Filter
+            </div>
           </div>
-        </div>
+      </div>
       </Drawer>
     </React.Fragment>
   )
@@ -85,7 +147,8 @@ function FilterBar ({ filterBar = false, setFilterBar = () => {} }) {
 
 FilterBar.propTypes = {
   filterBar: PropTypes.bool,
-  setFilterBar: PropTypes.func
+  setFilterBar: PropTypes.func,
+  handleMobileFilter: PropTypes.func
 }
 
 export default FilterBar

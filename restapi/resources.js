@@ -37,7 +37,7 @@ const resources = {
     all: async (productId, municipalityId) => await getRequest(`${ENDPOINTS.PRODUCTS_RELATED}/${municipalityId}/${productId}`)
   },
   categories: {
-    all: async (municipalityId) => await getRequest(ENDPOINTS.CATEGORY_SPECIAL),
+    all: async () => await getRequest(ENDPOINTS.CATEGORY_SPECIAL),
     paths: async () => await getRequest(`${ENDPOINTS.CATEGORIES_TREE}`)
   },
   brands: {

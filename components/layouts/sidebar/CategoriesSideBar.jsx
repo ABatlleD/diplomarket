@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Drawer from '@mui/material/Drawer'
 import PropTypes from 'prop-types'
 import { Divider } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import CategoriesAccordion from '../../categories/CategoriesAccordion'
-import { useTreeCategories } from '../../../restapi/hooks'
-import { serialize } from '../../../libs/serialize'
+import resources from '../../../restapi/resources'
 
 function CategoriesSideBar ({ categoriesSideBar = false, setCategoriesSideBar = () => {} }) {
-  const { categories, isLoading } = useTreeCategories()
-  const menuItems = serialize(categories?.data)
+  const [categories, setCategories] = useState([])
+
+  useEffect(() => {
+    resources.categories.all()
+      .then(response => setCategories(response.data.results))
+  }, [])
 
   return (
     <React.Fragment>
@@ -28,13 +31,11 @@ function CategoriesSideBar ({ categoriesSideBar = false, setCategoriesSideBar = 
           </button>
         </div>
         <Divider sx={{ bgcolor: '#b12024', marginX: '1rem' }} />
-        {!isLoading &&
           <div className='m-3'>
-            {menuItems.map((item) => (
-              <CategoriesAccordion key={item.name} title={item.label} items={item.items} />
+            {categories.map((item) => (
+              <CategoriesAccordion key={item.id} category={item} items={item.subcategorias} />
             ))}
           </div>
-        }
       </Drawer>
     </React.Fragment>
   )
