@@ -51,15 +51,13 @@ a {
   max-width: 24rem;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
 .MuiDrawer-paper::-webkit-scrollbar {
   display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
 .MuiDrawer-paper {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .Mui-focused {

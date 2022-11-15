@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SearchBar from '../../SearchBar'
 import AppButton from '../../AppButton'
 import { useTranslation } from 'react-i18next'
@@ -12,6 +12,7 @@ import DensityMediumIcon from '@mui/icons-material/DensityMedium'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
+import { getCookie } from 'cookies-next'
 
 function BottomOptions({
   categoriesSideBar,
@@ -22,10 +23,20 @@ function BottomOptions({
   setOpenSelectPlace
 }) {
   const [t] = useTranslation()
+  const NEXT_DISTRICT = getCookie('NEXT_DISTRICT')
+  const [district, setDistrict] = useState('')
+
+  useEffect(() => {
+    setDistrict(NEXT_DISTRICT)
+  }, [NEXT_DISTRICT])
+
+  const resizeTitle = (string, maxLength) => {
+    return string && string.length > maxLength ? `${string.slice(0, maxLength)}...` : string
+  }
 
   return (
     <>
-      <div className='bg-background-300 md:bg-background-100 flex flex-col md:flex-row md:justify-between p-2 md:p-4'>
+      <div className='bg-background-300 md:bg-background-300 flex flex-col md:flex-row md:justify-between p-2 md:p-4'>
         <div className='hidden md:flex xl:hidden'>
           <AppButton
             sx={{
@@ -46,25 +57,24 @@ function BottomOptions({
         <div className='md:w-[86%] xl:hidden'>
           <SearchBar {...{ openSelectPlace, setOpenSelectPlace }} />
         </div>
-        <div className='flex md:hidden flex-row justify-around mt-4'>
+        <div className='flex md:hidden flex-row justify-around mt-1'>
           <AppButton
             sx={{
-              fontSize: 10,
-              paddingY: 1,
-              paddingX: 1
+              fontSize: 10
             }}
             className='bg-button'
             onClick={() => setCategoriesSideBar((categoriesSideBar) => !categoriesSideBar)}
           >
-            {t('layout.navbar.categories')} <span className='mt-[-1px]'><ArrowForwardIosIcon fontSize='small' /></span>
+            {t('layout.navbar.categories')} <span className='mt-[-1px]'><ArrowForwardIosIcon sx={{ fontSize: 10 }} /></span>
           </AppButton>
           <AppButton
             sx={{
               fontSize: 10
             }}
             className='bg-button'
+            onClick={() => setOpenSelectPlace(true)}
           >
-            <span className='mt-[-1px] mr-1'><AddLocationAltOutlinedIcon fontSize='small' /></span> Miami <span className='mt-[-1px]'><KeyboardArrowDownOutlinedIcon fontSize='small' /></span>
+            <span className='mt-[-3px] mr-1'><AddLocationAltOutlinedIcon sx={{ fontSize: 10 }} /></span> {resizeTitle(district, 10)} <span className='mt-[-1px]'><KeyboardArrowDownOutlinedIcon sx={{ fontSize: 10 }} /></span>
           </AppButton>
           <div className='mt-1 mr-[-7px]'>
             <LangSelector />

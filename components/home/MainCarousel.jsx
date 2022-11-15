@@ -13,13 +13,13 @@ function MainCarousel({ carousel }) {
   useEffect(() => {
     switch (true) {
       case size.width < 768:
-        setSlideHeight(150)
+        setSlideHeight(50)
         break
       case size.width > 768 && size.width < 1200:
-        setSlideHeight(38)
+        setSlideHeight(25)
         break
       case size.width >= 1200:
-        setSlideHeight(38)
+        setSlideHeight(25)
         break
       default:
         setSlideHeight(35)
@@ -32,6 +32,8 @@ function MainCarousel({ carousel }) {
         naturalSlideWidth={100}
         naturalSlideHeight={slideHeight}
         totalSlides={carousel.count}
+        isPlaying={true}
+        interval={6000}
         infinite={true}
       >
         <Slider>

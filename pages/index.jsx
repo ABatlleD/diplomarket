@@ -22,7 +22,7 @@ function Home({
   carouselError
 }) {
   const { t } = useTranslation()
-  const [category, setCategory] = useState(Object.keys(featuredProducts)[0])
+  const [category, setCategory] = useState(Object.keys(featuredProducts)[1])
   const [categoriesFilter] = useState(Object.keys(featuredProducts))
   const [featureds, setFeatureds] = useState([])
 
@@ -39,19 +39,19 @@ function Home({
     <>
       <AppHeader title={t('pages.home')} />
       <div className='flex flex-col'>
-        <div className='mb-4 md:mb-0'>
+        <div className='mb-1 md:mb-0'>
           <MainCarousel carousel={carousel} />
         </div>
-        <div className='FeaturedProducts mx-2 md:mx-4 mt-4 mb-10 flex flex-col'>
-          <div className='flex mb-1 flex-col items-center'>
-            <div className='font-bold mb-2 md:mb-0 text-2xl md:text-3xl'>{t('home.featuredProducts')}</div>
-            <div className='flex flex-row mt-2'>
+        <div className='FeaturedProducts mx-1 md:mx-4 mt-4 mb-4 md:mb-10 flex flex-col'>
+          <div className='flex mb-0 flex-col items-center'>
+            <div className='flex flex-row mt-1'>
               {categoriesFilter.map((item, _idx) => (
+                item !== 'Todos' &&
                 <div
                   key={_idx}
                   onClick={() => handleChangeCategory(item)}
                   className={
-                    `md:pt-1 px-1 md:px-2 md:ml-4 md:h-8 mr-1 font-semibold hover:cursor-pointer ${
+                    `md:pt-1 px-1 md:px-2 md:ml-4 md:h-8 mr-1 font-semibold text-xs md:text-base hover:cursor-pointer ${
                       item === category
                       ? 'text-background-100 bg-button rounded-lg'
                       : 'text-button'
@@ -66,31 +66,30 @@ function Home({
           {featuredProductsError &&
             <h2>{featuredProductsError}</h2>
           }
-          <div className='my-4'>
+          <div className='mt-4 md:mb-12 xl:mx-32'>
             <ProductsCarousel products={featureds} />
           </div>
         </div>
-        <div className='RecentlySoldProducts mx-4 mb-10 flex flex-col'>
+        <div className='RecentlySoldProducts mx-2 md:mb-10 flex flex-col'>
           {categoriesError &&
             <h2>{categoriesError}</h2>
           }
-          <div className='my-4 w-full'>
+          <div className='xl:mx-20'>
             <CategoriesCarousel categories={categories} />
           </div>
         </div>
-        <div className='TodayRecomendationProducts mx-4 flex flex-col'>
+        <div className='TodayRecomendationProducts mx-2 md:mx-4 flex flex-col'>
           <div className='flex mb-2 flex-row justify-center'>
-            <div className='font-bold text-2xl md:text-3xl'>{t('home.todayRecomendation')}</div>
           </div>
           {todayRecomendationsError &&
             <h2>{todayRecomendationsError}</h2>
           }
-          <div className='my-4'>
+          <div className='my-4 xl:mx-32'>
             <ProductsCarousel products={todayRecomendations} />
           </div>
         </div>
-        <div className='flex flex-col items-center md:flex-row md:justify-around my-8 md:my-16'>
-          <div className='flex flex-col items-center text-center mb-4 md:mb-0 md:mt-8'>
+        <div className='flex flex-col items-center md:flex-row md:justify-around my-2 md:my-16'>
+          <div className='flex flex-col items-center text-center mb-2 md:mb-0 md:mt-8'>
             <PriceCheckIcon fontSize='large' />
             <p className='font-semibold'>{t('home.prices.title')}</p>
             <p>{t('home.prices.description')}</p>

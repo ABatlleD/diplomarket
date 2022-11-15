@@ -11,7 +11,7 @@ import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDown
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 
-function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {} }) {
+function FilterBar ({ filterBar = false, setFilterBar = () => {} }) {
   const { t } = useTranslation()
   const size = useWindowSize()
 
@@ -19,8 +19,8 @@ function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {} }) {
     <React.Fragment>
       <Drawer
         anchor={'left'}
-        open={mainSideBar}
-        onClose={() => setMainSideBar(false)}
+        open={filterBar}
+        onClose={() => setFilterBar(false)}
       >
         <div className='flex flex-row justify-between mx-4 mt-4'>
           <div className='flex mt-3 mr-[-7px]'>
@@ -33,7 +33,7 @@ function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {} }) {
             USD <span className='mt-[-3px]'><LockIcon fontSize={size.width < 1024 ? 'large' : 'small'} /></span>
           </div>
             <button
-              onClick={() => setMainSideBar((mainSideBar) => !mainSideBar)}
+              onClick={() => setFilterBar((filterBar) => !filterBar)}
               className="bg-white text-black h-4 w-4 pt-[1.3rem] mr-2 block rounded-full"
             >
               <HighlightOffIcon />
@@ -54,7 +54,7 @@ function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {} }) {
         </div>
           <div className='flex flex-col items-center'>
           <div
-            onClick={() => setMainSideBar((mainSideBar) => false)}
+            onClick={() => setFilterBar((filterBar) => false)}
             className='mt-8 text-footer-background-200 hover:text-footer-background-100 font-semibold text-lg'
           >
             <Link href='/products/all'>
@@ -62,7 +62,7 @@ function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {} }) {
             </Link>
           </div>
           <div
-            onClick={() => setMainSideBar((mainSideBar) => false)}
+            onClick={() => setFilterBar((filterBar) => false)}
             className='mt-4 text-footer-background-200 hover:text-footer-background-100 font-semibold text-lg'
           >
             <Link href='/about'>
@@ -70,7 +70,7 @@ function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {} }) {
             </Link>
           </div>
           <div
-            onClick={() => setMainSideBar((mainSideBar) => false)}
+            onClick={() => setFilterBar((filterBar) => false)}
             className='mt-4 text-footer-background-200 hover:text-footer-background-100 font-semibold text-lg'
           >
             <Link href='/contact'>
@@ -83,9 +83,9 @@ function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {} }) {
   )
 }
 
-MainSideBar.propTypes = {
-  mainSideBar: PropTypes.bool,
-  setMainSideBar: PropTypes.func
+FilterBar.propTypes = {
+  filterBar: PropTypes.bool,
+  setFilterBar: PropTypes.func
 }
 
-export default MainSideBar
+export default FilterBar

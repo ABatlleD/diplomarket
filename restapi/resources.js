@@ -19,7 +19,6 @@ const resources = {
       if (subcategory) filter += `&subcategoria=${subcategory}`
       if (brand) filter += `&marca=${brand}`
       if (provider) filter += `&proveedor=${provider}`
-      console.log('🚀 ~ file: resources.js ~ line 18 ~ all: ~ filter', filter)
 
       return await getRequest(`${ENDPOINTS.PRODUCTS}/${filter}`)
     },

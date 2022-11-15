@@ -29,6 +29,10 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
     setDistrict(NEXT_DISTRICT)
   }, [NEXT_DISTRICT])
 
+  const resizeTitle = (string, maxLength) => {
+    return string && string.length > maxLength ? `${string.slice(0, maxLength)}...` : string
+  }
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -48,7 +52,7 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
                 className='bg-button'
                 onClick={() => setOpenSelectPlace(true)}
               >
-                <span className='mt-[-1px] mr-1'><AddLocationAltOutlinedIcon fontSize='small' /></span> {district} <span className='mt-[-1px]'><KeyboardArrowDownOutlinedIcon fontSize='small' /></span>
+                <span className='mt-[-1px] mr-1'><AddLocationAltOutlinedIcon fontSize='small' /></span> {resizeTitle(district, 8)} <span className='mt-[-1px]'><KeyboardArrowDownOutlinedIcon fontSize='small' /></span>
             </AppButton>
           </div>
           <OutlinedInput

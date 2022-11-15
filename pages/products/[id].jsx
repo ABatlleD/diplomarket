@@ -234,7 +234,6 @@ async function fetchOneProduct(id) {
   } catch (error) {
     apiError = error.message
   }
-  console.log('🚀 ~ file: [id].jsx ~ line 236 ~ fetchOneProduct ~ product', product)
   return { product, apiError }
 }
 

@@ -51,11 +51,11 @@ function TopBar({
 
   return (
     <>
-      < div className='bg-background-100 flex flex-row justify-around md:justify-between my-2 xl:mt-1 xl:mb-2'>
+      < div className='bg-background-300 flex flex-row justify-around md:justify-between'>
         <div className='flex flex-row justify-between md:ml-6 w-1/2 md:w-1/5 xl:w-[12%]'>
           <div
             className='mt-2
-            lg:hidden'
+            xl:hidden'
             onClick={() => setMainSideBar(true)}
           >
             <DensityMediumIcon
@@ -109,9 +109,9 @@ function TopBar({
                   color='error'
                   sx={{
                     marginTop: {
-                      xs: '0.5rem',
-                      sm: '0.5rem',
-                      md: '0.75rem'
+                      xs: '0.75rem',
+                      sm: '0.75rem',
+                      md: '1rem'
                     }
                   }}
                 >
@@ -125,9 +125,9 @@ function TopBar({
                 color='error'
                 sx={{
                   marginTop: {
-                    xs: '0.5rem',
-                    sm: '0.5rem',
-                    md: '0.75rem'
+                    xs: '0.75rem',
+                    sm: '0.75rem',
+                    md: '1rem'
                   }
                 }}
                 onClick={() => setCartSideBar(true)}
@@ -136,7 +136,10 @@ function TopBar({
               </Badge>
             </div>
           </ThemeProvider>
-          <div className='mt-1'>
+          <div className='mt-1 flex md:hidden'>
+            <AccountMenu />
+          </div>
+          <div className='mt-2 hidden md:flex'>
             <AccountMenu />
           </div>
         </div>

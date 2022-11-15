@@ -6,6 +6,9 @@ import '../i18n'
 import 'swiper/css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/globals.css'
+import SwiperCore, { Autoplay } from 'swiper'
+
+SwiperCore.use([Autoplay])
 
 const queryClient = new QueryClient()
 

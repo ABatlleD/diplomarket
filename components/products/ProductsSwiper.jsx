@@ -14,10 +14,10 @@ function ProductsSwiper({ products }) {
       slidesPerView={'auto'}
       breakpoints={{
         200: {
-          slidesPerView: 2, spaceBetween: 0
+          slidesPerView: 3, spaceBetween: 0
         },
         320: {
-          slidesPerView: 2, spaceBetween: 5
+          slidesPerView: 3, spaceBetween: 5
         },
         460: {
           slidesPerView: 3, spaceBetween: 5

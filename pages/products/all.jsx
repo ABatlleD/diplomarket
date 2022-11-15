@@ -7,12 +7,15 @@ import { useTreeCategories } from '../../restapi/hooks'
 import { serialize } from '../../libs/serialize'
 import CategoriesAccordion from '../../components/categories/CategoriesAccordion'
 import { Slider, FormControlLabel, Pagination, RadioGroup, Radio } from '@mui/material'
+import FilterBar from '../../components/layouts/sidebar/FilterBar'
+import TuneIcon from '@mui/icons-material/Tune'
 
 // TODO: fix scroll to top on pagination change
 
 function AllProducts({ products, productsError }) {
   const [list, setList] = useState(products)
   const [loading, setLoading] = useState(false)
+  const [filterBar, setFilterBar] = useState(false)
   const [pages, setPages] = useState(1)
   const [page, setPage] = useState(1)
   const { categories } = useTreeCategories()
@@ -50,13 +53,11 @@ function AllProducts({ products, productsError }) {
   }
 
   const handleSubcategoryFilter = (subcategory) => {
-    console.log('🚀 ~ file: all.jsx ~ line 56 ~ handleSubcategoryFilter ~ id', subcategory)
     setCategory(undefined)
     setSubcategory(subcategory)
   }
 
   const handleCategoryFilter = (category) => {
-    console.log('🚀 ~ file: all.jsx ~ line 61 ~ handleCategoryFilter ~ id', category)
     setSubcategory(undefined)
     setCategory(category)
   }
@@ -117,8 +118,18 @@ function AllProducts({ products, productsError }) {
   }, [list])
 
   return (
-    <div className='flex flex-row w-[95%] mx-auto my-10'>
-      <div className='flex mr-1 flex-col w-3/12'>
+    <div className='flex md:flex-row flex-col w-full md:w-[95%] md:mx-auto my-3 md:my-10'>
+      <div className='mx-3 flex md:hidden flex-row justify-between mb-3'>
+        <div className='font-bold mt-1'>
+          Todas las categorías
+        </div>
+        <div
+          onClick={() => setFilterBar(true)}
+        >
+          <TuneIcon />
+        </div>
+      </div>
+      <div className='md:flex hidden mr-1 flex-col w-3/12'>
         <div className='flex flex-col'>
           <p className='font-bold mb-2'>Categories</p>
           <div className=''>
@@ -193,10 +204,11 @@ function AllProducts({ products, productsError }) {
         </div>
         <div className='my-2 underline hover:cursor-pointer' onClick={handleAllClick}>View All</div>
       </div>
-      <div className='flex ml-1 flex-row w-9/12'>
+      <div className='flex flex-row w-full md:w-9/12'>
         <div className='flex flex-col items-center w-full'>
+          <div className='font-bold w-full ml-4 mb-2 text-xl hidden md:flex'>Todas las categorías</div>
           <ListProducts products={list} loading={loading} />
-          <div className='mt-4'>
+          <div className='mt-2'>
             <Pagination
               count={pages}
               showFirstButton
@@ -208,6 +220,7 @@ function AllProducts({ products, productsError }) {
           </div>
         </div>
       </div>
+      <FilterBar {...{ filterBar, setFilterBar }} />
     </div>
   )
 }
