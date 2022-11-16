@@ -55,6 +55,16 @@
     "shipmentsFrom": "Shipments From",
     "relatedProducts": "Related Products"
   },
+  "filter": {
+    "category": "Categories",
+    "price": "Price",
+    "brand": "Brands",
+    "provider": "Providers",
+    "clear": "Clear",
+    "all": "View All",
+    "filter": "Fiter",
+    "categories": "All categories"
+  },
   "about": {
     "title": "ABOUT US",
     "text": "Diplomarket is an online store developed by CUSPINERA SURL in order to satisfy your purchases and deliveries, for you and dearest. We are pleased to bring you the BEST...ALWAYS!!!. The company works under the laws of the United States, which also includes all economic actors, such as suppliers, traders, according to their licenses and regulations. Everything you buy here is exported."

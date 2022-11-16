@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import Link from 'next/link'
 import Image from 'next/image'
 import useWindowSize from '../../hooks/WindowSize'
+import { useTranslation } from 'react-i18next'
 
 function CategoryItem({ category }) {
+  const { i18n } = useTranslation()
   const size = useWindowSize()
   const resizeTitle = (string, maxLength) => {
     return string.length > maxLength ? `${string.slice(0, maxLength)}...` : string
@@ -25,7 +27,7 @@ function CategoryItem({ category }) {
         </Link>
         <Link href={`/categorys/${category.id}`}>
           <div className='absolute hover:cursor-pointer w-full h-full flex flex-row justify-center items-center font-bold text-xl md:text-2xl bg-background-100 bg-opacity-60 text-footer-background-200 top-0 left-0'>
-            {resizeTitle(category.nombre, 20)}
+            {resizeTitle(i18n.language === 'es' ? category.nombre : category.nombre_ingles, 20)}
           </div>
         </Link>
       </div>

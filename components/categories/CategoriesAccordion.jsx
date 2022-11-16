@@ -2,8 +2,11 @@ import React from 'react'
 import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next'
 
 function CategoriesAccordion({ category, items, handleSubcategoryFilter = () => false, handleCategoryFilter = () => false }) {
+  const { i18n } = useTranslation()
+
   return (
     <>
       <Accordion
@@ -25,8 +28,8 @@ function CategoriesAccordion({ category, items, handleSubcategoryFilter = () => 
             margin: 0
           }}
         >
-          <div className='hover:cursor-pointer hover:underline' onClick={() => { handleCategoryFilter(category.id) }}>
-            {category.nombre}
+          <div className='hover:cursor-pointer hover:underline' onClick={() => { handleCategoryFilter(category) }}>
+            {i18n.language === 'es' ? category.nombre : category.nombre_ingles}
           </div>
         </AccordionSummary>
         {items.map((item) => (
@@ -36,10 +39,10 @@ function CategoriesAccordion({ category, items, handleSubcategoryFilter = () => 
               borderTop: 0,
               fontSize: '0.9rem'
             }}
-            onClick={() => handleSubcategoryFilter(item.pk)}
+            onClick={() => handleSubcategoryFilter(item)}
           >
             <div className='ml-4 hover:cursor-pointer'>
-              {item.nombre}
+              {i18n.language === 'es' ? item.nombre : item.nombre_ingles}
             </div>
           </AccordionDetails>
         ))}

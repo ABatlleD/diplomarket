@@ -6,6 +6,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
 function SignIn() {
   const [values, setValues] = useState({
+    username: '',
     confirmPassword: '',
     password: '',
     showConfirmPassword: false,
@@ -27,6 +28,10 @@ function SignIn() {
     event.preventDefault()
   }
 
+  const handleSubmit = () => {
+    console.log('🚀 ~ file: signin.jsx ~ line 33 ~ handleSubmit ~ values.username', values.username)
+  }
+
   return (
     <>
       <div className='flex flex-col items-center justify-center h-screen'>
@@ -42,6 +47,8 @@ function SignIn() {
               width: '100%',
               borderColor: 'red'
             }}
+            value={values.username}
+            onChange={handleChange('username')}
           />
         </div>
         <div className="Password mb-4 w-11/12 md:w-1/3">
@@ -77,6 +84,7 @@ function SignIn() {
               width: '100%',
               backgroundColor: '#15224b !important'
             }}
+            onClick={handleSubmit}
           >
             Sign In
           </Button>

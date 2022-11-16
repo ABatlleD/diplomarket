@@ -5,14 +5,25 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import resources from '../../../restapi/resources'
 import CategoriesAccordion from '../../categories/CategoriesAccordion'
 import { Slider, FormControlLabel, RadioGroup, Radio } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 
-function FilterBar ({ filterBar = false, setFilterBar = () => {}, handleMobileFilter = () => {} }) {
+function FilterBar ({
+  filterBar = false,
+  setFilterBar = () => {},
+  handleMobileFilter = () => {},
+  handleSubcategoryFilter = () => false,
+  handleCategoryFilter = () => false,
+  setCategory = () => false,
+  setSubcategory = () => false,
+  setSelectedCategory = () => false
+}) {
   const [categories, setCategories] = useState([])
   const [suppliers, setSuppliers] = useState([])
   const [brands, setBrands] = useState([])
   const [prices, setPrices] = useState([0, 1000])
   const [brand, setBrand] = useState(0)
   const [provider, setProvider] = useState(0)
+  const { t } = useTranslation()
 
   useEffect(() => {
     resources.brands.all()
@@ -47,6 +58,9 @@ function FilterBar ({ filterBar = false, setFilterBar = () => {}, handleMobileFi
   }
 
   const handleAllClick = () => {
+    setCategory(undefined)
+    setSubcategory(undefined)
+    setSelectedCategory(undefined)
     setProvider(0)
     setBrand(0)
     setPrices([0, 1000])
@@ -69,20 +83,24 @@ function FilterBar ({ filterBar = false, setFilterBar = () => {}, handleMobileFi
               </button>
           </div>
           <div className='flex flex-col mt-10'>
-            <p className='font-bold mb-2'>Categories</p>
+            <p className='font-bold mb-2'>{t('filter.category')}</p>
             <div className=''>
               {categories.map((item) => (
                 <div key={item.id} className='border-2 border-background-100'>
                   <CategoriesAccordion
                     category={item}
                     items={item.subcategorias}
+                    {...{
+                      handleCategoryFilter,
+                      handleSubcategoryFilter
+                    }}
                   />
                 </div>
               ))}
             </div>
           </div>
           <div className='flex flex-col my-2'>
-            <p className='font-bold mb-2'>Price</p>
+            <p className='font-bold mb-2'>{t('filter.price')}</p>
             <div className='w-[92%]'>
               <Slider
                 getAriaLabel={() => 'Temperature range'}
@@ -101,7 +119,7 @@ function FilterBar ({ filterBar = false, setFilterBar = () => {}, handleMobileFi
             </div>
           </div>
           <div className='flex flex-col w-[95%]'>
-            <p className='font-bold my-2'>Brands</p>
+            <p className='font-bold my-2'>{t('filter.brand')}</p>
             <RadioGroup
               aria-labelledby="demo-controlled-radio-buttons-group"
               name="controlled-radio-buttons-group"
@@ -116,7 +134,7 @@ function FilterBar ({ filterBar = false, setFilterBar = () => {}, handleMobileFi
             </RadioGroup>
           </div>
           <div className='flex flex-col w-[95%]'>
-            <p className='font-bold my-2'>Providers</p>
+            <p className='font-bold my-2'>{t('filter.provider')}</p>
             <RadioGroup
               aria-labelledby="demo-controlled-radio-buttons-group"
               name="controlled-radio-buttons-group"
@@ -131,12 +149,12 @@ function FilterBar ({ filterBar = false, setFilterBar = () => {}, handleMobileFi
             </RadioGroup>
           </div>
           <div className='flex flex-row justify-between'>
-            <div className='my-2 underline hover:cursor-pointer' onClick={handleAllClick}>Clear</div>
+            <div className='my-2 underline hover:cursor-pointer' onClick={handleAllClick}>{t('filter.clear')}</div>
             <div
               className='bg-footer-background-200 py-1 h-7 mt-1 text-background-100 text-sm px-2 font-bold shadow-sm rounded-sm hover:cursor-pointer hover:opacity-90'
               onClick={handleFilter}
             >
-              Filter
+              {t('filter.filter')}
             </div>
           </div>
       </div>
@@ -148,7 +166,12 @@ function FilterBar ({ filterBar = false, setFilterBar = () => {}, handleMobileFi
 FilterBar.propTypes = {
   filterBar: PropTypes.bool,
   setFilterBar: PropTypes.func,
-  handleMobileFilter: PropTypes.func
+  handleMobileFilter: PropTypes.func,
+  handleSubcategoryFilter: PropTypes.func,
+  handleCategoryFilter: PropTypes.func,
+  setCategory: PropTypes.func,
+  setSubcategory: PropTypes.func,
+  setSelectedCategory: PropTypes.func
 }
 
 export default FilterBar

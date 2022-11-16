@@ -7,10 +7,12 @@ import CategoriesAccordion from '../../components/categories/CategoriesAccordion
 import { Slider, FormControlLabel, Pagination, RadioGroup, Radio } from '@mui/material'
 import FilterBar from '../../components/layouts/sidebar/FilterBar'
 import TuneIcon from '@mui/icons-material/Tune'
+import { useTranslation } from 'react-i18next'
 
 // TODO: fix scroll to top on pagination change
 
 function AllProducts({ products, productsError }) {
+  const { t, i18n } = useTranslation()
   const [list, setList] = useState(products)
   const [loading, setLoading] = useState(false)
   const [filterBar, setFilterBar] = useState(false)
@@ -22,6 +24,7 @@ function AllProducts({ products, productsError }) {
   const [prices, setPrices] = useState([0, 1000])
 
   const [category, setCategory] = useState(undefined)
+  const [selectedCategory, setSelectedCategory] = useState(undefined)
   const [offset, setOffset] = useState(0)
   const [subcategory, setSubcategory] = useState(undefined)
   const [brand, setBrand] = useState(0)
@@ -52,13 +55,18 @@ function AllProducts({ products, productsError }) {
   }
 
   const handleSubcategoryFilter = (subcategory) => {
+    setFilterBar(false)
     setCategory(undefined)
-    setSubcategory(subcategory)
+    setSelectedCategory(subcategory)
+    setSubcategory(subcategory.pk)
   }
 
   const handleCategoryFilter = (category) => {
+    setFilterBar(false)
     setSubcategory(undefined)
-    setCategory(category)
+    setSelectedCategory(category)
+    console.log(selectedCategory)
+    setCategory(category.id)
   }
 
   const handleProviderFilter = (event) => {
@@ -70,13 +78,13 @@ function AllProducts({ products, productsError }) {
     setBrand(0)
     setCategory(undefined)
     setSubcategory(undefined)
+    setSelectedCategory(undefined)
     setMin(0)
     setMax(1000)
     setPrices([0, 1000])
   }
 
   const handleMobileFilter = (mobileFilter) => {
-    console.log('🚀 ~ file: all.jsx ~ line 79 ~ handleMobileFilter ~ mobileFilter', mobileFilter)
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
     setLoading(true)
     const filter = {
@@ -143,9 +151,16 @@ function AllProducts({ products, productsError }) {
   return (
     <div className='flex md:flex-row flex-col w-full md:w-[95%] md:mx-auto my-3 md:my-10'>
       <div className='mx-3 flex md:hidden text-sm flex-row justify-between mb-3'>
-        <div className='font-bold'>
-          Todas las categoías
-        </div>
+        {selectedCategory && (
+          <div className='font-bold'>
+            {i18n.language === 'es' ? selectedCategory.nombre : selectedCategory.nombre_ingles}
+          </div>
+        )}
+        {!selectedCategory && (
+          <div className='font-bold'>
+            {t('filter.categories')}
+          </div>
+        )}
         <div
           onClick={() => setFilterBar(true)}
         >
@@ -154,7 +169,7 @@ function AllProducts({ products, productsError }) {
       </div>
       <div className='md:flex hidden mr-1 flex-col w-3/12'>
         <div className='flex flex-col'>
-          <p className='font-bold mb-2'>Categories</p>
+          <p className='font-bold mb-2'>{t('filter.category')}</p>
           <div className=''>
             {categories.map((item) => (
               <div key={item.id} className='border-2 border-background-100'>
@@ -171,7 +186,7 @@ function AllProducts({ products, productsError }) {
           </div>
         </div>
         <div className='flex flex-col my-2'>
-          <p className='font-bold mb-2'>Price</p>
+          <p className='font-bold mb-2'>{t('filter.price')}</p>
           <div className='w-[92%]'>
             <Slider
               getAriaLabel={() => 'Temperature range'}
@@ -191,12 +206,12 @@ function AllProducts({ products, productsError }) {
               className='bg-footer-background-200 text-background-100 text-sm px-2 font-bold shadow-sm rounded-sm hover:cursor-pointer hover:opacity-90'
               onClick={handlePriceFilter}
             >
-              Filter
+              {t('filter.filter')}
             </div>
           </div>
         </div>
         <div className='flex flex-col w-[95%]'>
-          <p className='font-bold my-2'>Brands</p>
+          <p className='font-bold my-2'>{t('filter.brand')}</p>
           <RadioGroup
             aria-labelledby="demo-controlled-radio-buttons-group"
             name="controlled-radio-buttons-group"
@@ -211,7 +226,7 @@ function AllProducts({ products, productsError }) {
           </RadioGroup>
         </div>
         <div className='flex flex-col w-[95%]'>
-          <p className='font-bold my-2'>Providers</p>
+          <p className='font-bold my-2'>{t('filter.provider')}</p>
           <RadioGroup
             aria-labelledby="demo-controlled-radio-buttons-group"
             name="controlled-radio-buttons-group"
@@ -225,11 +240,20 @@ function AllProducts({ products, productsError }) {
             </div>
           </RadioGroup>
         </div>
-        <div className='my-2 underline hover:cursor-pointer' onClick={handleAllClick}>View All</div>
+        <div className='my-2 underline hover:cursor-pointer' onClick={handleAllClick}>{t('filter.all')}</div>
       </div>
       <div className='flex flex-row w-full md:w-9/12'>
         <div className='flex flex-col items-center w-full'>
-          <div className='font-bold w-full ml-4 mb-2 text-xl hidden md:flex'>Todas las categorías</div>
+          {selectedCategory && (
+            <div className='font-bold w-full ml-4 mb-2 text-xl hidden md:flex'>
+              {i18n.language === 'es' ? selectedCategory.nombre : selectedCategory.nombre_ingles}
+            </div>
+          )}
+          {!selectedCategory && (
+            <div className='font-bold w-full ml-4 mb-2 text-xl hidden md:flex'>
+              {t('filter.categories')}
+            </div>
+          )}
           <ListProducts products={list} loading={loading} />
           <div className='mt-2'>
             <Pagination
@@ -243,7 +267,16 @@ function AllProducts({ products, productsError }) {
           </div>
         </div>
       </div>
-      <FilterBar {...{ filterBar, setFilterBar, handleMobileFilter }} />
+      <FilterBar {...{
+        filterBar,
+        setFilterBar,
+        handleMobileFilter,
+        handleCategoryFilter,
+        setCategory,
+        setSubcategory,
+        handleSubcategoryFilter,
+        setSelectedCategory
+      }} />
     </div>
   )
 }
