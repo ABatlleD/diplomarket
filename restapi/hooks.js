@@ -1,7 +1,18 @@
+/* eslint-disable indent */
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
+import { isEmpty } from '../libs/serialize'
 import { ENDPOINTS } from './endpoints'
 import resources from './resources'
+const DEFAULT_CONFIG = {
+  phones: [],
+  emails: [],
+  social_media: [],
+  zelle_email: '',
+  zelle_time: null,
+  directo_email: '',
+  moneda: false
+}
 
 export function useTreeCategories() {
   const { data, isSuccess, error, isFetching } = useQuery(
@@ -142,6 +153,119 @@ export function useDistricts() {
   return {
     districts: data?.data ?? [],
     isSuccess,
+    isLoading,
+    error
+  }
+}
+
+export function useContact() {
+  const { data, isLoading, error } = useQuery(
+    [ENDPOINTS.CONTACT],
+    () => resources.contacts.get() ?? ({
+      results: [{
+        contactos: [
+          ...DEFAULT_CONFIG.phones,
+          ...DEFAULT_CONFIG.emails,
+          ...DEFAULT_CONFIG.social_media
+        ],
+        correo_zelle: DEFAULT_CONFIG.zelle_email,
+        tiempo_espera_zelle: DEFAULT_CONFIG.zelle_time
+      }]
+    })
+  )
+  const contactos = data?.results
+  const zelle_email = data?.results[0]?.correo_zelle ?? DEFAULT_CONFIG.zelle_email
+  const zelle_time = data?.results[0]?.tiempo_espera_zelle ?? DEFAULT_CONFIG.zelle_time
+  const emails = !isEmpty(contactos)
+    ? !isEmpty(contactos?.filter(
+      (data) =>
+        data?.tipo === 'email'
+    ))
+      ? contactos?.filter(
+        (data) =>
+          data?.tipo === 'email'
+      )
+      : [
+        ...DEFAULT_CONFIG.emails
+      ]
+    : [
+      ...DEFAULT_CONFIG.emails
+    ]
+  const phone = !isEmpty(contactos)
+    ? !isEmpty(contactos?.filter(
+      (data) =>
+        data?.tipo === 'telefono'
+    ))
+      ? contactos?.filter(
+        (data) =>
+          data?.tipo === 'telefono'
+      )
+      : []
+    : []
+
+  const whatsapp = !isEmpty(contactos)
+    ? !isEmpty(contactos?.filter(
+      (data) =>
+        data?.tipo === 'whatsapp'
+    ))
+      ? contactos?.filter(
+        (data) =>
+          data?.tipo === 'whatsapp'
+      )
+      : [
+        ...DEFAULT_CONFIG.phones
+      ]
+    : [
+      ...DEFAULT_CONFIG.phones
+    ]
+
+  const social_media = !isEmpty(contactos)
+    ? !isEmpty(contactos?.filter(
+      (data) =>
+        data?.tipo?.includes('facebook') ||
+        data?.tipo?.includes('telegram') ||
+        data?.tipo?.includes('twitter') ||
+        data?.tipo?.includes('instagram')
+    ))
+      ? contactos?.filter(
+        (data) =>
+          data?.tipo?.includes('facebook') ||
+          data?.tipo?.includes('telegram') ||
+          data?.tipo?.includes('twitter') ||
+          data?.tipo?.includes('instagram')
+      )
+      : [
+        ...DEFAULT_CONFIG.social_media
+      ]
+    : [
+      ...DEFAULT_CONFIG.social_media
+    ]
+  const address = !isEmpty(contactos)
+    ? !isEmpty(contactos?.filter(
+      (data) =>
+        data?.tipo === 'direccion'
+    ))
+      ? contactos?.filter(
+        (data) =>
+          data?.tipo === 'direccion'
+      )
+      : []
+    : []
+
+  return {
+    contacts: {
+      emails,
+      phones: {
+        whatsapp,
+        phone
+      },
+      social_media,
+      address,
+      zelle: {
+        zelle_email,
+        zelle_time
+      }
+    },
     isLoading,
     error
   }

@@ -13,6 +13,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
 import { getCookie } from 'cookies-next'
+import resources from '../../../restapi/resources'
 
 function BottomOptions({
   categoriesSideBar,
@@ -25,6 +26,16 @@ function BottomOptions({
   const [t] = useTranslation()
   const NEXT_DISTRICT = getCookie('NEXT_DISTRICT')
   const [district, setDistrict] = useState('')
+  const [whatsapps, setWhatsapps] = useState([])
+
+  useEffect(() => {
+    const answer = []
+    resources.contacts.get()
+      .then(response => {
+        response.data.results.map((item) => item.tipo === 'whatsapp' ? answer.push(item) : true)
+        setWhatsapps(answer)
+      })
+  }, [])
 
   useEffect(() => {
     setDistrict(NEXT_DISTRICT)
@@ -104,6 +115,11 @@ function BottomOptions({
                 {t('layout.navbar.about')}
               </Link>
             </div>
+            <div className='mr-4 text-footer-background-200 font-bold'>
+              <Link href='/sell-with-us'>
+                {t('layout.navbar.sell-with-us')}
+              </Link>
+            </div>
             <div className='text-footer-background-200 font-bold'>
               <Link href='/contact'>
                 {t('layout.navbar.contact')}
@@ -111,13 +127,17 @@ function BottomOptions({
             </div>
           </div>
           <div className='flex flex-row'>
-            <WhatsAppIcon
-              sx={{
-                color: '#49c95a',
-                fontSize: 25
-              }}
-            />
-            <a href='https://api.whatsapp.com/send?phone=+13053377539&text=Hola,%20Diplomarket%E2%84%A2' className='ml-1'>+1 305 337 7539</a>
+            {whatsapps.map(item => (
+              <div key={item.id} className='ml-2'>
+                <WhatsAppIcon
+                  sx={{
+                    color: '#49c95a',
+                    fontSize: 25
+                  }}
+                />
+                <a href={`https://api.whatsapp.com/send?phone=${item.contenido}&text=Hola,%20Diplomarket%E2%84%A2`} className='ml-1'>{item.contenido}</a>
+              </div>
+            ))}
           </div>
         </div>
       </div>
