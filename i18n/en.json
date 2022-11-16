@@ -172,29 +172,21 @@
   "contact": {
     "title": "Contact Us",
     "subtitle": "If having any problem or need assistance, please contact us",
-    "phones": {
-      "title": "Phones:",
-      "text": "About questions in general"
-    },
-    "emails": {
-      "title": "Emails",
-      "1": "Purchase orders:",
-      "2": "Home deliveries:",
-      "3": "Market your products with us:",
-      "4": "Technical details of the website:"
-    },
-    "address": {
-      "title": "Address:",
-      "subtitle": "Miami Office:",
-      "text": "7921 nw 68 street miami, fl 33166, united states ,so that you feel cared for or respond to your needs, with a physical presence. this office does not deal with matters to confirm purchases, only for cargo storage"
-    },
     "chat": {
       "title": "Online Chat Service:",
       "text": "9am - 6pm. To attend any kind of doubt or problem."
     },
+    "labels": {
+      "phone": "Phones:",
+      "mail": "Mails:",
+      "address": "Address:",
+      "chat": "Online chat:",
+      "chat-description": "9am - 6pm. To attend any kind of doubt or problem."
+    },
     "inputs": {
       "email": "EMAIL",
-      "message": "MESSAGE"
+      "message": "MESSAGE",
+      "submit": "SEND"
     }
   },
   "footer": {

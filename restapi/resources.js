@@ -66,6 +66,9 @@ const resources = {
   },
   contacts: {
     get: async () => await getRequest(`${ENDPOINTS.CONTACT}`)
+  },
+  configuration: {
+    get: async () => await getRequest(`${ENDPOINTS.CONFIGURACION}`)
   }
 }
 

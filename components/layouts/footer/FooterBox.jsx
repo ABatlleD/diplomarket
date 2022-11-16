@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import TelegramIcon from '@mui/icons-material/Telegram'
@@ -6,9 +6,31 @@ import InstagramIcon from '@mui/icons-material/Instagram'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
+import resources from '../../../restapi/resources'
 
 function FooterBox({ cartSideBar, setCartSideBar }) {
   const { t } = useTranslation()
+  const [socialMedias, setSocialMedias] = useState([])
+  const [configurations, setConfigurations] = useState({})
+
+  useEffect(() => {
+    const answer = []
+    resources.contacts.get()
+      .then((response) => {
+        response.data.results.map((item) => item.tipo === 'facebook' || item.tipo === 'telegram' || item.tipo === 'twitter' || item.tipo === 'instagram' ? answer.push(item) : true)
+        setSocialMedias(answer)
+      })
+    resources.configuration.get()
+      .then(response => setConfigurations(response.data.results[0].pasarelas[0]))
+    console.log('🚀 ~ file: FooterBox.jsx ~ line 15 ~ FooterBox ~ configurations', configurations)
+  }, [])
+
+  const SocialMedia = {
+    facebook: <FacebookIcon fontSize="large" />,
+    telegram: <TelegramIcon fontSize="large" />,
+    twitter: <TwitterIcon fontSize="large" />,
+    instagram: <InstagramIcon fontSize="large" />
+  }
 
   return (
     <div className='bg-footer-background-100 flex flex-col md:flex-row justify-around py-8 px-3'>
@@ -18,10 +40,11 @@ function FooterBox({ cartSideBar, setCartSideBar }) {
           {t('footer.description')}
         </p>
         <div className='flex flex-row justify-between text-background-100 w-1/2 mt-4'>
-          <FacebookIcon fontSize='large' />
-          <TelegramIcon fontSize='large' />
-          <TwitterIcon fontSize='large' />
-          <InstagramIcon fontSize='large' />
+          {socialMedias.map((social) => (
+            <a key={social.id} href={social.contenido} target="_blank" rel="noopener noreferrer" title={social.tipo}>
+              {SocialMedia[social.tipo]}
+            </a>
+          ))}
         </div>
       </div>
       <div className='flex flex-row justify-between md:w-4/12'>
@@ -70,10 +93,26 @@ function FooterBox({ cartSideBar, setCartSideBar }) {
       <div className='flex flex-col md:w-3/12 text-background-100'>
         <h2 className='mb-4 font-semibold'>{t('footer.app')}</h2>
         <img src="/assets/google-play.png" className="max-w-max h-14 rounded-md mb-2" alt="..." />
-        <div className='flex flex-row justify-between w-2/3 mt-4'>
-          <img src="/assets/payment/paypal/type-paypal.png" className="max-w-max h-14 rounded-md mb-2" alt="..." />
-          <img src="/assets/payment/zelle/type-zelle.png" className="max-w-max h-14 rounded-md mb-2" alt="..." />
-          <img src="/assets/payment/tropipay/type-tropipay.png" className="max-w-max h-14 rounded-md mb-2" alt="..." />
+        <div className='flex flex-wrap justify-between w-2/3 mt-4'>
+          {configurations.pasarela_paypal && (
+            <img src="/assets/payment/paypal/type-paypal.png" className="max-w-max h-10 rounded-md mb-2" alt="..." />
+          )}
+          {configurations.pasarela_zelle && (
+            <img src="/assets/payment/zelle/type-zelle.png" className="max-w-max h-10 rounded-md mb-2" alt="..." />
+          )}
+          {configurations.pasarela_tropipay && (
+            <img src="/assets/payment/tropipay/type-tropipay.png" className="max-w-max h-10 rounded-md mb-2" alt="..." />
+          )}
+          {configurations.pasarela_bofa &&
+            <>
+              <img src="/assets/payment/banco/card-visa.png" className="max-w-max h-10 rounded-md mb-2" alt="..." />
+              <img src="/assets/payment/banco/card-master.png" className="max-w-max h-10 rounded-md mb-2" alt="..." />
+              <img src="/assets/payment/banco/card-american-express.png" className="max-w-max h-10 rounded-md mb-2" alt="..." />
+              <img src="/assets/payment/banco/card-maestro.png" className="max-w-max h-10 rounded-md mb-2" alt="..." />
+              <img src="/assets/payment/banco/card-discover.png" className="max-w-max h-10 rounded-md mb-2" alt="..." />
+              <img src="/assets/payment/banco/card-uatp.png" className="max-w-max h-10 rounded-md mb-2" alt="..." />
+              <img src="/assets/payment/banco/card-jcb.png" className="max-w-max h-10 rounded-md mb-2" alt="..." />
+            </>}
         </div>
       </div>
     </div>

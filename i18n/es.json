@@ -172,29 +172,21 @@
   "contact": {
     "title": "Contáctenos",
     "subtitle": "Debido al alto volumen de clientes que nos contactan y porque deseamos escribirle en tiempo real, preferimos que nos escriba a los teléfonos siguientes y según la categoría del tema por el que nos contacta:",
-    "phones": {
-      "title": "Teléfonos:",
-      "text": "Sobre preguntas en general"
-    },
-    "emails": {
-      "title": "Correos",
-      "1": "Órdenes de compra:",
-      "2": "Entregas a domicilio:",
-      "3": "Comercializar sus productos con nosotros:",
-      "4": "Detalles técnicos de la web:"
-    },
-    "address": {
-      "title": "Dirección:",
-      "subtitle": "Oficina en Miami:",
-      "text": "7921 NW 68 Street Miami, FL 33166, Estados Unidos ,para que usted se sienta atendido o responda a sus necesidades, con presencia física. Esta oficina no atiende asuntos para confirmar compras, solo para alamacenamiento de cargas"
-    },
     "chat": {
       "title": "Servicio Chat en línea:",
       "text": "9am - 6pm. Para atender cualquier tipo de duda o problema."
     },
+    "labels": {
+      "phone": "Teléfonos:",
+      "mail": "Correos:",
+      "address": "Dirección:",
+      "chat": "Servicio chat en línea:",
+      "chat-description": "9am - 6pm. Para atender cualquier tipo de duda o problema."
+    },
     "inputs": {
       "email": "CORREO",
-      "message": "MENSAJE"
+      "message": "MENSAJE",
+      "submit": "ENVIAR"
     }
   },
   "footer": {
