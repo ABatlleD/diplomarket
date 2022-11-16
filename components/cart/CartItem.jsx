@@ -6,8 +6,10 @@ import { useCart } from '../../store/cart/cart.context'
 import usePrice from '../../libs/use-price'
 import PropTypes from 'prop-types'
 import Image from 'next/image'
+import { useTranslation } from 'react-i18next'
 
 function CartItem({ item, variant, calculateDelivery }) {
+  const { i18n } = useTranslation()
   const currency = 'USD'
   const t = (msg) => {
     return msg
@@ -59,7 +61,6 @@ function CartItem({ item, variant, calculateDelivery }) {
       {variant === 'pillVertical'
         ? (
         <div className="flex-shrink-0 mr-4">
-          {/* <img src="/comidas-mundo.jpg" /> */}
           <AppCounter
             value={item.quantity}
             onDecrement={handleRemoveClick}
@@ -85,7 +86,7 @@ function CartItem({ item, variant, calculateDelivery }) {
         />
       </div>
       <div>
-        <h3 className="font-bold text-heading">{item.name}</h3>
+        <h3 className="font-bold text-heading">{i18n.language === 'es' ? item.name : item.english_name}</h3>
         <p className="my-2.5 font-semibold text-accent">{price} {currency}</p>
         <span className="text-xs text-body">
           {!variant

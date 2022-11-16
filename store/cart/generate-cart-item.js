@@ -2,6 +2,7 @@ export function generateCartItem(item, variation) {
   const {
     id,
     nombre,
+    nombre_ingles,
     imagen,
     img_principal,
     precio,
@@ -15,6 +16,7 @@ export function generateCartItem(item, variation) {
   return {
     id: `${id}`,
     name: nombre,
+    english_name: nombre_ingles,
     slug: item?.slug,
     image: img_principal || imagen,
     stock: cant_inventario,
