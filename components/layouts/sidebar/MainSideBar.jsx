@@ -1,19 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Drawer from '@mui/material/Drawer'
 import PropTypes from 'prop-types'
 import LangSelector from '../navbar/LangSelector'
 import LockIcon from '@mui/icons-material/Lock'
-import useWindowSize from '../../../hooks/WindowSize'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import AppButton from '../../AppButton'
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined'
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined'
 import { useTranslation } from 'react-i18next'
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
+import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import Link from 'next/link'
+import resources from '../../../restapi/resources'
 
 function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {} }) {
   const { t } = useTranslation()
-  const size = useWindowSize()
+  const [contacts, setContacts] = useState([])
+
+  useEffect(() => {
+    const answer = []
+    resources.contacts.get()
+      .then(response => {
+        response.data.results.map(item => (item.tipo === 'email' || item.tipo === 'whatsapp') && item.sidebar ? answer.push(item) : true)
+        setContacts(answer)
+      })
+  }, [])
 
   return (
     <React.Fragment>
@@ -27,10 +39,10 @@ function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {} }) {
             <LangSelector />
           </div>
           <div
-            className='hidden md:flex flex-row mt-4 md:mt-6 ml-1 md:ml-[-10px] text-text-100 xl:text-sm'
+            className='flex flex-row mt-4 md:mt-6 ml-1 md:ml-[-10px] text-text-100 xl:text-sm'
             onClick={() => {}}
           >
-            USD <span className='mt-[-3px]'><LockIcon fontSize={size.width < 1024 ? 'large' : 'small'} /></span>
+            USD <span className='mt-[-3px]'><LockIcon fontSize={'small'} /></span>
           </div>
             <button
               onClick={() => setMainSideBar((mainSideBar) => !mainSideBar)}
@@ -52,13 +64,13 @@ function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {} }) {
             <span className='mt-[-3px] mr-1'><AddLocationAltOutlinedIcon fontSize='small' /></span> Miami <span className='mt-[-1px]'><KeyboardArrowDownOutlinedIcon fontSize='small' /></span>
           </AppButton>
         </div>
-          <div className='flex flex-col items-center'>
+          <div className='flex flex-col mx-4'>
           <div
             onClick={() => setMainSideBar((mainSideBar) => false)}
             className='mt-8 text-footer-background-200 hover:text-footer-background-100 font-semibold text-lg'
           >
             <Link href='/products/all'>
-              {t('layout.navbar.allProducts')}
+              <p>{t('layout.navbar.allProducts')} <span><KeyboardArrowRightIcon sx={{ marginTop: '-1px' }} /></span></p>
             </Link>
           </div>
           <div
@@ -66,7 +78,15 @@ function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {} }) {
             className='mt-4 text-footer-background-200 hover:text-footer-background-100 font-semibold text-lg'
           >
             <Link href='/about'>
-              {t('layout.navbar.about')}
+              <p>{t('layout.navbar.about')} <span><KeyboardArrowRightIcon sx={{ marginTop: '-1px' }} /></span></p>
+            </Link>
+          </div>
+          <div
+            onClick={() => setMainSideBar((mainSideBar) => false)}
+            className='mt-4 text-footer-background-200 hover:text-footer-background-100 font-semibold text-lg'
+          >
+            <Link href='/sell-with-us'>
+              <p>{t('layout.navbar.sell-with-us')} <span><KeyboardArrowRightIcon sx={{ marginTop: '-1px' }} /></span></p>
             </Link>
           </div>
           <div
@@ -74,9 +94,22 @@ function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {} }) {
             className='mt-4 text-footer-background-200 hover:text-footer-background-100 font-semibold text-lg'
           >
             <Link href='/contact'>
-              {t('layout.navbar.contact')}
+              <p>{t('layout.navbar.contact')} <span><KeyboardArrowRightIcon sx={{ marginTop: '-1px' }} /></span></p>
             </Link>
           </div>
+          {contacts.map(item => (
+            <div
+              key={item.id}
+              className='mt-4 text-footer-background-200 hover:text-footer-background-100 text-lg'
+            >
+              {item.tipo === 'email' && (
+                <p><span><EmailOutlinedIcon sx={{ marginTop: '-3px' }} /></span> {item.contenido}</p>
+              )}
+              {item.tipo === 'whatsapp' && (
+                <p><span><WhatsAppIcon sx={{ marginTop: '-3px' }} /></span> {item.contenido}</p>
+              )}
+            </div>
+          ))}
         </div>
       </Drawer>
     </React.Fragment>
