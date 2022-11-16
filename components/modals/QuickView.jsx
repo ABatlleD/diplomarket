@@ -20,7 +20,11 @@ const theme = createTheme({
 
 function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product }) {
   const [images, setImages] = useState([])
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+
+  const resizeTitle = (string, maxLength) => {
+    return string.length > maxLength ? `${string.slice(0, maxLength)}...` : string
+  }
 
   useEffect(() => {
     if (product.img_principal && product.galeria) {
@@ -72,9 +76,9 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
               </div>
               <div className='md:w-[3%]'></div>
               <div className='flex flex-col w-full md:w-[46%]'>
-                <p className='text-lg mb-2'>{product.nombre}</p>
+                <p className='text-lg mb-2'>{i18n.language === 'es' ? product.nombre : product.nombre_ingles}</p>
                 <div className='flex flex-row mb-2'>
-                  {product.etiquetas && (
+                  {(product.etiquetas && product.etiquetas.length > 0) && (
                     <ThemeProvider theme={theme}>
                       <div className='felx flex-row mr-2 my-1 md:my-2 h-7'>
                         {product.etiquetas.map((tag) => (
@@ -84,15 +88,15 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
                     </ThemeProvider>
                   )}
                   {product.sku &&
-                    <p className='mb-8'>
+                    <p className='mt-2'>
                       <span className='font-semibold'>SKU: </span> <span className='font-semibold'>{product.sku}</span>
                     </p>
                   }
                 </div>
                 <p className='text-button mb-2 text-xl font-semibold'>{product.precio?.cantidad} {product.precio?.moneda}</p>
-                <p className='text-xs text-text-100 mb-3'>{product.descripcion}</p>
+                <p className='text-xs text-text-100 mb-3'>{resizeTitle(i18n.language === 'es' ? product.descripcion : product.descripcion_ingles, 300)}</p>
                 <div className='flex flex-col'>
-                  <div className='flex flex-row w-11/12 mb-4'>
+                  <div className='flex flex-row justify-between mb-4'>
                     <div className='w-4/12 md:w-3/12'>
                       <div className='flex flex-row justify-between'>
                         <div
@@ -111,7 +115,7 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
                     </div>
                   </div>
                   <div className='flex flex-row text-button mt-1 hover:cursor-pointer hover:opacity-90'>
-                    <AddToFav data={product} text={'Añadir a favoritos'} success={'En favoritos'}/>
+                    <AddToFav data={product} text={t('fav.add')} success={t('fav.in')}/>
                   </div>
                 </div>
               </div>
