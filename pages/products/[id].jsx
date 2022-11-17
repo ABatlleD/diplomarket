@@ -31,6 +31,7 @@ function a11yProps(index) {
 }
 
 function Product({ product, apiError }) {
+  console.log('🚀 ~ file: [id].jsx ~ line 34 ~ Product ~ product', product)
   const router = useRouter()
   const [relatedProducts, setRelatedProducts] = useState([])
   const [isLoading, setLoading] = useState(false)
@@ -104,6 +105,9 @@ function Product({ product, apiError }) {
             }
           </div>
           <p className='mb-3 mt-2 text-button text-xl font-bold'>${product.precio} {product.precio_currency}</p>
+          {product.precioxlibra !== 0 && (
+            <p className='mb-3 mt-2 text-xl font-bold'>${product.precioxlibra} {product.precioxlibra_currency}/{product.um}</p>
+          )}
           <p className='mb-2'>
             <span className='font-semibold'>{t('products.subcategory')}:</span> <span className='font-semibold text-text-100 underline'>{product.subcategoria}</span>
           </p>
@@ -122,7 +126,13 @@ function Product({ product, apiError }) {
                   >
                     {Number(product.cant_inventario) > 0
                       ? (
-                          <AddToCart data={product} />
+                          <AddToCart data={{
+                            ...product,
+                            precio: {
+                              cantidad: product.precio,
+                              moneda: product.precio_currency
+                            }
+                          }} />
                         )
                       : <></>}
                   </div>

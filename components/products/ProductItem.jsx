@@ -32,7 +32,7 @@ function ProductItem({ product }) {
 
   return (
     <>
-      <div className='flex flex-col hover:shadow-button w-full bg-background-300 rounded-lg h-[12rem] md:h-[22rem] xl:h-[26rem]'>
+      <div className='flex flex-col hover:shadow-button w-full bg-background-300 rounded-lg h-[12.5rem] md:h-[23rem] xl:h-[27rem]'>
         <div className='w-full relative flex flex-row justify-center h-24 md:h-44 xl:h-60'>
           <Link href={`/products/${product.id}`}>
             <Image
@@ -69,7 +69,13 @@ function ProductItem({ product }) {
         </div>
         <div className='mx-2 my-0 md:my-0 text-button text-sm md:text-base'>{product.marca.nombre}</div>
         <div className='mx-2 my-0 md:my-0 text-button text-sm md:text-base'>{product.proveedor.nombre}</div>
-        <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>$ {product.precio.cantidad} {product.precio.moneda}</div>
+        <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>${product.precio.cantidad} {product.precio.moneda}</div>
+        {product.precioxlibra.cantidad !== '0.00' && (
+          <div className='mx-2 my-0 md:mb-0 md:my-0 font-bold text-sm md:text-base'>${product.precioxlibra.cantidad} {product.precioxlibra.moneda}/{product.um}</div>
+        )}
+        {product.precioxlibra.cantidad === '0.00' && (
+          <div className='md:h-6'></div>
+        )}
         {/* <ThemeProvider theme={theme}>
           <div className='felx flex-row mx-1 md:mx-2 my-1 md:my-2 h-7'>
             {product.etiquetas.map((tag) => (

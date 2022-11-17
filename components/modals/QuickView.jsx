@@ -93,7 +93,10 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
                     </p>
                   }
                 </div>
-                <p className='text-button mb-2 text-xl font-semibold'>{product.precio?.cantidad} {product.precio?.moneda}</p>
+                <p className='text-button mb-2 text-xl font-semibold'>${product.precio?.cantidad} {product.precio?.moneda}</p>
+                {product.precioxlibra.cantidad !== '0.00' && (
+                  <p className='mb-2 text-xl font-semibold'>${product.precioxlibra?.cantidad} {product.precioxlibra?.moneda}/{product.um}</p>
+                )}
                 <p className='text-xs text-text-100 mb-3'>{resizeTitle(i18n.language === 'es' ? product.descripcion : product.descripcion_ingles, 300)}</p>
                 <div className='flex flex-col'>
                   <div className='flex flex-row justify-between mb-4'>
