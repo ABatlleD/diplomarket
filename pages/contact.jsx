@@ -21,8 +21,8 @@ function Contact() {
     <>
      <AppHeader title={t('pages.contact')}/>
      <div className='flex flex-row justify-center text-footer-background-200'>
-      <div className='flex flex-row mt-10 mb-20 rounded-3xl w-5/6 p-8 bg-background-300 shadow-2xl'>
-        <div className='flex flex-col w-1/2 mr-4'>
+      <div className='flex flex-col md:flex-row mt-10 mb-20 rounded-3xl w-5/6 p-8 bg-background-300 shadow-2xl'>
+        <div className='flex flex-col w-full md:w-1/2 md:mr-4'>
           <p className='text-3xl font-semibold mb-4'>{t('contact.title')}</p>
           <p className='text-justify mb-2'>{t('contact.subtitle')}</p>
           <p className='font-semibold text-xl mb-1'>{t('contact.labels.phone')}</p>
@@ -70,7 +70,7 @@ function Contact() {
           <p className='font-semibold text-xl mb-1'>{t('contact.labels.chat')}</p>
           <p>{t('contact.labels.chat-description')}</p>
         </div>
-        <div className='flex flex-col w-1/2 ml-4'>
+        <div className='flex flex-col w-full md:w-1/2 md:ml-4'>
           <div className='mt-16 mb-4'>
             <TextField
               id="outlined-required"

@@ -114,7 +114,7 @@ function Product({ product, apiError }) {
             <span className='font-semibold'>{t('products.brand')}:</span> <span className='font-semibold text-text-100 underline'>{product.marca.nombre}</span>
           </p>
           <div className='flex flex-col'>
-            <div className='flex flex-row w-11/12 mb-4'>
+            <div className='flex flex-row justify-between w-11/12 mb-4'>
               <div className='w-4/12 md:w-3/12'>
                 <div className='flex flex-row justify-between'>
                   <div

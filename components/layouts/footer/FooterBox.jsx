@@ -93,25 +93,25 @@ function FooterBox({ cartSideBar, setCartSideBar }) {
       <div className='flex flex-col md:w-3/12 text-background-100'>
         <h2 className='mb-4 font-semibold'>{t('footer.app')}</h2>
         <img src="/assets/google-play.png" className="max-w-max h-14 rounded-md mb-2" alt="..." />
-        <div className='flex flex-wrap justify-between w-2/3 mt-4'>
+        <div className='flex flex-wrap md:w-2/3 mt-4'>
           {configurations.pasarela_paypal && (
-            <img src="/assets/payment/paypal/type-paypal.png" className="max-w-max h-10 rounded-md mb-2" alt="..." />
+            <img src="/assets/payment/paypal/type-paypal.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
           )}
           {configurations.pasarela_zelle && (
-            <img src="/assets/payment/zelle/type-zelle.png" className="max-w-max h-10 rounded-md mb-2" alt="..." />
+            <img src="/assets/payment/zelle/type-zelle.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
           )}
           {configurations.pasarela_tropipay && (
-            <img src="/assets/payment/tropipay/type-tropipay.png" className="max-w-max h-10 rounded-md mb-2" alt="..." />
+            <img src="/assets/payment/tropipay/type-tropipay.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
           )}
           {configurations.pasarela_bofa &&
             <>
-              <img src="/assets/payment/banco/card-visa.png" className="max-w-max h-10 rounded-md mb-2" alt="..." />
-              <img src="/assets/payment/banco/card-master.png" className="max-w-max h-10 rounded-md mb-2" alt="..." />
-              <img src="/assets/payment/banco/card-american-express.png" className="max-w-max h-10 rounded-md mb-2" alt="..." />
-              <img src="/assets/payment/banco/card-maestro.png" className="max-w-max h-10 rounded-md mb-2" alt="..." />
-              <img src="/assets/payment/banco/card-discover.png" className="max-w-max h-10 rounded-md mb-2" alt="..." />
-              <img src="/assets/payment/banco/card-uatp.png" className="max-w-max h-10 rounded-md mb-2" alt="..." />
-              <img src="/assets/payment/banco/card-jcb.png" className="max-w-max h-10 rounded-md mb-2" alt="..." />
+              <img src="/assets/payment/banco/card-visa.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
+              <img src="/assets/payment/banco/card-master.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
+              <img src="/assets/payment/banco/card-american-express.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
+              <img src="/assets/payment/banco/card-maestro.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
+              <img src="/assets/payment/banco/card-discover.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
+              <img src="/assets/payment/banco/card-uatp.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
+              <img src="/assets/payment/banco/card-jcb.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
             </>}
         </div>
       </div>
