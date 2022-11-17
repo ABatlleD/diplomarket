@@ -25,7 +25,11 @@ module.exports = {
         }
       }
     },
-    extend: {}
+    extend: {
+      backgroundImage: {
+        swus: "url('/public/assets/theme/logo-preloader.png')"
+      }
+    }
   },
   plugins: []
 }

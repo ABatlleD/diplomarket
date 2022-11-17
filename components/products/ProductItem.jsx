@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 import Image from 'next/image'
 import ZoomInIcon from '@mui/icons-material/ZoomIn'
-import CompareIcon from '@mui/icons-material/Compare'
+// import CompareIcon from '@mui/icons-material/Compare'
 import QuickView from '../modals/QuickView'
 import AddToFav from '../fav/AddFav'
 import AddToCart from '../cart/AddCart'
@@ -53,13 +53,13 @@ function ProductItem({ product }) {
                 <ZoomInIcon />
               </div>
             </Tooltip>
-            <Link href={'/products/compare'}>
+            {/* <Link href={'/products/compare'}>
               <Tooltip title='Compare' placement='right'>
                 <div className='rounded-lg hover:cursor-pointer hover:text-background-100 hover:bg-button bg-background-100'>
                   <CompareIcon />
                 </div>
               </Tooltip>
-            </Link>
+            </Link> */}
           </div>
         </div>
         <div className='mx-2 md:my-2 text-text-100 text-sm md:text-base md:h-6'>

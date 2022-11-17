@@ -8,6 +8,7 @@ import { Slider, FormControlLabel, Pagination, RadioGroup, Radio } from '@mui/ma
 import FilterBar from '../../components/layouts/sidebar/FilterBar'
 import TuneIcon from '@mui/icons-material/Tune'
 import { useTranslation } from 'react-i18next'
+import AppHeader from '../../components/layouts/AppHeader'
 
 // TODO: fix scroll to top on pagination change
 
@@ -149,135 +150,138 @@ function AllProducts({ products, productsError }) {
   }, [list])
 
   return (
-    <div className='flex md:flex-row flex-col w-full md:w-[95%] md:mx-auto my-3 md:my-10'>
-      <div className='mx-3 flex md:hidden text-sm flex-row justify-between mb-3'>
-        {selectedCategory && (
-          <div className='font-bold'>
-            {i18n.language === 'es' ? selectedCategory.nombre : selectedCategory.nombre_ingles}
-          </div>
-        )}
-        {!selectedCategory && (
-          <div className='font-bold'>
-            {t('filter.categories')}
-          </div>
-        )}
-        <div
-          onClick={() => setFilterBar(true)}
-        >
-          <TuneIcon />
-        </div>
-      </div>
-      <div className='md:flex hidden mr-1 flex-col w-3/12'>
-        <div className='flex flex-col'>
-          <p className='font-bold mb-2'>{t('filter.category')}</p>
-          <div className=''>
-            {categories.map((item) => (
-              <div key={item.id} className='border-2 border-background-100'>
-                <CategoriesAccordion
-                  category={item}
-                  items={item.subcategorias}
-                  {...{
-                    handleCategoryFilter,
-                    handleSubcategoryFilter
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className='flex flex-col my-2'>
-          <p className='font-bold mb-2'>{t('filter.price')}</p>
-          <div className='w-[92%]'>
-            <Slider
-              getAriaLabel={() => 'Temperature range'}
-              size='small'
-              value={prices}
-              onChange={handlePriceChange}
-              valueLabelDisplay="auto"
-              color='secondary'
-              max={1000}
-            />
-          </div>
-          <div className='flex flex-row justify-between w-[92%]'>
-            <div className=''>
-              <p className='border rounded-sm text-sm px-4'>${prices[0]} - ${prices[1]}</p>
-            </div>
-            <div
-              className='bg-footer-background-200 text-background-100 text-sm px-2 font-bold shadow-sm rounded-sm hover:cursor-pointer hover:opacity-90'
-              onClick={handlePriceFilter}
-            >
-              {t('filter.filter')}
-            </div>
-          </div>
-        </div>
-        <div className='flex flex-col w-[95%]'>
-          <p className='font-bold my-2'>{t('filter.brand')}</p>
-          <RadioGroup
-            aria-labelledby="demo-controlled-radio-buttons-group"
-            name="controlled-radio-buttons-group"
-            value={brand}
-            onChange={handleBrandFilter}
-          >
-            <div className='flex flex-wrap'>
-              {brands?.results?.map((item) => (
-                <FormControlLabel key={item.id} value={item.id} control={<Radio />} label={item.nombre} />
-              ))}
-            </div>
-          </RadioGroup>
-        </div>
-        <div className='flex flex-col w-[95%]'>
-          <p className='font-bold my-2'>{t('filter.provider')}</p>
-          <RadioGroup
-            aria-labelledby="demo-controlled-radio-buttons-group"
-            name="controlled-radio-buttons-group"
-            value={provider}
-            onChange={handleProviderFilter}
-          >
-            <div className='flex flex-wrap'>
-              {suppliers?.results?.map((item) => (
-                <FormControlLabel key={item.id} value={item.id} control={<Radio />} label={item.nombre} />
-              ))}
-            </div>
-          </RadioGroup>
-        </div>
-        <div className='my-2 underline hover:cursor-pointer' onClick={handleAllClick}>{t('filter.all')}</div>
-      </div>
-      <div className='flex flex-row w-full md:w-9/12'>
-        <div className='flex flex-col items-center w-full'>
+    <>
+      <AppHeader title={t('pages.products')} />
+      <div className='flex md:flex-row flex-col w-full md:w-[95%] md:mx-auto my-3 md:my-10'>
+        <div className='mx-3 flex md:hidden text-sm flex-row justify-between mb-3'>
           {selectedCategory && (
-            <div className='font-bold w-full ml-4 mb-2 text-xl hidden md:flex'>
+            <div className='font-bold'>
               {i18n.language === 'es' ? selectedCategory.nombre : selectedCategory.nombre_ingles}
             </div>
           )}
           {!selectedCategory && (
-            <div className='font-bold w-full ml-4 mb-2 text-xl hidden md:flex'>
+            <div className='font-bold'>
               {t('filter.categories')}
             </div>
           )}
-          <ListProducts products={list} loading={loading} />
-          <div className='mt-2'>
-            <Pagination
-              count={pages}
-              showFirstButton
-              size='large'
-              showLastButton
-              page={page}
-              onChange={handlePaginationChange}
-            />
+          <div
+            onClick={() => setFilterBar(true)}
+          >
+            <TuneIcon />
           </div>
         </div>
+        <div className='md:flex hidden mr-1 flex-col w-3/12'>
+          <div className='flex flex-col'>
+            <p className='font-bold mb-2'>{t('filter.category')}</p>
+            <div className=''>
+              {categories.map((item) => (
+                <div key={item.id} className='border-2 border-background-100'>
+                  <CategoriesAccordion
+                    category={item}
+                    items={item.subcategorias}
+                    {...{
+                      handleCategoryFilter,
+                      handleSubcategoryFilter
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className='flex flex-col my-2'>
+            <p className='font-bold mb-2'>{t('filter.price')}</p>
+            <div className='w-[92%]'>
+              <Slider
+                getAriaLabel={() => 'Temperature range'}
+                size='small'
+                value={prices}
+                onChange={handlePriceChange}
+                valueLabelDisplay="auto"
+                color='secondary'
+                max={1000}
+              />
+            </div>
+            <div className='flex flex-row justify-between w-[92%]'>
+              <div className=''>
+                <p className='border rounded-sm text-sm px-4'>${prices[0]} - ${prices[1]}</p>
+              </div>
+              <div
+                className='bg-footer-background-200 text-background-100 text-sm px-2 font-bold shadow-sm rounded-sm hover:cursor-pointer hover:opacity-90'
+                onClick={handlePriceFilter}
+              >
+                {t('filter.filter')}
+              </div>
+            </div>
+          </div>
+          <div className='flex flex-col w-[95%]'>
+            <p className='font-bold my-2'>{t('filter.brand')}</p>
+            <RadioGroup
+              aria-labelledby="demo-controlled-radio-buttons-group"
+              name="controlled-radio-buttons-group"
+              value={brand}
+              onChange={handleBrandFilter}
+            >
+              <div className='flex flex-wrap'>
+                {brands?.results?.map((item) => (
+                  <FormControlLabel key={item.id} value={item.id} control={<Radio />} label={item.nombre} />
+                ))}
+              </div>
+            </RadioGroup>
+          </div>
+          <div className='flex flex-col w-[95%]'>
+            <p className='font-bold my-2'>{t('filter.provider')}</p>
+            <RadioGroup
+              aria-labelledby="demo-controlled-radio-buttons-group"
+              name="controlled-radio-buttons-group"
+              value={provider}
+              onChange={handleProviderFilter}
+            >
+              <div className='flex flex-wrap'>
+                {suppliers?.results?.map((item) => (
+                  <FormControlLabel key={item.id} value={item.id} control={<Radio />} label={item.nombre} />
+                ))}
+              </div>
+            </RadioGroup>
+          </div>
+          <div className='my-2 underline hover:cursor-pointer' onClick={handleAllClick}>{t('filter.all')}</div>
+        </div>
+        <div className='flex flex-row w-full md:w-9/12'>
+          <div className='flex flex-col items-center w-full'>
+            {selectedCategory && (
+              <div className='font-bold w-full ml-4 mb-2 text-xl hidden md:flex'>
+                {i18n.language === 'es' ? selectedCategory.nombre : selectedCategory.nombre_ingles}
+              </div>
+            )}
+            {!selectedCategory && (
+              <div className='font-bold w-full ml-4 mb-2 text-xl hidden md:flex'>
+                {t('filter.categories')}
+              </div>
+            )}
+            <ListProducts products={list} loading={loading} />
+            <div className='mt-2'>
+              <Pagination
+                count={pages}
+                showFirstButton
+                size='large'
+                showLastButton
+                page={page}
+                onChange={handlePaginationChange}
+              />
+            </div>
+          </div>
+        </div>
+        <FilterBar {...{
+          filterBar,
+          setFilterBar,
+          handleMobileFilter,
+          handleCategoryFilter,
+          setCategory,
+          setSubcategory,
+          handleSubcategoryFilter,
+          setSelectedCategory
+        }} />
       </div>
-      <FilterBar {...{
-        filterBar,
-        setFilterBar,
-        handleMobileFilter,
-        handleCategoryFilter,
-        setCategory,
-        setSubcategory,
-        handleSubcategoryFilter,
-        setSelectedCategory
-      }} />
-    </div>
+    </>
   )
 }
 

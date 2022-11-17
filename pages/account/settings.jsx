@@ -4,8 +4,12 @@ import AccountLayout from '../../layouts/AccountLayout.jsx'
 import { InputAdornment, IconButton, TextField, Button } from '@mui/material'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import AppHeader from '../../components/layouts/AppHeader.jsx'
+import { useTranslation } from 'react-i18next'
 
 function Settings() {
+  const { t } = useTranslation()
+
   const [values, setValues] = useState({
     confirmPassword: '',
     password: '',
@@ -37,6 +41,7 @@ function Settings() {
 
   return (
     <>
+      <AppHeader title={t('pages.settings')} />
       <div className='flex flex-col'>
         <div className='flex flex-col items-center p-4 mb-8 border-2 border-button rounded-3xl'>
           <p className='font-semibold text-button text-4xl mb-8'>Actualizar a Premium</p>

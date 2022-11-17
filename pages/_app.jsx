@@ -7,6 +7,7 @@ import 'swiper/css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/globals.css'
 import SwiperCore, { Autoplay } from 'swiper'
+import WebChat from '../components/WebChat'
 
 SwiperCore.use([Autoplay])
 
@@ -21,6 +22,7 @@ function MyApp({ Component, pageProps }) {
       <QueryClientProvider client={queryClient}>
         <Component {...pageProps} />
       </QueryClientProvider>
+      <WebChat />
     </>
   )
 }

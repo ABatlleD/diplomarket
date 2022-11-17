@@ -1,9 +1,14 @@
 import React from 'react'
 import { TextField, Button } from '@mui/material'
+import AppHeader from '../../components/layouts/AppHeader'
+import { useTranslation } from 'react-i18next'
 
 function ForgotPassword() {
+  const { t } = useTranslation()
+
   return (
     <>
+      <AppHeader title={t('pages.forgot-password')} />
       <div className='flex flex-col items-center justify-center h-screen'>
         <div className="Img mb-4">
           <img src="/logo.png" className="max-w-max h-20 md:h-24 hover:cursor-pointer" alt="..." />

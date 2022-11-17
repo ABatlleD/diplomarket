@@ -3,6 +3,7 @@ import MainLayout from '../layouts/MainLayout'
 import FavList from '../components/fav/FavList'
 import { useFav } from '../store/fav/fav.context'
 import { useTranslation } from 'react-i18next'
+import AppHeader from '../components/layouts/AppHeader'
 
 function Wishlist() {
   const { items } = useFav()
@@ -10,12 +11,15 @@ function Wishlist() {
   const { t } = useTranslation()
 
   return (
-    <div className='flex flex-col items-center my-10'>
-      <div className='flex mb-4 flex-row justify-center'>
-        <div className='font-bold text-2xl md:text-3xl'>{t('wishlist.title')}</div>
+    <>
+      <AppHeader title={t('pages.wishlist')} />
+      <div className='flex flex-col items-center my-10'>
+        <div className='flex mb-4 flex-row justify-center'>
+          <div className='font-bold text-2xl md:text-3xl'>{t('wishlist.title')}</div>
+        </div>
+        <FavList products={items} loading={loading} />
       </div>
-      <FavList products={items} loading={loading} />
-    </div>
+    </>
   )
 }
 

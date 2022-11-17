@@ -6,7 +6,17 @@
     "terms": "Términos y Condiciones",
     "privacy": "Política de Privacidad",
     "contact": "Contáctenos",
-    "help": "Ayuda"
+    "help": "Ayuda",
+    "sell-with-us": "Vende Con Nosotros",
+    "compare": "Comparar",
+    "forgot-password": "Recuperar Contraseña",
+    "signin": "Iniciar Sesión",
+    "signup": "Registrarse",
+    "details": "Detalles",
+    "orders": "Órdenes",
+    "recipients": "Destinatarios",
+    "settings": "Ajustes",
+    "wishlist": "Favoritos"
   },
   "layout": {
     "navbar": {

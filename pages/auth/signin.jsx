@@ -3,8 +3,12 @@ import { TextField, Button, InputAdornment, IconButton } from '@mui/material'
 import Link from 'next/link'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import AppHeader from '../../components/layouts/AppHeader'
+import { useTranslation } from 'react-i18next'
 
 function SignIn() {
+  const { t } = useTranslation()
+
   const [values, setValues] = useState({
     username: '',
     confirmPassword: '',
@@ -34,6 +38,7 @@ function SignIn() {
 
   return (
     <>
+      <AppHeader title={t('pages.signin')} />
       <div className='flex flex-col items-center justify-center h-screen'>
         <div className="Img mb-4">
           <img src="/logo.png" className="max-w-max h-20 md:h-24 hover:cursor-pointer" alt="..." />

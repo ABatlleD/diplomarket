@@ -6,7 +6,17 @@
     "terms": "Terms & Conditions",
     "privacy": "Privacy Policy",
     "contact": "Contact Us",
-    "help": "Help"
+    "help": "Help",
+    "sell-with-us": "Sell With Us",
+    "compare": "Compare",
+    "forgot-password": "Forgot Password",
+    "signin": "Login",
+    "signup": "Register",
+    "details": "Details",
+    "orders": "Orders",
+    "recipients": "Recipients",
+    "settings": "Settings",
+    "wishlist": "Wishlist"
   },
   "layout": {
     "navbar": {

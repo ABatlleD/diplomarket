@@ -11,10 +11,13 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import resources from '../../restapi/resources'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'react-i18next'
+import AppHeader from '../../components/layouts/AppHeader'
 
 const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
 
 function SignUp() {
+  const { t } = useTranslation()
   const router = useRouter()
   const [values, setValues] = useState({
     fullname: '',
@@ -165,6 +168,7 @@ function SignUp() {
 
   return (
     <>
+      <AppHeader title={t('pages.signup')} />
       <ToastContainer />
       <div className='flex flex-col items-center my-4'>
         <div className="Img mb-4">
