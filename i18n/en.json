@@ -72,6 +72,13 @@
     "no-products": "NO PRODUCTS",
     "pay": "Pay"
   },
+  "place": {
+    "title": "Select the delivery city",
+    "subtitle": "The products available for the selected city will be displayed please note that not all products can be shipped to all cities.",
+    "state": "State",
+    "district": "District",
+    "accept": "Accept"
+  },
   "fav": {
     "add": "Add to wishlist",
     "in": "In wishlist"

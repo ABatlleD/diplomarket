@@ -72,6 +72,13 @@
     "no-products": "SIN PRODUCTOS",
     "pay": "Pagar"
   },
+  "place": {
+    "title": "Seleccione el municipio de entrega",
+    "subtitle": "Se mostrarán los productos disponibles para el municipio seleccionado.Tenga en cuenta que no todos los productos pueden ser enviados a todos los municipios.",
+    "state": "Provincia",
+    "district": "Municipio",
+    "accept": "Aceptar"
+  },
   "fav": {
     "add": "Añadir a favoritos",
     "in": "En favoritos"

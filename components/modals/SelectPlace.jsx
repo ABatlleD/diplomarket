@@ -4,8 +4,10 @@ import PropTypes from 'prop-types'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import resources from '../../restapi/resources'
 import { setCookie } from 'cookies-next'
+import { useTranslation } from 'react-i18next'
 
 function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} }) {
+  const { t } = useTranslation()
   const [cities, setCities] = useState({})
   const [districts, setDistricts] = useState([])
   const [pivots, setPivots] = useState({})
@@ -59,20 +61,20 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
               <HighlightOffIcon className='hover:cursor-pointer' onClick={() => setOpenSelectPlace(false)} />
             </div>
             <div className='flex flex-row justify-center mt-4'>
-              <p className='font-bold text-lg text-footer-background-100'>Select the delivery city</p>
+              <p className='font-bold text-lg text-footer-background-100'>{t('place.title')}</p>
             </div>
             <div className='flex flex-row justify-center mt-4'>
               <img src="/delivery-top.png" className="max-w-max h-44 hover:cursor-pointer" alt="..." />
             </div>
             <div className='flex flex-row justify-center mt-4 mx-12'>
               <p className='font-semibold text-footer-background-100 text-justify'>
-                The products available for the selected city will be displayed <span className='font-bold'>please note that not all products can be shipped to all cities.</span>
+              {t('place.subtitle')}
               </p>
             </div>
             <div className='flex flex-row justify-between mx-12 mt-8'>
               <div className='w-[45%]'>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">State</InputLabel>
+                  <InputLabel id="demo-simple-select-label">{t('place.state')}</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -88,7 +90,7 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
               </div>
               <div className='w-[45%]'>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">District</InputLabel>
+                  <InputLabel id="demo-simple-select-label">{t('place.district')}</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -112,7 +114,7 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
                 }}
                 onClick={handleSubmit}
               >
-                Accept
+                {t('place.accept')}
               </Button>
             </div>
           </div>
