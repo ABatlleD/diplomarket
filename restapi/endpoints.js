@@ -3,6 +3,7 @@ export const ENDPOINTS = {
   PRODUCTS: '/producto',
   CATEGORY: '/subcategoria/arbol',
   SUBCATEGORY: '/subcategoria',
+  SEARCH: '/buscar',
   PRODUCTS_BEST_SELLERS: '/masvendidos/ultimahora',
   PRODUCTS_RECOMMENDED: '/recomendados',
   PRODUCTS_RECOMMENDED_DAY: '/recomendadosdia',

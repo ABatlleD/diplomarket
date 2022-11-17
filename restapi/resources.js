@@ -22,6 +22,7 @@ const resources = {
 
       return await getRequest(`${ENDPOINTS.PRODUCTS}/${filter}`)
     },
+    search: async (municipality, type) => await getRequest(`${ENDPOINTS.SEARCH}/${municipality}/${type}/`),
     one: async (id) => await getRequest(`${ENDPOINTS.PRODUCTS}/${id}/`)
   },
   featured_products: {
