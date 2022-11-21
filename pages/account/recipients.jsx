@@ -3,9 +3,17 @@ import MainLayout from '../../layouts/MainLayout.jsx'
 import AccountLayout from '../../layouts/AccountLayout.jsx'
 import AppHeader from '../../components/layouts/AppHeader.jsx'
 import { useTranslation } from 'react-i18next'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 function Recipients() {
   const { t } = useTranslation()
+  const { status } = useSession()
+  const router = useRouter()
+
+  if (status === 'unauthenticated') {
+    router.push('/auth/signin')
+  }
 
   return (
     <>

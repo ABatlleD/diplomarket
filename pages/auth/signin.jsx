@@ -5,9 +5,14 @@ import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import AppHeader from '../../components/layouts/AppHeader'
 import { useTranslation } from 'react-i18next'
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function SignIn() {
   const { t } = useTranslation()
+  const router = useRouter()
 
   const [values, setValues] = useState({
     username: '',
@@ -32,13 +37,31 @@ function SignIn() {
     event.preventDefault()
   }
 
-  const handleSubmit = () => {
-    console.log('🚀 ~ file: signin.jsx ~ line 33 ~ handleSubmit ~ values.username', values.username)
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const res = await signIn('credentials', { redirect: false, username: values.username, password: values.password })
+    console.log('🚀 ~ file: signin.jsx ~ line 43 ~ handleSubmit ~ values', values)
+    console.log('🚀 ~ file: signin.jsx ~ line 43 ~ handleSubmit ~ res', res)
+    if (res.error === '403') {
+      return toast.error(t('no_active_error'))
+    } else if (res.error === '404') {
+      return toast.error(t('no_exist_error'))
+    } else if (res.error === 'error_recaptcha_fail') {
+      return toast.error(t('error_recaptcha_fail'))
+    } else if (res.error === 'error_recaptcha_form') {
+      return toast.error(t('error_recaptcha_form'))
+    } else if (res.error) {
+      return toast.error(t('login_error'))
+    }
+    toast.success(t('login_success'))
+    setTimeout(() => {
+      router.push('/')
+    }, 1000)
   }
-
   return (
     <>
       <AppHeader title={t('pages.signin')} />
+      <ToastContainer />
       <div className='flex flex-col items-center justify-center h-screen'>
         <div className="Img mb-4">
           <img src="/logo.png" className="max-w-max h-20 md:h-24 hover:cursor-pointer" alt="..." />

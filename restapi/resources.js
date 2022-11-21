@@ -3,7 +3,8 @@ import { getRequest, postRequest } from '.'
 
 const resources = {
   auth: {
-    signup: async (data) => await postRequest(`${ENDPOINTS.USERS}`, data)
+    signup: async (data) => await postRequest(`${ENDPOINTS.USERS}`, data),
+    signin: async (data) => await postRequest(`${ENDPOINTS.AUTH}`, data)
   },
   carousel: {
     all: async () => await getRequest(`${ENDPOINTS.CAROUSEL}`)
@@ -70,6 +71,14 @@ const resources = {
   },
   configuration: {
     get: async () => await getRequest(`${ENDPOINTS.CONFIGURACION}`)
+  },
+  users: {
+    all: async () => await getRequest(`${ENDPOINTS.USERS}`),
+    get: async (email) => {
+      const users = await getRequest(`${ENDPOINTS.USERS}`)
+      const { results } = users.data
+      return results.find(user => user.email === email)
+    }
   }
 }
 

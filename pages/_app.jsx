@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/globals.css'
 import SwiperCore, { Autoplay } from 'swiper'
 import WebChat from '../components/WebChat'
+import { SessionProvider } from 'next-auth/react'
 
 SwiperCore.use([Autoplay])
 
@@ -19,9 +20,11 @@ function MyApp({ Component, pageProps }) {
   return getLayout(
     <>
       <NextNProgress color="#b12024" />
-      <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
-      </QueryClientProvider>
+      <SessionProvider session={pageProps.session}>
+        <QueryClientProvider client={queryClient}>
+          <Component {...pageProps} />
+        </QueryClientProvider>
+      </SessionProvider>
       <WebChat />
     </>
   )

@@ -6,9 +6,17 @@ import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import AppHeader from '../../components/layouts/AppHeader.jsx'
 import { useTranslation } from 'react-i18next'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 function Settings() {
   const { t } = useTranslation()
+  const { status } = useSession()
+  const router = useRouter()
+
+  if (status === 'unauthenticated') {
+    router.push('/auth/signin')
+  }
 
   const [values, setValues] = useState({
     confirmPassword: '',

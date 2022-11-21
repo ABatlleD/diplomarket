@@ -31,7 +31,6 @@ function a11yProps(index) {
 }
 
 function Product({ product, apiError }) {
-  console.log('🚀 ~ file: [id].jsx ~ line 34 ~ Product ~ product', product)
   const router = useRouter()
   const [relatedProducts, setRelatedProducts] = useState([])
   const [isLoading, setLoading] = useState(false)

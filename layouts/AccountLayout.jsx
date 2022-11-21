@@ -4,7 +4,6 @@ import PersonIcon from '@mui/icons-material/Person'
 import GroupIcon from '@mui/icons-material/Group'
 import ListAltIcon from '@mui/icons-material/ListAlt'
 import SettingsIcon from '@mui/icons-material/Settings'
-import LogoutIcon from '@mui/icons-material/Logout'
 import Link from 'next/link'
 
 function AccountLayout({ children, option }) {
@@ -32,15 +31,11 @@ function AccountLayout({ children, option }) {
               </div>
             </Link>
             <Link href={'/account/settings'}>
-              <div className={`flex flex-row p-2 border hover:cursor-pointer ${option === 4 ? 'bg-button text-text-200' : ''}`}>
+              <div className={`flex flex-row p-2 border hover:cursor-pointer rounded-b-3xl ${option === 4 ? 'bg-button text-text-200' : ''}`}>
                 <div><SettingsIcon fontSize='small' /></div>
                 <div className='mt-[0.20rem] ml-1'> Opciones</div>
               </div>
             </Link>
-            <div className='flex flex-row p-2 border rounded-b-3xl hover:cursor-pointer'>
-              <div><LogoutIcon fontSize='small' /></div>
-              <div className='mt-[0.20rem] ml-1'> Salir</div>
-            </div>
           </div>
           <div className='w-10/12'>{children}</div>
         </div>
