@@ -23,7 +23,7 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
   const { t, i18n } = useTranslation()
 
   const resizeTitle = (string, maxLength) => {
-    return string.length > maxLength ? `${string.slice(0, maxLength)}...` : string
+    return string?.length > maxLength ? `${string.slice(0, maxLength)}...` : string
   }
 
   useEffect(() => {
@@ -94,7 +94,7 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
                   }
                 </div>
                 <p className='text-button mb-2 text-xl font-semibold'>${product.precio?.cantidad} {product.precio?.moneda}</p>
-                {product.precioxlibra.cantidad !== '0.00' && (
+                {product.precioxlibra && product.precioxlibra?.cantidad !== '0.00' && (
                   <p className='mb-2 text-xl font-semibold'>${product.precioxlibra?.cantidad} {product.precioxlibra?.moneda}/{product.um}</p>
                 )}
                 <p className='text-xs text-text-100 mb-3'>{resizeTitle(i18n.language === 'es' ? product.descripcion : product.descripcion_ingles, 300)}</p>
