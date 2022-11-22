@@ -1,5 +1,5 @@
 import { ENDPOINTS } from './endpoints'
-import { getRequest, postRequest } from '.'
+import { getRequest, postRequest, putRequest } from '.'
 
 const resources = {
   auth: {
@@ -57,7 +57,12 @@ const resources = {
       one: async (id) => await getRequest(`${ENDPOINTS.MUNICIPALITY}${id}`)
     },
     city: {
-      all: async () => await getRequest(ENDPOINTS.PROVINCES)
+      all: async () => await getRequest(ENDPOINTS.PROVINCES),
+      one: async (id) => await getRequest(`${ENDPOINTS.PROVINCES}${id}`)
+    },
+    country: {
+      all: async () => await getRequest(ENDPOINTS.COUNTRIES),
+      one: async (id) => await getRequest(`${ENDPOINTS.COUNTRIES}${id}`)
     }
   },
   faq: {
@@ -79,6 +84,12 @@ const resources = {
       const { results } = users.data
       return results.find(user => user.email === email)
     }
+  },
+  recipients: {
+    all: async () => await getRequest(ENDPOINTS.RECIPIENTS),
+    one: async (id) => await getRequest(`${ENDPOINTS.RECIPIENTS}${id}/`),
+    create: async (data) => await postRequest(ENDPOINTS.RECIPIENTS, data),
+    update: async (id, data) => await putRequest(`${ENDPOINTS.RECIPIENTS}${id}/`, data)
   }
 }
 

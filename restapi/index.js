@@ -29,7 +29,7 @@ export async function postRequest(URL, payload) {
 }
 
 export async function putRequest(URL, payload) {
-  return await AxiosBackendClient.patch(`${URL}`, payload).then(response => response)
+  return await AxiosBackendClient.put(`${URL}`, payload).then(response => response)
 }
 
 export async function deleteRequest(URL) {

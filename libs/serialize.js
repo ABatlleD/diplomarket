@@ -2,6 +2,15 @@ export const isEmpty = obj => [Object, Array].includes((obj || {}).constructor) 
 export const isArray = array => Array.isArray(array)
 export const isObject = obj => Object.prototype.toString.call(obj) === '[object Object]'
 
+export const removeDuplicateObjects = (array, key) => {
+  const set = new Set()
+  return array.filter(item => {
+    const alreadyHas = set.has(item[key])
+    set.add(item[key])
+    return !alreadyHas
+  })
+}
+
 export const serialize = (obj) => {
   const arr_ = []
   if (obj) {

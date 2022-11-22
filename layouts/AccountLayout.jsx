@@ -11,7 +11,7 @@ function AccountLayout({ children, option }) {
     <>
       <div className='flex justify-center w-full'>
         <div className='flex flex-row self-center w-[95%] my-10'>
-          <div className='flex flex-col w-2/12 mr-4 text-footer-background-200 rounded-3xl'>
+          <div className='hidden md:flex flex-col w-2/12 mr-4 text-footer-background-200 rounded-3xl'>
             <Link href={'/account/details'}>
               <div className={`flex flex-row p-2 border rounded-t-3xl hover:cursor-pointer ${option === 1 ? 'bg-button text-text-200' : ''}`}>
                 <div><PersonIcon fontSize='small' /></div>
@@ -37,7 +37,7 @@ function AccountLayout({ children, option }) {
               </div>
             </Link>
           </div>
-          <div className='w-10/12'>{children}</div>
+          <div className='w-full md:w-10/12'>{children}</div>
         </div>
       </div>
     </>
