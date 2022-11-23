@@ -10,8 +10,6 @@ import TuneIcon from '@mui/icons-material/Tune'
 import { useTranslation } from 'react-i18next'
 import AppHeader from '../../components/layouts/AppHeader'
 
-// TODO: fix scroll to top on pagination change
-
 function AllProducts({ products, productsError }) {
   const { t, i18n } = useTranslation()
   const [list, setList] = useState(products)

@@ -125,7 +125,7 @@ function SignIn() {
             <Link href={'/auth/signup'}>
               <p className='text-footer-background-100 font-bold underline hover:cursor-pointer hover:text-footer-background-200'>Don&apos;t have an account?</p>
             </Link>
-            <Link href={'/auth/forgot-password'}>
+            <Link href={'/backend/password_reset'}>
               <p className='text-footer-background-100 font-bold underline hover:cursor-pointer hover:text-footer-background-200'>Forgot your password?</p>
             </Link>
           </div>

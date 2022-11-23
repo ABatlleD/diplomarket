@@ -6,8 +6,11 @@ import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import AppHeader from '../../components/layouts/AppHeader.jsx'
 import { useTranslation } from 'react-i18next'
-import { useSession } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/router'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import axios from 'axios'
 
 function Settings() {
   const { t } = useTranslation()
@@ -43,6 +46,26 @@ function Settings() {
     })
   }
 
+  const handleSubmit = async () => {
+    if (!(values.password === '') && !(values.confirmPassword === '')) {
+      if (values.password === values.confirmPassword) {
+        toast.error('Las contraseñas son iguales')
+      } else {
+        const saveNewPassword = await axios.post('/api/setting', {
+          setting: [values.password, values.confirmPassword]
+        })
+        toast.info(saveNewPassword.data.message ?? 'Contacte al administrator')
+        if (saveNewPassword?.data?.status) {
+          setTimeout(() => {
+            signOut()
+          }, 3000)
+        }
+      }
+    } else {
+      toast.error('Llene los dos campos')
+    }
+  }
+
   const handleMouseDownPassword = (event) => {
     event.preventDefault()
   }
@@ -50,6 +73,7 @@ function Settings() {
   return (
     <>
       <AppHeader title={t('pages.settings')} />
+      <ToastContainer />
       <div className='flex flex-col'>
         <div className='flex flex-col items-center p-4 mb-8 border-2 border-button rounded-3xl'>
           <p className='font-semibold text-button text-4xl mb-8'>Actualizar a Premium</p>
@@ -58,7 +82,7 @@ function Settings() {
         <div className='flex flex-col border items-center p-4 rounded-3xl'>
           <p className='font-bold text-2xl text-footer-background-200 mb-8'>Cambiar Contraseña</p>
           <div className='flex flex-col md:flex-row w-full'>
-            <div className="Password mr-2 w-11/12 md:w-10/12">
+            <div className="Password md:mr-2 mb-4 w-full md:w-10/12">
               <TextField
                 required
                 id="outlined-password-input"
@@ -84,7 +108,7 @@ function Settings() {
                 }}
               />
             </div>
-            <div className="ConfirmPassword mb-4 ml-2 w-11/12 md:w-10/12">
+            <div className="ConfirmPassword mb-4 md:ml-2 w-full md:w-10/12">
               <TextField
                 required
                 id="outlined-password-input"
@@ -118,6 +142,7 @@ function Settings() {
                 width: '100%',
                 backgroundColor: '#15224b !important'
               }}
+              onClick={handleSubmit}
             >
               Guardar Nueva Contraseña
             </Button>

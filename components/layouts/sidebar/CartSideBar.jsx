@@ -8,6 +8,7 @@ import { useCart } from '../../../store/cart/cart.context'
 import CartItem from '../../cart/CartItem'
 import usePrice from '../../../libs/use-price'
 import { t } from 'i18next'
+import Link from 'next/link'
 
 function CartSideBar ({ cartSideBar = false, setCartSideBar = () => {} }) {
   const currency = 'USD'
@@ -51,12 +52,14 @@ function CartSideBar ({ cartSideBar = false, setCartSideBar = () => {} }) {
               <h1 className='mt-4 text-2xl font-bold text-text-100'>{t('cart.no-products')}</h1>
             </div>
           )}
-          <div className="flex flex-row justify-between p-2 hover:cursor-pointer rounded-full bg-button mt-4">
-            <h1 className='text-background-100 text-2xl ml-6 mt-1'>{t('cart.pay')}</h1>
-            <div className='bg-background-100 py-2 px-4 rounded-full text-lg font-semibold text-button'>
-              {totalPrice} {currency}
+          <Link href={'/checkout/'}>
+            <div className="flex flex-row justify-between p-2 hover:cursor-pointer rounded-full bg-button mt-4" onClick={() => setCartSideBar(false)}>
+              <h1 className='text-background-100 text-2xl ml-6 mt-1'>{t('cart.pay')}</h1>
+              <div className='bg-background-100 py-2 px-4 rounded-full text-lg font-semibold text-button'>
+                {totalPrice} {currency}
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
       </Drawer>
     </React.Fragment>

@@ -22,7 +22,7 @@ function Home({
   carouselError
 }) {
   const { t } = useTranslation()
-  const [category, setCategory] = useState(Object.keys(featuredProducts)[1])
+  const [category, setCategory] = useState(Object.keys(featuredProducts)[0])
   const [categoriesFilter] = useState(Object.keys(featuredProducts))
   const [featureds, setFeatureds] = useState([])
 

@@ -1,13 +1,27 @@
 import { ENDPOINTS } from './endpoints'
+import axios from 'axios'
 import { getRequest, postRequest, putRequest } from '.'
 
 const resources = {
   auth: {
     signup: async (data) => await postRequest(`${ENDPOINTS.USERS}`, data),
-    signin: async (data) => await postRequest(`${ENDPOINTS.AUTH}`, data)
+    signin: async (data) => await postRequest(`${ENDPOINTS.AUTH}`, data),
+    changePassword: async (data) => await postRequest(ENDPOINTS.CHANGE_PASSWORD, data)
   },
   carousel: {
     all: async () => await getRequest(`${ENDPOINTS.CAROUSEL}`)
+  },
+  checkout: async (data) => await postRequest(ENDPOINTS.CHECKOUT, data),
+  bofa: async (data) => await postRequest(ENDPOINTS.BOFA, data),
+  delivery: {
+    get: async (items, municipio) => {
+      const response = await axios.post('/api/checkout/checkdelivery', {
+        items,
+        municipio
+      })
+      return response.data.total
+    },
+    create: async (data) => await postRequest(ENDPOINTS.DELIVERY, data)
   },
   products: {
     all: async (options) => {
@@ -83,7 +97,8 @@ const resources = {
       const users = await getRequest(`${ENDPOINTS.USERS}`)
       const { results } = users.data
       return results.find(user => user.email === email)
-    }
+    },
+    update: async (id, data) => await putRequest(`${ENDPOINTS.USERS}${id}/`, data)
   },
   recipients: {
     all: async () => await getRequest(ENDPOINTS.RECIPIENTS),

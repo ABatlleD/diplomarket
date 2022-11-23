@@ -105,7 +105,7 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
               )
             }}
             renderOption={(props, option) => (
-              <SearchResult data={option} {...props} />
+              <SearchResult data={option} {...{ setInputValue }} />
             )}
           />
           <AppButton

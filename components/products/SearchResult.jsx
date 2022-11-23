@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
 import useWindowSize from '../../hooks/WindowSize'
 
-function SearchResult({ data }) {
+function SearchResult({ data, setInputValue = () => '' }) {
   const size = useWindowSize()
   const { i18n } = useTranslation()
 
@@ -15,7 +15,7 @@ function SearchResult({ data }) {
   return (
     <div className='flex flex-col mx-4 my-2'>
       <Link href={`/products/${data.pk}`}>
-        <div className='w-full flex flex-row justify-between hover:cursor-pointer hover:bg-background-300'>
+        <div className='w-full flex flex-row justify-between hover:cursor-pointer hover:bg-background-300' onClick={() => setInputValue('')}>
           <div>{resizeTitle(i18n.language === 'es' ? data.nombre : data.nombre_ingles, size.width < 768 ? 15 : 25)}</div>
           <div className='bg-button px-1 text-background-100 rounded-md'>{data.precio} USD</div>
         </div>
@@ -25,7 +25,8 @@ function SearchResult({ data }) {
 }
 
 SearchResult.propTypes = {
-  data: PropTypes.any
+  data: PropTypes.any,
+  setInputValue: PropTypes.any
 }
 
 export default SearchResult

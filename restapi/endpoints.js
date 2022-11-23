@@ -31,5 +31,8 @@ export const ENDPOINTS = {
   DELIVERY: '/entrega/',
   PREMIUM: '/premium/',
   CONFIGURACION: '/configuracion/',
-  CONTACT: '/contactoempresa/'
+  CONTACT: '/contactoempresa/',
+  CHECKOUT: '/checkout/',
+  BOFA: '/checkout/bofa/',
+  CHANGE_PASSWORD: '/user/password/change/'
 }

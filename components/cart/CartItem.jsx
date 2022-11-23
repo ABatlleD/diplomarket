@@ -7,6 +7,7 @@ import usePrice from '../../libs/use-price'
 import PropTypes from 'prop-types'
 import Image from 'next/image'
 import { useTranslation } from 'react-i18next'
+import useWindowSize from '../../hooks/WindowSize'
 
 function CartItem({ item, variant, calculateDelivery }) {
   const { i18n } = useTranslation()
@@ -14,6 +15,7 @@ function CartItem({ item, variant, calculateDelivery }) {
   const t = (msg) => {
     return msg
   }
+  const size = useWindowSize()
   const { price } = usePrice({
     amount: item.price,
     currencyCode: currency
@@ -75,11 +77,11 @@ function CartItem({ item, variant, calculateDelivery }) {
         <></>
           )}
 
-      <div className="w-28 sm:w-28 ml-1 overflow-hidden bg-gray-100 mr-2 shrink-0 relative">
+      <div className="w-16 md:w-28 ml-1 overflow-hidden bg-gray-100 mr-2 shrink-0 relative">
         <Image
           src={`http://127.0.0.1:8000${item.image}`}
-          width={180}
-          height={200}
+          width={size.width < 768 ? 80 : 180}
+          height={size.width < 768 ? 90 : 200}
           placeholder='blur'
           blurDataURL='/loading.gif'
           className='hover:cursor-pointer'
