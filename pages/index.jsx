@@ -10,6 +10,7 @@ import PaymentIcon from '@mui/icons-material/Payment'
 import { useTranslation } from 'react-i18next'
 import AppHeader from '../components/layouts/AppHeader.jsx'
 import MainCarousel from '../components/home/MainCarousel.jsx'
+import { getCookie } from 'cookies-next'
 
 function Home({
   featuredProducts,
@@ -42,51 +43,46 @@ function Home({
         <div className='mb-1 md:mb-0'>
           <MainCarousel carousel={carousel} />
         </div>
-        <div className='FeaturedProducts mx-1 md:mx-4 mt-4 mb-4 md:mb-10 flex flex-col'>
-          <div className='flex mb-0 flex-col items-center'>
-            <div className='flex flex-row mt-1'>
-              {categoriesFilter.map((item, _idx) => (
-                item !== 'Todos' &&
-                <div
-                  key={_idx}
-                  onClick={() => handleChangeCategory(item)}
-                  className={
-                    `md:pt-1 px-1 md:px-2 md:ml-4 md:h-8 mr-1 font-semibold text-xs md:text-base hover:cursor-pointer ${
-                      item === category
-                      ? 'text-background-100 bg-button rounded-lg'
-                      : 'text-button'
-                    }`
-                  }
-                >
-                  {item}
-                </div>
-              ))}
+        {featureds && (
+          <div className='FeaturedProducts mx-1 md:mx-4 mt-4 mb-4 md:mb-10 flex flex-col'>
+            <div className='flex mb-0 flex-col items-center'>
+              <div className='flex flex-row mt-1'>
+                {categoriesFilter.map((item, _idx) => (
+                  item !== 'Todos' &&
+                  <div
+                    key={_idx}
+                    onClick={() => handleChangeCategory(item)}
+                    className={
+                      `md:pt-1 px-1 md:px-2 md:ml-4 md:h-8 mr-1 font-semibold text-xs md:text-base hover:cursor-pointer ${
+                        item === category
+                        ? 'text-background-100 bg-button rounded-lg'
+                        : 'text-button'
+                      }`
+                    }
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className='mt-4 md:mb-12 xl:mx-32'>
+              <ProductsCarousel products={featureds} />
             </div>
           </div>
-          {featuredProductsError &&
-            <h2>{featuredProductsError}</h2>
-          }
-          <div className='mt-4 md:mb-12 xl:mx-32'>
-            <ProductsCarousel products={featureds} />
-          </div>
-        </div>
+        )}
         <div className='RecentlySoldProducts mx-2 md:mb-10 flex flex-col'>
-          {categoriesError &&
-            <h2>{categoriesError}</h2>
-          }
-          <div className='xl:mx-20'>
-            <CategoriesCarousel categories={categories} />
-          </div>
+          {categories && (
+            <div className='xl:mx-20'>
+              <CategoriesCarousel categories={categories} />
+            </div>
+          )}
         </div>
         <div className='TodayRecomendationProducts mx-2 md:mx-4 flex flex-col'>
-          <div className='flex mb-2 flex-row justify-center'>
-          </div>
-          {todayRecomendationsError &&
-            <h2>{todayRecomendationsError}</h2>
-          }
-          <div className='my-4 xl:mx-32'>
-            <ProductsCarousel products={todayRecomendations} />
-          </div>
+          {todayRecomendations && (
+            <div className='my-4 xl:mx-32'>
+              <ProductsCarousel products={todayRecomendations} />
+            </div>
+          )}
         </div>
         <div className='flex flex-col items-center md:flex-row md:justify-around my-2 md:my-16'>
           <div className='flex flex-col items-center text-center mb-2 md:mb-0 md:mt-8'>
@@ -110,10 +106,11 @@ function Home({
   )
 }
 
-export async function getServerSideProps(context) {
-  const { featuredProducts, featuredProductsError } = await fetchFeaturedProducts()
-  const { categories, categoriesError } = await fetchCategories()
-  const { todayRecomendations, todayRecomendationsError } = await fetchTodayRecomendations()
+export async function getServerSideProps({ req, res }) {
+  const municipality = getCookie('NEXT_MUNICIPALITY', { req, res })
+  const { featuredProducts, featuredProductsError } = await fetchFeaturedProducts(municipality)
+  const { categories, categoriesError } = await fetchCategories(municipality)
+  const { todayRecomendations, todayRecomendationsError } = await fetchTodayRecomendations(municipality)
   const { carousel, carouselError } = await fetchCarousel()
 
   return {
@@ -130,33 +127,33 @@ export async function getServerSideProps(context) {
   }
 }
 
-async function fetchFeaturedProducts() {
+async function fetchFeaturedProducts(municipality) {
   let featuredProductsError = ''
   let featuredProducts = []
   try {
-    featuredProducts = await (await resources.featured_products.all(1)).data
+    featuredProducts = await (await resources.featured_products.all(municipality)).data
   } catch (error) {
     featuredProductsError = error.message
   }
   return { featuredProducts, featuredProductsError }
 }
 
-async function fetchCategories() {
+async function fetchCategories(municipality) {
   let categoriesError = ''
   let categories = []
   try {
-    categories = await (await resources.categories.all(1)).data
+    categories = await (await resources.categories.all(municipality)).data
   } catch (error) {
     categoriesError = error.message
   }
   return { categories, categoriesError }
 }
 
-async function fetchTodayRecomendations() {
+async function fetchTodayRecomendations(municipality) {
   let todayRecomendationsError = ''
   let todayRecomendations = []
   try {
-    todayRecomendations = await (await resources.today_recomendations.all(1)).data
+    todayRecomendations = await (await resources.today_recomendations.all(municipality)).data
   } catch (error) {
     todayRecomendationsError = error.message
   }
@@ -175,14 +172,14 @@ async function fetchCarousel() {
 }
 
 Home.propTypes = {
-  featuredProducts: PropTypes.array,
-  featuredProductsError: PropTypes.string,
-  categories: PropTypes.array,
-  categoriesError: PropTypes.string,
-  todayRecomendations: PropTypes.array,
-  todayRecomendationsError: PropTypes.string,
-  carousel: PropTypes.array,
-  carouselError: PropTypes.string
+  featuredProducts: PropTypes.any,
+  featuredProductsError: PropTypes.any,
+  categories: PropTypes.any,
+  categoriesError: PropTypes.any,
+  todayRecomendations: PropTypes.any,
+  todayRecomendationsError: PropTypes.any,
+  carousel: PropTypes.any,
+  carouselError: PropTypes.any
 }
 
 Home.getLayout = function getLayout(page) {

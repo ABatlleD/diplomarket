@@ -177,6 +177,38 @@
       }
     }
   },
+  "sell_with_us": {
+    "get_touch": "Ponerse en contacto",
+    "start_conversation": "Inicie una conversación con nosotros",
+    "emails": "Correos",
+    "phones": "Teléfonos",
+    "locations": "Dirección",
+    "title": "Sé parte de nuestro grupo, comercializa tus productos y servicios con nosotros... Todos son bienvenidos",
+    "text_email": "Correo",
+    "text_message": "Mensaje",
+    "message": "Somos una plataforma electrónica que le permite un mayor rendimiento a sus productos y servicios, ser más competitivo… ¿Cómo?",
+    "description": {
+      "1": "- Conectamos de manera más rápida a fabricantes, distribuidores, comercializadores, con los clientes, variada, barata y constante.",
+      "2": "- Productos de primera necesidad llegarán a sus hogares, en todo el país.",
+      "3": "- Aplicamos porcientos (%) de servicios más baratos que otros. Sus productos y servicios llegarán más barato para el cliente/comprador.",
+      "4": "- Nos encargamos de que sus productos se les hagan entregas a domicilios, más rápido, en menor tiempo, con las mismas garantías y cuidado de cuando está en su negocio.",
+      "5": "- No obtenemos ingresos por servicios de entrega. Trabajamos con nuestros propios transportes o con terceros y solo transferimos los gastos. ",
+      "6": "- Nos ocupamos que reciba sus pagos en USD donde quiera que usted o su empresa desee, sin temor a que sea bloqueado por instituciones bancarias u OFAC.",
+      "7": "- Nos encargamos de que su empresa comercialice al amparo de las leyes de comercio y bancarias, de los Estados Unidos y la isla, asignada a las FGNE y estatal, mediante licencias emitidas para nuestras empresas, sus proveedores y clientes."
+    },
+    "message_forms": "Por favor, complete el siguiente formulario. Nuestros especialistas le contactarán. Su información es confidencial con nosotros.",
+    "placeholder": "A pesar de que este campo no es obligatorio, el equipo de Diplomarket™ recomienda enviar la mayor (y más clara) información posible.",
+    "buttonText": "ENVIAR",
+    "forms": {
+      "name": "Nombre de la entidad o persona",
+      "name_agent": "Nombre de representante de la entidad o persona",
+      "address": "Dirección",
+      "email": "Correo",
+      "phone": "Teléfono",
+      "review": "Breve reseña de la empresa o entidad, productos y servicios interesados a comercializar"
+    },
+    "notification": "Su mensaje ha sido enviado, muchas gracias!"
+  },
   "wishlist": {
     "title": "Mis Favoritos"
   },

@@ -177,6 +177,38 @@
       }
     }
   },
+  "sell_with_us": {
+    "get_touch": "Get in touch",
+    "start_conversation": "Start a conversation with us",
+    "emails": "Emails",
+    "phones": "Phones",
+    "locations": "Address",
+    "title": "Be part of our group, sell your products and services with us... Everyone is welcome.",
+    "text_email": "Email",
+    "text_message": "Message",
+    "message": "We are an electronic platform that allows your products and services to perform better, to be more competitive… How?",
+    "description": {
+      "1": "- We connect manufacturers, distributors, marketers, with customers, in a varied, cheap, constant and faster way.",
+      "2": "- Basic necessities will reach to their homes throughout the country.",
+      "3": "- We apply cheaper percentages (%) than our competitors. Your products and services will arrive cheaper for the customer/buyer.",
+      "4": "- We take care that your products are delivered to your customers' homes in less time and with the same standards as the original seller.",
+      "5": "- We do not earn revenue from delivery services. We work with our own transports or with third parties and we only transfer the expenses.",
+      "6": "- We take care that we receive your payments in USD wherever you or your company wants, without fear of being blocked by banks or OFAC institutions.",
+      "7": "- We take care that your company commercializes under the commercial and banking laws of the United States and the island, highlighted by the FGNE and the state, through licenses issued for our companies, their suppliers and clients."
+    },
+    "message_forms": "Please complete the form below. Our specialists will contact you. Your information is confidential with us.",
+    "placeholder": "Although this field is not required, the Diplomamarket team suggests sending as much (and clearest) information as possible.",
+    "buttonText": "SEND",
+    "forms": {
+      "name": "Name of the entity or person",
+      "name_agent": "Name of the representative of the entity or person",
+      "address": "Address",
+      "email": "Email",
+      "phone": "Phone",
+      "review": "Brief overview of the company or entity, products and services interested in marketing"
+    },
+    "notification": "Your message has been sent, thank!"
+  },
   "wishlist": {
     "title": "Wish List"
   },

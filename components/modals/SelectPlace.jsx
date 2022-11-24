@@ -3,8 +3,13 @@ import { Button, Modal, Fade, FormControl, InputLabel, MenuItem, Select } from '
 import PropTypes from 'prop-types'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import resources from '../../restapi/resources'
-import { setCookie } from 'cookies-next'
+import { getCookie, setCookie } from 'cookies-next'
 import { useTranslation } from 'react-i18next'
+import Link from 'next/link'
+import { useCart } from '../../store/cart/cart.context'
+import { useFav } from '../../store/fav/fav.context'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} }) {
   const { t } = useTranslation()
@@ -13,6 +18,13 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
   const [pivots, setPivots] = useState({})
   const [state, setState] = useState('')
   const [district, setDistrict] = useState('')
+
+  const {
+    resetCart
+  } = useCart()
+  const {
+    resetFav
+  } = useFav()
 
   useEffect(() => {
     resources.place.city.all()
@@ -37,19 +49,50 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
     setDistrict(event.target.value)
   }
 
+  const handleClose = () => {
+    if (getCookie('NEXT_MUNICIPALITY')) {
+      setOpenSelectPlace(false)
+    } else {
+      toast.error('Debe seleccionar una ubicación')
+    }
+  }
+
   const handleSubmit = () => {
-    setCookie('NEXT_MUNICIPALITY', district.id)
-    setCookie('NEXT_DISTRICT', district.nombre)
-    setOpenSelectPlace(false)
+    const municipality = getCookie('NEXT_MUNICIPALITY')
+    if (municipality) {
+      // eslint-disable-next-line eqeqeq
+      if (municipality != district.id) {
+        setCookie('NEXT_MUNICIPALITY', district.id)
+        setCookie('NEXT_MUNICIPALITY', district.id)
+        setCookie('NEXT_DISTRICT', district.nombre)
+        resetCart()
+        resetFav()
+        window.location.reload(false)
+      } else {
+        setOpenSelectPlace(false)
+      }
+    } else {
+      if (district && district.id) {
+        setCookie('NEXT_MUNICIPALITY', district.id)
+        setCookie('NEXT_MUNICIPALITY', district.id)
+        setCookie('NEXT_DISTRICT', district.nombre)
+        resetCart()
+        resetFav()
+        window.location.reload(false)
+      } else {
+        toast.error('Debe seleccionar una ubicación')
+      }
+    }
   }
 
   return (
     <>
+      <ToastContainer />
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={openSelectPlace}
-        onClose={() => setOpenSelectPlace(false)}
+        onClose={handleClose}
         closeAfterTransition
         BackdropProps={{
           timeout: 500
@@ -58,7 +101,7 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
         <Fade in={openSelectPlace}>
           <div className='flex flex-col shadow-2xl rounded-xl bg-background-100 w-11/12 md:w-2/5 md:mt-4 mx-auto p-2'>
             <div className='flex flex-row justify-end'>
-              <HighlightOffIcon className='hover:cursor-pointer' onClick={() => setOpenSelectPlace(false)} />
+              <HighlightOffIcon className='hover:cursor-pointer' onClick={handleClose} />
             </div>
             <div className='flex flex-row justify-center mt-4'>
               <p className='font-bold text-lg text-footer-background-100'>{t('place.title')}</p>
@@ -106,16 +149,18 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
               </div>
             </div>
             <div className='mx-12 my-4'>
-              <Button
-                variant="contained"
-                sx={{
-                  width: '100%',
-                  backgroundColor: '#ff4a4a !important'
-                }}
-                onClick={handleSubmit}
-              >
-                {t('place.accept')}
-              </Button>
+              <Link href={'/'}>
+                <Button
+                  variant="contained"
+                  sx={{
+                    width: '100%',
+                    backgroundColor: '#ff4a4a !important'
+                  }}
+                  onClick={handleSubmit}
+                >
+                  {t('place.accept')}
+                </Button>
+              </Link>
             </div>
           </div>
         </Fade>

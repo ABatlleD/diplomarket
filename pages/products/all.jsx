@@ -9,6 +9,7 @@ import FilterBar from '../../components/layouts/sidebar/FilterBar'
 import TuneIcon from '@mui/icons-material/Tune'
 import { useTranslation } from 'react-i18next'
 import AppHeader from '../../components/layouts/AppHeader'
+import { getCookie } from 'cookies-next'
 
 function AllProducts({ products, productsError }) {
   const { t, i18n } = useTranslation()
@@ -21,6 +22,7 @@ function AllProducts({ products, productsError }) {
   const [suppliers, setSuppliers] = useState()
   const [brands, setBrands] = useState()
   const [prices, setPrices] = useState([0, 1000])
+  const municipality = getCookie('NEXT_MUNICIPALITY')
 
   const [category, setCategory] = useState(undefined)
   const [selectedCategory, setSelectedCategory] = useState(undefined)
@@ -88,7 +90,7 @@ function AllProducts({ products, productsError }) {
     setLoading(true)
     const filter = {
       offset,
-      municipality_id: 1,
+      municipality_id: municipality,
       limit: 15,
       category,
       subcategory,
@@ -111,7 +113,7 @@ function AllProducts({ products, productsError }) {
     setLoading(true)
     const filter = {
       offset,
-      municipality_id: 1,
+      municipality_id: municipality,
       limit: 15,
       category,
       subcategory,
@@ -283,8 +285,9 @@ function AllProducts({ products, productsError }) {
   )
 }
 
-export async function getServerSideProps(context) {
-  const { products, productsError } = await fetchProducts()
+export async function getServerSideProps({ req, res }) {
+  const municipality = getCookie('NEXT_MUNICIPALITY', { req, res })
+  const { products, productsError } = await fetchProducts(municipality)
 
   return {
     props: {
@@ -294,7 +297,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-async function fetchProducts() {
+async function fetchProducts(municipality) {
   let productsError = ''
   let products = []
   const filter = {

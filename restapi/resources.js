@@ -11,6 +11,7 @@ const resources = {
   carousel: {
     all: async () => await getRequest(`${ENDPOINTS.CAROUSEL}`)
   },
+  comercial: async (data) => await postRequest(ENDPOINTS.COMERCIAL, data),
   checkout: async (data) => await postRequest(ENDPOINTS.CHECKOUT, data),
   bofa: async (data) => await postRequest(ENDPOINTS.BOFA, data),
   delivery: {

@@ -22,7 +22,6 @@ function FooterBox({ cartSideBar, setCartSideBar }) {
       })
     resources.configuration.get()
       .then(response => setConfigurations(response.data.results[0].pasarelas[0]))
-    console.log('🚀 ~ file: FooterBox.jsx ~ line 15 ~ FooterBox ~ configurations', configurations)
   }, [])
 
   const SocialMedia = {

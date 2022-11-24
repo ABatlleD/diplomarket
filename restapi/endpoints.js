@@ -4,6 +4,7 @@ export const ENDPOINTS = {
   CATEGORY: '/subcategoria/arbol',
   SUBCATEGORY: '/subcategoria',
   SEARCH: '/buscar',
+  COMERCIAL: '/comercial/',
   PRODUCTS_BEST_SELLERS: '/masvendidos/ultimahora',
   PRODUCTS_RECOMMENDED: '/recomendados',
   PRODUCTS_RECOMMENDED_DAY: '/recomendadosdia',
