@@ -7,9 +7,9 @@
     "privacy": "Privacy Policy",
     "contact": "Contact Us",
     "help": "Help",
-    "sell-with-us": "Sell With Us",
+    "swus": "Sell With Us",
     "compare": "Compare",
-    "forgot-password": "Forgot Password",
+    "forgot_password": "Forgot Password",
     "signin": "Login",
     "signup": "Register",
     "details": "Details",
@@ -257,5 +257,13 @@
     },
     "app": "INSTALL APP",
     "bottom": "© 2022 Diplomarket is a Web/Logo with all rights reserved."
+  },
+  "signin": {
+    "no_active_error": "Login error: user not active",
+    "no_exist_error": "Login error: user not found",
+    "error_recaptcha_fail": "Google ReCaptcha Failure",
+    "error_recaptcha_form": "Error submitting the form",
+    "login_success": "Login successful",
+    "login_error": "Wrong credentials"
   }
 }

@@ -7,6 +7,7 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/bootstrap.css'
 import modalBg from '../public/assets/theme/logo-preloader.png'
 import MainLayout from '../layouts/MainLayout'
+import AppHeader from '../components/layouts/AppHeader'
 
 function SellWithUs() {
   const [nombre_entidad, setNombreEntidad] = useState('')
@@ -21,9 +22,7 @@ function SellWithUs() {
   const { push } = useRouter()
   const [loading, setLoading] = useState(false)
 
-  const { t } = useTranslation('', {
-    keyPrefix: 'sell_with_us'
-  })
+  const { t } = useTranslation()
 
   const [maximum, setMaximum] = useState('')
   const [calculate, setCalculate] = useState(250)
@@ -82,6 +81,7 @@ function SellWithUs() {
 
   return (
     <>
+      <AppHeader title={t('pages.swus')}/>
       <ToastContainer />
       <div
         className="max-w-screen-xl my-8 relative px-6 md:px-12 lg:px-16 xl:px-20 lg:py-16 md:py-8 py-6 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg">
@@ -97,38 +97,38 @@ function SellWithUs() {
             }}
           ></div>
         <div className="relative" style={{ zIndex: '2' }}>
-          <h2 className="text-3xl font-bold text-justify leading-tight mb-2">{t('title')}</h2>
+          <h2 className="text-3xl font-bold text-justify leading-tight mb-2">{t('sell_with_us.title')}</h2>
           <div className="flex flex-col justify-between">
             <div>
               <p className="text-lg text-justify leading-tight font-bold mb-2">
-                {t('message')}
+                {t('sell_with_us.message')}
               </p>
               <p className="text-lg text-justify leading-tight align-center" style={{ whiteSpace: 'pre-wrap' }}>
-                {t('description.1')}
+                {t('sell_with_us.description.1')}
               </p>
               <p className="text-lg text-justify leading-tight align-center" style={{ whiteSpace: 'pre-wrap' }}>
-                {t('description.2')}
+                {t('sell_with_us.description.2')}
               </p>
               <p className="text-lg text-justify leading-tight align-center" style={{ whiteSpace: 'pre-wrap' }}>
-                {t('description.3')}
+                {t('sell_with_us.description.3')}
               </p>
               <p className="text-lg text-justify leading-tight align-center" style={{ whiteSpace: 'pre-wrap' }}>
-                {t('description.4')}
+                {t('sell_with_us.description.4')}
               </p>
               <p className="text-lg text-justify leading-tight align-center" style={{ whiteSpace: 'pre-wrap' }}>
-                {t('description.5')}
+                {t('sell_with_us.description.5')}
               </p>
               <p className="text-lg text-justify leading-tight align-center" style={{ whiteSpace: 'pre-wrap' }}>
-                {t('description.6')}
+                {t('sell_with_us.description.6')}
               </p>
               <p className="text-lg text-justify leading-tight align-center mb-2" style={{ whiteSpace: 'pre-wrap' }}>
-                {t('description.7')}
+                {t('sell_with_us.description.7')}
               </p>
             </div>
           </div>
           <div>
           <p className="text-lg text-justify leading-tight font-bold mb-4">
-            {t('message_forms')}
+            {t('sell_with_us.message_forms')}
           </p>
         </div>
         <form
@@ -136,7 +136,7 @@ function SellWithUs() {
           onSubmit={handleSubmit}
         >
           <label className="col-span-full xl:col-span-1 lg:col-span-1">
-            <span className="font-bold font-soft text-slate-600">{t('forms.name')}:</span>
+            <span className="font-bold font-soft text-slate-600">{t('sell_with_us.forms.name')}:</span>
             <input className="w-full bg-gray-300 text-gray-900 border mt-2 p-3 rounded-lg ring-offset-1 ring-offset-dm-blue ring-dm-blue focus:outline-none select-none focus:ring-1"
               type="text"
               onChange={(e) => {
@@ -146,7 +146,7 @@ function SellWithUs() {
             />
           </label>
           <label className="col-span-full xl:col-span-1 lg:col-span-1">
-            <span className="font-bold font-soft text-slate-600">{t('forms.name_agent')}:</span>
+            <span className="font-bold font-soft text-slate-600">{t('sell_with_us.forms.name_agent')}:</span>
             <input className="w-full bg-gray-300 border text-gray-900 mt-2 p-3 rounded-lg ring-offset-1 ring-offset-dm-blue ring-dm-blue focus:outline-none select-none focus:ring-1"
               type="text"
               onChange={(e) => {
@@ -156,7 +156,7 @@ function SellWithUs() {
             />
           </label>
           <label className="col-span-full">
-            <span className="font-bold font-soft text-slate-600">{t('forms.address')}:</span>
+            <span className="font-bold font-soft text-slate-600">{t('sell_with_us.forms.address')}:</span>
             <div className="relative">
               <textarea
                 required
@@ -168,7 +168,7 @@ function SellWithUs() {
             </div>
           </label>
           <label className="col-span-full xl:col-span-1 lg:col-span-1 md:col-span-1">
-            <span className="font-bold font-soft text-slate-600">{t('forms.email')}:</span>
+            <span className="font-bold font-soft text-slate-600">{t('sell_with_us.forms.email')}:</span>
             <input className="w-full bg-gray-300 text-gray-900 border mt-2 p-3 rounded-lg ring-offset-1 ring-offset-dm-blue ring-dm-blue focus:outline-none select-none focus:ring-1"
               type="email"
               onChange={(e) => {
@@ -178,7 +178,7 @@ function SellWithUs() {
             />
           </label>
           <label className="col-span-full xl:col-span-1 lg:col-span-1 md:col-span-1">
-            <span className="font-bold font-soft text-slate-600">{t('forms.phone')}:</span>
+            <span className="font-bold font-soft text-slate-600">{t('sell_with_us.forms.phone')}:</span>
             <PhoneInput
               inputProps={{
                 name: 'phone',
@@ -197,13 +197,13 @@ function SellWithUs() {
               type="text" /> */}
           </label>
           <label className="col-span-full">
-            <span className="font-bold font-soft text-slate-600">{t('forms.review')}:</span>
+            <span className="font-bold font-soft text-slate-600">{t('sell_with_us.forms.review')}:</span>
             <div className="relative">
               <textarea
                 ref={maximumChar}
                 onChange={changeMaximum}
                 maxLength={250}
-                placeholder={t('placeholder')}
+                placeholder={t('sell_with_us.placeholder')}
                 className="w-full h-32 bg-gray-300 border text-gray-900 mt-2 p-3 rounded-lg ring-offset-1 ring-offset-dm-blue ring-dm-blue focus:outline-none select-none focus:ring-1"
               />
               <span className="absolute px-2 py-1 bg-footer-background-100 text-xs text-white bg-dm-blue rounded right-1 bottom-2">{calculate}</span>
@@ -213,7 +213,7 @@ function SellWithUs() {
             <button
               disabled={loading}
               className="uppercase w-40 text-sm font-bold tracking-wide bg-dm-blue text-gray-100 p-3 rounded-lg bg-footer-background-100 text-background-100 ring-offset-1 ring-offset-gray-500 ring-gray-500 focus:outline-none select-none focus:ring-1">
-              {t('buttonText')}
+              {t('sell_with_us.buttonText')}
             </button>
           </div>
         </form>

@@ -7,9 +7,9 @@
     "privacy": "Política de Privacidad",
     "contact": "Contáctenos",
     "help": "Ayuda",
-    "sell-with-us": "Vende Con Nosotros",
+    "swus": "Vende Con Nosotros",
     "compare": "Comparar",
-    "forgot-password": "Recuperar Contraseña",
+    "forgot_password": "Recuperar Contraseña",
     "signin": "Iniciar Sesión",
     "signup": "Registrarse",
     "details": "Detalles",
@@ -257,5 +257,13 @@
     },
     "app": "NUESTRA APP",
     "bottom": "© 2022 Diplomarket es una Web/Logo con todos los derechos reservados."
+  },
+  "signin": {
+    "no_active_error": "Error al autenticar: Usuario no activo",
+    "no_exist_error": "Error al autenticar: Usuario no encontrado",
+    "error_recaptcha_fail": "Error de Google ReCaptcha",
+    "error_recaptcha_form": "Error al enviar el formulario",
+    "login_success": "Autenticación exitosa",
+    "login_error": "Credenciales incorrectas"
   }
 }

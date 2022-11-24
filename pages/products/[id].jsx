@@ -35,6 +35,10 @@ function Product({ product, apiError }) {
   const [relatedProducts, setRelatedProducts] = useState([])
   const [isLoading, setLoading] = useState(false)
   const [value, setValue] = React.useState(0)
+  const [state, setState] = useState({
+    backgroundPosition: '0% 0%'
+  })
+  const [hover, setHover] = useState(false)
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
@@ -43,6 +47,14 @@ function Product({ product, apiError }) {
   const { t, i18n } = useTranslation()
 
   const [images, setImages] = useState([])
+
+  const handleMouseMove = e => {
+    setHover(true)
+    const { left, top, width, height } = e.target.getBoundingClientRect()
+    const x = (e.pageX - left) / width * 100
+    const y = (e.pageY - top) / height * 100
+    setState({ backgroundPosition: `${x}% ${y}%` })
+  }
 
   useEffect(() => {
     if (product) {
@@ -66,23 +78,39 @@ function Product({ product, apiError }) {
       <div className='flex flex-col md:flex-row w-full 2xl:w-[60%] xl:w-[75%] md:justify-between my-8'>
         <div className='md:w-[45%] flex flex-row justify-center'>
           <Carousel
-            showArrows={false}
             showStatus={false}
-            preventMovementUntilSwipeScrollTolerance
-            swipeScrollTolerance={100}
-            className={'border w-full rounded-lg h-[20rem] md:h-[19rem]'}
-          >
-            {images.map((item) => (
-              <div className='active-resource-card' key={item}>
-                <img
-                  src={`http://localhost:8000${item}`}
-                  alt="..."
-                  style={{
-                    maxHeight: '300px',
+            showArrows={false}
+            renderThumbs={() => (
+              images.map((item) => (
+                <div className='active-resource-card flex flex-row justify-center' key={item}>
+                  <img src={`http://localhost:8000${item}`} style={{
+                    maxHeight: '500px',
                     borderRadius: '6px',
                     objectFit: 'contain'
-                  }}
-                />
+                  }} />
+                </div>
+              ))
+            )}
+            preventMovementUntilSwipeScrollTolerance
+            swipeScrollTolerance={100}
+            className={'border w-full rounded-lg h-[25rem] md:h-[25rem]'}
+          >
+            {images.map((item) => (
+              <div className='active-resource-card flex flex-row justify-center' key={item}>
+                <figure onMouseMove={handleMouseMove} onMouseLeave={() => setHover(false)} style={{
+                  backgroundImage: hover ? `url(http://localhost:8000${item})` : '',
+                  maxHeight: '500px',
+                  borderRadius: '6px',
+                  objectFit: 'contain',
+                  backgroundColor: 'white',
+                  ...state
+                }}>
+                  <img src={`http://localhost:8000${item}`} style={{
+                    maxHeight: '500px',
+                    borderRadius: '6px',
+                    objectFit: 'contain'
+                  }} />
+                </figure>
               </div>
             ))}
           </Carousel>

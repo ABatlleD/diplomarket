@@ -72,3 +72,25 @@ div.Mui-focused .MuiOutlinedInput-notchedOutline {
   color: #15224b !important;
 }
 
+figure {
+  width: 300px;
+  background-repeat: no-repeat
+}
+
+figure:hover {
+  cursor: crosshair;
+}
+
+.carousel .control-dots .dot {
+  background: #15224b !important;
+}
+
+figure:hover img {
+  opacity: 0;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+

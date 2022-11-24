@@ -43,17 +43,17 @@ function SignIn() {
     console.log('🚀 ~ file: signin.jsx ~ line 43 ~ handleSubmit ~ values', values)
     console.log('🚀 ~ file: signin.jsx ~ line 43 ~ handleSubmit ~ res', res)
     if (res.error === '403') {
-      return toast.error(t('no_active_error'))
+      return toast.error(t('signin.no_active_error'))
     } else if (res.error === '404') {
-      return toast.error(t('no_exist_error'))
+      return toast.error(t('signin.no_exist_error'))
     } else if (res.error === 'error_recaptcha_fail') {
-      return toast.error(t('error_recaptcha_fail'))
+      return toast.error(t('signin.error_recaptcha_fail'))
     } else if (res.error === 'error_recaptcha_form') {
-      return toast.error(t('error_recaptcha_form'))
+      return toast.error(t('signin.error_recaptcha_form'))
     } else if (res.error) {
-      return toast.error(t('login_error'))
+      return toast.error(t('signin.login_error'))
     }
-    toast.success(t('login_success'))
+    toast.success(t('signin.login_success'))
     setTimeout(() => {
       router.push('/')
     }, 1000)
