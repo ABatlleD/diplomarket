@@ -7,9 +7,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import LangSelector from './LangSelector'
 import LockIcon from '@mui/icons-material/Lock'
 import useWindowSize from '../../../hooks/WindowSize'
-import AppButton from '../../AppButton'
-import { useTranslation } from 'react-i18next'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+// import AppButton from '../../AppButton'
+// import { useTranslation } from 'react-i18next'
+// import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import SearchBar from '../../SearchBar'
 import AccountMenu from './AccountMenu'
 import Link from 'next/link'
@@ -37,7 +37,7 @@ function TopBar({
   openSelectPlace,
   setOpenSelectPlace
 }) {
-  const [t] = useTranslation()
+  // const [t] = useTranslation()
   const size = useWindowSize()
   const { totalUniqueItemsFav } = useFav()
   const { totalUniqueItems } = useCart()
@@ -67,7 +67,7 @@ function TopBar({
           </Link>
         </div>
         <div className='hidden md:hidden xl:flex xl:w-9/12 flex-row mt-2'>
-          <div className='mr-2'>
+          {/* <div className='mr-2'>
             <AppButton
               sx={{
                 fontSize: {
@@ -85,8 +85,8 @@ function TopBar({
             >
               {t('layout.navbar.categories')} <span className='mt-[-1px]'><ArrowForwardIosIcon fontSize='small' /></span>
             </AppButton>
-          </div>
-          <div className='md:w-[88%]'>
+          </div> */}
+          <div className='md:ml-3 md:w-[98%]'>
             <SearchBar {...{ openSelectPlace, setOpenSelectPlace }} />
           </div>
         </div>

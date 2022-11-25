@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import SearchBar from '../../SearchBar'
 import AppButton from '../../AppButton'
 import { useTranslation } from 'react-i18next'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+// import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined'
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined'
 import LockIcon from '@mui/icons-material/Lock'
@@ -48,7 +48,7 @@ function BottomOptions({
   return (
     <>
       <div className='bg-background-300 md:bg-background-300 flex flex-col md:flex-row md:justify-between p-2 md:p-4'>
-        <div className='hidden md:flex xl:hidden'>
+        {/* <div className='hidden md:flex xl:hidden'>
           <AppButton
             sx={{
               fontSize: {
@@ -64,12 +64,12 @@ function BottomOptions({
           >
             {t('layout.navbar.categories')} <span className='mt-[-1px]'><ArrowForwardIosIcon fontSize='small' /></span>
           </AppButton>
-        </div>
-        <div className='md:w-[86%] xl:hidden'>
+        </div> */}
+        <div className='md:w-[98%] md:ml-4 xl:hidden'>
           <SearchBar {...{ openSelectPlace, setOpenSelectPlace }} />
         </div>
-        <div className='flex md:hidden flex-row justify-around mt-1'>
-          <AppButton
+        <div className='flex md:hidden flex-row justify-between mt-1'>
+          {/* <AppButton
             sx={{
               fontSize: 10
             }}
@@ -77,7 +77,7 @@ function BottomOptions({
             onClick={() => setCategoriesSideBar((categoriesSideBar) => !categoriesSideBar)}
           >
             {t('layout.navbar.categories')} <span className='mt-[-1px]'><ArrowForwardIosIcon sx={{ fontSize: 10 }} /></span>
-          </AppButton>
+          </AppButton> */}
           <AppButton
             sx={{
               fontSize: 10
@@ -85,14 +85,16 @@ function BottomOptions({
             className='bg-button'
             onClick={() => setOpenSelectPlace(true)}
           >
-            <span className='mt-[-3px] mr-1'><AddLocationAltOutlinedIcon sx={{ fontSize: 10 }} /></span> {resizeTitle(district, 10)} <span className='mt-[-1px]'><KeyboardArrowDownOutlinedIcon sx={{ fontSize: 10 }} /></span>
+            <span className='mt-[-3px]'><AddLocationAltOutlinedIcon sx={{ fontSize: 10 }} /></span> {resizeTitle(district, 10)} <span className='mt-[-1px]'><KeyboardArrowDownOutlinedIcon sx={{ fontSize: 10 }} /></span>
           </AppButton>
-          <div className='mt-1 mr-[-7px]'>
-            <LangSelector />
-          </div>
-          <Divider orientation="vertical" flexItem />
-          <div className='flex flex-row mt-3 ml-1 text-text-100' onClick={() => {}}>
-            USD <span className='mt-[-3px]'><LockIcon fontSize='small' /></span>
+          <div className='flex flex-row'>
+            <div className='mt-2 mr-[-7px]'>
+              <LangSelector />
+            </div>
+            <Divider orientation="vertical" flexItem />
+            <div className='flex flex-row mt-3 ml-1 text-text-100' onClick={() => {}}>
+              USD <span className='mt-[-3px]'><LockIcon fontSize='small' /></span>
+            </div>
           </div>
         </div>
         <div className='hidden xl:flex flex-row justify-between w-full mx-4'>

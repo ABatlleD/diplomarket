@@ -13,6 +13,8 @@ import ProductsCarousel from '../../components/products/ProductsSwiper.jsx'
 import AddToCart from '../../components/cart/AddCart'
 import AddToFav from '../../components/fav/AddFav'
 import AppTabPanel from '../../components/AppTabPanel'
+import { useCart } from '../../store/cart/cart.context'
+import { generateCartItem } from '../../store/cart/generate-cart-item'
 
 const theme = createTheme({
   palette: {
@@ -40,6 +42,11 @@ function Product({ product, apiError }) {
   })
   const [hover, setHover] = useState(false)
 
+  const {
+    addItemToCart,
+    isInCart
+  } = useCart()
+
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
@@ -65,6 +72,22 @@ function Product({ product, apiError }) {
       setLoading(false)
     }
   }, [product])
+
+  const handleBuyNow = () => {
+    const item = generateCartItem({
+      ...product,
+      precio: {
+        cantidad: product.precio,
+        moneda: product.precio_currency
+      }
+    }, 0)
+    if (!isInCart(item.id)) {
+      addItemToCart(item, 1)
+      router.push('/checkout/')
+    } else {
+      router.push('/checkout/')
+    }
+  }
 
   if (router.isFallback) {
     return (
@@ -165,9 +188,16 @@ function Product({ product, apiError }) {
                   </div>
                 </div>
               </div>
-              <div className='bg-footer-background-200 w-6/12 shadow-lg text-background-100 py-1 text-center rounded-md hover:cursor-pointer hover:opacity-90'>
-                {t('home.shopNow')}
-              </div>
+              {Number(product.cant_inventario) > 0
+                ? (
+                    <div
+                      className='bg-footer-background-200 w-6/12 shadow-lg text-background-100 py-1 text-center rounded-md hover:cursor-pointer hover:opacity-90'
+                      onClick={handleBuyNow}
+                    >
+                      {t('home.shopNow')}
+                    </div>
+                  )
+                : <></>}
             </div>
             <div className='flex flex-row text-button mt-1 hover:cursor-pointer hover:opacity-90'>
               <AddToFav data={product} text={'Añadir a favoritos'} success={'En favoritos'}/>

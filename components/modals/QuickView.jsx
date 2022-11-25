@@ -8,6 +8,9 @@ import { Carousel } from 'react-responsive-carousel'
 import AddToCart from '../cart/AddCart'
 import AddToFav from '../fav/AddFav'
 import { useTranslation } from 'react-i18next'
+import { useCart } from '../../store/cart/cart.context'
+import { generateCartItem } from '../../store/cart/generate-cart-item'
+import { useRouter } from 'next/router'
 
 const theme = createTheme({
   palette: {
@@ -21,6 +24,12 @@ const theme = createTheme({
 function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product }) {
   const [images, setImages] = useState([])
   const { t, i18n } = useTranslation()
+  const router = useRouter()
+
+  const {
+    addItemToCart,
+    isInCart
+  } = useCart()
 
   const resizeTitle = (string, maxLength) => {
     return string?.length > maxLength ? `${string.slice(0, maxLength)}...` : string
@@ -31,6 +40,16 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
       setImages([product.img_principal, ...product.galeria])
     }
   }, [product])
+
+  const handleBuyNow = () => {
+    const item = generateCartItem(product, 0)
+    if (!isInCart(item.id)) {
+      addItemToCart(item, 1)
+      router.push('/checkout')
+    } else {
+      router.push('/checkout')
+    }
+  }
 
   return (
     <>
@@ -113,9 +132,16 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
                         </div>
                       </div>
                     </div>
-                    <div className='bg-footer-background-200 w-6/12 shadow-lg text-background-100 py-1 text-center rounded-md hover:cursor-pointer hover:opacity-90'>
-                      {t('home.shopNow')}
-                    </div>
+                    {Number(product.cant_inventario) > 0
+                      ? (
+                        <div
+                          className='bg-footer-background-200 w-6/12 shadow-lg text-background-100 py-1 text-center rounded-md hover:cursor-pointer hover:opacity-90'
+                          onClick={handleBuyNow}
+                        >
+                          {t('home.shopNow')}
+                        </div>
+                        )
+                      : <></>}
                   </div>
                   <div className='flex flex-row text-button mt-1 hover:cursor-pointer hover:opacity-90'>
                     <AddToFav data={product} text={t('fav.add')} success={t('fav.in')}/>

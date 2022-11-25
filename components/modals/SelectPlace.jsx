@@ -27,18 +27,32 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
   } = useFav()
 
   useEffect(() => {
+    const municipality = getCookie('NEXT_MUNICIPALITY')
+    const province = getCookie('NEXT_MUNICIPALITY')
     resources.place.city.all()
       .then(response => setCities(response.data))
     resources.place.district.all()
       .then(response => setPivots(response.data))
+    if (municipality && province) {
+      resources.place.city.one(province)
+        .then((response) => {
+          setState(response.data)
+        })
+      resources.place.district.one(municipality)
+        .then((response) => {
+          setDistrict(response.data)
+        })
+    }
   }, [])
 
   const handleStateChange = (event) => {
-    setState(event.target.value)
+    resources.place.city.one(event.target.value)
+      .then((response) => {
+        setState(response.data)
+      })
     const _arr = []
     for (const item of pivots.results) {
-      console.log(event.target.value.id === item.provincia)
-      if (event.target.value.id === item.provincia) {
+      if (event.target.value === item.provincia) {
         _arr.push(item)
       }
     }
@@ -46,7 +60,10 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
   }
 
   const handleDistrictChange = (event) => {
-    setDistrict(event.target.value)
+    resources.place.district.one(event.target.value)
+      .then((response) => {
+        setDistrict(response.data)
+      })
   }
 
   const handleClose = () => {
@@ -63,7 +80,7 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
       // eslint-disable-next-line eqeqeq
       if (municipality != district.id) {
         setCookie('NEXT_MUNICIPALITY', district.id)
-        setCookie('NEXT_MUNICIPALITY', district.id)
+        setCookie('NEXT_STATE', state.id)
         setCookie('NEXT_DISTRICT', district.nombre)
         resetCart()
         resetFav()
@@ -74,7 +91,7 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
     } else {
       if (district && district.id) {
         setCookie('NEXT_MUNICIPALITY', district.id)
-        setCookie('NEXT_MUNICIPALITY', district.id)
+        setCookie('NEXT_STATE', state.id)
         setCookie('NEXT_DISTRICT', district.nombre)
         resetCart()
         resetFav()
@@ -121,12 +138,12 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={state}
+                    value={state.id}
                     label="State"
                     onChange={handleStateChange}
                   >
                     {cities?.results?.map((item) => (
-                      <MenuItem key={item.id} value={item}>{item.nombre}</MenuItem>
+                      <MenuItem key={item.id} value={item.id}>{item.nombre}</MenuItem>
                     ))}
                   </Select>
                 </FormControl>
@@ -137,12 +154,12 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={district}
+                    value={district.id}
                     label="District"
                     onChange={handleDistrictChange}
                   >
                     {districts?.map((item) => (
-                      <MenuItem key={item.id} value={item}>{item.nombre}</MenuItem>
+                      <MenuItem key={item.id} value={item.id}>{item.nombre}</MenuItem>
                     ))}
                   </Select>
                 </FormControl>

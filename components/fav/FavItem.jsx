@@ -105,7 +105,13 @@ function FavItem({ id }) {
             >
               {Number(product.cant_inventario) > 0
                 ? (
-                    <AddToCart data={product} />
+                    <AddToCart data={{
+                      ...product,
+                      precio: {
+                        cantidad: product.precio,
+                        moneda: product.precio_currency
+                      }
+                    }} />
                   )
                 : <></>}
             </div>

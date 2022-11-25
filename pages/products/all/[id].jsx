@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react'
-import MainLayout from '../../layouts/MainLayout'
-import resources from '../../restapi/resources'
+import MainLayout from '../../../layouts/MainLayout'
+import resources from '../../../restapi/resources'
 import PropTypes from 'prop-types'
-import ListProducts from '../../components/products/ListProducts'
-import CategoriesAccordion from '../../components/categories/CategoriesAccordion'
+import ListProducts from '../../../components/products/ListProducts'
+import CategoriesAccordion from '../../../components/categories/CategoriesAccordion'
 import { Slider, FormControlLabel, Pagination, RadioGroup, Radio } from '@mui/material'
-import FilterBar from '../../components/layouts/sidebar/FilterBar'
+import FilterBar from '../../../components/layouts/sidebar/FilterBar'
 import TuneIcon from '@mui/icons-material/Tune'
 import { useTranslation } from 'react-i18next'
-import AppHeader from '../../components/layouts/AppHeader'
+import AppHeader from '../../../components/layouts/AppHeader'
 import { getCookie } from 'cookies-next'
+import { useRouter } from 'next/router'
 
 function AllProducts({ products, productsError }) {
+  const municipality = getCookie('NEXT_MUNICIPALITY')
+  const router = useRouter()
+  const query = router.query
   const { t, i18n } = useTranslation()
-  const [list, setList] = useState(products)
+  const [list, setList] = useState([])
   const [loading, setLoading] = useState(false)
   const [filterBar, setFilterBar] = useState(false)
   const [pages, setPages] = useState(1)
@@ -22,10 +26,9 @@ function AllProducts({ products, productsError }) {
   const [suppliers, setSuppliers] = useState()
   const [brands, setBrands] = useState()
   const [prices, setPrices] = useState([0, 1000])
-  const municipality = getCookie('NEXT_MUNICIPALITY')
 
-  const [category, setCategory] = useState(undefined)
-  const [selectedCategory, setSelectedCategory] = useState(undefined)
+  const [category, setCategory] = useState(query.id)
+  const [selectedCategory, setSelectedCategory] = useState(query)
   const [offset, setOffset] = useState(0)
   const [subcategory, setSubcategory] = useState(undefined)
   const [brand, setBrand] = useState(0)
@@ -66,7 +69,6 @@ function AllProducts({ products, productsError }) {
     setFilterBar(false)
     setSubcategory(undefined)
     setSelectedCategory(category)
-    console.log(selectedCategory)
     setCategory(category.id)
   }
 
@@ -285,33 +287,56 @@ function AllProducts({ products, productsError }) {
   )
 }
 
-export async function getServerSideProps({ req, res }, context) {
-  const municipality = getCookie('NEXT_MUNICIPALITY', { req, res })
-  const { products, productsError } = await fetchProducts(municipality)
+// export async function getStaticPaths() {
+//   const { categories } = await fetchAllCategories()
 
-  return {
-    props: {
-      products,
-      productsError
-    }
-  }
-}
+//   const paths = categories?.results.map((category) => ({
+//     params: { id: category.id.toString() }
+//   }))
 
-async function fetchProducts(municipality) {
-  let productsError = ''
-  let products = []
-  const filter = {
-    offset: 0,
-    limit: 15,
-    municipality_id: municipality
-  }
-  try {
-    products = await (await resources.products.all(filter)).data
-  } catch (error) {
-    productsError = error.message
-  }
-  return { products, productsError }
-}
+//   return { paths, fallback: true }
+// }
+
+// export async function getStaticProps({ params }) {
+//   const municipality = getCookie('NEXT_MUNICIPALITY')
+//   const { products, productsError } = await fetchProducts(params.id, municipality)
+
+//   return {
+//     props: {
+//       products,
+//       productsError
+//     }
+//   }
+// }
+
+// async function fetchAllCategories() {
+//   let apiError = ''
+//   let categories = []
+//   try {
+//     categories = await (await resources.categories.all()).data
+//   } catch (error) {
+//     apiError = error.message
+//   }
+//   return { categories, apiError }
+// }
+
+// async function fetchProducts(id, municipality) {
+//   let productsError = ''
+//   let products = []
+//   const filter = {
+//     offset: 0,
+//     limit: 15,
+//     municipality_id: municipality,
+//     category: id
+//   }
+//   console.log('🚀 ~ file: [id].jsx ~ line 331 ~ fetchProducts ~ filter', filter)
+//   try {
+//     products = await (await resources.products.all(filter)).data
+//   } catch (error) {
+//     productsError = error.message
+//   }
+//   return { products, productsError }
+// }
 
 AllProducts.propTypes = {
   products: PropTypes.object,

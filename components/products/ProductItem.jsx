@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Divider, Tooltip } from '@mui/material'
-// import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 import useWindowSize from '../../hooks/WindowSize'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
@@ -12,14 +12,14 @@ import QuickView from '../modals/QuickView'
 import AddToFav from '../fav/AddFav'
 import AddToCart from '../cart/AddCart'
 
-// const theme = createTheme({
-//   palette: {
-//     error: {
-//       main: '#b12024',
-//       contrastText: '#fff'
-//     }
-//   }
-// })
+const theme = createTheme({
+  palette: {
+    error: {
+      main: '#b12024',
+      contrastText: '#fff'
+    }
+  }
+})
 
 function ProductItem({ product }) {
   const { i18n } = useTranslation()
@@ -44,7 +44,7 @@ function ProductItem({ product }) {
               className='hover:cursor-pointer'
             />
           </Link>
-          <div className='absolute right-1'>
+          <div className='absolute right-1 top-1'>
             <Tooltip title='Quick View' placement='right'>
               <div
                 className='rounded-lg mb-2 hover:cursor-pointer hover:text-background-100 hover:bg-button bg-background-100'
@@ -61,6 +61,20 @@ function ProductItem({ product }) {
               </Tooltip>
             </Link> */}
           </div>
+          <div className='absolute top-1 left-1'>
+            <ThemeProvider theme={theme}>
+              <div className='felx flex-col md:my-2'>
+                {product.etiquetas.map((tag) => (
+                  <div
+                    key={tag.pk}
+                    className='bg-button p-1 rounded-full text-background-100 text-xs'
+                  >
+                    {i18n.language === 'es' ? tag.nombre : tag.ingles}
+                  </div>
+                ))}
+              </div>
+            </ThemeProvider>
+          </div>
         </div>
         <div className='mx-2 md:my-2 text-text-100 text-sm md:text-base md:h-6'>
           <Link href={`/products/${product.id}`}>
@@ -76,13 +90,6 @@ function ProductItem({ product }) {
         {product.precioxlibra.cantidad === '0.00' && (
           <div className='md:h-6'></div>
         )}
-        {/* <ThemeProvider theme={theme}>
-          <div className='felx flex-row mx-1 md:mx-2 my-1 md:my-2 h-7'>
-            {product.etiquetas.map((tag) => (
-              <Chip key={tag.pk} sx={{ marginRight: 1, marginBottom: 1 }} label={i18n.language === 'es' ? tag.nombre : tag.ingles} color="error" />
-            ))}
-          </div>
-        </ThemeProvider> */}
         {size.width > 768 &&
           <Divider
             sx={{
