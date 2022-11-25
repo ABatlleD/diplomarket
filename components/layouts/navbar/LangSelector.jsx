@@ -10,8 +10,8 @@ import { useTranslation } from 'react-i18next'
 const languages = ['en', 'es']
 
 function LangSelector () {
-  const [language, setLanguage] = useState('es')
   const [t, i18n] = useTranslation()
+  const [language, setLanguage] = useState(i18n.language)
   const [anchorElLanguage, setAnchorElLanguage] = useState(null)
 
   const handleOpenLanguageMenu = (event) => {
