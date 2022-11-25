@@ -76,17 +76,17 @@ function Settings() {
       <ToastContainer />
       <div className='flex flex-col'>
         <div className='flex flex-col items-center p-4 mb-8 border-2 border-button rounded-3xl'>
-          <p className='font-semibold text-button text-4xl mb-8'>Actualizar a Premium</p>
-          <p className='text-xl'>Esta funcionalidad no está disponible por el momento.</p>
+          <p className='font-semibold text-button text-4xl mb-8'>{t('profile.settings.premium_title')}</p>
+          <p className='text-xl'>{t('profile.settings.premium_subtitle')}</p>
         </div>
         <div className='flex flex-col border items-center p-4 rounded-3xl'>
-          <p className='font-bold text-2xl text-footer-background-200 mb-8'>Cambiar Contraseña</p>
+          <p className='font-bold text-2xl text-footer-background-200 mb-8'>{t('profile.settings.title')}</p>
           <div className='flex flex-col md:flex-row w-full'>
             <div className="Password md:mr-2 mb-4 w-full md:w-10/12">
               <TextField
                 required
                 id="outlined-password-input"
-                label="Password"
+                label={t('profile.settings.old')}
                 type={values.showPassword ? 'text' : 'password'}
                 value={values.password}
                 onChange={handleChange('password')}
@@ -112,7 +112,7 @@ function Settings() {
               <TextField
                 required
                 id="outlined-password-input"
-                label="Confirm Password"
+                label={t('profile.settings.new')}
                 type={values.showConfirmPassword ? 'text' : 'password'}
                 value={values.confirmPassword}
                 onChange={handleChange('confirmPassword')}
@@ -144,7 +144,7 @@ function Settings() {
               }}
               onClick={handleSubmit}
             >
-              Guardar Nueva Contraseña
+              {t('profile.settings.submit')}
             </Button>
         </div>
         </div>

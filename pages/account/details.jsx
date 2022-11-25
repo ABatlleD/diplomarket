@@ -92,12 +92,12 @@ function Details() {
       <AppHeader title={t('pages.details')} />
       <ToastContainer />
       <div className='flex flex-col border items-center rounded-3xl'>
-        <p className='font-bold text-footer-background-200 text-2xl my-4'>Editar mis datos</p>
+        <p className='font-bold text-footer-background-200 text-2xl my-4'>{t('profile.details.title')}</p>
         <div className='flex flex-row w-11/12 mb-4'>
           <div className='w-10/12 mr-2'>
             <TextField
               id="standard-basic"
-              label="Nombre y Apellidos"
+              label={t('profile.details.fullname')}
               variant="standard"
               value={name}
               sx={{
@@ -107,14 +107,14 @@ function Details() {
             />
           </div>
           <div className='flex flex-col w-10/12 ml-2'>
-            <div className='font-bold'>Email:</div>
+            <div className='font-bold'>{t('profile.details.email')}:</div>
             <div>{ email }</div>
           </div>
         </div>
         <div className='w-11/12 mb-8'>
           <TextField
             id="standard-textarea"
-            label="Dirección*"
+            label={t('profile.details.address').concat('*')}
             multiline
             variant="standard"
             value={address}
@@ -127,7 +127,7 @@ function Details() {
           <div className='w-10/12 mr-2'>
             <PhoneInput
               country={'us'}
-              specialLabel={`${t('phone')}`}
+              specialLabel={`${t('profile.details.phone')}`}
               value={phone ?? '1'}
               inputStyle={{ width: '100%', height: '100%' }}
               onChange={(e) => setPhone(e.target.value)}
@@ -138,7 +138,7 @@ function Details() {
             required
             id="countries"
             name="pais"
-            label={t('country')}
+            label={t('profile.details.country')}
             value={country ?? ''}
             fullWidth
             autoComplete="shipping countries"
@@ -150,7 +150,7 @@ function Details() {
           <div className='w-10/12 mr-2'>
             <TextField
               id="standard-basic"
-              label="Estado"
+              label={t('profile.details.state')}
               variant="standard"
               value={state}
               sx={{
@@ -162,7 +162,7 @@ function Details() {
           <div className='w-10/12 ml-2'>
             <TextField
               id="standard-basic"
-              label="Ciudad"
+              label={t('profile.details.city')}
               variant="standard"
               value={city}
               sx={{
@@ -176,7 +176,7 @@ function Details() {
           <div className='w-[49%] mr-2'>
             <TextField
               id="standard-basic"
-              label="Código Postal"
+              label={t('profile.details.zip')}
               variant="standard"
               value={zip}
               sx={{
@@ -190,7 +190,7 @@ function Details() {
           <div className='w-10/12 mr-2 flex flex-row'>
             <Checkbox label='' checked={rss} value={!rss} onChange={(e) => setName(e.target.value)} />
             <p className='text-justify text-footer-background-100 font-semibold ml-1 mt-2'>
-              Recibir notificaciones de la tienda.
+            {t('profile.details.rss')}
             </p>
           </div>
           <div className='flex flex-row justify-end w-10/12 ml-2'>
@@ -202,7 +202,7 @@ function Details() {
               }}
               onClick={handleSubmit}
             >
-              Guardar Cambios
+              {t('profile.details.submit')}
             </Button>
           </div>
         </div>

@@ -61,11 +61,11 @@ function AddRecipient({
               <HighlightOffIcon className='hover:cursor-pointer' onClick={() => setOpenAddRecipient(false)} />
             </div>
             <div className='flex flex-row justify-center mt-4'>
-              <p className='font-bold text-lg text-footer-background-100'>Añadir destinatario</p>
+              <p className='font-bold text-lg text-footer-background-100'>{t('profile.recipients.modal.title')}</p>
             </div>
             <div className='flex flex-row justify-center mt-4 mx-12'>
               <p className='font-semibold text-footer-background-100 text-justify'>
-                Introduzca el nombre para su nuevo destinatario.
+              {t('profile.recipients.modal.subtitle')}
               </p>
             </div>
             <div className='flex flex-row justify-between mx-12 mt-8'>
@@ -76,7 +76,7 @@ function AddRecipient({
                     id="select-addresses"
                     name='addresses'
                     value={address}
-                    label={t('addresses_name')}
+                    label={t('profile.recipients.modal.name')}
                     fullWidth
                     onChange={(address) => {
                       setAddress(address.target.value)
@@ -94,7 +94,7 @@ function AddRecipient({
                 }}
                 onClick={handleSubmit}
               >
-                {t('place.accept')}
+                {t('profile.recipients.modal.submit')}
               </Button>
             </div>
           </div>

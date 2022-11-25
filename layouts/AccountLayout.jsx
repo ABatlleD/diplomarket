@@ -5,8 +5,10 @@ import GroupIcon from '@mui/icons-material/Group'
 import ListAltIcon from '@mui/icons-material/ListAlt'
 import SettingsIcon from '@mui/icons-material/Settings'
 import Link from 'next/link'
+import { useTranslation } from 'react-i18next'
 
 function AccountLayout({ children, option }) {
+  const { t } = useTranslation()
   return (
     <>
       <div className='flex justify-center w-full'>
@@ -15,25 +17,25 @@ function AccountLayout({ children, option }) {
             <Link href={'/account/details'}>
               <div className={`flex flex-row p-2 border rounded-t-3xl hover:cursor-pointer ${option === 1 ? 'bg-button text-text-200' : ''}`}>
                 <div><PersonIcon fontSize='small' /></div>
-                <div className='mt-[0.20rem] ml-1'> Mi Cuenta</div>
+                <div className='mt-[0.20rem] ml-1'> {t('layout.navbar.account.details')}</div>
               </div>
             </Link>
             <Link href={'/account/recipients'}>
               <div className={`flex flex-row p-2 border hover:cursor-pointer ${option === 2 ? 'bg-button text-text-200' : ''}`}>
                 <div><GroupIcon fontSize='small' /></div>
-                <div className='mt-[0.20rem] ml-1'> Mis Destinatarios</div>
+                <div className='mt-[0.20rem] ml-1'> {t('layout.navbar.account.recipients')}</div>
               </div>
             </Link>
             <Link href={'/account/orders'}>
               <div className={`flex flex-row p-2 border hover:cursor-pointer ${option === 3 ? 'bg-button text-text-200' : ''}`}>
                 <div><ListAltIcon fontSize='small' /></div>
-                <div className='mt-[0.20rem] ml-1'> Mis Órdenes</div>
+                <div className='mt-[0.20rem] ml-1'> {t('layout.navbar.account.orders')}</div>
               </div>
             </Link>
             <Link href={'/account/settings'}>
               <div className={`flex flex-row p-2 border hover:cursor-pointer rounded-b-3xl ${option === 4 ? 'bg-button text-text-200' : ''}`}>
                 <div><SettingsIcon fontSize='small' /></div>
-                <div className='mt-[0.20rem] ml-1'> Opciones</div>
+                <div className='mt-[0.20rem] ml-1'> {t('layout.navbar.account.settings')}</div>
               </div>
             </Link>
           </div>

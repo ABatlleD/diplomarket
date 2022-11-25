@@ -40,8 +40,6 @@ function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const res = await signIn('credentials', { redirect: false, username: values.username, password: values.password })
-    console.log('🚀 ~ file: signin.jsx ~ line 43 ~ handleSubmit ~ values', values)
-    console.log('🚀 ~ file: signin.jsx ~ line 43 ~ handleSubmit ~ res', res)
     if (res.error === '403') {
       return toast.error(t('signin.no_active_error'))
     } else if (res.error === '404') {
@@ -70,7 +68,7 @@ function SignIn() {
           <TextField
             required
             id="outlined-required"
-            label="Email"
+            label={t('auth.signin.email')}
             sx={{
               width: '100%',
               borderColor: 'red'
@@ -83,7 +81,7 @@ function SignIn() {
           <TextField
             required
             id="outlined-password-input"
-            label="Password"
+            label={t('auth.signin.password')}
             type={values.showPassword ? 'text' : 'password'}
             value={values.password}
             onChange={handleChange('password')}
@@ -114,19 +112,19 @@ function SignIn() {
             }}
             onClick={handleSubmit}
           >
-            Sign In
+            {t('auth.signin.submit')}
           </Button>
         </div>
         <div className="Links flex flex-row justify-between w-11/12 md:w-1/3">
           <Link href={'/'}>
-            <p className='text-footer-background-100 font-bold underline hover:cursor-pointer hover:text-footer-background-200'>Go back</p>
+            <p className='text-footer-background-100 font-bold underline hover:cursor-pointer hover:text-footer-background-200'>{t('auth.signin.back')}</p>
           </Link>
           <div className='flex flex-col'>
             <Link href={'/auth/signup'}>
-              <p className='text-footer-background-100 font-bold underline hover:cursor-pointer hover:text-footer-background-200'>Don&apos;t have an account?</p>
+              <p className='text-footer-background-100 font-bold underline hover:cursor-pointer hover:text-footer-background-200'>{t('auth.signin.register')}</p>
             </Link>
             <Link href={'/backend/password_reset'}>
-              <p className='text-footer-background-100 font-bold underline hover:cursor-pointer hover:text-footer-background-200'>Forgot your password?</p>
+              <p className='text-footer-background-100 font-bold underline hover:cursor-pointer hover:text-footer-background-200'>{t('auth.signin.forgot')}</p>
             </Link>
           </div>
         </div>

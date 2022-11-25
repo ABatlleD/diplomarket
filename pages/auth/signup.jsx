@@ -156,13 +156,13 @@ function SignUp() {
 
   const privacy = (
     <Link href={'/privacy'}>
-      <span className='text-footer-background-200 underline hover:cursor-pointer font-bold'>privacy policy</span>
+      <span className='text-footer-background-200 underline hover:cursor-pointer font-bold'>{t('auth.signup.privacy')}</span>
     </Link>
   )
 
   const terms = (
     <Link href={'/terms'}>
-      <span className='text-footer-background-200 underline hover:cursor-pointer font-bold'>terms of service</span>
+      <span className='text-footer-background-200 underline hover:cursor-pointer font-bold'>{t('auth.signup.terms')}</span>
     </Link>
   )
 
@@ -178,7 +178,7 @@ function SignUp() {
           <TextField
             required
             id="outlined-required"
-            label="Fullname"
+            label={t('auth.signup.fullname')}
             error={fullnameError}
             onChange={(e) => {
               setValues({
@@ -197,7 +197,7 @@ function SignUp() {
           <TextField
             required
             id="outlined-required"
-            label="Email"
+            label={t('auth.signup.email')}
             type={'email'}
             error={emailError}
             onChange={(e) => {
@@ -217,7 +217,7 @@ function SignUp() {
           <TextField
             required
             id="outlined-password-input"
-            label="Password"
+            label={t('auth.signup.password')}
             type={values.showPassword ? 'text' : 'password'}
             value={values.password}
             error={passwordError}
@@ -244,7 +244,7 @@ function SignUp() {
           <TextField
             required
             id="outlined-password-input"
-            label="Confirm Password"
+            label={t('auth.signup.confirm')}
             type={values.showConfirmPassword ? 'text' : 'password'}
             value={values.confirmPassword}
             error={confirmPasswordError}
@@ -271,7 +271,7 @@ function SignUp() {
           <TextField
             required
             id="outlined-required"
-            label="Address"
+            label={t('auth.signup.address')}
             error={addressError}
             onChange={(e) => {
               setValues({
@@ -289,7 +289,7 @@ function SignUp() {
         <div className="Phone mb-4 w-11/12 md:w-1/3">
         <PhoneInput
           containerStyle={{ borderColor: 'red' }}
-          specialLabel={'Phone*'}
+          specialLabel={`${t('auth.signup.phone')}*`}
           country={'us'}
           value={'1'}
           error={phoneError}
@@ -320,14 +320,14 @@ function SignUp() {
             width: '100%',
             color: 'red'
           }}
-          renderInput={(params) => <TextField {...params} label="Countrie*" />}
+          renderInput={(params) => <TextField {...params} label={`${t('auth.signup.country')}*`} />}
         />
         </div>
         <div className="State mb-4 w-11/12 md:w-1/3">
           <TextField
             required
             id="outlined-required"
-            label="State"
+            label={t('auth.signup.state')}
             error={stateError}
             onChange={(e) => {
               setValues({
@@ -346,7 +346,7 @@ function SignUp() {
           <TextField
             required
             id="outlined-required"
-            label="City"
+            label={t('auth.signup.city')}
             error={cityError}
             onChange={(e) => {
               setValues({
@@ -364,7 +364,7 @@ function SignUp() {
         <div className="Zip Code mb-4 w-11/12 md:w-1/3">
           <TextField
             id="outlined-required"
-            label="Zip Code"
+            label={t('auth.signup.zip')}
             type={'number'}
             onChange={(e) => {
               setValues({
@@ -386,7 +386,7 @@ function SignUp() {
             })
           }} />
           <p className='text-justify text-footer-background-100 font-semibold ml-2'>
-            By signing up you agree to our {terms} and {privacy}.
+            {t('auth.signup.agree')} {terms} {t('auth.signup.and')} {privacy}.
           </p>
         </div>
         <div className="Submit mb-4 w-11/12 md:w-1/3">
@@ -399,16 +399,16 @@ function SignUp() {
             }}
             onClick={handleSubmit}
           >
-            Sign Up
+            {t('auth.signup.submit')}
           </Button>
         </div>
         <div className="Links flex flex-row justify-between w-11/12 md:w-1/3">
           <Link href={'/'}>
-            <p className='text-footer-background-100 font-bold underline hover:cursor-pointer hover:text-footer-background-200'>Go back</p>
+            <p className='text-footer-background-100 font-bold underline hover:cursor-pointer hover:text-footer-background-200'>{t('auth.signup.back')}</p>
           </Link>
           <div className='flex flex-col'>
             <Link href={'/auth/signin'}>
-              <p className='text-footer-background-100 font-bold underline hover:cursor-pointer hover:text-footer-background-200'>Do you have an account?</p>
+              <p className='text-footer-background-100 font-bold underline hover:cursor-pointer hover:text-footer-background-200'>{t('auth.signup.is_register')}</p>
             </Link>
           </div>
         </div>

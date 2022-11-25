@@ -32,7 +32,12 @@
       "search": "Search",
       "account": {
         "signin": "Sign In",
-        "signup": "Sign Up"
+        "signup": "Sign Up",
+        "details": "My Account",
+        "recipients": "My Addresses",
+        "orders": "My Orders",
+        "settings": "Settings",
+        "signout": "Log Out"
       }
     }
   },
@@ -265,5 +270,113 @@
     "error_recaptcha_form": "Error submitting the form",
     "login_success": "Login successful",
     "login_error": "Wrong credentials"
+  },
+  "profile": {
+    "details": {
+      "title": "Edit my data",
+      "fullname": "Full Name",
+      "email": "Email",
+      "address": "Address",
+      "phone": "Phone",
+      "country": "Country",
+      "state": "State",
+      "city": "City",
+      "zip": "Zip Code",
+      "rss": "Receive store notifications",
+      "submit": "Save Changes"
+    },
+    "recipients": {
+      "title": "Edit my recipients",
+      "subtitle": "Recipients Details:",
+      "name": "Recipient Name",
+      "first": "Name",
+      "second": "Sur Name",
+      "last": "Last Name",
+      "email": "Email",
+      "phone": "Phone",
+      "country": "Country",
+      "state": "Province",
+      "city": "Municipality",
+      "district": "City or District",
+      "address": "Address",
+      "subtitle2": "Alternative contact details:",
+      "optional": "Optional Name",
+      "note": "Note",
+      "submit": "Save Changes",
+      "modal": {
+        "title": "Add recipient",
+        "subtitle": "Enter the name for your new recipient.",
+        "name": "Recipient name",
+        "submit": "Add"
+      }
+    },
+    "orders": {},
+    "settings": {
+      "premium_title": "Update to Premium",
+      "premium_subtitle": "This feature it's not currently available.",
+      "title": "Cahange Password",
+      "old": "Old Password",
+      "new": "New Password",
+      "submit": "Save New Password"
+    }
+  },
+  "checkout": {
+    "title": "Checkout",
+    "next": "Next",
+    "back": "Back",
+    "payment_method": {
+      "title": "Payment method",
+      "paypal_tax": "Extra fees may apply"
+    },
+    "review": {
+      "title": "Order summary",
+      "subtotal": "Subtotal products",
+      "delivery": "Delivery price for",
+      "paypal": "PayPal amount",
+      "total": "Total",
+      "recipients": "Sender Info",
+      "delivery_data": "Delivery",
+      "paypal_error": "Payment with PayPal it's not available in your region.",
+      "placeholder": {
+        "card": "Card number",
+        "expiry": "Expiration",
+        "cvc": "Security code",
+        "country": "Country",
+        "state": "Administrative Area (State, Province)",
+        "city": "Location (City)",
+        "zip": "Zip code",
+        "address": "Address",
+        "pay": "Pay"
+      }
+    }
+  },
+  "auth": {
+    "signin": {
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign In",
+      "back": "Go Back",
+      "register": "Don't have an account?",
+      "forgot": "Forgot your password?"
+    },
+    "signup": {
+      "fullname": "Fullname",
+      "email": "Email",
+      "password": "Password",
+      "confirm": "Confirm Password",
+      "address": "Address",
+      "phone": "Phone",
+      "submit": "Sign In",
+      "back": "Go Back",
+      "country": "Country",
+      "state": "State",
+      "city": "City",
+      "zip": "Zip Code",
+      "agree": "By signing up you agree to our",
+      "and": "and",
+      "terms": "terms of service",
+      "privacy": "privacy policy",
+      "is_register": "Do you have an account?"
+    }
   }
 }

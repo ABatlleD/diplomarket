@@ -20,9 +20,7 @@ import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
 const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) => {
-  const { t } = useTranslation('', {
-    keyPrefix: 'checkout'
-  })
+  const { t } = useTranslation()
   const formRef = useRef(null)
   const { push } = useRouter()
   const [data, setData] = useState({
@@ -189,7 +187,7 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
               type="tel"
               name="number"
               className="form-control"
-              placeholder={t('placeholder_number_card')}
+              placeholder={t('checkout.review.placeholder.card')}
               pattern="[\d| ]{16,22}"
               required
               onChange={handleInputChange}
@@ -202,7 +200,7 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
                 type="tel"
                 name="expiry"
                 className="form-control"
-                placeholder={t('placeholder_expiry')}
+                placeholder={t('checkout.review.placeholder.expiry')}
                 pattern="\d\d/\d\d"
                 required
                 onChange={handleInputChange}
@@ -214,7 +212,7 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
                 type="tel"
                 name="cvc"
                 className="form-control"
-                placeholder={t('placeholder_cvc')}
+                placeholder={t('checkout.review.placeholder.cvc')}
                 pattern="\d{3,4}"
                 required
                 onChange={handleInputChange}
@@ -225,11 +223,11 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
           <div className="flex space-x-6 mt-2">
             <div className="w-1/2">
               <FormControl sx={{ minWidth: '100%' }} size="small">
-                <InputLabel id="pais">{t('placeholder_pais')}</InputLabel>
+                <InputLabel id="pais">{t('checkout.review.placeholder.country')}</InputLabel>
                 <Select
                   labelId="pais"
                   id="pais"
-                  label={t('placeholder_pais')}
+                  label={t('checkout.review.placeholder.country')}
                   name="pais"
                   value={pais}
                   required
@@ -251,7 +249,7 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
                 type="text"
                 name="estado"
                 className="form-control"
-                placeholder={t('placeholder_estado')}
+                placeholder={t('checkout.review.placeholder.state')}
                 required
                 onChange={handleInputChange}
                 onFocus={handleInputFocus}
@@ -264,7 +262,7 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
                 type="text"
                 name="locacion"
                 className="form-control"
-                placeholder={t('placeholder_locacion')}
+                placeholder={t('checkout.review.placeholder.city')}
                 required
                 onChange={handleInputChange}
                 onFocus={handleInputFocus}
@@ -275,7 +273,7 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
                 type="text"
                 name="postal"
                 className="form-control"
-                placeholder={t('placeholder_postal')}
+                placeholder={t('checkout.review.placeholder.zip')}
                 required
                 onChange={handleInputChange}
                 onFocus={handleInputFocus}
@@ -287,7 +285,7 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
               type="text"
               name="direccion"
               className="form-control"
-              placeholder={t('placeholder_direccion')}
+              placeholder={t('checkout.review.placeholder.address')}
               required
               onChange={handleInputChange}
               onFocus={handleInputFocus}
@@ -295,7 +293,7 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
           </div>
           <input type="hidden" name="issuer" value={issuer} />
           <div className="my-2">
-            <button className="p-2 rounded-xl bg-dm-red text-white w-full bg-button uppercase">{t('pay')}</button>
+            <button className="p-2 rounded-xl bg-dm-red text-white w-full bg-button uppercase">{t('checkout.review.placeholder.pay')}</button>
           </div>
         </form>
       </div>

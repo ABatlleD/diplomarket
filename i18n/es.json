@@ -32,7 +32,12 @@
       "search": "Buscar",
       "account": {
         "signin": "Iniciar Sesión",
-        "signup": "Registrarse"
+        "signup": "Registrarse",
+        "details": "Mi Cuenta",
+        "recipients": "Mis Destinatarios",
+        "orders": "Mis Órdenes",
+        "settings": "Ajustes",
+        "signout": "Salir"
       }
     }
   },
@@ -265,5 +270,113 @@
     "error_recaptcha_form": "Error al enviar el formulario",
     "login_success": "Autenticación exitosa",
     "login_error": "Credenciales incorrectas"
+  },
+  "profile": {
+    "details": {
+      "title": "Editar mis datos",
+      "fullname": "Nombre y Apellidos",
+      "email": "Correo Electrónico",
+      "address": "Dirección",
+      "phone": "Teléfono",
+      "country": "País",
+      "state": "Estado",
+      "city": "Ciudad",
+      "zip": "Código Postal",
+      "rss": "Recibir notificaciones de la tienda.",
+      "submit": "Salvar Cambios"
+    },
+    "recipients": {
+      "title": "Editar mis destinatarios",
+      "subtitle": "Detalles de mis destinatarios:",
+      "name": "Nombre del destinatario",
+      "first": "Nombre del receptor",
+      "second": "Primer Apellido",
+      "last": "Segundo Apellido",
+      "email": "Correo Electrónico",
+      "phone": "Teléfono",
+      "country": "País",
+      "state": "Provincia",
+      "city": "Municipio",
+      "district": "Ciudad o Reparto",
+      "address": "Dirección",
+      "subtitle2": "Contacto alternativo:",
+      "optional": "Nombre opcional",
+      "note": "Nota",
+      "submit": "Guardar Cambios",
+      "modal": {
+        "title": "Añadir destinatario",
+        "subtitle": "Introduzca el nombre para su nuevo destinatario.",
+        "name": "Nombre del destinatario",
+        "submit": "Añadir"
+      }
+    },
+    "orders": {},
+    "settings": {
+      "premium_title": "Actualizar a Premium",
+      "premium_subtitle": "Esta funcionalidad no está disponible por el momento",
+      "title": "Cambiar Contraseña",
+      "old": "Contraseña Actual",
+      "new": "Nueva Contraseña",
+      "submit": "Guardar Nueva Contraseña"
+    }
+  },
+  "checkout": {
+    "title": "Pago",
+    "next": "Siguiente",
+    "back": "Atrás",
+    "payment_method": {
+      "title": "Método de pago",
+      "paypal_tax": "Se aplicarán cargos extras."
+    },
+    "review": {
+      "title": "Resumen de la orden",
+      "subtotal": "Subtotal productos",
+      "delivery": "Precio de entrega para",
+      "paypal": "Importe PayPal",
+      "total": "Total",
+      "recipients": "Datos del remitente",
+      "delivery_data": "Información de entrega",
+      "paypal_error": "El pago con PayPal no está disponible en su región.",
+      "placeholder": {
+        "card": "Número de tarjeta",
+        "expiry": "Expiración",
+        "cvc": "Código de seguridad",
+        "country": "País",
+        "state": "Área administrativa (Estado, Provincia)",
+        "city": "Ubicación (Ciudad)",
+        "zip": "Código Postal",
+        "address": "Dirección",
+        "pay": "Pagar"
+      }
+    }
+  },
+  "auth": {
+    "signin": {
+      "email": "Correo Electrónico",
+      "password": "Contraseña",
+      "submit": "Iniciar Sesión",
+      "back": "Ir Atrás",
+      "register": "¿No está registrado?",
+      "forgot": "¿Olvidó su contraseña?"
+    },
+    "signup": {
+      "fullname": "Nombre completo",
+      "email": "Correo Electrónico",
+      "password": "Contraseña",
+      "confirm": "Confirmar contraseña",
+      "address": "Dirección",
+      "phone": "Teléfono",
+      "submit": "Iniciar Sesión",
+      "back": "Ir Atrás",
+      "country": "País",
+      "state": "Estado",
+      "city": "Ciudad",
+      "zip": "Código Postal",
+      "agree": "Al registrarte aceptas nuestros",
+      "and": "y",
+      "terms": "Términos & Condiciones",
+      "privacy": "Políticas de Privacidad",
+      "is_register": "¿Ya está registrado?"
+    }
   }
 }

@@ -7,10 +7,12 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 import axios from 'axios'
 import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next'
 const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
 const ciValid = /[0-9]{2}(?:0[0-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01])[0-9]{5}/
 
 function MyAddresses({ address }) {
+  const { t } = useTranslation()
   const { addressees, countries, municipalities, provinces } = address
   const [loading, setLoading] = React.useState(false)
   const [getAddressees, setAddressees] = React.useState(addressees)
@@ -67,7 +69,7 @@ function MyAddresses({ address }) {
       <ToastContainer />
         <div className='w-full'>
           <Typography component="h1" variant="h4" align="center">
-            Editar
+          {t('profile.recipients.title')}
           </Typography>
           <React.Fragment>
             <React.Fragment>
@@ -81,7 +83,7 @@ function MyAddresses({ address }) {
                   onClick={handleNext}
                   sx={{ mt: 3, ml: 1 }}
                 >
-                  Guardar
+                  {t('profile.recipients.submit')}
                 </Button>
               </Box>
             </React.Fragment>

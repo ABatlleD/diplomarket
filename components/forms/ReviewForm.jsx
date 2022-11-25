@@ -98,9 +98,7 @@ function Review({ address }) {
     intent: 'capture'
   }
 
-  const { t } = useTranslation('', {
-    keyPrefix: 'checkout'
-  })
+  const { t } = useTranslation()
 
   const { data } = useSession()
 
@@ -168,7 +166,7 @@ function Review({ address }) {
   })
   return (
     <>
-      <h6 className="mb-1">{t('order_summary')}</h6>
+      <h6 className="mb-1">{t('checkout.review.title')}</h6>
       <List disablePadding className="">
         <div className="overflow-auto" style={{ height: '250px' }}>
           {items.length > 0
@@ -187,14 +185,14 @@ function Review({ address }) {
               )}
         </div>
         <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary={t('subtotal')} />
+          <ListItemText primary={t('checkout.review.subtotal')} />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             {totalPrice} {currency}
           </Typography>
         </ListItem>
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText
-            primary={`${t('delivery')} ${activeMunicipalities?.name} (${
+            primary={`${t('checkout.review.delivery')} ${activeMunicipalities?.name} (${
               activeProvinces?.name
             })`}
           />
@@ -210,20 +208,20 @@ function Review({ address }) {
           </Typography>
         </ListItem>
         {getTypePay === 'paypal' && <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary={t('tax_paypal')} />
+          <ListItemText primary={t('checkout.review.paypal')} />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             {typeof totalDelivery === 'undefined' ? t('loadingMessage') : totalPriceWithDeliveryAndTax} {currency}
           </Typography>
         </ListItem>}
         {getTypePay === 'paypal'
           ? <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary={t('total')} />
+          <ListItemText primary={t('checkout.review.total')} />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             {typeof totalDelivery === 'undefined' ? t('loadingMessage') : totalPriceWithDeliveryForPaypal} {currency}
           </Typography>
         </ListItem>
           : <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary={t('total')} />
+          <ListItemText primary={t('checkout.review.total')} />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             {typeof totalDelivery === 'undefined' ? t('loadingMessage') : totalPriceWithDelivery} {currency}
           </Typography>
@@ -232,14 +230,14 @@ function Review({ address }) {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-            {t('details')}
+          {t('checkout.review.recipients')}
           </Typography>
           <Typography gutterBottom>{data?.user?.name}</Typography>
           <Typography gutterBottom>{data?.user?.email}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-            {t('shipping')}
+          {t('checkout.review.delivery_data')}
           </Typography>
           <React.Fragment>
             <Grid item xs={6}>
@@ -597,7 +595,7 @@ function Review({ address }) {
                   />
                 </PayPalScriptProvider>
               ) : (
-                <Typography style={{ color: '#b12024' }}>{t('paypal-error')}</Typography>
+                <Typography style={{ color: '#b12024' }}>{t('checkout.review.paypal_error')}</Typography>
               )}
             </div>
           ) : (

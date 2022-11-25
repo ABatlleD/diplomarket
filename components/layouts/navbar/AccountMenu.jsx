@@ -94,7 +94,7 @@ function AccountMenu () {
                 <span className='pr-2'>
                   <PersonIcon />
                 </span>
-                <span>Mi Cuenta</span>
+                <span>{t('layout.navbar.account.details')}</span>
               </div>
             </Link>
           </MenuItem>
@@ -106,7 +106,7 @@ function AccountMenu () {
                 <span className='pr-2'>
                   <GroupIcon />
                 </span>
-                <span>Mis Destinatarios</span>
+                <span>{t('layout.navbar.account.recipients')}</span>
               </div>
             </Link>
           </MenuItem>
@@ -118,7 +118,7 @@ function AccountMenu () {
                 <span className='pr-2'>
                   <ListAltIcon />
                 </span>
-                <span>Mis Órdenes</span>
+                <span>{t('layout.navbar.account.orders')}</span>
               </div>
             </Link>
           </MenuItem>
@@ -130,7 +130,7 @@ function AccountMenu () {
                 <span className='pr-2'>
                   <SettingsIcon />
                 </span>
-                <span>Ajustes</span>
+                <span>{t('layout.navbar.account.settings')}</span>
               </div>
             </Link>
           </MenuItem>
@@ -141,7 +141,7 @@ function AccountMenu () {
               <span className='pr-2'>
                 <LogoutIcon />
               </span>
-              <span>Salir</span>
+              <span>{t('layout.navbar.account.signout')}</span>
             </div>
           </MenuItem>
         )}

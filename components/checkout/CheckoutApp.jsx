@@ -37,9 +37,7 @@ const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
 const ciValid = /[0-9]{2}(?:0[0-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01])[0-9]{5}/
 
 function Checkout({ address }) {
-  const { t } = useTranslation('', {
-    keyPrefix: 'checkout'
-  })
+  const { t } = useTranslation()
   const steps = [
     `${t('deliveryAddress')}`,
     `${t('paymentMethod')}`,
@@ -122,7 +120,7 @@ function Checkout({ address }) {
           className='md:border md:rounded-3xl md:border-text-200 my-6 md:my-12 p-4 md:p-6'
         >
           <Typography component="h1" variant="h4" align="center">
-            Checkout
+            {t('checkout.title')}
           </Typography>
           <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
             {steps.map((label) => (
@@ -151,7 +149,7 @@ function Checkout({ address }) {
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                      Back
+                      {t('checkout.back')}
                     </Button>
                   )}
                   {activeStep === steps.length - 1
@@ -165,7 +163,7 @@ function Checkout({ address }) {
                       onClick={handleNext}
                       sx={{ mt: 3, ml: 1 }}
                     >
-                      {'Next'}
+                      {t('checkout.next')}
                     </Button>
                       )}
                 </Box>

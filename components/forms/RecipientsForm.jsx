@@ -11,10 +11,12 @@ import 'react-phone-input-2/lib/material.css'
 import { removeDuplicateObjects } from '../../libs/serialize'
 import PropTypes from 'prop-types'
 import AddRecipient from '../modals/AddRecipient'
+import { useTranslation } from 'react-i18next'
 
 // Alternative Contact
 
 function AddressForm({ address }) {
+  const { t } = useTranslation()
   const { addressees, countries, municipalities, provinces } = address
   const [getAddressees, setAddressees] = addressees
   const [getCountries, setCountries] = countries
@@ -125,12 +127,12 @@ function AddressForm({ address }) {
   return (
     <>
       <h6 className='mb-2 mt-4'>
-        Detalles
+        {t('profile.recipients.subtitle')}
       </h6>
         <div className='flex flex-row justify-between mb-4'>
           <div className='flex w-11/12'>
             <FormControl fullWidth>
-              <InputLabel id="select-addressee">Address Name</InputLabel>
+              <InputLabel id="select-addressee">{t('profile.recipients.name')}</InputLabel>
               <Select
                 labelId="select-addressee"
                 id="select-addressee"
@@ -163,7 +165,7 @@ function AddressForm({ address }) {
             id="firstName"
             sx={{ marginBottom: 2 }}
             name="nombre_remitente"
-            label={'receiver_name'}
+            label={t('profile.recipients.first')}
             value={activeAddressees?.nombre_remitente ?? ''}
             fullWidth
             autoComplete="given-name"
@@ -177,7 +179,7 @@ function AddressForm({ address }) {
                 id="lastName1"
                 sx={{ marginBottom: 2 }}
                 name="apellido1"
-                label={'receiver_name_first'}
+                label={t('profile.recipients.second')}
                 value={activeAddressees?.apellido1 ?? ''}
                 fullWidth
                 autoComplete="family-name"
@@ -190,7 +192,7 @@ function AddressForm({ address }) {
                 id="lastName2"
                 name="apellido2"
                 sx={{ marginBottom: 2 }}
-                label={'receiver_name_last'}
+                label={t('profile.recipients.last')}
                 value={activeAddressees?.apellido2 ?? ''}
                 fullWidth
                 autoComplete="family-name"
@@ -205,7 +207,7 @@ function AddressForm({ address }) {
                 id="email"
                 name="email"
                 sx={{ marginBottom: 2, width: '100%' }}
-                label="Email"
+                label={t('profile.recipients.email')}
                 value={activeAddressees?.email ?? ''}
                 autoComplete="shipping email1"
                 variant="standard"
@@ -218,7 +220,7 @@ function AddressForm({ address }) {
                 id="ci"
                 name="ci"
                 sx={{ marginBottom: 2, width: '100%' }}
-                label={'personal_idenfication'}
+                label='CI'
                 value={activeAddressees?.ci ?? ''}
                 autoComplete="personal-idenfication"
                 variant="standard"
@@ -229,7 +231,7 @@ function AddressForm({ address }) {
           <div className='mb-4'>
             <PhoneInput
               country={'cu'}
-              specialLabel={`${'phone'} *`}
+              specialLabel={`${t('profile.recipients.phone')} *`}
               value={activeAddressees?.telefono ?? '53'}
               inputStyle={{ width: '100%', height: '100%' }}
               onChange={(phone) => {
@@ -238,14 +240,14 @@ function AddressForm({ address }) {
             />
           </div>
           <FormControl fullWidth>
-            <InputLabel id="select-countries">{'country'}</InputLabel>
+            <InputLabel id="select-countries">{t('profile.recipients.country')}</InputLabel>
             <Select
               labelId="select-countries"
               id="select-countries"
               sx={{ marginBottom: 2 }}
               value={activeCountries?.name ?? ''}
               onChange={handleChangeCountries}
-              label={'country'}
+              label={t('profile.recipients.country')}
               fullWidth
             >
               {getCountries?.map((country, _idx) => (
@@ -254,14 +256,14 @@ function AddressForm({ address }) {
             </Select>
           </FormControl>
           <FormControl fullWidth>
-            <InputLabel id="select-provinces">{'province'}</InputLabel>
+            <InputLabel id="select-provinces">{t('profile.recipients.state')}</InputLabel>
             <Select
               labelId="select-provinces"
               id="select-provinces"
               sx={{ marginBottom: 2 }}
               value={activeProvinces?.name ?? ''}
               onChange={handleChangeProvinces}
-              label={'province'}
+              label={t('profile.recipients.state')}
               fullWidth
             >
               {getProvinces?.map((province, _idx) => (
@@ -270,14 +272,14 @@ function AddressForm({ address }) {
             </Select>
           </FormControl>
           <FormControl fullWidth>
-            <InputLabel id="select-municipalities">{'municipality'}</InputLabel>
+            <InputLabel id="select-municipalities">{t('profile.recipients.city')}</InputLabel>
             <Select
               labelId="select-municipalities"
               id="select-municipalities"
               sx={{ marginBottom: 2 }}
               value={activeMunicipalities?.name ?? ''}
               onChange={handleChangeMunicipalities}
-              label={'municipality'}
+              label={t('profile.recipients.city')}
               fullWidth
             >
               {getMunicipalities?.map((municipality, _idx) => municipality?.provinceId === activeProvinces?.id && (
@@ -289,7 +291,7 @@ function AddressForm({ address }) {
             id="city"
             name="ciudad"
             sx={{ marginBottom: 2 }}
-            label={'city'}
+            label={t('profile.recipients.district')}
             value={activeAddressees?.ciudad ?? ''}
             fullWidth
             autoComplete="shipping city"
@@ -301,7 +303,7 @@ function AddressForm({ address }) {
             id="address1"
             sx={{ marginBottom: 2 }}
             name="direccion"
-            label={'address'}
+            label={t('profile.recipients.address')}
             value={activeAddressees?.direccion ?? ''}
             fullWidth
             autoComplete="shipping address-line1"
@@ -309,13 +311,13 @@ function AddressForm({ address }) {
             onChange={handleChangeField}
           />
       <h6 className='mt-5'>
-        {/* Shipping address */}{'alternative_contact'}:
+      {t('profile.recipients.subtitle2')}:
       </h6>
           <TextField
             id="optionalName"
             name="nombre_alternativo"
             sx={{ marginBottom: 2 }}
-            label={'alternative_name'}
+            label={t('profile.recipients.optional')}
             value={activeAddressees?.nombre_alternativo ?? ''}
             fullWidth
             autoComplete="given-name-optional"
@@ -325,7 +327,7 @@ function AddressForm({ address }) {
           <div className='mb-4'>
             <PhoneInput
               country={'cu'}
-              specialLabel={`${'phone'} *`}
+              specialLabel={`${t('profile.recipients.phone')} *`}
               value={activeAddressees?.telefono_alternativo ?? '53'}
               inputStyle={{ width: '100%', height: '100%' }}
               onChange={(phone) => {
@@ -336,7 +338,7 @@ function AddressForm({ address }) {
           <TextField
             id="Note"
             name="nota_entrega"
-            label={'note'}
+            label={t('profile.recipients.note')}
             multiline
             maxRows={4}
             value={activeAddressees?.nota_entrega ?? ''}
