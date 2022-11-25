@@ -7,9 +7,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import LangSelector from './LangSelector'
 import LockIcon from '@mui/icons-material/Lock'
 import useWindowSize from '../../../hooks/WindowSize'
-// import AppButton from '../../AppButton'
-// import { useTranslation } from 'react-i18next'
-// import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import SearchBar from '../../SearchBar'
 import AccountMenu from './AccountMenu'
 import Link from 'next/link'
@@ -67,25 +64,6 @@ function TopBar({
           </Link>
         </div>
         <div className='hidden md:hidden xl:flex xl:w-9/12 flex-row mt-2'>
-          {/* <div className='mr-2'>
-            <AppButton
-              sx={{
-                fontSize: {
-                  xs: 10,
-                  sm: 10,
-                  md: 15,
-                  lg: 10,
-                  xl: 10
-                },
-                paddingY: 1.3,
-                paddingX: 1
-              }}
-              className='bg-button'
-              onClick={() => setCategoriesSideBar(true)}
-            >
-              {t('layout.navbar.categories')} <span className='mt-[-1px]'><ArrowForwardIosIcon fontSize='small' /></span>
-            </AppButton>
-          </div> */}
           <div className='md:ml-3 md:w-[98%]'>
             <SearchBar {...{ openSelectPlace, setOpenSelectPlace }} />
           </div>

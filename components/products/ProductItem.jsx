@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 import Image from 'next/image'
 import ZoomInIcon from '@mui/icons-material/ZoomIn'
-// import CompareIcon from '@mui/icons-material/Compare'
 import QuickView from '../modals/QuickView'
 import AddToFav from '../fav/AddFav'
 import AddToCart from '../cart/AddCart'
@@ -36,7 +35,7 @@ function ProductItem({ product }) {
         <div className='w-full relative flex flex-row justify-center h-24 md:h-44 xl:h-60'>
           <Link href={`/products/${product.id}`}>
             <Image
-              src={`http://127.0.0.1:8000${product.img_principal}`}
+              src={`${process.env.NEXT_PUBLIC_BACKEND}${product.img_principal}`}
               width={size.width < 768 ? 90 : 180}
               height={10}
               placeholder='blur'
@@ -53,13 +52,6 @@ function ProductItem({ product }) {
                 <ZoomInIcon />
               </div>
             </Tooltip>
-            {/* <Link href={'/products/compare'}>
-              <Tooltip title='Compare' placement='right'>
-                <div className='rounded-lg hover:cursor-pointer hover:text-background-100 hover:bg-button bg-background-100'>
-                  <CompareIcon />
-                </div>
-              </Tooltip>
-            </Link> */}
           </div>
           <div className='absolute top-1 left-1'>
             <ThemeProvider theme={theme}>
@@ -121,13 +113,6 @@ function ProductItem({ product }) {
 
 ProductItem.propTypes = {
   product: PropTypes.object
-  // id: PropTypes.number,
-  // title: PropTypes.string,
-  // price: PropTypes.number,
-  // description: PropTypes.string,
-  // brand: PropTypes.string,
-  // provider: PropTypes.string,
-  // image: PropTypes.string
 }
 
 export default ProductItem

@@ -79,7 +79,7 @@ function CartItem({ item, variant, calculateDelivery }) {
 
       <div className="w-16 md:w-28 ml-1 overflow-hidden bg-gray-100 mr-2 shrink-0 relative">
         <Image
-          src={`http://127.0.0.1:8000${item.image}`}
+          src={`${process.env.NEXT_PUBLIC_BACKEND}${item.image}`}
           width={size.width < 768 ? 80 : 180}
           height={size.width < 768 ? 90 : 200}
           placeholder='blur'

@@ -20,7 +20,7 @@ function CategoryItem({ category }) {
           query: category
         }}>
           <Image
-            src={`http://127.0.0.1:8000${category.imagen}`}
+            src={`${process.env.NEXT_PUBLIC_BACKEND}${category.imagen}`}
             width={size.width < 768 ? 350 : 400}
             height={40}
             placeholder='blur'

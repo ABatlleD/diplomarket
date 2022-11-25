@@ -45,8 +45,8 @@ function MainCarousel({ carousel }) {
                 <Link href={result.enlace}>
                   <img
                     src={size.width >= 768
-                      ? `http://localhost:8000${result.imagen}`
-                      : `http://localhost:8000${result.img_movil}`
+                      ? `${process.env.NEXT_PUBLIC_BACKEND}${result.imagen}`
+                      : `${process.env.NEXT_PUBLIC_BACKEND}${result.img_movil}`
                     }
                     className="w-full hover:cursor-pointer h-full" alt="..."
                   />

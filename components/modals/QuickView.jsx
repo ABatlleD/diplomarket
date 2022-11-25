@@ -81,7 +81,7 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
                   {images.map((item) => (
                     <div className='active-resource-card' key={item}>
                       <img
-                        src={`http://127.0.0.1:8000${item}`}
+                        src={`${process.env.NEXT_PUBLIC_BACKEND}${item}`}
                         alt="..."
                         style={{
                           maxHeight: '300px',

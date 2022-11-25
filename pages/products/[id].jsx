@@ -106,7 +106,7 @@ function Product({ product, apiError }) {
             renderThumbs={() => (
               images.map((item) => (
                 <div className='active-resource-card flex flex-row justify-center' key={item}>
-                  <img src={`http://localhost:8000${item}`} style={{
+                  <img src={`${process.env.NEXT_PUBLIC_BACKEND}${item}`} style={{
                     maxHeight: '500px',
                     borderRadius: '6px',
                     objectFit: 'contain'
@@ -121,14 +121,14 @@ function Product({ product, apiError }) {
             {images.map((item) => (
               <div className='active-resource-card flex flex-row justify-center' key={item}>
                 <figure onMouseMove={handleMouseMove} onMouseLeave={() => setHover(false)} style={{
-                  backgroundImage: hover ? `url(http://localhost:8000${item})` : '',
+                  backgroundImage: hover ? `url(${process.env.NEXT_PUBLIC_BACKEND}${item})` : '',
                   maxHeight: '500px',
                   borderRadius: '6px',
                   objectFit: 'contain',
                   backgroundColor: 'white',
                   ...state
                 }}>
-                  <img src={`http://localhost:8000${item}`} style={{
+                  <img src={`${process.env.NEXT_PUBLIC_BACKEND}${item}`} style={{
                     maxHeight: '500px',
                     borderRadius: '6px',
                     objectFit: 'contain'
