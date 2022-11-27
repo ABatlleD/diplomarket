@@ -16,8 +16,8 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
   const [cities, setCities] = useState({})
   const [districts, setDistricts] = useState([])
   const [pivots, setPivots] = useState({})
-  const [state, setState] = useState('')
-  const [district, setDistrict] = useState('')
+  const [state, setState] = useState({})
+  const [district, setDistrict] = useState({})
 
   const {
     resetCart
@@ -27,32 +27,18 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
   } = useFav()
 
   useEffect(() => {
-    const municipality = getCookie('NEXT_MUNICIPALITY')
-    const province = getCookie('NEXT_MUNICIPALITY')
     resources.place.city.all()
       .then(response => setCities(response.data))
     resources.place.district.all()
       .then(response => setPivots(response.data))
-    if (municipality && province) {
-      resources.place.city.one(province)
-        .then((response) => {
-          setState(response.data)
-        })
-      resources.place.district.one(municipality)
-        .then((response) => {
-          setDistrict(response.data)
-        })
-    }
   }, [])
 
   const handleStateChange = (event) => {
-    resources.place.city.one(event.target.value)
-      .then((response) => {
-        setState(response.data)
-      })
+    setState(event.target.value)
     const _arr = []
     for (const item of pivots.results) {
-      if (event.target.value === item.provincia) {
+      console.log(event.target.value.id === item.provincia)
+      if (event.target.value.id === item.provincia) {
         _arr.push(item)
       }
     }
@@ -60,10 +46,7 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
   }
 
   const handleDistrictChange = (event) => {
-    resources.place.district.one(event.target.value)
-      .then((response) => {
-        setDistrict(response.data)
-      })
+    setDistrict(event.target.value)
   }
 
   const handleClose = () => {
@@ -138,12 +121,12 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={state.id}
+                    value={state}
                     label="State"
                     onChange={handleStateChange}
                   >
                     {cities?.results?.map((item) => (
-                      <MenuItem key={item.id} value={item.id}>{item.nombre}</MenuItem>
+                      <MenuItem key={item.id} value={item}>{item.nombre}</MenuItem>
                     ))}
                   </Select>
                 </FormControl>
@@ -154,12 +137,12 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={district.id}
+                    value={district}
                     label="District"
                     onChange={handleDistrictChange}
                   >
                     {districts?.map((item) => (
-                      <MenuItem key={item.id} value={item.id}>{item.nombre}</MenuItem>
+                      <MenuItem key={item.id} value={item}>{item.nombre}</MenuItem>
                     ))}
                   </Select>
                 </FormControl>

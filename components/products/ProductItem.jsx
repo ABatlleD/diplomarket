@@ -32,7 +32,7 @@ function ProductItem({ product }) {
   return (
     <>
       <div className='flex flex-col hover:shadow-button w-full bg-background-300 rounded-lg h-[12.5rem] md:h-[23rem] xl:h-[27rem]'>
-        <div className='w-full relative flex flex-row justify-center h-24 md:h-44 xl:h-60'>
+        <div className='w-[90%] relative flex flex-row justify-center self-center mt-2 bg-background-300 h-24 md:h-44 xl:h-60'>
           <Link href={`/products/${product.id}`}>
             <Image
               src={`${process.env.NEXT_PUBLIC_BACKEND}${product.img_principal}`}
