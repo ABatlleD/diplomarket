@@ -17,7 +17,7 @@ function ListProducts({ products, loading }) {
   return (
     <div className='flex flex-wrap justify-evenly w-full'>
       {!isLoading && products?.results?.map((item) => (
-        <div className='w-[30%] md:w-1/4 xl:w-[24%] mb-4' key={item.id}>
+        <div className='w-[30%] md:w-1/4 xl:w-[19%] mb-4' key={item.id}>
           <ProductItem product={item} />
         </div>
       ))}

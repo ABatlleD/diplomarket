@@ -31,12 +31,12 @@ function ProductItem({ product }) {
 
   return (
     <>
-      <div className='flex flex-col hover:shadow-button w-full bg-background-300 rounded-lg h-[12.5rem] md:h-[23rem] xl:h-[27rem]'>
-        <div className='w-[90%] relative flex flex-row justify-center self-center mt-2 bg-background-300 h-24 md:h-44 xl:h-60'>
+      <div className='flex flex-col hover:shadow-button w-full border rounded-lg h-[12.5rem] md:h-[23rem] xl:h-[27.5rem]'>
+        <div className='w-full relative flex flex-row justify-center self-center h-24 md:h-44 xl:h-60'>
           <Link href={`/products/${product.id}`}>
             <Image
               src={`${process.env.NEXT_PUBLIC_BACKEND}${product.img_principal}`}
-              width={size.width < 768 ? 90 : 180}
+              width={size.width < 768 ? 90 : '100%'}
               height={10}
               placeholder='blur'
               blurDataURL='/loading.gif'
@@ -68,7 +68,7 @@ function ProductItem({ product }) {
             </ThemeProvider>
           </div>
         </div>
-        <div className='mx-2 md:my-2 text-text-100 text-sm md:text-base md:h-6'>
+        <div className='mx-2 md:my-2 text-text-blue text-sm md:text-base md:h-6'>
           <Link href={`/products/${product.id}`}>
             {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, size.width < 768 ? 12 : 20)}
           </Link>
@@ -92,7 +92,7 @@ function ProductItem({ product }) {
           />
         }
         {size.width > 768 &&
-          <div className='flex flex-row justify-between mx-2'>
+          <div className='flex flex-row justify-between mx-1'>
             <div
               className='ml-2 hover:cursor-pointer'
             >

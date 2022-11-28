@@ -116,20 +116,24 @@ function Product({ product, apiError }) {
             )}
             preventMovementUntilSwipeScrollTolerance
             swipeScrollTolerance={100}
-            className={'border w-full rounded-lg h-[25rem] md:h-[25rem]'}
+            className={'border w-full flex flex-col justify-center rounded-lg'}
           >
             {images.map((item) => (
               <div className='active-resource-card flex flex-row justify-center' key={item}>
-                <figure onMouseMove={handleMouseMove} onMouseLeave={() => setHover(false)} style={{
+                <figure
+                onMouseMove={handleMouseMove}
+                onMouseLeave={() => setHover(false)}
+                className='flex'
+                style={{
                   backgroundImage: hover ? `url(${process.env.NEXT_PUBLIC_BACKEND}${item})` : '',
-                  maxHeight: '500px',
+                  maxHeight: '200px',
                   borderRadius: '6px',
                   objectFit: 'contain',
                   backgroundColor: 'white',
                   ...state
                 }}>
                   <img src={`${process.env.NEXT_PUBLIC_BACKEND}${item}`} style={{
-                    maxHeight: '500px',
+                    maxHeight: '200px',
                     borderRadius: '6px',
                     objectFit: 'contain'
                   }} />
@@ -208,7 +212,7 @@ function Product({ product, apiError }) {
       {isLoading &&
         <>Loading...</>
       }
-      <div className='w-full 2xl:w-[60%] xl:w-[75%] flex flex-col items-center xs:mt-4 md:mt-28 mb-8'>
+      <div className='w-full 2xl:w-[60%] xl:w-[75%] flex flex-col items-center xs:mt-4 md:mt-4 mb-8'>
         <Box sx={{ width: '95%', borderBottom: 1, borderColor: 'divider' }}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs

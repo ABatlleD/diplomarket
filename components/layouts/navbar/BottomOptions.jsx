@@ -68,7 +68,7 @@ function BottomOptions({
         <div className='md:w-[98%] md:ml-4 xl:hidden'>
           <SearchBar {...{ openSelectPlace, setOpenSelectPlace }} />
         </div>
-        <div className='flex md:hidden flex-row justify-between mt-1'>
+        <div className='hidden md:hidden flex-row justify-between mt-1'>
           {/* <AppButton
             sx={{
               fontSize: 10

@@ -49,7 +49,7 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
     <>
       <ThemeProvider theme={theme}>
         <div className='flex flex-row'>
-          <div className='hidden md:w-4/12 md:flex'>
+          <div className='hidden md:w-2/12 md:flex'>
             <AppButton
                 sx={{
                   fontSize: {
@@ -65,7 +65,7 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
                 className='bg-button'
                 onClick={() => setOpenSelectPlace(true)}
               >
-                <span className='mt-[-1px] mr-1'><AddLocationAltOutlinedIcon fontSize='small' /></span> {resizeTitle(district, 15)} <span className='mt-[-1px]'><KeyboardArrowDownOutlinedIcon fontSize='small' /></span>
+                <span className='mt-[-1px] mr-1'><AddLocationAltOutlinedIcon fontSize='small' /></span> {resizeTitle(district, 10)} <span className='mt-[-1px]'><KeyboardArrowDownOutlinedIcon fontSize='small' /></span>
             </AppButton>
           </div>
           <Autocomplete

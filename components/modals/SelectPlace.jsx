@@ -99,7 +99,7 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
         }}
       >
         <Fade in={openSelectPlace}>
-          <div className='flex flex-col shadow-2xl rounded-xl bg-background-100 w-11/12 md:w-2/5 md:mt-4 mx-auto p-2'>
+          <div className='flex flex-col shadow-2xl h-screen md:h-auto md:rounded-xl bg-background-100 w-full md:w-2/5 md:mt-4 mx-auto p-2'>
             <div className='flex flex-row justify-end'>
               <HighlightOffIcon className='hover:cursor-pointer' onClick={handleClose} />
             </div>
@@ -109,13 +109,13 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
             <div className='flex flex-row justify-center mt-4'>
               <img src="/delivery-top.png" className="max-w-max h-44 hover:cursor-pointer" alt="..." />
             </div>
-            <div className='flex flex-row justify-center mt-4 mx-12'>
+            <div className='flex flex-row justify-center mt-4 mx-2'>
               <p className='font-semibold text-footer-background-100 text-justify'>
               {t('place.subtitle')}
               </p>
             </div>
-            <div className='flex flex-row justify-between mx-12 mt-8'>
-              <div className='w-[45%]'>
+            <div className='flex flex-col md:flex-row justify-between mx-2 mt-8'>
+              <div className='md:w-[45%] mb-4 md:mb-0'>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">{t('place.state')}</InputLabel>
                   <Select
@@ -131,7 +131,7 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
                   </Select>
                 </FormControl>
               </div>
-              <div className='w-[45%]'>
+              <div className='md:w-[45%]'>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">{t('place.district')}</InputLabel>
                   <Select
@@ -148,7 +148,7 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
                 </FormControl>
               </div>
             </div>
-            <div className='mx-12 my-4'>
+            <div className='mx-2 my-4'>
               <Link href={'/'}>
                 <Button
                   variant="contained"

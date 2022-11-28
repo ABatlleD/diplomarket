@@ -10,8 +10,14 @@ import TuneIcon from '@mui/icons-material/Tune'
 import { useTranslation } from 'react-i18next'
 import AppHeader from '../../components/layouts/AppHeader'
 import { getCookie } from 'cookies-next'
+import MainCarousel from '../../components/home/MainCarousel'
 
-function AllProducts({ products, productsError }) {
+function AllProducts({
+  products,
+  productsError,
+  carousel,
+  carouselError
+}) {
   const { t, i18n } = useTranslation()
   const [list, setList] = useState(products)
   const [loading, setLoading] = useState(false)
@@ -152,7 +158,10 @@ function AllProducts({ products, productsError }) {
   return (
     <>
       <AppHeader title={t('pages.products')} />
-      <div className='flex md:flex-row flex-col w-full md:w-[95%] md:mx-auto my-3 md:my-10'>
+      <div className='flex md:flex-row flex-col w-full md:w-[95%] md:mx-auto mb-3 md:my-10'>
+        <div className='mb-3 md:mb-0'>
+          <MainCarousel carousel={carousel} />
+        </div>
         <div className='mx-3 flex md:hidden text-sm flex-row justify-between mb-3'>
           {selectedCategory && (
             <div className='font-bold'>
@@ -288,11 +297,14 @@ function AllProducts({ products, productsError }) {
 export async function getServerSideProps({ req, res }, context) {
   const municipality = getCookie('NEXT_MUNICIPALITY', { req, res })
   const { products, productsError } = await fetchProducts(municipality)
+  const { carousel, carouselError } = await fetchCarousel()
 
   return {
     props: {
       products,
-      productsError
+      productsError,
+      carousel,
+      carouselError
     }
   }
 }
@@ -313,9 +325,22 @@ async function fetchProducts(municipality) {
   return { products, productsError }
 }
 
+async function fetchCarousel() {
+  let carouselError = ''
+  let carousel = []
+  try {
+    carousel = await (await resources.carousel.all()).data
+  } catch (error) {
+    carouselError = error.message
+  }
+  return { carousel, carouselError }
+}
+
 AllProducts.propTypes = {
   products: PropTypes.object,
-  productsError: PropTypes.string
+  productsError: PropTypes.string,
+  carousel: PropTypes.object,
+  carouselError: PropTypes.string
 }
 
 AllProducts.getLayout = function getLayout(page) {
