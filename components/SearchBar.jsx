@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Autocomplete from '@mui/material/Autocomplete'
-import SearchIcon from '@mui/icons-material/Search'
+import SearchIcon from './icons/search-icon'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import AppButton from './AppButton'
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined'
@@ -10,6 +10,7 @@ import { PropTypes } from 'prop-types'
 import { getCookie } from 'cookies-next'
 import resources from '../restapi/resources'
 import SearchResult from './products/SearchResult'
+import useWindowSize from '../hooks/WindowSize'
 
 const theme = createTheme({
   palette: {
@@ -21,6 +22,7 @@ const theme = createTheme({
 })
 
 function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
+  const size = useWindowSize()
   const { t } = useTranslation()
   const NEXT_DISTRICT = getCookie('NEXT_DISTRICT')
   const NEXT_MUNICIPALITY = getCookie('NEXT_MUNICIPALITY')
@@ -55,8 +57,7 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
                   fontSize: {
                     xs: 10,
                     sm: 10,
-                    md: 10,
-                    lg: 10
+                    md: 12
                   },
                   borderTopRightRadius: 0,
                   width: '100%',
@@ -65,7 +66,7 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
                 className='bg-button'
                 onClick={() => setOpenSelectPlace(true)}
               >
-                <span className='mt-[-1px] mr-1'><AddLocationAltOutlinedIcon fontSize='small' /></span> {resizeTitle(district, 10)} <span className='mt-[-1px]'><KeyboardArrowDownOutlinedIcon fontSize='small' /></span>
+                <span className='mt-[-1px] mr-1'><AddLocationAltOutlinedIcon fontSize='small' /></span> {size.width < 1900 ? resizeTitle(district, 6) : resizeTitle(district, 10)} <span className='mt-[-1px]'><KeyboardArrowDownOutlinedIcon fontSize='small' /></span>
             </AppButton>
           </div>
           <Autocomplete
@@ -113,7 +114,6 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
             sx={{
               borderTopLeftRadius: 0,
               borderBottomLeftRadius: 0,
-              width: '15%',
               padding: '0px 0px'
             }}
             className='bg-button'

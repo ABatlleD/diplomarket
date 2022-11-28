@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import DensityMediumIcon from '@mui/icons-material/DensityMedium'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 import { Badge, Divider } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import LangSelector from './LangSelector'
@@ -14,6 +12,8 @@ import PropTypes from 'prop-types'
 import SelectPlace from '../../modals/SelectPlace'
 import { useFav } from '../../../store/fav/fav.context'
 import { useCart } from '../../../store/cart/cart.context'
+import CartHomeIcon from '../../icons/cart-home-icon'
+import HeartIcon from '../../icons/heart-icon'
 
 const theme = createTheme({
   palette: {
@@ -48,8 +48,8 @@ function TopBar({
 
   return (
     <>
-      < div className='bg-background-300 flex flex-row justify-around md:justify-between'>
-        <div className='flex flex-row justify-between md:ml-6 w-1/2 md:w-1/5 xl:w-[12%]'>
+      < div className='flex flex-row justify-around md:justify-between'>
+        <div className='flex flex-row justify-start md:ml-6 w-1/2 md:w-1/5 xl:w-[10%]'>
           <div
             className='mt-2
             xl:hidden'
@@ -63,12 +63,12 @@ function TopBar({
             <img src="/logo-preloader0.png" className="max-w-max h-14 hover:cursor-pointer" alt="..." />
           </Link>
         </div>
-        <div className='hidden md:hidden xl:flex xl:w-9/12 flex-row mt-2'>
+        <div className='hidden md:hidden xl:flex xl:w-10/12 2xl:w-10/12 flex-row mt-2'>
           <div className='md:ml-3 md:w-[98%]'>
             <SearchBar {...{ openSelectPlace, setOpenSelectPlace }} />
           </div>
         </div>
-        <div className='flex flex-row justify-between md:justify-around w-5/12 md:w-4/12 xl:w-3/12 md:mt-[-5px]'>
+        <div className='flex flex-row justify-between md:justify-around w-5/12 md:w-4/12 xl:w-3/12 2xl:w-2/12 md:mt-[-5px]'>
           <div className='hidden md:flex mt-3 md:mt-7 mr-[-7px] md:mr-[-20px]'>
             <LangSelector />
           </div>
@@ -87,13 +87,13 @@ function TopBar({
                   color='error'
                   sx={{
                     marginTop: {
-                      xs: '0.75rem',
-                      sm: '0.75rem',
-                      md: '1rem'
+                      xs: '1rem',
+                      sm: '1rem',
+                      md: '1.1rem'
                     }
                   }}
                 >
-                  <FavoriteBorderIcon fontSize='large' />
+                  <HeartIcon />
                 </Badge>
               </div>
             </Link>
@@ -103,21 +103,21 @@ function TopBar({
                 color='error'
                 sx={{
                   marginTop: {
-                    xs: '0.75rem',
-                    sm: '0.75rem',
+                    xs: '0.9rem',
+                    sm: '0.9rem',
                     md: '1rem'
                   }
                 }}
                 onClick={() => setCartSideBar(true)}
               >
-                <ShoppingCartOutlinedIcon fontSize='large' />
+                <CartHomeIcon />
               </Badge>
             </div>
           </ThemeProvider>
-          <div className='mt-1 flex md:hidden'>
+          <div className='mt-[0.30rem] flex md:hidden'>
             <AccountMenu />
           </div>
-          <div className='mt-2 hidden md:flex'>
+          <div className='mt-[0.45rem] hidden md:flex'>
             <AccountMenu />
           </div>
         </div>

@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react'
 import SearchBar from '../../SearchBar'
 import AppButton from '../../AppButton'
 import { useTranslation } from 'react-i18next'
-// import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import WhatsAppBusinessIcon from '../../icons/whats-app-business-icon'
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined'
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined'
 import LockIcon from '@mui/icons-material/Lock'
 import { Divider } from '@mui/material'
 import LangSelector from './LangSelector'
 import DensityMediumIcon from '@mui/icons-material/DensityMedium'
-import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
 import { getCookie } from 'cookies-next'
@@ -47,37 +46,11 @@ function BottomOptions({
 
   return (
     <>
-      <div className='bg-background-300 md:bg-background-300 flex flex-col md:flex-row md:justify-between p-2 md:p-4'>
-        {/* <div className='hidden md:flex xl:hidden'>
-          <AppButton
-            sx={{
-              fontSize: {
-                xs: 10,
-                sm: 10,
-                md: 15
-              },
-              paddingY: 1,
-              paddingX: 1
-            }}
-            className='bg-button'
-            onClick={() => setCategoriesSideBar((categoriesSideBar) => !categoriesSideBar)}
-          >
-            {t('layout.navbar.categories')} <span className='mt-[-1px]'><ArrowForwardIosIcon fontSize='small' /></span>
-          </AppButton>
-        </div> */}
+      <div className='md:bg-background-300 flex flex-col md:flex-row md:justify-between p-2 md:p-4'>
         <div className='md:w-[98%] md:ml-4 xl:hidden'>
           <SearchBar {...{ openSelectPlace, setOpenSelectPlace }} />
         </div>
         <div className='hidden md:hidden flex-row justify-between mt-1'>
-          {/* <AppButton
-            sx={{
-              fontSize: 10
-            }}
-            className='bg-button'
-            onClick={() => setCategoriesSideBar((categoriesSideBar) => !categoriesSideBar)}
-          >
-            {t('layout.navbar.categories')} <span className='mt-[-1px]'><ArrowForwardIosIcon sx={{ fontSize: 10 }} /></span>
-          </AppButton> */}
           <AppButton
             sx={{
               fontSize: 10
@@ -107,22 +80,17 @@ function BottomOptions({
                 fontSize='small'
               />
             </div>
-            <div className='mx-4 text-footer-background-200 font-bold'>
-              <Link href='/products/all'>
-                {t('layout.navbar.allProducts')}
-              </Link>
-            </div>
-            <div className='mr-4 text-footer-background-200 font-bold'>
+            <div className='mx-4 text-footer-background-200 font-medium hover:underline'>
               <Link href='/about'>
                 {t('layout.navbar.about')}
               </Link>
             </div>
-            <div className='mr-4 text-footer-background-200 font-bold'>
+            <div className='mr-4 text-footer-background-200 font-medium hover:underline'>
               <Link href='/sell-with-us'>
                 {t('layout.navbar.sell-with-us')}
               </Link>
             </div>
-            <div className='text-footer-background-200 font-bold'>
+            <div className='text-footer-background-200 font-medium hover:underline'>
               <Link href='/contact'>
                 {t('layout.navbar.contact')}
               </Link>
@@ -130,14 +98,9 @@ function BottomOptions({
           </div>
           <div className='flex flex-row'>
             {whatsapps.map(item => (
-              <div key={item.id} className='ml-2'>
-                <WhatsAppIcon
-                  sx={{
-                    color: '#49c95a',
-                    fontSize: 25
-                  }}
-                />
-                <a href={`https://api.whatsapp.com/send?phone=${item.contenido}&text=Hola,%20Diplomarket%E2%84%A2`} className='ml-1'>{item.contenido}</a>
+              <div key={item.id} className='ml-2 flex flex-row hover:text-footer-background-200 hover:underline'>
+                <WhatsAppBusinessIcon />
+                <a href={`https://api.whatsapp.com/send?phone=${item.contenido}&text=Hola,%20Diplomarket%E2%84%A2`} className='ml-1 font-bold'>{item.contenido}</a>
               </div>
             ))}
           </div>

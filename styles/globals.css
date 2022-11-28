@@ -94,3 +94,7 @@ img {
   width: 100%;
 }
 
+a:hover {
+  color: inherit !important;
+}
+
