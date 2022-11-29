@@ -1,7 +1,8 @@
 import React from 'react'
-import AddIcon from '@mui/icons-material/Add'
-import RemoveIcon from '@mui/icons-material/Remove'
 import PropTypes from 'prop-types'
+import { PlusIcon } from './icons/plus-icon'
+import { MinusIcon } from './icons/minus-icon'
+import useWindowSize from '../hooks/WindowSize'
 
 function AppCounter({
   value,
@@ -9,21 +10,31 @@ function AppCounter({
   onIncrement,
   disabled
 }) {
+  const size = useWindowSize()
+
   return (
-    <div className='flex flex-row mb-[0.2rem]'>
+    <div className='flex flex-row md:h-6'>
       <div
-        className='bg-background-300 rounded-md p-1 hover:cursor-pointer hover:opacity-90'
+        className='bg-background-300 rounded-md px-[0.1rem] hover:cursor-pointer hover:opacity-90'
         onClick={onDecrement}
       >
-        <RemoveIcon />
+        <MinusIcon
+          width={size.width < 768 ? 10 : 20}
+          height={size.width < 768 ? 12 : 20}
+          className='mt-[0.15rem]'
+        />
       </div>
-      <p className='text-lg mt-1 font-semibold w-6 md:w-10 text-center'>{value || 0}</p>
+      <p className='text-xs md:text-base w-6 mt-[0.1rem] md:mt-0 md:w-10 text-center'>{value || 0}</p>
       {!disabled && (
         <div
-          className='bg-background-300 rounded-md p-1 hover:cursor-pointer hover:opacity-90'
+          className='bg-background-300 rounded-md p-[0.1rem] hover:cursor-pointer hover:opacity-90'
           onClick={onIncrement}
         >
-          <AddIcon />
+          <PlusIcon
+            width={size.width < 768 ? 12 : 20}
+            height={size.width < 768 ? 12 : 20}
+            className='mt-[0.1rem]'
+          />
         </div>
       )}
     </div>

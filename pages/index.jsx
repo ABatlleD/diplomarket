@@ -158,11 +158,11 @@ function Home({
   return (
     <>
       <AppHeader title={t('pages.products')} />
-      <div className='flex flex-col'>
+      <div className='flex flex-col dark:bg-background-100'>
         <div className='mb-3 md:mb-0'>
           <MainCarousel carousel={carousel} />
         </div>
-        <div className='flex md:flex-row flex-col w-full md:w-[95%] md:mx-auto mb-3 md:my-5'>
+        <div className='dark:text-[black] flex md:flex-row flex-col w-full md:w-[95%] md:mx-auto mb-3 md:my-5'>
           <div className='mx-3 flex md:hidden text-sm flex-row justify-between mb-3'>
             {selectedCategory && (
               <div className='font-bold'>
@@ -272,7 +272,7 @@ function Home({
                 <Pagination
                   count={pages}
                   showFirstButton
-                  size='large'
+                  size='medium'
                   showLastButton
                   page={page}
                   onChange={handlePaginationChange}

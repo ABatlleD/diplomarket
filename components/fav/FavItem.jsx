@@ -5,21 +5,12 @@ import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 import Image from 'next/image'
 import ZoomInIcon from '@mui/icons-material/ZoomIn'
-import CompareIcon from '@mui/icons-material/Compare'
+// import CompareIcon from '@mui/icons-material/Compare'
 import QuickView from '../modals/QuickView'
 import AddToFav from '../fav/AddFav'
 import AddToCart from '../cart/AddCart'
 import resources from '../../restapi/resources'
 import useWindowSize from '../../hooks/WindowSize.js'
-
-// const theme = createTheme({
-//   palette: {
-//     error: {
-//       main: '#b12024',
-//       contrastText: '#fff'
-//     }
-//   }
-// })
 
 function FavItem({ id }) {
   const { i18n } = useTranslation()
@@ -30,6 +21,7 @@ function FavItem({ id }) {
   useEffect(() => {
     resources.products.one(id)
       .then(response => setProduct(response.data))
+    console.log('🚀 ~ file: FavItem.jsx ~ line 19 ~ FavItem ~ product', product)
   }, [])
 
   const resizeTitle = (string, maxLength) => {
@@ -38,57 +30,62 @@ function FavItem({ id }) {
 
   return (
     <>
-      <div className='flex flex-col hover:shadow-button w-full bg-background-300 rounded-lg h-[12rem] md:h-[22rem] xl:h-[26rem]'>
-        <div className='w-full relative flex flex-row justify-center h-24 md:h-44 xl:h-60'>
+      <div className='flex flex-col hover:shadow-button w-full border rounded-lg h-[13.5rem] md:h-[20rem] 2xl:h-[24rem]'>
+        <div className='w-full relative flex flex-row justify-center self-center h-24 md:h-44 2xl:h-60'>
           {product.img_principal && (
             <Link href={`/products/${product.id}`}>
               <Image
-                src={`http://127.0.0.1:8000${product.img_principal}`}
-                width={size.width < 768 ? 90 : 180}
-                height={10}
+                src={`${process.env.NEXT_PUBLIC_BACKEND}${product.img_principal}`}
+                layout='fill'
                 placeholder='blur'
                 blurDataURL='/loading.gif'
                 className='hover:cursor-pointer'
               />
             </Link>
           )}
-          <div className='absolute right-1'>
+          <div className='absolute right-0 top-1'>
             <Tooltip title='Quick View' placement='right'>
               <div
-                className='rounded-lg mb-2 hover:cursor-pointer hover:text-background-100 hover:bg-button bg-background-100'
+                className='rounded-l-lg pr-1 pl-[0.1rem] mb-2 hover:cursor-pointer text-background-100 bg-footer-background-200'
                 onClick={() => setOpenQuickView(true)}
               >
-                <ZoomInIcon />
+                <ZoomInIcon fontSize={size.width < 768 ? 'samll' : 'medium'} />
               </div>
             </Tooltip>
-            <Link href={'/products/compare'}>
-              <Tooltip title='Compare' placement='right'>
-                <div className='rounded-lg hover:cursor-pointer hover:text-background-100 hover:bg-button bg-background-100'>
-                  <CompareIcon />
-                </div>
-              </Tooltip>
-            </Link>
           </div>
         </div>
-        <div className='mx-2 mt-2 mb-2 md:my-2 text-text-100 h-10 md:h-6'>
-          {product.id && (
-            <Link href={`/products/${product.id}`}>
-              {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, size.width < 768 ? 10 : 20)}
-            </Link>
+        <div className='flex flex-col h-20 md:h-24'>
+          <div className='mx-2 text-text-blue text-sm md:text-base md:h-6'>
+            {product.id && (
+              <Link href={`/products/${product.id}`}>
+                {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, size.width < 768 ? 10 : 20)}
+              </Link>
+            )}
+          </div>
+          <div className='mx-2 my-0 md:my-0 text-button text-sm md:text-base'>{product.proveedor?.nombre}</div>
+          {(!product.promocion || !product.promocion.activo) && (
+            <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${product.precio}</div>
+          )}
+          {product.promocion && product.promocion.activo && (
+            <div className='flex flex-col md:flex-row ml-2 leading-3'>
+              <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-xs md:text-base'>US${(product.precio - (product.precio * product.promocion.descuento / 100)).toFixed(2)} </p>
+              <div className='flex flex-row'>
+                <div
+                  className='bg-button flex md:hidden rounded-md px-1 mr-1 text-background-100 text-xs'
+                >
+                  -{product.promocion.nombre}
+                </div>
+                <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-xs md:text-sm line-through'> US${product.precio}</p>
+              </div>
+            </div>
+          )}
+          {product.precioxlibra !== 0 && (
+            <div className='mx-2 my-0 md:mb-0 md:my-0 text-text-100 text-xs md:text-base'>US${product.precioxlibra}/{product.um}</div>
+          )}
+          {product.precioxlibra === 0 && (
+            <div className='md:h-6'></div>
           )}
         </div>
-        <div className='mx-2 my-0 md:my-0 text-button'>{product.marca?.nombre}</div>
-        <div className='mx-2 my-0 md:my-0 text-button'>{product.proveedor?.nombre}</div>
-        <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold'>$ {product.precio} {product.precio_currency}</div>
-        {/* {product.etiquetas && (
-          <ThemeProvider theme={theme}>
-            <div className='felx flex-row mx-1 md:mx-2 my-1 md:my-2 h-7'>
-              {product.etiquetas?.map((tag) => (
-                <Chip key={tag.pk} sx={{ marginRight: 1, marginBottom: 1 }} label={i18n.language === 'es' ? tag.nombre : tag.ingles} color="error" />
-              ))}
-            </div>
-          </ThemeProvider>
-        )} */}
         {size.width > 768 &&
           <Divider
             sx={{

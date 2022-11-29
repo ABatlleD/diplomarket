@@ -46,7 +46,7 @@ function BottomOptions({
 
   return (
     <>
-      <div className='md:bg-background-300 flex flex-col md:flex-row md:justify-between p-2 md:p-4'>
+      <div className='dark:bg-background-100 md:bg-background-300 dark:md:bg-background-300 flex flex-col md:flex-row md:justify-between p-2 md:p-4'>
         <div className='md:w-[98%] md:ml-4 xl:hidden'>
           <SearchBar {...{ openSelectPlace, setOpenSelectPlace }} />
         </div>

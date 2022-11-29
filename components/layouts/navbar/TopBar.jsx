@@ -48,8 +48,8 @@ function TopBar({
 
   return (
     <>
-      < div className='flex flex-row justify-around md:justify-between'>
-        <div className='flex flex-row justify-start md:ml-6 w-1/2 md:w-1/5 xl:w-[10%]'>
+      < div className='flex flex-row justify-around md:justify-between dark:bg-background-100'>
+        <div className='flex flex-row dark:text-[black] justify-start md:ml-6 w-1/2 md:w-1/5 xl:w-[10%]'>
           <div
             className='mt-2
             xl:hidden'

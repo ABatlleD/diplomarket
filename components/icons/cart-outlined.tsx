@@ -1,3 +1,5 @@
+import React from 'react'
+
 export const CartOutlinedIcon: React.FC<React.SVGAttributes<{}>> = (props) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.6 19.6" {...props}>
     <path
@@ -10,4 +12,4 @@ export const CartOutlinedIcon: React.FC<React.SVGAttributes<{}>> = (props) => (
       strokeWidth="1.6"
     />
   </svg>
-);
+)

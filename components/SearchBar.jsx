@@ -51,7 +51,7 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
     <>
       <ThemeProvider theme={theme}>
         <div className='flex flex-row'>
-          <div className='hidden md:w-2/12 md:flex'>
+          <div className='hidden md:w-1/5 md:flex'>
             <AppButton
                 sx={{
                   fontSize: {

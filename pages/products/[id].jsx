@@ -107,7 +107,6 @@ function Product({ product, apiError }) {
               images.map((item) => (
                 <div className='active-resource-card flex flex-row justify-center' key={item}>
                   <img src={`${process.env.NEXT_PUBLIC_BACKEND}${item}`} style={{
-                    maxHeight: '500px',
                     borderRadius: '6px',
                     objectFit: 'contain'
                   }} />
@@ -116,24 +115,22 @@ function Product({ product, apiError }) {
             )}
             preventMovementUntilSwipeScrollTolerance
             swipeScrollTolerance={100}
-            className={'border w-full flex flex-col justify-center rounded-lg'}
+            className={'w-full flex flex-col justify-center rounded-lg'}
           >
             {images.map((item) => (
-              <div className='active-resource-card flex flex-row justify-center' key={item}>
+              <div className='active-resource-card border rounded-3xl flex flex-row justify-center' key={item}>
                 <figure
                 onMouseMove={handleMouseMove}
                 onMouseLeave={() => setHover(false)}
                 className='flex'
                 style={{
                   backgroundImage: hover ? `url(${process.env.NEXT_PUBLIC_BACKEND}${item})` : '',
-                  maxHeight: '200px',
                   borderRadius: '6px',
                   objectFit: 'contain',
                   backgroundColor: 'white',
                   ...state
                 }}>
                   <img src={`${process.env.NEXT_PUBLIC_BACKEND}${item}`} style={{
-                    maxHeight: '200px',
                     borderRadius: '6px',
                     objectFit: 'contain'
                   }} />
@@ -142,8 +139,8 @@ function Product({ product, apiError }) {
             ))}
           </Carousel>
         </div>
-        <div className='flex flex-col mt-28 md:mt-0 md:w-1/2'>
-          <p className='font-bold text-2xl text-text-100 mb-2 mt-8 md:mt-0'>{i18n.language === 'es' ? product.nombre : product.nombre_ingles}</p>
+        <div className='flex flex-col md:mt-0 md:w-1/2'>
+          <p className='text-lg md:text-2xl text-text-blue mb-2 mt-8 md:mt-0'>{i18n.language === 'es' ? product.nombre : product.nombre_ingles}</p>
           <div className='flex flex-row'>
             <ThemeProvider theme={theme}>
               <div className='felx flex-row'>
@@ -154,7 +151,7 @@ function Product({ product, apiError }) {
             </ThemeProvider>
             {product.sku &&
               <p className={`${product.etiquetas.length > 0 ? 'ml-6' : ''} mt-1`}>
-                <span className='font-semibold'>SKU: </span> <span className='font-semibold'>{product.sku}</span>
+                <span className=''>SKU: </span> <span className='font-semibold'>{product.sku}</span>
               </p>
             }
           </div>
@@ -163,13 +160,13 @@ function Product({ product, apiError }) {
             <p className='mb-3 mt-2 text-xl font-bold'>${product.precioxlibra} {product.precioxlibra_currency}/{product.um}</p>
           )}
           <p className='mb-2'>
-            <span className='font-semibold'>{t('products.subcategory')}:</span> <span className='font-semibold text-text-100 underline'>{product.subcategoria}</span>
+            <span className='font-semibold'>{t('products.subcategory')}:</span> <span className='font-semibold text-text-100'>{product.subcategoria}</span>
           </p>
           <p className='mb-2'>
-            <span className='font-semibold'>{t('products.provider')}:</span> <span className='font-semibold text-text-100 underline'>{product.proveedor.nombre}</span>
+            <span className='font-semibold'>{t('products.provider')}:</span> <span className='font-semibold text-text-100'>{product.proveedor.nombre}</span>
           </p>
           <p className='mb-4'>
-            <span className='font-semibold'>{t('products.brand')}:</span> <span className='font-semibold text-text-100 underline'>{product.marca.nombre}</span>
+            <span className='font-semibold'>{t('products.brand')}:</span> <span className='font-semibold text-text-100'>{product.marca.nombre}</span>
           </p>
           <div className='flex flex-col'>
             <div className='flex flex-row justify-between w-11/12 mb-4'>
@@ -212,7 +209,7 @@ function Product({ product, apiError }) {
       {isLoading &&
         <>Loading...</>
       }
-      <div className='w-full 2xl:w-[60%] xl:w-[75%] flex flex-col items-center xs:mt-4 md:mt-4 mb-8'>
+      <div className='w-full 2xl:w-[60%] xl:w-[75%] flex flex-col items-center md:mt-4 mb-8'>
         <Box sx={{ width: '95%', borderBottom: 1, borderColor: 'divider' }}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs

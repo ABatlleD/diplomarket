@@ -4,6 +4,7 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined'
 import { generateFavItem } from '../../store/fav/generate-fav-item'
 import PropTypes from 'prop-types'
+import useWindowSize from '../../hooks/WindowSize'
 
 function AddToFav({
   data,
@@ -13,6 +14,7 @@ function AddToFav({
   variation,
   disabled
 }) {
+  const size = useWindowSize()
   const {
     addItemToFav,
     removeItemFromFav,
@@ -31,9 +33,9 @@ function AddToFav({
   }
   return !isInFav(item?.id)
     ? (
-      <div onClick={handleAddClick} className='text-button hover:cursor-pointer'>
+      <div onClick={handleAddClick} className='text-button hover:cursor-pointer mt-[-2px] md:mt-0'>
         <FavoriteBorderOutlinedIcon
-            fontSize="large"
+            fontSize={size.width < 768 ? 'small' : 'medium'}
         />
         {text && (
           <span>{text}</span>
@@ -43,7 +45,7 @@ function AddToFav({
     : (
         <div onClick={handleRemoveClick} className='text-button hover:cursor-pointer'>
           <FavoriteOutlinedIcon
-              fontSize="large"
+              fontSize={size.width < 768 ? 'small' : 'medium'}
           />
           {success && (
             <span>{success}</span>
