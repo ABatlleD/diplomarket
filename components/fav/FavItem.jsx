@@ -21,7 +21,6 @@ function FavItem({ id }) {
   useEffect(() => {
     resources.products.one(id)
       .then(response => setProduct(response.data))
-    console.log('🚀 ~ file: FavItem.jsx ~ line 19 ~ FavItem ~ product', product)
   }, [])
 
   const resizeTitle = (string, maxLength) => {

@@ -39,10 +39,10 @@ function ProductItem({ product }) {
               layout='fill'
               placeholder='blur'
               blurDataURL='/loading.gif'
-              className='hover:cursor-pointer'
+              className='hover:cursor-pointer rounded-t-lg'
             />
           </Link>
-          <div className='absolute right-0 top-1'>
+          <div className='absolute right-0 top-2'>
             <Tooltip title='Quick View' placement='right'>
               <div
                 className='rounded-l-lg pr-1 pl-[0.1rem] mb-2 hover:cursor-pointer text-background-100 bg-footer-background-200'
@@ -52,7 +52,7 @@ function ProductItem({ product }) {
               </div>
             </Tooltip>
           </div>
-          <div className='absolute top-1 left-0'>
+          <div className='absolute top-2 left-0'>
             <ThemeProvider theme={theme}>
               <div className='felx flex-col my-1 md:my-2'>
                 {product.etiquetas.map((tag) => (

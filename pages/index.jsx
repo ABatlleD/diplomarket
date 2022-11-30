@@ -4,7 +4,7 @@ import resources from '../restapi/resources'
 import PropTypes from 'prop-types'
 import ListProducts from '../components/products/ListProducts'
 import CategoriesAccordion from '../components/categories/CategoriesAccordion'
-import { Slider, FormControlLabel, Pagination, RadioGroup, Radio } from '@mui/material'
+import { FormControlLabel, Pagination, RadioGroup, Radio, TextField, Autocomplete } from '@mui/material'
 import FilterBar from '../components/layouts/sidebar/FilterBar'
 import TuneIcon from '@mui/icons-material/Tune'
 import { useTranslation } from 'react-i18next'
@@ -26,39 +26,43 @@ function Home({
   const [page, setPage] = useState(1)
   const [categories, setCategories] = useState([])
   const [suppliers, setSuppliers] = useState()
-  const [brands, setBrands] = useState()
-  const [prices, setPrices] = useState([0, 1000])
+  const [brands, setBrands] = useState([])
   const municipality = getCookie('NEXT_MUNICIPALITY')
+  const [featureds, setFeatureds] = useState(false)
+  const [promotions, setPromotions] = useState(false)
+  const [recomendations, setRecomendations] = useState(false)
 
   const [category, setCategory] = useState(undefined)
   const [selectedCategory, setSelectedCategory] = useState(undefined)
   const [offset, setOffset] = useState(0)
   const [subcategory, setSubcategory] = useState(undefined)
-  const [brand, setBrand] = useState(0)
+  const [brand, setBrand] = useState()
   const [provider, setProvider] = useState(0)
   const [min, setMin] = useState(0)
   const [max, setMax] = useState(1000)
 
   useEffect(() => {
     resources.brands.all()
-      .then(response => setBrands(response.data))
+      .then(response => {
+        const answer = []
+        response.data.results.map((item) => {
+          const el = {
+            label: item.nombre,
+            id: item.id
+          }
+          return answer.push(el)
+        })
+        return setBrands(answer)
+      })
     resources.suppliers.all()
       .then(response => setSuppliers(response.data))
     resources.categories.all()
       .then(response => setCategories(response.data.results))
   }, [])
 
-  const handlePriceChange = (event, newPrices) => {
-    setPrices(newPrices)
-  }
-
-  const handlePriceFilter = () => {
+  const handlePriceFilter = (prices) => {
     setMin(prices[0])
     setMax(prices[1])
-  }
-
-  const handleBrandFilter = (event) => {
-    setBrand(event.target.value)
   }
 
   const handleSubcategoryFilter = (subcategory) => {
@@ -88,7 +92,6 @@ function Home({
     setSelectedCategory(undefined)
     setMin(0)
     setMax(1000)
-    setPrices([0, 1000])
   }
 
   const handleMobileFilter = (mobileFilter) => {
@@ -155,6 +158,23 @@ function Home({
     }
   }, [list])
 
+  const handleChangeType = (type) => {
+    setFeatureds(false)
+    setPromotions(false)
+    setRecomendations(false)
+    switch (type) {
+      case 'featureds':
+        setFeatureds(true)
+        break
+      case 'promotions':
+        setPromotions(true)
+        break
+      case 'recommendations':
+        setRecomendations(true)
+        break
+    }
+  }
+
   return (
     <>
       <AppHeader title={t('pages.products')} />
@@ -180,7 +200,7 @@ function Home({
               <TuneIcon />
             </div>
           </div>
-          <div className='md:flex hidden mr-1 flex-col w-3/12'>
+          <div className='md:flex hidden mr-1 flex-col w-1/6'>
             <div className='flex flex-col'>
               <p className='font-bold mb-2'>{t('filter.category')}</p>
               <div className=''>
@@ -198,45 +218,30 @@ function Home({
                 ))}
               </div>
             </div>
-            <div className='flex flex-col my-2'>
+            <div className='flex flex-col my-4'>
+              <FormControlLabel value={featureds} onChange={() => handleChangeType('featureds')} control={<Radio />} label={t('filter.featureds')} />
+              <FormControlLabel value={promotions} onChange={() => handleChangeType('featureds')} control={<Radio />} label={t('filter.promotions')} />
+              <FormControlLabel value={recomendations} onChange={() => handleChangeType('featureds')} control={<Radio />} label={t('filter.recomendations')} />
+            </div>
+            <div className='flex flex-col mt-2 mb-4'>
               <p className='font-bold mb-2'>{t('filter.price')}</p>
               <div className='w-[92%]'>
-                <Slider
-                  getAriaLabel={() => 'Temperature range'}
-                  size='small'
-                  value={prices}
-                  onChange={handlePriceChange}
-                  valueLabelDisplay="auto"
-                  color='secondary'
-                  max={1000}
-                />
-              </div>
-              <div className='flex flex-row justify-between w-[92%]'>
-                <div className=''>
-                  <p className='border rounded-sm text-sm px-4'>${prices[0]} - ${prices[1]}</p>
-                </div>
-                <div
-                  className='bg-footer-background-200 text-background-100 text-sm px-2 font-bold shadow-sm rounded-sm hover:cursor-pointer hover:opacity-90'
-                  onClick={handlePriceFilter}
-                >
-                  {t('filter.filter')}
-                </div>
+                <div className='mb-1 hover:cursor-pointer' onClick={() => handlePriceFilter([0, 25])}>US$0 {t('filter.to')} US$25</div>
+                <div className='mb-1 hover:cursor-pointer' onClick={() => handlePriceFilter([25, 50])}>US$25 {t('filter.to')} US$50</div>
+                <div className='mb-1 hover:cursor-pointer' onClick={() => handlePriceFilter([50, 100])}>US$50 {t('filter.to')} US$100</div>
+                <div className='mb-1 hover:cursor-pointer' onClick={() => handlePriceFilter([100, 200])}>US$100 {t('filter.to')} US$200</div>
+                <div className='mb-1 hover:cursor-pointer' onClick={() => handlePriceFilter([200, 1000])}>{t('filter.more')} US$200</div>
               </div>
             </div>
-            <div className='flex flex-col w-[95%]'>
-              <p className='font-bold my-2'>{t('filter.brand')}</p>
-              <RadioGroup
-                aria-labelledby="demo-controlled-radio-buttons-group"
-                name="controlled-radio-buttons-group"
+            <div className='flex flex-col mb-4 w-[95%]'>
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
                 value={brand}
-                onChange={handleBrandFilter}
-              >
-                <div className='flex flex-wrap'>
-                  {brands?.results?.map((item) => (
-                    <FormControlLabel key={item.id} value={item.id} control={<Radio />} label={item.nombre} />
-                  ))}
-                </div>
-              </RadioGroup>
+                options={brands}
+                onChange={(event, newValue) => setBrand(newValue.id)}
+                renderInput={(params) => <TextField {...params} label={t('filter.brand')} />}
+              />
             </div>
             <div className='flex flex-col w-[95%]'>
               <p className='font-bold my-2'>{t('filter.provider')}</p>
@@ -255,7 +260,7 @@ function Home({
             </div>
             <div className='my-2 underline hover:cursor-pointer' onClick={handleAllClick}>{t('filter.all')}</div>
           </div>
-          <div className='flex flex-row w-full md:w-9/12'>
+          <div className='flex flex-row w-full md:w-5/6'>
             <div className='flex flex-col items-center w-full'>
               {selectedCategory && (
                 <div className='font-bold w-full ml-4 mb-2 text-xl hidden md:flex'>

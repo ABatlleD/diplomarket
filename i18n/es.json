@@ -74,12 +74,17 @@
   "filter": {
     "category": "Categorías",
     "price": "Precio",
-    "brand": "Marcas",
-    "provider": "Proveedores",
+    "brand": "Marca",
+    "provider": "Proveedor",
     "clear": "Limpiar",
     "all": "Ver Todos",
     "filter": "Filtrar",
-    "categories": "Todas las categorías"
+    "categories": "Todas las categorías",
+    "to": "hasta",
+    "more": "Más de",
+    "promotions": "Productos en oferta",
+    "featureds": "Productos destacados",
+    "recomendations": "Recomendaciones de hoy"
   },
   "cart": {
     "no": "No hay",
