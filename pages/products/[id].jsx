@@ -140,7 +140,7 @@ function Product({ product, apiError }) {
           </Carousel>
         </div>
         <div className='flex flex-col md:mt-0 md:w-1/2'>
-          <p className='text-lg md:text-2xl text-text-blue mb-2 mt-8 md:mt-0'>{i18n.language === 'es' ? product.nombre : product.nombre_ingles}</p>
+          <p className='text-lg md:text-xl text-text-blue mb-2 md:mt-0'>{i18n.language === 'es' ? product.nombre : product.nombre_ingles}</p>
           <div className='flex flex-row'>
             <ThemeProvider theme={theme}>
               <div className='felx flex-row'>
@@ -150,14 +150,29 @@ function Product({ product, apiError }) {
               </div>
             </ThemeProvider>
             {product.sku &&
-              <p className={`${product.etiquetas.length > 0 ? 'ml-6' : ''} mt-1`}>
+              <p className={`${product.etiquetas.length > 0 ? 'ml-6' : ''} my-2`}>
                 <span className=''>SKU: </span> <span className='font-semibold'>{product.sku}</span>
               </p>
             }
           </div>
-          <p className='mb-3 mt-2 text-button text-xl font-bold'>${product.precio} {product.precio_currency}</p>
-          {product.precioxlibra !== 0 && (
-            <p className='mb-3 mt-2 text-xl font-bold'>${product.precioxlibra} {product.precioxlibra_currency}/{product.um}</p>
+          {!product.promocion.activo && (
+            <div className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${product.precio}</div>
+          )}
+          {product.promocion.activo && (
+            <div className='flex flex-col leading-3'>
+              <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${(product.precio - (product.precio * product.promocion.descuento / 100)).toFixed(2)} </p>
+              <div className='flex flex-row my-2'>
+                <div
+                  className='bg-button flex rounded-md px-1 mr-1 text-background-100 text-sm'
+                >
+                  -{product.promocion.descuento}%
+                </div>
+                <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-sm md:text-sm line-through'> US${product.precio}</p>
+              </div>
+            </div>
+          )}
+          {product.precioxlibra.cantidad !== '0.00' && (
+            <div className='mb-2 md:mb-0 md:my-0 text-text-100 text-sm md:text-base'>US${product.precioxlibra}/{product.um}</div>
           )}
           <p className='mb-2'>
             <span className='font-semibold'>{t('products.subcategory')}:</span> <span className='font-semibold text-text-100'>{product.subcategoria}</span>
@@ -177,13 +192,16 @@ function Product({ product, apiError }) {
                   >
                     {Number(product.cant_inventario) > 0
                       ? (
-                          <AddToCart data={{
-                            ...product,
-                            precio: {
-                              cantidad: product.precio,
-                              moneda: product.precio_currency
-                            }
-                          }} />
+                          <AddToCart
+                            data={{
+                              ...product,
+                              precio: {
+                                cantidad: product.precio,
+                                moneda: product.precio_currency
+                              }
+                            }}
+                            size={[26, 26]}
+                          />
                         )
                       : <></>}
                   </div>

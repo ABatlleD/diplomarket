@@ -10,7 +10,8 @@ function AddToCart ({
   counterClass,
   helium,
   variation,
-  disabled
+  disabled,
+  size
 }) {
   const {
     addItemToCart,
@@ -41,6 +42,7 @@ function AddToCart ({
       <AddToCartBtn
         disabled={disabled || outOfStock}
         onClick={handleAddClick}
+        dimentions={size}
       />
       )}
       {isInCart(`${item.id}`) && (
@@ -62,7 +64,8 @@ AddToCart.propTypes = {
   counterClass: PropTypes.string,
   helium: PropTypes.bool,
   variation: PropTypes.any,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  size: PropTypes.array
 }
 
 export default AddToCart

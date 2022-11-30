@@ -69,7 +69,7 @@ function ProductItem({ product }) {
                     <div
                       className='bg-button hidden md:flex px-1 rounded-r-full text-background-100 font-weight-light text-[0.5rem] md:text-xs'
                     >
-                      -{product.promocion.nombre}
+                      -{product.promocion.descuento}%
                     </div>
                   </div>
                 )}
@@ -77,15 +77,15 @@ function ProductItem({ product }) {
             </ThemeProvider>
           </div>
         </div>
-        <div className='flex flex-col h-20 md:h-24'>
+        <div className='flex flex-col h-[5.5rem] md:h-24'>
           <div className='mx-2 text-text-blue text-sm md:text-base md:h-6'>
             <Link href={`/products/${product.id}`}>
-              {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, size.width > 768 ? size.width > 1900 ? 25 : 16 : 10)}
+              {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, size.width > 768 ? size.width > 1900 ? 20 : 16 : 10)}
             </Link>
           </div>
           <div className='mx-2 my-0 md:my-0 text-button text-sm md:text-base'>{product.proveedor.nombre}</div>
           {!product.promocion.activo && (
-            <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${product.precio.cantidad}</div>
+            <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-xs md:text-base'>US${product.precio.cantidad}</div>
           )}
           {product.promocion.activo && (
             <div className='flex flex-col md:flex-row ml-2 leading-3'>
@@ -94,7 +94,7 @@ function ProductItem({ product }) {
                 <div
                   className='bg-button flex md:hidden rounded-md px-1 mr-1 text-background-100 text-xs'
                 >
-                  -{product.promocion.nombre}
+                  -{product.promocion.descuento}%
                 </div>
                 <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-xs md:text-sm line-through'> US${product.precio.cantidad}</p>
               </div>
