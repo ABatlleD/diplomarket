@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import AppCounter from '../AppCounter'
-import HighlightOffIcon from '@mui/icons-material/HighlightOff'
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import { useCart } from '../../store/cart/cart.context'
 import usePrice from '../../libs/use-price'
 import PropTypes from 'prop-types'
@@ -52,11 +52,12 @@ function CartItem({ item, variant, calculateDelivery }) {
   const isNotAvailable = !isAvailable(item.id)
   return (
     <motion.div
-      layout
-      initial="from"
-      animate="to"
-      exit="from"
-      className={`flex items-center py-1 text-sm bg-background-300 mt-4 rounded-lg justify-around border-opacity-75 ${
+      key={item.id}
+      initial={{ opacity: 0, x: 100 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 100, rotate: 10 }}
+      transition={{ }}
+      className={`flex flex-row p-1 text-sm border mt-4 rounded-lg justify-around border-opacity-75 ${
         isNotAvailable ? 'bg-red-100' : ''
       }`}
     >
@@ -77,19 +78,19 @@ function CartItem({ item, variant, calculateDelivery }) {
         <></>
           )}
 
-      <div className="w-16 md:w-28 ml-1 overflow-hidden bg-gray-100 mr-2 shrink-0 relative">
+      <div className="w-16 md:w-24 ml-1 overflow-hidden bg-gray-100 mr-2 shrink-0 relative">
         <Image
           src={`${process.env.NEXT_PUBLIC_BACKEND}${item.image}`}
-          width={size.width < 768 ? 80 : 180}
-          height={size.width < 768 ? 90 : 200}
+          width={size.width < 768 ? 80 : 100}
+          height={size.width >= 768 && size.width < 1900 ? 90 : 100}
           placeholder='blur'
           blurDataURL='/loading.gif'
           className='hover:cursor-pointer'
         />
       </div>
       <div>
-        <h3 className="font-bold text-heading">{i18n.language === 'es' ? item.name : item.english_name}</h3>
-        <p className="my-2.5 font-semibold text-accent">{price} {currency}</p>
+        <h3 className="font-bold text-heading text-text-blue">{i18n.language === 'es' ? item.name : item.english_name}</h3>
+        <p className="my-2.5 font-semibold text-accent text-button">US{price}</p>
         <span className="text-xs text-body">
           {!variant
             ? (
@@ -121,15 +122,15 @@ function CartItem({ item, variant, calculateDelivery }) {
                 )}
         </span>
       </div>
-      <div className='flex flex-col items-end h-[4.7rem] justify-between'>
+      <div className='flex flex-col items-end h-[5rem] md:h-[5rem] 2xl:h-[6rem] justify-between'>
         <button
           className="w-6 h-6 flex items-center justify-center shrink-0 rounded-full transition-all focus:outline-none hover:bg-accent focus:bg-accent hover:text-light focus:text-light"
           onClick={() => clearItemFromCart(item.id)}
         >
           <span className="sr-only mt-[-7px]">{t('text-close')}</span>
-          <HighlightOffIcon />
+          <DeleteOutlineIcon color='error' />
         </button>
-        <span className="font-bold text-heading">{itemPrice} {currency}</span>
+        <span className="font-bold text-heading">US{itemPrice}</span>
       </div>
     </motion.div>
   )

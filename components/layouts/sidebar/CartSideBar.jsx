@@ -9,6 +9,7 @@ import CartItem from '../../cart/CartItem'
 import usePrice from '../../../libs/use-price'
 import { t } from 'i18next'
 import Link from 'next/link'
+import { AnimatePresence } from 'framer-motion'
 
 function CartSideBar ({ cartSideBar = false, setCartSideBar = () => {} }) {
   const currency = 'USD'
@@ -40,10 +41,14 @@ function CartSideBar ({ cartSideBar = false, setCartSideBar = () => {} }) {
             </div>
             <Divider sx={{ bgcolor: '#111b3c' }} />
             {items.length > 0 && (
-              items.map((item) =>
-                <div key={item.id}>
-                  <CartItem item={item} />
-                </div>)
+              <AnimatePresence>
+                {
+                  items.map((item) =>
+                  <div key={item.id}>
+                    <CartItem item={item} />
+                  </div>)
+                }
+              </AnimatePresence>
             )}
           </div>
           {items.length <= 0 && (
