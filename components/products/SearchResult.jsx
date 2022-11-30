@@ -13,11 +13,11 @@ function SearchResult({ data, setInputValue = () => '' }) {
   }
 
   return (
-    <div className='flex flex-col mx-4 my-2'>
+    <div className='flex flex-col mx-2 md:mx-4 my-2'>
       <Link href={`/products/${data.pk}`}>
         <div className='w-full flex flex-row justify-between hover:cursor-pointer hover:bg-background-300' onClick={() => setInputValue('')}>
-          <div>{resizeTitle(i18n.language === 'es' ? data.nombre : data.nombre_ingles, size.width < 768 ? 15 : 25)}</div>
-          <div className='bg-button px-1 text-background-100 rounded-md'>{data.precio} USD</div>
+          <div className='text-sm md:text-base'>{resizeTitle(i18n.language === 'es' ? data.nombre : data.nombre_ingles, size.width < 768 ? 15 : 25)}</div>
+          <div className='bg-button px-1 text-background-100 rounded-xl text-sm md:text-base'>{data.precio} USD</div>
         </div>
       </Link>
     </div>
