@@ -56,7 +56,12 @@ function MainLayout({ children }) {
                 }} />
               </motion.div>
               <CategoriesSideBar {...{ categoriesSideBar, setCategoriesSideBar }} />
-              <MainSideBar {...{ mainSideBar, setMainSideBar }} />
+              <MainSideBar {...{
+                mainSideBar,
+                setMainSideBar,
+                openSelectPlace,
+                setOpenSelectPlace
+              }} />
               <CartSideBar {...{ cartSideBar, setCartSideBar }} />
             </QueryClientProvider>
           </CartProvider>

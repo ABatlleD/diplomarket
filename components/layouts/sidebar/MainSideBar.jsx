@@ -6,17 +6,19 @@ import LockIcon from '@mui/icons-material/Lock'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import AppButton from '../../AppButton'
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined'
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined'
 import { useTranslation } from 'react-i18next'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
+import { getCookie } from 'cookies-next'
 import Link from 'next/link'
 import resources from '../../../restapi/resources'
 
-function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {} }) {
+function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {}, openSelectPlace, setOpenSelectPlace }) {
   const { t } = useTranslation()
   const [contacts, setContacts] = useState([])
+  const NEXT_DISTRICT = getCookie('NEXT_DISTRICT')
+  const [district, setDistrict] = useState('')
 
   useEffect(() => {
     const answer = []
@@ -26,6 +28,10 @@ function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {} }) {
         setContacts(answer)
       })
   }, [])
+
+  useEffect(() => {
+    setDistrict(NEXT_DISTRICT)
+  }, [NEXT_DISTRICT])
 
   return (
     <React.Fragment>
@@ -60,19 +66,15 @@ function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {} }) {
               width: '100%'
             }}
             className='bg-button rounded-full'
+            onClick={() => {
+              setMainSideBar((mainSideBar) => !mainSideBar)
+              setOpenSelectPlace(true)
+            }}
           >
-            <span className='mt-[-3px] mr-1'><AddLocationAltOutlinedIcon fontSize='small' /></span> Miami <span className='mt-[-1px]'><KeyboardArrowDownOutlinedIcon fontSize='small' /></span>
+            <span className='mt-[-3px] mr-1'><AddLocationAltOutlinedIcon fontSize='small' /></span> {district} <span className='mt-[-1px]'></span>
           </AppButton>
         </div>
           <div className='flex flex-col mx-4'>
-          <div
-            onClick={() => setMainSideBar((mainSideBar) => false)}
-            className='mt-8 text-footer-background-200 hover:text-footer-background-100 font-semibold text-lg'
-          >
-            <Link href='/products/all'>
-              <p>{t('layout.navbar.allProducts')} <span><KeyboardArrowRightIcon sx={{ marginTop: '-1px' }} /></span></p>
-            </Link>
-          </div>
           <div
             onClick={() => setMainSideBar((mainSideBar) => false)}
             className='mt-4 text-footer-background-200 hover:text-footer-background-100 font-semibold text-lg'
@@ -118,7 +120,9 @@ function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {} }) {
 
 MainSideBar.propTypes = {
   mainSideBar: PropTypes.bool,
-  setMainSideBar: PropTypes.func
+  setMainSideBar: PropTypes.func,
+  openSelectPlace: PropTypes.bool,
+  setOpenSelectPlace: PropTypes.func
 }
 
 export default MainSideBar

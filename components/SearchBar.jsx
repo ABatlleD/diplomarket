@@ -66,7 +66,7 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
                 className='bg-button'
                 onClick={() => setOpenSelectPlace(true)}
               >
-                <span className='mt-[-1px] mr-1'><AddLocationAltOutlinedIcon fontSize='small' /></span> {size.width < 1900 ? resizeTitle(district, 6) : resizeTitle(district, 10)} <span className='mt-[-1px]'><KeyboardArrowDownOutlinedIcon fontSize='small' /></span>
+                <span className='mt-[-1px] mr-1'><AddLocationAltOutlinedIcon fontSize='small' /></span> {size.width < 1900 ? resizeTitle(district, 6) : resizeTitle(district, 15)} <span className='mt-[-1px]'></span>
             </AppButton>
           </div>
           <Autocomplete
