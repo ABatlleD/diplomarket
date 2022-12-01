@@ -1,13 +1,9 @@
-import React, { FC } from 'react';
+/* eslint-disable no-tabs */
+import React from 'react'
+import PropTypes from 'prop-types'
 
-type CartProps = {
-	width?: number;
-	height?: number;
-	className?: string;
-};
-
-const Cart: FC<CartProps> = ({ width, height, className }) => {
-	return (
+const Cart = ({ width, height, className }) => {
+  return (
 		<svg
 			version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
 			width={width}
@@ -42,7 +38,13 @@ const Cart: FC<CartProps> = ({ width, height, className }) => {
 				c-0.001,0-0.001,0-0.001,0c-4.142,0-7.5,3.357-7.501,7.498l-0.008,33.311C127.507,44.951,130.864,48.31,135.006,48.311z"/>
 		</g>
 		</svg>
-	);
-};
+  )
+}
 
-export default Cart;
+Cart.propTypes = {
+  width: PropTypes.any,
+  height: PropTypes.any,
+  className: PropTypes.any
+}
+
+export default Cart

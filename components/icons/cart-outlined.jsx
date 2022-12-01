@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const CartOutlinedIcon: React.FC<React.SVGAttributes<{}>> = (props) => (
+export const CartOutlinedIcon = (props) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.6 19.6" {...props}>
     <path
       data-name="Path 12"

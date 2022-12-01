@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CartHomeIcon: React.FC<React.SVGAttributes<{}>> = () => (
+const CartHomeIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="30"

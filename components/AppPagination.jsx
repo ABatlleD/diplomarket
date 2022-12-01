@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavigateBefore, NavigateNext } from '@mui/icons-material'
+import { NavigateBefore } from '@mui/icons-material'
 
 function AppPagination() {
   return (

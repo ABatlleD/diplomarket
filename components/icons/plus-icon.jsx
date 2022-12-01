@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const PlusIcon: React.FC<React.SVGAttributes<{}>> = (props) => (
+export const PlusIcon = (props) => (
   <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
     <path
       strokeLinecap="round"

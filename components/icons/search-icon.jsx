@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SearchIcon: React.FC<React.SVGAttributes<{}>> = () => (
+const SearchIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="40.414"
