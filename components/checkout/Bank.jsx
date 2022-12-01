@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import Card from 'react-credit-cards'
+import Card from 'react-credit-cards-2'
 import { EXCLUSIVE_COUNTRIES } from '../../libs/constants'
 import PropTypes from 'prop-types'
 import {
@@ -15,7 +15,7 @@ import {
   formatExpirationDate
 } from '../../libs/format-credit-card'
 
-import 'react-credit-cards/es/styles-compiled.css'
+import 'react-credit-cards-2/es/styles-compiled.css'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
