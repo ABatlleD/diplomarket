@@ -171,7 +171,7 @@ function Product({ product, apiError }) {
               </div>
             </div>
           )}
-          {product.precioxlibra.cantidad !== '0.00' && (
+          {product.precioxlibra !== 0 && (
             <div className='mb-2 md:mb-0 md:my-0 text-text-100 text-sm md:text-base'>US${product.precioxlibra}/{product.um}</div>
           )}
           <p className='mb-2'>
