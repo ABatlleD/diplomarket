@@ -4,7 +4,7 @@ import resources from '../restapi/resources'
 import PropTypes from 'prop-types'
 import ListProducts from '../components/products/ListProducts'
 import CategoriesAccordion from '../components/categories/CategoriesAccordion'
-import { FormControlLabel, Pagination, RadioGroup, Radio, TextField, Autocomplete } from '@mui/material'
+import { FormControlLabel, Tooltip, Pagination, RadioGroup, Radio, TextField, Autocomplete } from '@mui/material'
 import FilterBar from '../components/layouts/sidebar/FilterBar'
 import TuneIcon from '@mui/icons-material/Tune'
 import { useTranslation } from 'react-i18next'
@@ -31,6 +31,7 @@ function Home({
   const [featureds, setFeatureds] = useState(false)
   const [promotions, setPromotions] = useState(false)
   const [recomendations, setRecomendations] = useState(false)
+  const [tooltip, setTooltip] = useState(true)
 
   const [category, setCategory] = useState(undefined)
   const [selectedCategory, setSelectedCategory] = useState(undefined)
@@ -194,11 +195,28 @@ function Home({
                 {t('filter.categories')}
               </div>
             )}
-            <div
-              onClick={() => setFilterBar(true)}
+            <Tooltip
+              PopperProps={{
+                disablePortal: true
+              }}
+              onClose={() => setTooltip(false)}
+              open={tooltip}
+              placement="left"
+              arrow
+              disableFocusListener
+              disableHoverListener
+              disableTouchListener
+              title={t('filter.filter')}
             >
-              <TuneIcon />
-            </div>
+              <div
+                onClick={() => {
+                  setTooltip(false)
+                  setFilterBar(true)
+                }}
+              >
+                <TuneIcon />
+              </div>
+            </Tooltip>
           </div>
           <div className='md:flex hidden mr-1 flex-col w-1/6'>
             <div className='flex flex-col'>
