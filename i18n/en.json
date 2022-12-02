@@ -45,7 +45,7 @@
     "allProducts": "All Products",
     "featuredProducts": "Featured Products",
     "recentlySold": "Most Recently Sold",
-    "todayRecomendation": "Today's Recomendations",
+    "todayRecommendation": "Today's Recommendations",
     "addCart": "Add Cart",
     "shopNow": "Shop Now",
     "addWishList": "Add To Wishlist",
@@ -78,13 +78,13 @@
     "provider": "Provider",
     "clear": "Clear",
     "all": "View All",
-    "filter": "Fiter",
+    "filter": "Filter",
     "categories": "All categories",
     "to": "to",
     "more": "More than",
     "promotions": "Hot deals",
-    "featureds": "Featured products",
-    "recomendations": "Today's recommendations"
+    "features": "Featured products",
+    "recommendations": "Today's recommendations"
   },
   "cart": {
     "no": "No",
@@ -207,7 +207,7 @@
       "7": "- We take care that your company commercializes under the commercial and banking laws of the United States and the island, highlighted by the FGNE and the state, through licenses issued for our companies, their suppliers and clients."
     },
     "message_forms": "Please complete the form below. Our specialists will contact you. Your information is confidential with us.",
-    "placeholder": "Although this field is not required, the Diplomamarket team suggests sending as much (and clearest) information as possible.",
+    "placeholder": "Although this field is not required, the Diplomarket team suggests sending as much (and clearest) information as possible.",
     "buttonText": "SEND",
     "forms": {
       "name": "Name of the entity or person",
@@ -319,7 +319,7 @@
     "settings": {
       "premium_title": "Update to Premium",
       "premium_subtitle": "This feature it's not currently available.",
-      "title": "Cahange Password",
+      "title": "Change Password",
       "old": "Old Password",
       "new": "New Password",
       "submit": "Save New Password"
@@ -365,7 +365,7 @@
       "forgot": "Forgot your password?"
     },
     "signup": {
-      "fullname": "Fullname",
+      "fullname": "Full Name",
       "email": "Email",
       "password": "Password",
       "confirm": "Confirm Password",
@@ -383,5 +383,7 @@
       "privacy": "privacy policy",
       "is_register": "Do you have an account?"
     }
-  }
+  },
+  "compare": "Compare",
+  "quick": "Quick view"
 }

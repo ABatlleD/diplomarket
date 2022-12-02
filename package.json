@@ -39,6 +39,7 @@
     "react-dom": "18.2.0",
     "react-google-recaptcha-v3": "^1.10.0",
     "react-i18next": "^11.18.6",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-phone-input-2": "^2.15.1",
     "react-responsive-carousel": "^3.2.23",
     "react-toastify": "^9.1.1",

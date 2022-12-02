@@ -10,6 +10,8 @@ import ZoomInIcon from '@mui/icons-material/ZoomIn'
 import QuickView from '../modals/QuickView'
 import AddToFav from '../fav/AddFav'
 import AddToCart from '../cart/AddCart'
+import CompareArrowsIcon from '@mui/icons-material/CompareArrows'
+import { useRouter } from 'next/router'
 
 const theme = createTheme({
   palette: {
@@ -21,7 +23,8 @@ const theme = createTheme({
 })
 
 function ProductItem({ product }) {
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const router = useRouter()
   const [openQuickView, setOpenQuickView] = useState(false)
   const size = useWindowSize()
 
@@ -43,12 +46,22 @@ function ProductItem({ product }) {
             />
           </Link>
           <div className='absolute right-0 top-2'>
-            <Tooltip title='Quick View' placement='right'>
+            <Tooltip title={t('quick')} placement='right'>
               <div
                 className='rounded-l-lg pr-1 pl-[0.1rem] mb-2 hover:cursor-pointer text-background-100 bg-footer-background-200'
                 onClick={() => setOpenQuickView(true)}
               >
-                <ZoomInIcon fontSize={size.width < 768 ? 'samll' : 'medium'} />
+                <ZoomInIcon fontSize={size.width < 768 ? 'small' : 'medium'} />
+              </div>
+            </Tooltip>
+          </div>
+          <div className='absolute hidden md:flex right-0 top-9 md:top-10'>
+            <Tooltip title={t('compare')} placement='right'>
+              <div
+                className='rounded-l-lg pr-1 pl-[0.1rem] mb-2 hover:cursor-pointer text-background-100 bg-button'
+                onClick={() => router.push('/compare')}
+              >
+                <CompareArrowsIcon fontSize={size.width < 768 ? 'samll' : 'medium'} />
               </div>
             </Tooltip>
           </div>

@@ -11,13 +11,22 @@ import { getCookie } from 'cookies-next'
 import { FavProvider } from '../store/fav/fav.context.jsx'
 import { CartProvider } from '../store/cart/cart.context.jsx'
 import { SessionProvider } from 'next-auth/react'
+import QuickTip from '../components/modals/QuickTip.jsx'
 
 function MainLayout({ children }) {
   const [categoriesSideBar, setCategoriesSideBar] = useState(false)
   const [mainSideBar, setMainSideBar] = useState(false)
   const [cartSideBar, setCartSideBar] = useState(false)
   const [openSelectPlace, setOpenSelectPlace] = useState(false)
+  const [openQuickTip, setOpenQuickTip] = useState(false)
   const NEXT_MUNICIPALITY = getCookie('NEXT_MUNICIPALITY')
+  const NEXT_TIP = getCookie('NEXT_TIP')
+
+  useEffect(() => {
+    if (NEXT_TIP >= 2) {
+      setOpenQuickTip(true)
+    }
+  }, [NEXT_TIP])
 
   useEffect(() => {
     if (!NEXT_MUNICIPALITY) {
@@ -63,6 +72,7 @@ function MainLayout({ children }) {
                 setOpenSelectPlace
               }} />
               <CartSideBar {...{ cartSideBar, setCartSideBar }} />
+              <QuickTip {...{ openQuickTip, setOpenQuickTip }} />
             </QueryClientProvider>
           </CartProvider>
         </FavProvider>

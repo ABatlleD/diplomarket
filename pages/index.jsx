@@ -4,13 +4,16 @@ import resources from '../restapi/resources'
 import PropTypes from 'prop-types'
 import ListProducts from '../components/products/ListProducts'
 import CategoriesAccordion from '../components/categories/CategoriesAccordion'
-import { FormControlLabel, Tooltip, Pagination, RadioGroup, Radio, TextField, Autocomplete } from '@mui/material'
+import { FormControlLabel, Pagination, RadioGroup, Radio, TextField, Autocomplete } from '@mui/material'
 import FilterBar from '../components/layouts/sidebar/FilterBar'
 import TuneIcon from '@mui/icons-material/Tune'
 import { useTranslation } from 'react-i18next'
 import AppHeader from '../components/layouts/AppHeader'
 import { getCookie } from 'cookies-next'
 import MainCarousel from '../components/home/MainCarousel'
+import useWindowSize from '../hooks/WindowSize'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import ProductItem from '../components/products/ProductItem'
 
 function Home({
   products,
@@ -18,8 +21,10 @@ function Home({
   carousel,
   carouselError
 }) {
+  const size = useWindowSize()
   const { t, i18n } = useTranslation()
   const [list, setList] = useState(products)
+  const [mobileList, setMobileList] = useState(products.results)
   const [loading, setLoading] = useState(false)
   const [filterBar, setFilterBar] = useState(false)
   const [pages, setPages] = useState(1)
@@ -31,7 +36,6 @@ function Home({
   const [featureds, setFeatureds] = useState(false)
   const [promotions, setPromotions] = useState(false)
   const [recomendations, setRecomendations] = useState(false)
-  const [tooltip, setTooltip] = useState(true)
 
   const [category, setCategory] = useState(undefined)
   const [selectedCategory, setSelectedCategory] = useState(undefined)
@@ -41,6 +45,10 @@ function Home({
   const [provider, setProvider] = useState(0)
   const [min, setMin] = useState(0)
   const [max, setMax] = useState(1000)
+
+  const getMorePost = async () => {
+    setOffset(offset + 15)
+  }
 
   useEffect(() => {
     resources.brands.all()
@@ -77,7 +85,6 @@ function Home({
     setFilterBar(false)
     setSubcategory(undefined)
     setSelectedCategory(category)
-    console.log(selectedCategory)
     setCategory(category.id)
   }
 
@@ -111,7 +118,7 @@ function Home({
     }
     try {
       resources.products.all(filter)
-        .then(response => setList(response.data))
+        .then(response => setMobileList(response.data.results))
     } catch (error) {
       productsError = error.message
     }
@@ -119,27 +126,78 @@ function Home({
   }
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-    setLoading(true)
-    const filter = {
-      offset,
-      municipality_id: municipality,
-      limit: 15,
-      category,
-      subcategory,
-      brand,
-      provider,
-      min,
-      max
+    if (size.width > 768) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+      setLoading(true)
+      const filter = {
+        offset,
+        municipality_id: municipality,
+        limit: 15,
+        category,
+        subcategory,
+        brand,
+        provider,
+        min,
+        max
+      }
+      try {
+        resources.products.all(filter)
+          .then(response => setList(response.data))
+      } catch (error) {
+        productsError = error.message
+      }
+      setLoading(false)
     }
-    try {
-      resources.products.all(filter)
-        .then(response => setList(response.data))
-    } catch (error) {
-      productsError = error.message
-    }
-    setLoading(false)
   }, [offset, products, category, subcategory, brand, provider, min, max])
+
+  useEffect(() => {
+    if (size.width <= 768) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+      setLoading(true)
+      const filter = {
+        offset: 0,
+        municipality_id: municipality,
+        limit: 15,
+        category,
+        subcategory,
+        brand,
+        provider,
+        min,
+        max
+      }
+      try {
+        resources.products.all(filter)
+          .then(response => setMobileList(response.data.results))
+      } catch (error) {
+        productsError = error.message
+      }
+      setLoading(false)
+    }
+  }, [products, category, subcategory, brand, provider, min, max])
+
+  useEffect(() => {
+    if (size.width <= 768) {
+      setLoading(true)
+      const filter = {
+        offset,
+        municipality_id: municipality,
+        limit: 15,
+        category,
+        subcategory,
+        brand,
+        provider,
+        min,
+        max
+      }
+      try {
+        resources.products.all(filter)
+          .then(response => setMobileList((mobileList) => [...mobileList, ...response.data.results]))
+      } catch (error) {
+        productsError = error.message
+      }
+      setLoading(false)
+    }
+  }, [offset])
 
   useEffect(() => {
     setOffset(0)
@@ -195,28 +253,11 @@ function Home({
                 {t('filter.categories')}
               </div>
             )}
-            <Tooltip
-              PopperProps={{
-                disablePortal: true
-              }}
-              onClose={() => setTooltip(false)}
-              open={tooltip}
-              placement="left"
-              arrow
-              disableFocusListener
-              disableHoverListener
-              disableTouchListener
-              title={t('filter.filter')}
+            <div
+              onClick={() => setFilterBar(true)}
             >
-              <div
-                onClick={() => {
-                  setTooltip(false)
-                  setFilterBar(true)
-                }}
-              >
-                <TuneIcon />
-              </div>
-            </Tooltip>
+              <TuneIcon />
+            </div>
           </div>
           <div className='md:flex hidden mr-1 flex-col w-1/6'>
             <div className='flex flex-col'>
@@ -290,17 +331,38 @@ function Home({
                   {t('filter.categories')}
                 </div>
               )}
-              <ListProducts products={list} loading={loading} />
-              <div className='mt-2'>
-                <Pagination
-                  count={pages}
-                  showFirstButton
-                  size='medium'
-                  showLastButton
-                  page={page}
-                  onChange={handlePaginationChange}
-                />
-              </div>
+              {size.width <= 768 && (
+                <InfiniteScroll
+                  dataLength={mobileList.length}
+                  next={getMorePost}
+                  hasMore={true}
+                  loader={<div className='flex flex-row w-full justify-center my-6 text-text-blue'> Loading...</div>}
+                  endMessage={<h4>Nothing more to show</h4>}
+                >
+                  <div className='flex flex-wrap justify-evenly w-full'>
+                    {mobileList.map((data) => (
+                      <div className='w-[30%] md:w-1/4 xl:w-[19%] mb-4' key={data.id}>
+                        <ProductItem product={data} />
+                      </div>
+                    ))}
+                  </div>
+                </InfiniteScroll>
+              )}
+              {size.width > 768 && (
+                <ListProducts products={list} loading={loading} />
+              )}
+              {size.width > 768 && (
+                <div className='mt-2'>
+                  <Pagination
+                    count={pages}
+                    showFirstButton
+                    size='medium'
+                    showLastButton
+                    page={page}
+                    onChange={handlePaginationChange}
+                  />
+                </div>
+              )}
             </div>
           </div>
           <FilterBar {...{
