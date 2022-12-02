@@ -36,9 +36,9 @@ function AddToFav({
   }
   return !isInFav(item?.id)
     ? (
-      <div onClick={handleAddClick} className='text-button hover:cursor-pointer mt-[-2px] md:mt-0'>
+      <div onClick={handleAddClick} className='text-button hover:cursor-pointer'>
         <FavoriteBorderOutlinedIcon
-            fontSize={size.width < 768 ? 'small' : 'medium'}
+            fontSize={size.width < 768 ? 'medium' : 'medium'}
         />
         {text && (
           <span>{text}</span>
@@ -48,7 +48,7 @@ function AddToFav({
     : (
         <div onClick={handleRemoveClick} className='text-button hover:cursor-pointer'>
           <FavoriteOutlinedIcon
-              fontSize={size.width < 768 ? 'small' : 'medium'}
+              fontSize={size.width < 768 ? 'medium' : 'medium'}
           />
           {success && (
             <span>{success}</span>

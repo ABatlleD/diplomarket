@@ -15,7 +15,7 @@ function AppCounter({
   return (
     <div className='flex flex-row md:h-6'>
       <div
-        className='bg-background-300 rounded-md px-[0.1rem] hover:cursor-pointer hover:opacity-90'
+        className='bg-background-300 rounded-md p-[0.3rem] hover:cursor-pointer hover:opacity-90'
         onClick={onDecrement}
       >
         <MinusIcon
@@ -24,10 +24,10 @@ function AppCounter({
           className='mt-[0.15rem]'
         />
       </div>
-      <p className='text-xs md:text-base w-6 mt-[0.1rem] md:mt-0 md:w-10 text-center'>{value || 0}</p>
+      <p className='text-sm md:text-base w-4 mt-[0.2rem] md:mt-0 md:w-10 text-center'>{value || 0}</p>
       {!disabled && (
         <div
-          className='bg-background-300 rounded-md p-[0.1rem] hover:cursor-pointer hover:opacity-90'
+          className='bg-background-300 rounded-md p-[0.3rem] hover:cursor-pointer hover:opacity-90'
           onClick={onIncrement}
         >
           <PlusIcon

@@ -35,7 +35,7 @@ function ProductItem({ product }) {
 
   return (
     <>
-      <div className='flex flex-col hover:shadow-button w-full border rounded-lg h-[13.5rem] md:h-[20rem] 2xl:h-[24rem]'>
+      <div className='flex flex-col hover:shadow-button w-full border rounded-lg h-[14.5rem] md:h-[20rem] 2xl:h-[24rem]'>
         <div className='w-full relative flex flex-row justify-center self-center h-24 md:h-44 2xl:h-60'>
           <Link href={`/products/${product.id}`}>
             <Image
@@ -97,7 +97,7 @@ function ProductItem({ product }) {
             </ThemeProvider>
           </div>
         </div>
-        <div className='flex flex-col h-[5.5rem] md:h-24'>
+        <div className='flex flex-col h-[5.7rem] md:h-24'>
           <div className='mx-2 text-text-blue text-sm md:text-base md:h-6'>
             <Link href={`/products/${product.id}`}>
               {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, size.width > 768 ? size.width > 1900 ? 20 : 16 : 10)}
@@ -105,11 +105,11 @@ function ProductItem({ product }) {
           </div>
           <div className='mx-2 my-0 md:my-0 text-button text-sm md:text-base'>{product.proveedor.nombre}</div>
           {!product.promocion.activo && (
-            <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-xs md:text-base'>US${product.precio.cantidad}</div>
+            <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-base'>US${product.precio.cantidad}</div>
           )}
           {product.promocion.activo && (
             <div className='flex flex-col md:flex-row ml-2 leading-3'>
-              <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-xs md:text-base'>US${(product.precio.cantidad - (product.precio.cantidad * product.promocion.descuento / 100)).toFixed(2)} </p>
+              <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-base'>US${(product.precio.cantidad - (product.precio.cantidad * product.promocion.descuento / 100)).toFixed(2)} </p>
               <div className='flex flex-row'>
                 <div
                   className='bg-button flex md:hidden rounded-md px-1 mr-1 text-background-100 text-xs'
