@@ -14,6 +14,7 @@ import MainCarousel from '../components/home/MainCarousel'
 import useWindowSize from '../hooks/WindowSize'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import ProductItem from '../components/products/ProductItem'
+import AllProductsLoader from '../components/loaders/AllProducts'
 
 function Home({
   products,
@@ -25,7 +26,7 @@ function Home({
   const { t, i18n } = useTranslation()
   const [list, setList] = useState(products)
   const [mobileList, setMobileList] = useState(products.results)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState()
   const [filterBar, setFilterBar] = useState(false)
   const [pages, setPages] = useState(1)
   const [page, setPage] = useState(1)
@@ -116,7 +117,6 @@ function Home({
       min: mobileFilter.min,
       max: mobileFilter.max
     }
-    console.log('🚀 ~ file: index.jsx:109 ~ handleMobileFilter ~ filter', filter)
     try {
       resources.products.all(filter)
         .then(response => setMobileList(response.data.results))
@@ -129,7 +129,7 @@ function Home({
   useEffect(() => {
     if (size.width > 768) {
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-      setLoading(true)
+      console.log('🚀 ~ file: index.jsx:153 ~ useEffect ~ loading', loading)
       const filter = {
         offset,
         municipality_id: municipality,
@@ -142,12 +142,15 @@ function Home({
         max
       }
       try {
+        setLoading(true)
         resources.products.all(filter)
-          .then(response => setList(response.data))
+          .then(response => {
+            setList(response.data)
+            setLoading(false)
+          })
       } catch (error) {
         productsError = error.message
       }
-      setLoading(false)
     }
   }, [offset, products, category, subcategory, brand, provider, min, max])
 
@@ -349,7 +352,10 @@ function Home({
                   </div>
                 </InfiniteScroll>
               )}
-              {size.width > 768 && (
+              {size.width > 768 && loading && (
+                <AllProductsLoader />
+              )}
+              {size.width > 768 && !loading && (
                 <ListProducts products={list} loading={loading} />
               )}
               {size.width > 768 && (

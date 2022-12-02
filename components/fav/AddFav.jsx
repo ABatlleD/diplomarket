@@ -5,6 +5,7 @@ import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined'
 import { generateFavItem } from '../../store/fav/generate-fav-item'
 import PropTypes from 'prop-types'
 import useWindowSize from '../../hooks/WindowSize'
+import { addClicks } from '../../libs/quick-tip'
 
 function AddToFav({
   data,
@@ -25,10 +26,12 @@ function AddToFav({
     e
   ) => {
     e.stopPropagation()
+    addClicks()
     addItemToFav(item, 1)
   }
   const handleRemoveClick = (e) => {
     e.stopPropagation()
+    addClicks()
     removeItemFromFav(item.id)
   }
   return !isInFav(item?.id)

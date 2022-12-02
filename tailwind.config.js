@@ -22,7 +22,8 @@ module.exports = {
       footer: {
         background: {
           100: '#15224b',
-          200: '#111b3c'
+          200: '#111b3c',
+          300: '#111b2c'
         }
       }
     },

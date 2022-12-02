@@ -12,6 +12,7 @@ import AddToFav from '../fav/AddFav'
 import AddToCart from '../cart/AddCart'
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows'
 import { useRouter } from 'next/router'
+import { addClicks } from '../../libs/quick-tip'
 
 const theme = createTheme({
   palette: {
@@ -49,7 +50,10 @@ function ProductItem({ product }) {
             <Tooltip title={t('quick')} placement='right'>
               <div
                 className='rounded-l-lg pr-1 pl-[0.1rem] mb-2 hover:cursor-pointer text-background-100 bg-footer-background-200'
-                onClick={() => setOpenQuickView(true)}
+                onClick={() => {
+                  addClicks()
+                  setOpenQuickView(true)
+                }}
               >
                 <ZoomInIcon fontSize={size.width < 768 ? 'small' : 'medium'} />
               </div>
@@ -59,7 +63,10 @@ function ProductItem({ product }) {
             <Tooltip title={t('compare')} placement='right'>
               <div
                 className='rounded-l-lg pr-1 pl-[0.1rem] mb-2 hover:cursor-pointer text-background-100 bg-button'
-                onClick={() => router.push('/compare')}
+                onClick={() => {
+                  addClicks()
+                  router.push('/compare')
+                }}
               >
                 <CompareArrowsIcon fontSize={size.width < 768 ? 'samll' : 'medium'} />
               </div>

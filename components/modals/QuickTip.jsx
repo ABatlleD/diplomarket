@@ -22,6 +22,7 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
             <div className='flex flex-row justify-end mb-6'>
               <HighlightOffIcon className='hover:cursor-pointer' onClick={() => setOpenQuickTip(false)} />
             </div>
+            <div className='font-bold text-lg'>SUGERENCIA</div>
           </div>
         </Fade>
       </Modal>

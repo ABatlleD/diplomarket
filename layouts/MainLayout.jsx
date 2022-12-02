@@ -12,6 +12,9 @@ import { FavProvider } from '../store/fav/fav.context.jsx'
 import { CartProvider } from '../store/cart/cart.context.jsx'
 import { SessionProvider } from 'next-auth/react'
 import QuickTip from '../components/modals/QuickTip.jsx'
+import { addClicks, clicks } from '../libs/quick-tip'
+import useScrollY from '../hooks/Scroll.js'
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 
 function MainLayout({ children }) {
   const [categoriesSideBar, setCategoriesSideBar] = useState(false)
@@ -20,13 +23,18 @@ function MainLayout({ children }) {
   const [openSelectPlace, setOpenSelectPlace] = useState(false)
   const [openQuickTip, setOpenQuickTip] = useState(false)
   const NEXT_MUNICIPALITY = getCookie('NEXT_MUNICIPALITY')
-  const NEXT_TIP = getCookie('NEXT_TIP')
+  const scrollY = useScrollY()
 
   useEffect(() => {
-    if (NEXT_TIP >= 2) {
-      setOpenQuickTip(true)
-    }
-  }, [NEXT_TIP])
+    const interval = setInterval(() => {
+      console.log('🚀 ~ file: MainLayout.jsx:28 ~ interval ~ clicks', clicks)
+      if (clicks >= 20) {
+        addClicks()
+        setOpenQuickTip(true)
+      }
+    }, 100)
+    return () => clearInterval(interval)
+  }, [])
 
   useEffect(() => {
     if (!NEXT_MUNICIPALITY) {
@@ -73,6 +81,11 @@ function MainLayout({ children }) {
               }} />
               <CartSideBar {...{ cartSideBar, setCartSideBar }} />
               <QuickTip {...{ openQuickTip, setOpenQuickTip }} />
+              {scrollY !== 0 && (
+                <div className='fixed overflow-hidden p-2 rounded bottom-8 right-3 bg-footer-background-300 text-background-100 flex flex-row justify-center items-center shadow-md hover:cursor-pointer' onClick={() => window.scrollTo(0, 0)}>
+                  <KeyboardArrowUpIcon />
+                </div>
+              )}
             </QueryClientProvider>
           </CartProvider>
         </FavProvider>
