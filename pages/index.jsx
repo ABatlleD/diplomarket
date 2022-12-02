@@ -157,7 +157,6 @@ function Home({
   useEffect(() => {
     if (size.width <= 768) {
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-      setLoading(true)
       const filter = {
         offset: 0,
         municipality_id: municipality,
@@ -170,18 +169,20 @@ function Home({
         max
       }
       try {
+        setLoading(true)
         resources.products.all(filter)
-          .then(response => setMobileList(response.data.results))
+          .then(response => {
+            setMobileList(response.data.results)
+            setLoading(false)
+          })
       } catch (error) {
         productsError = error.message
       }
-      setLoading(false)
     }
   }, [products, category, subcategory, brand, provider, min, max])
 
   useEffect(() => {
     if (size.width <= 768) {
-      setLoading(true)
       const filter = {
         offset,
         municipality_id: municipality,
@@ -199,7 +200,6 @@ function Home({
       } catch (error) {
         productsError = error.message
       }
-      setLoading(false)
     }
   }, [offset])
 
@@ -335,7 +335,10 @@ function Home({
                   {t('filter.categories')}
                 </div>
               )}
-              {size.width <= 768 && municipality && (
+              {size.width <= 768 && loading && (
+                <AllProductsLoader />
+              )}
+              {size.width <= 768 && municipality && !loading && (
                 <InfiniteScroll
                   dataLength={mobileList.length}
                   next={getMorePost}
