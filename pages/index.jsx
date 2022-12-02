@@ -331,7 +331,7 @@ function Home({
                   {t('filter.categories')}
                 </div>
               )}
-              {size.width <= 768 && (
+              {size.width <= 768 && municipality && (
                 <InfiniteScroll
                   dataLength={mobileList.length}
                   next={getMorePost}
