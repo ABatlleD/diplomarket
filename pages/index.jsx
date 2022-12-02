@@ -116,6 +116,7 @@ function Home({
       min: mobileFilter.min,
       max: mobileFilter.max
     }
+    console.log('🚀 ~ file: index.jsx:109 ~ handleMobileFilter ~ filter', filter)
     try {
       resources.products.all(filter)
         .then(response => setMobileList(response.data.results))
