@@ -26,8 +26,8 @@ function ListProducts({ products, loading }) {
 }
 
 ListProducts.propTypes = {
-  products: PropTypes.array,
-  loading: PropTypes.bool
+  products: PropTypes.any,
+  loading: PropTypes.any
 }
 
 export default ListProducts

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Divider, Tooltip } from '@mui/material'
+import { Tooltip } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import useWindowSize from '../../hooks/WindowSize'
 import { useTranslation } from 'react-i18next'
@@ -23,7 +23,7 @@ const theme = createTheme({
   }
 })
 
-function ProductItem({ product }) {
+function HorizontalProductItem({ product }) {
   const { t, i18n } = useTranslation()
   const router = useRouter()
   const [openQuickView, setOpenQuickView] = useState(false)
@@ -35,8 +35,8 @@ function ProductItem({ product }) {
 
   return (
     <>
-      <div className='flex flex-col hover:shadow-button w-full border rounded-lg h-[14.5rem] md:h-[20rem] 2xl:h-[24rem]'>
-        <div className='w-full relative flex flex-row justify-center self-center h-24 md:h-44 2xl:h-60'>
+      <div className='flex flex-row hover:shadow-button w-full border rounded-lg py-2'>
+        <div className='w-[30%] relative flex flex-row justify-center self-center h-28 md:h-44 2xl:h-60'>
           <Link href={`/products/${product.id}`}>
             <Image
               src={`${process.env.NEXT_PUBLIC_BACKEND}${product.img_principal}`}
@@ -46,10 +46,10 @@ function ProductItem({ product }) {
               className='hover:cursor-pointer rounded-t-lg'
             />
           </Link>
-          <div className='absolute right-0 top-2'>
+          <div className='absolute left-0 top-2'>
             <Tooltip title={t('quick')} placement='right'>
               <div
-                className='rounded-l-lg pr-1 pl-[0.1rem] mb-2 hover:cursor-pointer text-background-100 bg-footer-background-200'
+                className='rounded-r-lg pr-1 pl-[0.1rem] mb-2 hover:cursor-pointer text-background-100 bg-footer-background-200'
                 onClick={() => {
                   addClicks()
                   setOpenQuickView(true)
@@ -72,13 +72,13 @@ function ProductItem({ product }) {
               </div>
             </Tooltip>
           </div>
-          <div className='absolute top-2 left-0'>
+          <div className='absolute top-2 right-0'>
             <ThemeProvider theme={theme}>
               <div className='felx flex-col my-1 md:my-2'>
                 {product.etiquetas.map((tag) => (
                   <div key={tag.pk}>
                     <div
-                      className='bg-button px-1 mb-1 rounded-r-full text-background-100 font-weight-light text-[0.6rem] md:text-sm'
+                      className='bg-button px-1 mb-1 rounded-l-full text-background-100 font-weight-light text-[0.6rem] md:text-sm'
                     >
                       {i18n.language === 'es' ? tag.nombre : tag.ingles}
                     </div>
@@ -97,10 +97,10 @@ function ProductItem({ product }) {
             </ThemeProvider>
           </div>
         </div>
-        <div className='flex flex-col h-[5.7rem] md:h-24'>
-          <div className='mx-2 text-text-blue text-sm md:text-base h-9 md:h-6'>
+        <div className='w-[70%] flex flex-col justify-between'>
+          <div className='mx-2 text-text-blue text-sm md:text-base'>
             <Link href={`/products/${product.id}`}>
-              {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, size.width > 768 ? size.width > 1900 ? 20 : 16 : 18)}
+              {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, 60)}
             </Link>
           </div>
           {size.width >= 768 && (
@@ -128,14 +128,6 @@ function ProductItem({ product }) {
           {product.precioxlibra.cantidad === '0.00' && (
             <div className='md:h-6'></div>
           )}
-        </div>
-          <Divider
-            sx={{
-              marginX: 1,
-              marginY: 1,
-              backgroundColor: '#6e717a'
-            }}
-          />
           <div className='flex flex-row justify-between mx-1 mt-[-3px] md:mt-0'>
             <div
               className='ml-2 hover:cursor-pointer'
@@ -150,14 +142,15 @@ function ProductItem({ product }) {
               <AddToFav data={product}/>
             </div>
           </div>
+        </div>
         <QuickView {...{ openQuickView, setOpenQuickView, product }}></QuickView>
       </div>
     </>
   )
 }
 
-ProductItem.propTypes = {
+HorizontalProductItem.propTypes = {
   product: PropTypes.object
 }
 
-export default ProductItem
+export default HorizontalProductItem

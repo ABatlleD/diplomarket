@@ -7,6 +7,8 @@ import CategoriesAccordion from '../components/categories/CategoriesAccordion'
 import { FormControlLabel, Pagination, RadioGroup, Radio, TextField, Autocomplete } from '@mui/material'
 import FilterBar from '../components/layouts/sidebar/FilterBar'
 import TuneIcon from '@mui/icons-material/Tune'
+import TableRowsIcon from '@mui/icons-material/TableRows'
+import WindowIcon from '@mui/icons-material/Window'
 import { useTranslation } from 'react-i18next'
 import AppHeader from '../components/layouts/AppHeader'
 import { getCookie } from 'cookies-next'
@@ -15,6 +17,7 @@ import useWindowSize from '../hooks/WindowSize'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import ProductItem from '../components/products/ProductItem'
 import AllProductsLoader from '../components/loaders/AllProducts'
+import HorizontalProductItem from '../components/products/HorizontalProductItem'
 
 function Home({
   products,
@@ -26,6 +29,7 @@ function Home({
   const { t, i18n } = useTranslation()
   const [list, setList] = useState(products)
   const [mobileList, setMobileList] = useState(products.results)
+  const [listView, setListView] = useState(true)
   const [loading, setLoading] = useState()
   const [filterBar, setFilterBar] = useState(false)
   const [pages, setPages] = useState(1)
@@ -257,10 +261,20 @@ function Home({
                 {t('filter.categories')}
               </div>
             )}
-            <div
-              onClick={() => setFilterBar(true)}
-            >
-              <TuneIcon />
+            <div className='flex flex-row'>
+              <div className='mr-3' onClick={() => setListView(!listView)}>
+                {listView && (
+                  <WindowIcon />
+                )}
+                {!listView && (
+                  <TableRowsIcon />
+                )}
+              </div>
+              <div
+                onClick={() => setFilterBar(true)}
+              >
+                <TuneIcon />
+              </div>
             </div>
           </div>
           <div className='md:flex hidden mr-1 flex-col w-1/6'>
@@ -348,8 +362,13 @@ function Home({
                 >
                   <div className='flex flex-wrap justify-evenly w-full'>
                     {mobileList.map((data) => (
-                      <div className='w-[30%] md:w-1/4 xl:w-[19%] mb-4' key={data.id}>
-                        <ProductItem product={data} />
+                      <div className={listView ? 'w-full mx-2 my-2' : 'w-[30%] md:w-1/4 xl:w-[19%] mb-4'} key={data.id}>
+                        {!listView && (
+                          <ProductItem product={data} />
+                        )}
+                        {listView && (
+                          <HorizontalProductItem product={data} />
+                        )}
                       </div>
                     ))}
                   </div>
