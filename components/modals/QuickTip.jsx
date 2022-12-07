@@ -11,11 +11,7 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={openQuickTip}
-        onClose={() => setOpenQuickTip(false)}
         closeAfterTransition
-        BackdropProps={{
-          timeout: 500
-        }}
       >
         <Fade in={openQuickTip}>
           <div className='flex z-50 flex-col shadow-2xl bg-background-100 w-11/12 md:4/5 xl:w-1/3 mt-4 md:mt-10 mx-auto p-2'>

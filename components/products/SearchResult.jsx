@@ -13,14 +13,23 @@ function SearchResult({ data, setInputValue = () => '' }) {
   }
 
   return (
-    <div className='flex flex-col mx-2 md:mx-4 my-2'>
-      <Link href={`/products/${data.pk}`}>
-        <div className='w-full flex flex-row justify-between hover:cursor-pointer hover:bg-background-300' onClick={() => setInputValue('')}>
-          <div className='text-sm md:text-base'>{resizeTitle(i18n.language === 'es' ? data.nombre : data.nombre_ingles, size.width < 768 ? 15 : 25)}</div>
-          <div className='bg-button px-1 text-background-100 rounded-xl text-sm md:text-base'>{data.precio} USD</div>
+    <>
+      {data.tipo === 'Producto' && (
+        <div className='flex flex-col mx-2 md:mx-4 my-2'>
+          <Link href={`/products/${data.pk}`}>
+            <div className='w-full flex flex-row justify-between hover:cursor-pointer hover:bg-background-300' onClick={() => setInputValue('')}>
+              <div className='text-xs md:text-base'>{resizeTitle(i18n.language === 'es' ? data.nombre : data.nombre_ingles, size.width < 768 ? 30 : 100)}</div>
+              <div className='flex flex-row'>
+                {data.promocion && data.promocion.descuento && (
+                  <div className='bg-button px-1 text-background-100 rounded-xl h-4 md:h-auto text-xs md:mr-1 md:text-base'>-{data.promocion.descuento}%</div>
+                )}
+                <div className='bg-button px-1 text-background-100 rounded-xl h-4 md:h-auto text-xs md:text-base'>US${data.precio}</div>
+              </div>
+            </div>
+          </Link>
         </div>
-      </Link>
-    </div>
+      )}
+    </>
   )
 }
 

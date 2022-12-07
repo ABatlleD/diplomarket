@@ -9,7 +9,7 @@ import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlin
 import { useTranslation } from 'react-i18next'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
-import WhatsAppIcon from '@mui/icons-material/WhatsApp'
+import WhatsAppBusinessIcon from '../../icons/whats-app-business-icon'
 import { getCookie } from 'cookies-next'
 import Link from 'next/link'
 import resources from '../../../restapi/resources'
@@ -80,7 +80,7 @@ function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {}, openSele
             className='mt-4 text-footer-background-200 hover:text-footer-background-100 font-semibold text-lg'
           >
             <Link href='/about'>
-              <p>{t('layout.navbar.about')} <span><KeyboardArrowRightIcon sx={{ marginTop: '-1px' }} /></span></p>
+              <p className='hover:cursor-pointer hover:underline'>{t('layout.navbar.about')} <span><KeyboardArrowRightIcon sx={{ marginTop: '-1px' }} /></span></p>
             </Link>
           </div>
           <div
@@ -88,7 +88,7 @@ function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {}, openSele
             className='mt-4 text-footer-background-200 hover:text-footer-background-100 font-semibold text-lg'
           >
             <Link href='/sell-with-us'>
-              <p>{t('layout.navbar.sell-with-us')} <span><KeyboardArrowRightIcon sx={{ marginTop: '-1px' }} /></span></p>
+              <p className='hover:cursor-pointer hover:underline'>{t('layout.navbar.sell-with-us')} <span><KeyboardArrowRightIcon sx={{ marginTop: '-1px' }} /></span></p>
             </Link>
           </div>
           <div
@@ -96,7 +96,7 @@ function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {}, openSele
             className='mt-4 text-footer-background-200 hover:text-footer-background-100 font-semibold text-lg'
           >
             <Link href='/contact'>
-              <p>{t('layout.navbar.contact')} <span><KeyboardArrowRightIcon sx={{ marginTop: '-1px' }} /></span></p>
+              <p className='hover:cursor-pointer hover:underline'>{t('layout.navbar.contact')} <span><KeyboardArrowRightIcon sx={{ marginTop: '-1px' }} /></span></p>
             </Link>
           </div>
           {contacts.map(item => (
@@ -108,7 +108,7 @@ function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {}, openSele
                 <p><span><EmailOutlinedIcon sx={{ marginTop: '-3px' }} /></span> {item.contenido}</p>
               )}
               {item.tipo === 'whatsapp' && (
-                <p><span><WhatsAppIcon sx={{ marginTop: '-3px' }} /></span> {item.contenido}</p>
+                <p className='flex flex-row'><span><WhatsAppBusinessIcon /></span> <span className='ml-1 mt-[-0.2rem]'> +{item.contenido}</span></p>
               )}
             </div>
           ))}

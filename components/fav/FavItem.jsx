@@ -20,7 +20,10 @@ function FavItem({ id }) {
 
   useEffect(() => {
     resources.products.one(id)
-      .then(response => setProduct(response.data))
+      .then(response => {
+        setProduct(response.data)
+        console.log('🚀 ~ file: FavItem.jsx:19 ~ FavItem ~ product', response.data)
+      })
   }, [])
 
   const resizeTitle = (string, maxLength) => {

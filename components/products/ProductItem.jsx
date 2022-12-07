@@ -59,7 +59,7 @@ function ProductItem({ product }) {
               </div>
             </Tooltip>
           </div>
-          <div className='absolute hidden md:flex right-0 top-9 md:top-10'>
+          <div className='absolute hidden right-0 top-9 md:top-10'>
             <Tooltip title={t('compare')} placement='right'>
               <div
                 className='rounded-l-lg pr-1 pl-[0.1rem] mb-2 hover:cursor-pointer text-background-100 bg-button'

@@ -27,7 +27,6 @@ function MainLayout({ children }) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log('🚀 ~ file: MainLayout.jsx:28 ~ interval ~ clicks', clicks)
       if (clicks >= 20) {
         addClicks()
         setOpenQuickTip(true)

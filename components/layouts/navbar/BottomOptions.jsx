@@ -98,9 +98,9 @@ function BottomOptions({
           </div>
           <div className='flex flex-row'>
             {whatsapps.map(item => (
-              <div key={item.id} className='ml-2 flex flex-row hover:text-footer-background-200 hover:underline'>
+              <div key={item.id} className='ml-4 flex flex-row hover:text-footer-background-200 text-2xl hover:underline'>
                 <WhatsAppBusinessIcon />
-                <a href={`https://api.whatsapp.com/send?phone=${item.contenido}&text=Hola,%20Diplomarket%E2%84%A2`} className='ml-1 font-bold'>{item.contenido}</a>
+                <a href={`https://api.whatsapp.com/send?phone=${item.contenido}&text=Hola,%20Diplomarket%E2%84%A2`} className='ml-1 mt-[-0.2rem]'>+{item.contenido}</a>
               </div>
             ))}
           </div>

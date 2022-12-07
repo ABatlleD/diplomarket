@@ -112,12 +112,12 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
                     </p>
                   }
                 </div>
-                {!product.promocion.activo && (
-                  <div className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${product.precio.cantidad}</div>
+                {!product.promocion?.activo && (
+                  <div className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${product.precio?.cantidad || product.precio}</div>
                 )}
-                {product.promocion.activo && (
+                {product.promocion?.activo && (
                   <div className='flex flex-col leading-3'>
-                    <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${(product.precio.cantidad - (product.precio.cantidad * product.promocion.descuento / 100)).toFixed(2)} </p>
+                    <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${((product.precio?.cantidad || product.precio) - ((product.precio?.cantidad || product.precio) * product.promocion.descuento / 100)).toFixed(2)} </p>
                     <div className='flex flex-row my-2'>
                       <div
                         className='bg-button flex rounded-md px-1 mr-1 text-background-100 text-sm'
@@ -128,8 +128,11 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
                     </div>
                   </div>
                 )}
-                {product.precioxlibra.cantidad !== '0.00' && (
-                  <div className='mb-2 md:mb-0 md:my-0 text-text-100 text-sm md:text-base'>US${product.precioxlibra.cantidad}/{product.um}</div>
+                {(product.precioxlibra !== undefined && product.precioxlibra !== 0) && (
+                  <div className='mb-2 md:mb-0 md:my-0 text-text-100 text-sm md:text-base'>US${product.precioxlibra}/{product.um}</div>
+                )}
+                {product.precioxlibra?.cantidad !== undefined && product.precioxlibra?.cantidad !== '0.00' && (
+                  <div className='mb-2 md:mb-0 md:my-0 text-text-100 text-sm md:text-base'>US${product.precioxlibra?.cantidad}/{product.um}</div>
                 )}
                 <p className='text-xs text-text-100 mb-3'>{resizeTitle(i18n.language === 'es' ? product.descripcion : product.descripcion_ingles, 300)}</p>
                 <div className='flex flex-col'>
