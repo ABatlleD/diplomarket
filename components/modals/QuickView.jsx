@@ -124,11 +124,11 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
                       >
                         -{product.promocion.descuento}%
                       </div>
-                      <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-sm md:text-sm line-through'> US${product.precio.cantidad}</p>
+                      <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-sm md:text-sm line-through'> US${product.precio?.cantidad || product.precio}</p>
                     </div>
                   </div>
                 )}
-                {(product.precioxlibra !== undefined && product.precioxlibra !== 0) && (
+                {(typeof (product.precioxlibra) === 'number' && product.precioxlibra !== 0) && (
                   <div className='mb-2 md:mb-0 md:my-0 text-text-100 text-sm md:text-base'>US${product.precioxlibra}/{product.um}</div>
                 )}
                 {product.precioxlibra?.cantidad !== undefined && product.precioxlibra?.cantidad !== '0.00' && (
