@@ -76,8 +76,8 @@ function Settings() {
       <ToastContainer />
       <div className='flex flex-col'>
         <div className='flex flex-col items-center p-4 mb-8 border-2 border-button rounded-3xl'>
-          <p className='font-semibold text-button text-4xl mb-8'>{t('profile.settings.premium_title')}</p>
-          <p className='text-xl'>{t('profile.settings.premium_subtitle')}</p>
+          <p className='font-semibold text-button text-2xl md:text-4xl mb-1 md:mb-8'>{t('profile.settings.premium_title')}</p>
+          <p className='md:text-xl'>{t('profile.settings.premium_subtitle')}</p>
         </div>
         <div className='flex flex-col border items-center p-4 rounded-3xl'>
           <p className='font-bold text-2xl text-footer-background-200 mb-8'>{t('profile.settings.title')}</p>

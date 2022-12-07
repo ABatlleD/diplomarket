@@ -23,7 +23,7 @@ function CategoriesAccordion({ category, items, handleSubcategoryFilter = () => 
           id="panel1a-header"
           sx={{
             borderTop: 0,
-            fontSize: '0.9rem',
+            fontSize: '1rem',
             paddingY: 0,
             margin: 0
           }}

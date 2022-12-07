@@ -46,7 +46,6 @@ function Details() {
         setCity(res?.ciudad)
         setZip(res?.codigo_postal)
         setRss(res?.rss)
-        console.log('🚀 ~ file: details.jsx ~ line 52 ~ .then ~ res', res)
       })
   }, [session])
 
@@ -93,8 +92,8 @@ function Details() {
       <ToastContainer />
       <div className='flex flex-col border items-center rounded-3xl'>
         <p className='font-bold text-footer-background-200 text-2xl my-4'>{t('profile.details.title')}</p>
-        <div className='flex flex-row w-11/12 mb-4'>
-          <div className='w-10/12 mr-2'>
+        <div className='flex flex-col md:flex-row w-11/12 mb-4'>
+          <div className='md:w-10/12 md:mr-2 mb-4 md:mb-0'>
             <TextField
               id="standard-basic"
               label={t('profile.details.fullname')}
@@ -106,7 +105,7 @@ function Details() {
               onChange={(e) => setName(e.target.value)}
             />
           </div>
-          <div className='flex flex-col w-10/12 ml-2'>
+          <div className='flex flex-col md:w-10/12 md:ml-2'>
             <div className='font-bold'>{t('profile.details.email')}:</div>
             <div>{ email }</div>
           </div>
@@ -123,8 +122,8 @@ function Details() {
             }}
           />
         </div>
-        <div className='flex flex-row w-11/12 mb-4'>
-          <div className='w-10/12 mr-2'>
+        <div className='flex flex-col md:flex-row w-11/12 mb-4'>
+          <div className='md:w-10/12 md:mr-2 mb-4 md:mb-0'>
             <PhoneInput
               country={'us'}
               specialLabel={`${t('profile.details.phone')}`}
@@ -133,7 +132,7 @@ function Details() {
               onChange={(e) => setPhone(e.target.value)}
             />
           </div>
-          <div className='w-10/12 ml-2'>
+          <div className='md:w-10/12 md:ml-2'>
           <TextField
             required
             id="countries"
@@ -146,8 +145,8 @@ function Details() {
           />
           </div>
         </div>
-        <div className='flex flex-row w-11/12 mb-4'>
-          <div className='w-10/12 mr-2'>
+        <div className='flex flex-col md:flex-row w-11/12 mb-4'>
+          <div className='md:w-10/12 md:mr-2 mb-4 md:mb-0'>
             <TextField
               id="standard-basic"
               label={t('profile.details.state')}
@@ -159,7 +158,7 @@ function Details() {
               onChange={(e) => setState(e.target.value)}
             />
           </div>
-          <div className='w-10/12 ml-2'>
+          <div className='md:w-10/12 md:ml-2'>
             <TextField
               id="standard-basic"
               label={t('profile.details.city')}
@@ -172,8 +171,8 @@ function Details() {
             />
           </div>
         </div>
-        <div className='flex flex-row w-11/12 mb-12'>
-          <div className='w-[49%] mr-2'>
+        <div className='flex flex-row w-11/12 md:mb-12 mb-4'>
+          <div className='w-full md:w-[49%] md:mr-2'>
             <TextField
               id="standard-basic"
               label={t('profile.details.zip')}
@@ -186,18 +185,18 @@ function Details() {
             />
           </div>
         </div>
-        <div className='flex flex-row justify-end w-11/12 mb-8'>
-          <div className='w-10/12 mr-2 flex flex-row'>
+        <div className='flex flex-col md:flex-row justify-end w-11/12 mb-8'>
+          <div className='w-10/12 mr-2 flex flex-row mb-4 md:mb-0'>
             <Checkbox label='' checked={rss} value={!rss} onChange={(e) => setName(e.target.value)} />
-            <p className='text-justify text-footer-background-100 font-semibold ml-1 mt-2'>
+            <p className='text-justify text-footer-background-100 font-semibold text-sm md:text-base ml-1 md:mt-2 mt-[0.7rem]'>
             {t('profile.details.rss')}
             </p>
           </div>
-          <div className='flex flex-row justify-end w-10/12 ml-2'>
+          <div className='flex flex-row md:justify-end w-10/12 ml-2'>
             <Button
               variant="contained"
               sx={{
-                width: '50%',
+                height: '2.1rem',
                 backgroundColor: '#15224b !important'
               }}
               onClick={handleSubmit}
