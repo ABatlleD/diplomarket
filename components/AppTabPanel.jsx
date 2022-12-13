@@ -1,5 +1,4 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
@@ -21,12 +20,6 @@ function AppTabPanel(props) {
       )}
     </div>
   )
-}
-
-AppTabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired
 }
 
 export default AppTabPanel

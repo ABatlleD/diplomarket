@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import Drawer from '@mui/material/Drawer'
-import PropTypes from 'prop-types'
 import { Divider } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import CategoriesAccordion from '../../categories/CategoriesAccordion'
@@ -39,12 +38,6 @@ function CategoriesSideBar ({ categoriesSideBar = false, setCategoriesSideBar = 
       </Drawer>
     </React.Fragment>
   )
-}
-
-CategoriesSideBar.propTypes = {
-  categories: PropTypes.object,
-  categoriesSideBar: PropTypes.bool,
-  setCategoriesSideBar: PropTypes.func
 }
 
 export default CategoriesSideBar

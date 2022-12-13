@@ -3,7 +3,6 @@ import AppCounter from '../AppCounter'
 import AddToCartBtn from './AddCartBtn'
 import { useCart } from '../../store/cart/cart.context'
 import { generateCartItem } from '../../store/cart/generate-cart-item'
-import PropTypes from 'prop-types'
 import { addClicks } from '../../libs/quick-tip'
 
 function AddToCart ({
@@ -60,15 +59,6 @@ function AddToCart ({
       )}
     </>
   )
-}
-
-AddToCart.propTypes = {
-  data: PropTypes.any,
-  counterClass: PropTypes.string,
-  helium: PropTypes.bool,
-  variation: PropTypes.any,
-  disabled: PropTypes.bool,
-  size: PropTypes.array
 }
 
 export default AddToCart

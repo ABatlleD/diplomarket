@@ -4,7 +4,6 @@ import AppCounter from '../AppCounter'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import { useCart } from '../../store/cart/cart.context'
 import usePrice from '../../libs/use-price'
-import PropTypes from 'prop-types'
 import Image from 'next/image'
 import { useTranslation } from 'react-i18next'
 import useWindowSize from '../../hooks/WindowSize'
@@ -135,11 +134,5 @@ function CartItem({ item, variant, calculateDelivery }) {
     </motion.div>
   )
 };
-
-CartItem.propTypes = {
-  item: PropTypes.any,
-  variant: PropTypes.string,
-  calculateDelivery: PropTypes.func
-}
 
 export default CartItem

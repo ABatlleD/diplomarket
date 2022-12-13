@@ -8,7 +8,6 @@ import useWindowSize from '../../../hooks/WindowSize'
 import SearchBar from '../../SearchBar'
 import AccountMenu from './AccountMenu'
 import Link from 'next/link'
-import PropTypes from 'prop-types'
 import SelectPlace from '../../modals/SelectPlace'
 import { useFav } from '../../../store/fav/fav.context'
 import { useCart } from '../../../store/cart/cart.context'
@@ -125,17 +124,6 @@ function TopBar({
       <SelectPlace {...{ openSelectPlace, setOpenSelectPlace }}></SelectPlace>
     </>
   )
-}
-
-TopBar.propTypes = {
-  categoriesSideBar: PropTypes.bool,
-  setCategoriesSideBar: PropTypes.func,
-  mainSideBar: PropTypes.bool,
-  setMainSideBar: PropTypes.func,
-  cartSideBar: PropTypes.bool,
-  setCartSideBar: PropTypes.func,
-  openSelectPlace: PropTypes.bool,
-  setOpenSelectPlace: PropTypes.func
 }
 
 export default TopBar

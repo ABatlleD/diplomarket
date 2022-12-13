@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Chip, Modal, Fade } from '@mui/material'
-import PropTypes from 'prop-types'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
@@ -173,12 +172,6 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
       </Modal>
     </>
   )
-}
-
-QuickView.propTypes = {
-  openQuickView: PropTypes.bool,
-  setOpenQuickView: PropTypes.func,
-  product: PropTypes.object
 }
 
 export default QuickView

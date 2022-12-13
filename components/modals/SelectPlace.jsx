@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Modal, Fade, FormControl, InputLabel, MenuItem, Select } from '@mui/material'
-import PropTypes from 'prop-types'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import resources from '../../restapi/resources'
 import { getCookie, setCookie } from 'cookies-next'
@@ -168,11 +167,6 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
       </Modal>
     </>
   )
-}
-
-SelectPlace.propTypes = {
-  openSelectPlace: PropTypes.bool,
-  setOpenSelectPlace: PropTypes.func
 }
 
 export default SelectPlace

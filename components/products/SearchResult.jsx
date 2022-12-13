@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
 import useWindowSize from '../../hooks/WindowSize'
@@ -31,11 +30,6 @@ function SearchResult({ data, setInputValue = () => '' }) {
       )}
     </>
   )
-}
-
-SearchResult.propTypes = {
-  data: PropTypes.any,
-  setInputValue: PropTypes.any
 }
 
 export default SearchResult

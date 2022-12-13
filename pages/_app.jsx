@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import NextNProgress from 'nextjs-progressbar'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import '../i18n'
@@ -36,11 +35,6 @@ function MyApp({ Component, pageProps }) {
       <WebChat />
     </>
   )
-}
-
-MyApp.propTypes = {
-  Component: PropTypes.func,
-  pageProps: PropTypes.object
 }
 
 export default MyApp

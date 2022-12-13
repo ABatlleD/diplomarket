@@ -1,6 +1,5 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import PropTypes from 'prop-types'
 import ProductItem from './ProductItem'
 
 function ProductsSwiper({ products }) {
@@ -49,10 +48,6 @@ function ProductsSwiper({ products }) {
       ))}
     </Swiper>
   )
-}
-
-ProductsSwiper.propTypes = {
-  products: PropTypes.array.isRequired
 }
 
 export default ProductsSwiper

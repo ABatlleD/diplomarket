@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import { Divider, Tooltip } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import useWindowSize from '../../hooks/WindowSize'
@@ -41,6 +40,7 @@ function ProductItem({ product }) {
             <Image
               src={`${process.env.NEXT_PUBLIC_BACKEND}${product.img_principal}`}
               layout='fill'
+              alt='Diplomarket product'
               placeholder='blur'
               blurDataURL='/loading.gif'
               className='hover:cursor-pointer rounded-t-lg'
@@ -59,7 +59,7 @@ function ProductItem({ product }) {
               </div>
             </Tooltip>
           </div>
-          <div className='absolute hidden right-0 top-9 md:top-10'>
+          <div className='absolute hidden md:flex right-0 top-9 md:top-10'>
             <Tooltip title={t('compare')} placement='right'>
               <div
                 className='rounded-l-lg pr-1 pl-[0.1rem] mb-2 hover:cursor-pointer text-background-100 bg-button'
@@ -154,10 +154,6 @@ function ProductItem({ product }) {
       </div>
     </>
   )
-}
-
-ProductItem.propTypes = {
-  product: PropTypes.object
 }
 
 export default ProductItem

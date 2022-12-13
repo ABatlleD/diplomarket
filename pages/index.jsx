@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import MainLayout from '../layouts/MainLayout'
 import resources from '../restapi/resources'
-import PropTypes from 'prop-types'
 import ListProducts from '../components/products/ListProducts'
 import CategoriesAccordion from '../components/categories/CategoriesAccordion'
 import { FormControlLabel, Pagination, RadioGroup, Radio, TextField, Autocomplete } from '@mui/material'
@@ -450,13 +449,6 @@ async function fetchCarousel() {
     carouselError = error.message
   }
   return { carousel, carouselError }
-}
-
-Home.propTypes = {
-  products: PropTypes.object,
-  productsError: PropTypes.string,
-  carousel: PropTypes.object,
-  carouselError: PropTypes.string
 }
 
 Home.getLayout = function getLayout(page) {

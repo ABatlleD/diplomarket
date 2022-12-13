@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import Drawer from '@mui/material/Drawer'
-import PropTypes from 'prop-types'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import resources from '../../../restapi/resources'
 import CategoriesAccordion from '../../categories/CategoriesAccordion'
@@ -201,17 +200,6 @@ function FilterBar ({
       </Drawer>
     </React.Fragment>
   )
-}
-
-FilterBar.propTypes = {
-  filterBar: PropTypes.bool,
-  setFilterBar: PropTypes.func,
-  handleMobileFilter: PropTypes.func,
-  handleSubcategoryFilter: PropTypes.func,
-  handleCategoryFilter: PropTypes.func,
-  setCategory: PropTypes.func,
-  setSubcategory: PropTypes.func,
-  setSelectedCategory: PropTypes.func
 }
 
 export default FilterBar

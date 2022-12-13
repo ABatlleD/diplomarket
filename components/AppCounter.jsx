@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { PlusIcon } from './icons/plus-icon'
 import { MinusIcon } from './icons/minus-icon'
 import useWindowSize from '../hooks/WindowSize'
@@ -39,13 +38,6 @@ function AppCounter({
       )}
     </div>
   )
-}
-
-AppCounter.propTypes = {
-  value: PropTypes.number,
-  onDecrement: PropTypes.any,
-  onIncrement: PropTypes.any,
-  disabled: PropTypes.bool
 }
 
 export default AppCounter

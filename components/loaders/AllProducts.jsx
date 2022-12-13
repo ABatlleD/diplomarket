@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Skeleton } from '@mui/material'
 import useWindowSize from '../../hooks/WindowSize'
 
@@ -20,10 +19,6 @@ function AllProductsLoader() {
       ))}
     </div>
   )
-}
-
-AllProductsLoader.propTypes = {
-  products: PropTypes.object
 }
 
 export default AllProductsLoader

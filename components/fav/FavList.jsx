@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import FavItem from './FavItem'
 
 function FavList({ products, loading }) {
@@ -12,11 +11,6 @@ function FavList({ products, loading }) {
       ))}
     </div>
   )
-}
-
-FavList.propTypes = {
-  products: PropTypes.array,
-  loading: PropTypes.bool
 }
 
 export default FavList

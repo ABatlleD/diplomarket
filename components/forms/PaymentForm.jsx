@@ -2,7 +2,6 @@ import React from 'react'
 import Grid from '@mui/material/Grid'
 import { useConfig } from '../../restapi/config'
 import { useTranslation } from 'react-i18next'
-import PropTypes from 'prop-types'
 
 function PaymentForm({ address }) {
   const { typePay } = address
@@ -54,10 +53,6 @@ function PaymentForm({ address }) {
       </Grid>
     </>
   )
-}
-
-PaymentForm.propTypes = {
-  address: PropTypes.any
 }
 
 export default PaymentForm

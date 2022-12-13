@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { CarouselProvider, Slider, Slide } from 'pure-react-carousel'
 import 'pure-react-carousel/dist/react-carousel.es.css'
-import PropTypes from 'prop-types'
 import Link from 'next/link'
 import useWindowSize from '../../hooks/WindowSize'
 
@@ -58,10 +57,6 @@ function MainCarousel({ carousel }) {
       </CarouselProvider>
     </>
   )
-}
-
-MainCarousel.propTypes = {
-  carousel: PropTypes.object
 }
 
 export default MainCarousel

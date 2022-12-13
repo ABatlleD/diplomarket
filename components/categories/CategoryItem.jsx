@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Link from 'next/link'
 import Image from 'next/image'
 import useWindowSize from '../../hooks/WindowSize'
@@ -39,10 +38,6 @@ function CategoryItem({ category }) {
       </div>
     </>
   )
-}
-
-CategoryItem.propTypes = {
-  category: PropTypes.object
 }
 
 export default CategoryItem

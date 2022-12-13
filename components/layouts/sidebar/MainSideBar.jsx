@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Drawer from '@mui/material/Drawer'
-import PropTypes from 'prop-types'
 import LangSelector from '../navbar/LangSelector'
 import LockIcon from '@mui/icons-material/Lock'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
@@ -117,13 +116,6 @@ function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {}, openSele
       </Drawer>
     </React.Fragment>
   )
-}
-
-MainSideBar.propTypes = {
-  mainSideBar: PropTypes.bool,
-  setMainSideBar: PropTypes.func,
-  openSelectPlace: PropTypes.bool,
-  setOpenSelectPlace: PropTypes.func
 }
 
 export default MainSideBar

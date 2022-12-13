@@ -4,7 +4,6 @@ import MainLayout from '../layouts/MainLayout'
 import AppHeader from '../components/layouts/AppHeader'
 import AppAccordion from '../components/AppAccordion'
 import resources from '../restapi/resources'
-import PropTypes from 'prop-types'
 
 function Help({ faq, help, fetchError }) {
   const { t, i18n } = useTranslation()
@@ -74,12 +73,6 @@ async function fetchData() {
     fetchError = error.message
   }
   return { faq, help, fetchError }
-}
-
-Help.propTypes = {
-  faq: PropTypes.object,
-  help: PropTypes.object,
-  fetchError: PropTypes.string
 }
 
 Help.getLayout = function getLayout(page) {

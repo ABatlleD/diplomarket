@@ -21,7 +21,6 @@ import { useTranslation } from 'react-i18next'
 import { useDelivery } from '../../restapi/delivery'
 import { useConfig } from '../../restapi/config'
 import Bank from '../checkout/Bank'
-import PropTypes from 'prop-types'
 
 const errorsAtom = atom(false)
 
@@ -605,10 +604,6 @@ function Review({ address }) {
       </Grid>
     </>
   )
-}
-
-Review.propTypes = {
-  address: PropTypes.any
 }
 
 export default Review

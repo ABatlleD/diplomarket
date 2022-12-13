@@ -1,6 +1,5 @@
 import React from 'react'
 import Drawer from '@mui/material/Drawer'
-import PropTypes from 'prop-types'
 import { Divider } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import RemoveShoppingCartOutlinedIcon from '@mui/icons-material/RemoveShoppingCartOutlined'
@@ -69,11 +68,6 @@ function CartSideBar ({ cartSideBar = false, setCartSideBar = () => {} }) {
       </Drawer>
     </React.Fragment>
   )
-}
-
-CartSideBar.propTypes = {
-  cartSideBar: PropTypes.bool,
-  setCartSideBar: PropTypes.func
 }
 
 export default CartSideBar

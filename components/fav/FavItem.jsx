@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import { Divider, Tooltip } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
@@ -121,10 +120,6 @@ function FavItem({ id }) {
       </div>
     </>
   )
-}
-
-FavItem.propTypes = {
-  id: PropTypes.number
 }
 
 export default FavItem

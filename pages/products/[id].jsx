@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
 import MainLayout from '../../layouts/MainLayout'
 import { Chip, Box, Tabs, Tab } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
@@ -299,11 +298,6 @@ async function fetchOneProduct(id) {
     apiError = error.message
   }
   return { product, apiError }
-}
-
-Product.propTypes = {
-  product: PropTypes.object,
-  apiError: PropTypes.string
 }
 
 Product.getLayout = function getLayout(page) {

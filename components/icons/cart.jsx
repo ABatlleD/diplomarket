@@ -1,6 +1,5 @@
 /* eslint-disable no-tabs */
 import React from 'react'
-import PropTypes from 'prop-types'
 
 const Cart = ({ width, height, className }) => {
   return (
@@ -39,12 +38,6 @@ const Cart = ({ width, height, className }) => {
 		</g>
 		</svg>
   )
-}
-
-Cart.propTypes = {
-  width: PropTypes.any,
-  height: PropTypes.any,
-  className: PropTypes.any
 }
 
 export default Cart

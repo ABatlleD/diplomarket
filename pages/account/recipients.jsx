@@ -14,7 +14,6 @@ import {
   getProvincesId,
   getMunicipalitiesId
 } from '../../restapi/get-places'
-import PropTypes from 'prop-types'
 import MyAddressees from '../../components/account/MyAddresses'
 
 function Recipients({ get_user_addresse }) {
@@ -127,10 +126,6 @@ Recipients.getLayout = function getLayout(page) {
       </AccountLayout>
     </MainLayout>
   )
-}
-
-Recipients.propTypes = {
-  get_user_addresse: PropTypes.any
 }
 
 export default Recipients

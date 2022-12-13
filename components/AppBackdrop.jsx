@@ -1,6 +1,5 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import PropTypes from 'prop-types'
 
 function AppBackdrop ({ children, onClick }) {
   return (
@@ -14,11 +13,6 @@ function AppBackdrop ({ children, onClick }) {
       {children}
     </motion.div>
   )
-}
-
-AppBackdrop.propTypes = {
-  children: PropTypes.node,
-  onClick: PropTypes.func
 }
 
 export default AppBackdrop

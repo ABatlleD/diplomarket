@@ -3,7 +3,6 @@ import { useFav } from '../../store/fav/fav.context'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined'
 import { generateFavItem } from '../../store/fav/generate-fav-item'
-import PropTypes from 'prop-types'
 import useWindowSize from '../../hooks/WindowSize'
 import { addClicks } from '../../libs/quick-tip'
 
@@ -55,15 +54,6 @@ function AddToFav({
           )}
         </div>
       )
-}
-
-AddToFav.propTypes = {
-  data: PropTypes.any,
-  counterClass: PropTypes.string,
-  text: PropTypes.string,
-  success: PropTypes.string,
-  variation: PropTypes.any,
-  disabled: PropTypes.bool
 }
 
 export default AddToFav

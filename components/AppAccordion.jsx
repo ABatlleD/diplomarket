@@ -1,7 +1,6 @@
 import React from 'react'
 import { Accordion, AccordionSummary, AccordionDetails, Divider } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import PropTypes from 'prop-types'
 
 function AppAccordion({ title, text }) {
   return (
@@ -30,11 +29,6 @@ function AppAccordion({ title, text }) {
       </Accordion>
     </>
   )
-}
-
-AppAccordion.propTypes = {
-  title: PropTypes.string,
-  text: PropTypes.string
 }
 
 export default AppAccordion

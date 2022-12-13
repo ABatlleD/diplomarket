@@ -5,7 +5,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import AppButton from './AppButton'
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined'
 import { useTranslation } from 'react-i18next'
-import { PropTypes } from 'prop-types'
 import { getCookie } from 'cookies-next'
 import resources from '../restapi/resources'
 import SearchResult from './products/SearchResult'
@@ -123,11 +122,6 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
       </ThemeProvider>
     </>
   )
-}
-
-SearchBar.propTypes = {
-  openSelectPlace: PropTypes.bool,
-  setOpenSelectPlace: PropTypes.func
 }
 
 export default SearchBar

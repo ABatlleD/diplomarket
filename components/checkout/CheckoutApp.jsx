@@ -17,7 +17,6 @@ import { useCart } from '../../store/cart/cart.context'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 import { isEmpty } from '../../libs/serialize'
-import PropTypes from 'prop-types'
 
 function Copyright() {
   return (
@@ -175,10 +174,6 @@ function Checkout({ address }) {
       </Container>
     </ThemeProvider>
   )
-}
-
-Checkout.propTypes = {
-  address: PropTypes.any
 }
 
 export default Checkout

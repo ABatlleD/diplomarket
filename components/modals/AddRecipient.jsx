@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Button, Modal, Fade, FormControl, TextField } from '@mui/material'
-import PropTypes from 'prop-types'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import { removeDuplicateObjects } from '../../libs/serialize'
 import { useTranslation } from 'react-i18next'
@@ -103,13 +102,6 @@ function AddRecipient({
       </Modal>
     </>
   )
-}
-
-AddRecipient.propTypes = {
-  openAddRecipient: PropTypes.bool,
-  setOpenAddRecipient: PropTypes.func,
-  setAddressees: PropTypes.any,
-  getAddressees: PropTypes.any
 }
 
 export default AddRecipient

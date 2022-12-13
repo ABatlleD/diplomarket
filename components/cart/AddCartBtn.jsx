@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Cart from '../icons/cart'
 import useWindowSize from '../../hooks/WindowSize'
 
@@ -16,11 +15,5 @@ function AddToCartBtn({ onClick, disabled, dimentions }) {
     </button>
   )
 };
-
-AddToCartBtn.propTypes = {
-  onClick: PropTypes.func,
-  disabled: PropTypes.bool,
-  dimentions: PropTypes.array
-}
 
 export default AddToCartBtn

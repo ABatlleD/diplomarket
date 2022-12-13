@@ -10,7 +10,6 @@ import { Divider } from '@mui/material'
 import LangSelector from './LangSelector'
 import DensityMediumIcon from '@mui/icons-material/DensityMedium'
 import Link from 'next/link'
-import PropTypes from 'prop-types'
 import { getCookie } from 'cookies-next'
 import resources from '../../../restapi/resources'
 import parsePhoneNumber from 'libphonenumber-js'
@@ -109,15 +108,6 @@ function BottomOptions({
       </div>
     </>
   )
-}
-
-BottomOptions.propTypes = {
-  categoriesSideBar: PropTypes.bool,
-  setCategoriesSideBar: PropTypes.func,
-  mainSideBar: PropTypes.bool,
-  setMainSideBar: PropTypes.func,
-  openSelectPlace: PropTypes.bool,
-  setOpenSelectPlace: PropTypes.func
 }
 
 export default BottomOptions

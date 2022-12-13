@@ -1,7 +1,6 @@
 import React from 'react'
 import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 
 function CategoriesAccordion({ category, items, handleSubcategoryFilter = () => false, handleCategoryFilter = () => false }) {
@@ -49,13 +48,6 @@ function CategoriesAccordion({ category, items, handleSubcategoryFilter = () => 
       </Accordion>
     </>
   )
-}
-
-CategoriesAccordion.propTypes = {
-  category: PropTypes.string,
-  items: PropTypes.array,
-  handleSubcategoryFilter: PropTypes.func,
-  handleCategoryFilter: PropTypes.func
 }
 
 export default CategoriesAccordion

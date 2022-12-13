@@ -1,6 +1,5 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import PropTypes from 'prop-types'
 import CategoryItem from './CategoryItem'
 
 function CategoriesSwiper({ categories }) {
@@ -49,10 +48,6 @@ function CategoriesSwiper({ categories }) {
       ))}
     </Swiper>
   )
-}
-
-CategoriesSwiper.propTypes = {
-  categories: PropTypes.object.isRequired
 }
 
 export default CategoriesSwiper

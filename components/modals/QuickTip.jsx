@@ -1,6 +1,5 @@
 import React from 'react'
 import { Modal, Fade } from '@mui/material'
-import PropTypes from 'prop-types'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
@@ -25,12 +24,6 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
       </Modal>
     </>
   )
-}
-
-QuickTip.propTypes = {
-  openQuickTip: PropTypes.bool,
-  setOpenQuickTip: PropTypes.func,
-  product: PropTypes.object
 }
 
 export default QuickTip

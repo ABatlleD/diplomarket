@@ -1,6 +1,5 @@
 import React from 'react'
 import Checkout from '../components/checkout/CheckoutApp'
-import PropTypes from 'prop-types'
 import MainLayout from '../layouts/MainLayout.jsx'
 import AppHeader from '../components/layouts/AppHeader.jsx'
 import { useTranslation } from 'react-i18next'
@@ -117,10 +116,6 @@ CheckoutPage.getLayout = function getLayout(page) {
       {page}
     </MainLayout>
   )
-}
-
-CheckoutPage.propTypes = {
-  get_user_addresse: PropTypes.any
 }
 
 export default CheckoutPage

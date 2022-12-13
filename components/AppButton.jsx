@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import PropTypes from 'prop-types'
 
 const theme = createTheme({
   palette: {
@@ -22,11 +21,6 @@ function AppButton(props) {
       </ThemeProvider>
     </>
   )
-}
-
-AppButton.propTypes = {
-  props: PropTypes.node,
-  children: PropTypes.any
 }
 
 export default AppButton

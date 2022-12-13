@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import ProductItem from './ProductItem'
 import AllProductsLoader from '../loaders/AllProducts'
 
@@ -23,11 +22,6 @@ function ListProducts({ products, loading }) {
       ))}
     </div>
   )
-}
-
-ListProducts.propTypes = {
-  products: PropTypes.any,
-  loading: PropTypes.any
 }
 
 export default ListProducts

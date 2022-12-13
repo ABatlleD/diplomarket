@@ -5,7 +5,6 @@ import TelegramIcon from '@mui/icons-material/Telegram'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
-import PropTypes from 'prop-types'
 import resources from '../../../restapi/resources'
 
 function FooterBox({ cartSideBar, setCartSideBar }) {
@@ -116,11 +115,6 @@ function FooterBox({ cartSideBar, setCartSideBar }) {
       </div>
     </div>
   )
-}
-
-FooterBox.propTypes = {
-  cartSideBar: PropTypes.bool,
-  setCartSideBar: PropTypes.func
 }
 
 export default FooterBox

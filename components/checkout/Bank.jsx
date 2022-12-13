@@ -8,7 +8,6 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import Card from 'react-credit-cards-2'
 import { EXCLUSIVE_COUNTRIES } from '../../libs/constants'
-import PropTypes from 'prop-types'
 import {
   formatCreditCardNumber,
   formatCVC,
@@ -299,15 +298,6 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
       </div>
     </div>
   )
-}
-
-Bank.propTypes = {
-  user: PropTypes.any,
-  updateCart: PropTypes.any,
-  checkCart: PropTypes.any,
-  resetCart: PropTypes.any,
-  addressee: PropTypes.any,
-  delivery: PropTypes.any
 }
 
 export default Bank

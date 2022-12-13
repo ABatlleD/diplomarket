@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import { Tooltip } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import useWindowSize from '../../hooks/WindowSize'
@@ -147,10 +146,6 @@ function HorizontalProductItem({ product }) {
       </div>
     </>
   )
-}
-
-HorizontalProductItem.propTypes = {
-  product: PropTypes.object
 }
 
 export default HorizontalProductItem

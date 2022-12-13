@@ -1,6 +1,5 @@
 import React from 'react'
 import { Modal, Fade } from '@mui/material'
-import PropTypes from 'prop-types'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import OrderProductItem from '../orders/OrderProductItem'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
@@ -53,12 +52,6 @@ function OrderDetails({ openOrderDetails = false, setOpenOrderDetails = () => {}
       </Modal>
     </>
   )
-}
-
-OrderDetails.propTypes = {
-  openOrderDetails: PropTypes.bool,
-  setOpenOrderDetails: PropTypes.func,
-  product: PropTypes.object
 }
 
 export default OrderDetails
