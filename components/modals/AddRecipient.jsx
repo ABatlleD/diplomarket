@@ -54,6 +54,7 @@ function AddRecipient({
         BackdropProps={{
           timeout: 500
         }}
+        sx={{ overflowY: 'scroll' }}
       >
         <Fade in={openAddRecipient}>
           <div className='flex flex-col shadow-2xl rounded-xl bg-background-100 w-11/12 md:w-2/5 md:mt-4 mx-auto p-2'>

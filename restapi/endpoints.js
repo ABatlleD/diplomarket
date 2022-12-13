@@ -35,5 +35,7 @@ export const ENDPOINTS = {
   CONTACT: '/contactoempresa/',
   CHECKOUT: '/checkout/',
   BOFA: '/checkout/bofa/',
-  CHANGE_PASSWORD: '/user/password/change/'
+  CHANGE_PASSWORD: '/user/password/change/',
+  ORDER: '/orden/',
+  COMPONENT: '/componente/'
 }

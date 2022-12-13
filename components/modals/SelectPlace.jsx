@@ -97,6 +97,7 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
         BackdropProps={{
           timeout: 500
         }}
+        sx={{ overflowY: 'scroll' }}
       >
         <Fade in={openSelectPlace}>
           <div className='flex flex-col shadow-2xl h-screen md:h-auto md:rounded-xl bg-background-100 w-full md:w-2/5 md:mt-4 mx-auto p-2'>

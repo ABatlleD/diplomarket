@@ -62,6 +62,7 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
         BackdropProps={{
           timeout: 500
         }}
+        sx={{ overflowY: 'scroll' }}
       >
         <Fade in={openQuickView}>
           <div className='flex z-50 flex-col shadow-2xl bg-background-100 w-11/12 md:4/5 xl:w-1/3 mt-4 md:mt-10 mx-auto p-2'>

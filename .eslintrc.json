@@ -13,6 +13,7 @@
   "plugins": ["react"],
   "rules": {
     "space-before-function-paren": "off",
-    "camelcase": "off"
+    "camelcase": "off",
+    "react/prop-types": "off"
   }
 }

@@ -13,6 +13,7 @@ import WhatsAppBusinessIcon from '../../icons/whats-app-business-icon'
 import { getCookie } from 'cookies-next'
 import Link from 'next/link'
 import resources from '../../../restapi/resources'
+import parsePhoneNumber from 'libphonenumber-js'
 
 function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {}, openSelectPlace, setOpenSelectPlace }) {
   const { t } = useTranslation()
@@ -108,7 +109,7 @@ function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {}, openSele
                 <p><span><EmailOutlinedIcon sx={{ marginTop: '-3px' }} /></span> {item.contenido}</p>
               )}
               {item.tipo === 'whatsapp' && (
-                <p className='flex flex-row'><span><WhatsAppBusinessIcon /></span> <span className='ml-1 mt-[-0.2rem]'> +{item.contenido}</span></p>
+                <p className='flex flex-row'><span><WhatsAppBusinessIcon /></span> <span className='ml-1 mt-[-0.2rem]'> {parsePhoneNumber(`+${item.contenido}`)?.formatInternational()}</span></p>
               )}
             </div>
           ))}

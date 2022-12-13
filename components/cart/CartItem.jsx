@@ -80,7 +80,7 @@ function CartItem({ item, variant, calculateDelivery }) {
 
       <div className="w-16 md:w-24 ml-1 overflow-hidden bg-gray-100 mr-2 shrink-0 relative">
         <Image
-          src={`${process.env.NEXT_PUBLIC_BACKEND}${item.image}`}
+          src={`${process.env.NEXT_PUBLIC_BACKEND}${item.image || item.producto.img_principal}`}
           width={size.width < 768 ? 80 : 100}
           height={size.width >= 768 && size.width < 1900 ? 90 : 100}
           placeholder='blur'
@@ -89,7 +89,7 @@ function CartItem({ item, variant, calculateDelivery }) {
         />
       </div>
       <div>
-        <h3 className="font-bold text-heading text-text-blue">{i18n.language === 'es' ? item.name : item.english_name}</h3>
+        <h3 className="font-bold text-heading text-text-blue">{i18n.language === 'es' ? item.name || item.producto.nombre : item.english_name || item.producto.nombre_ingles}</h3>
         <p className="my-2.5 font-semibold text-accent text-button">US{price}</p>
         <span className="text-xs text-body">
           {!variant

@@ -9,6 +9,12 @@ import '../styles/globals.css'
 import SwiperCore, { Autoplay } from 'swiper'
 import WebChat from '../components/WebChat'
 import { SessionProvider } from 'next-auth/react'
+import { Roboto } from '@next/font/google'
+
+const roboto = Roboto({
+  weight: '400',
+  subsets: ['latin']
+})
 
 SwiperCore.use([Autoplay])
 
@@ -22,7 +28,9 @@ function MyApp({ Component, pageProps }) {
       <NextNProgress color="#b12024" />
       <SessionProvider session={pageProps.session}>
         <QueryClientProvider client={queryClient}>
-          <Component {...pageProps} />
+          <main className={roboto.className}>
+            <Component {...pageProps} />
+          </main>
         </QueryClientProvider>
       </SessionProvider>
       <WebChat />

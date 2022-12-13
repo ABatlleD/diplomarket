@@ -35,8 +35,8 @@ function ProductItem({ product }) {
 
   return (
     <>
-      <div className='flex flex-col hover:shadow-button w-full border rounded-lg h-[14.5rem] md:h-[20rem] 2xl:h-[24rem]'>
-        <div className='w-full relative flex flex-row justify-center self-center h-24 md:h-44 2xl:h-60'>
+      <div className='flex flex-col hover:shadow-button w-full border rounded-lg h-[14.5rem] md:h-[20rem] 2xl:h-[25.4rem]'>
+        <div className='w-full relative flex flex-row justify-center self-center md:mb-1 h-24 md:h-44 2xl:h-60'>
           <Link href={`/products/${product.id}`}>
             <Image
               src={`${process.env.NEXT_PUBLIC_BACKEND}${product.img_principal}`}
@@ -97,10 +97,10 @@ function ProductItem({ product }) {
             </ThemeProvider>
           </div>
         </div>
-        <div className='flex flex-col h-[5.7rem] md:h-24'>
-          <div className='mx-2 text-text-blue text-sm md:text-base h-9 md:h-6'>
+        <div className='flex flex-col h-[5.7rem] md:h-[7rem]'>
+          <div className='mx-2 text-text-blue text-sm h-9 md:h-10'>
             <Link href={`/products/${product.id}`}>
-              {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, size.width > 768 ? size.width > 1900 ? 20 : 16 : 18)}
+              {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, size.width > 768 ? size.width > 1900 ? 20 : 55 : 18)}
             </Link>
           </div>
           {size.width >= 768 && (
