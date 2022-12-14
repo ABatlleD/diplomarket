@@ -7,10 +7,42 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline'
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined'
 import { TextField, Button } from '@mui/material'
 import resources from '../restapi/resources'
+import { isEmpty } from '../libs/serialize'
+import { ToastContainer, toast } from 'react-toastify'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import axios from 'axios'
 
 function Contact() {
   const { t, i18n } = useTranslation()
   const [contacts, setContacts] = useState([])
+  const { data } = useSession()
+  const email = data?.user?.email ?? ''
+  const { push } = useRouter()
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState('')
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setLoading(true)
+    if (!isEmpty(message)) {
+      axios.post('/api/contact', { message }).then((Message) => {
+        if (Message?.data?.status === 'ok') {
+          toast.info(Message?.data?.message ?? 'Contacte al administrator')
+          setTimeout(() => {
+            push('/').then()
+          }, 2000)
+        } else {
+          toast.info('Debe iniciar sesión')
+        }
+      }).catch(() => {
+        toast.info('Contacte al administrator')
+      })
+    } else {
+      toast.info('Escriba su mensaje')
+    }
+    setLoading(false)
+  }
 
   useEffect(() => {
     resources.contacts.get()
@@ -20,6 +52,7 @@ function Contact() {
   return (
     <>
      <AppHeader title={t('pages.contact')}/>
+     <ToastContainer />
      <div className='flex flex-row justify-center text-footer-background-200'>
       <div className='flex flex-col md:flex-row mt-10 mb-20 rounded-3xl w-5/6 p-8 bg-background-300 shadow-2xl'>
         <div className='flex flex-col w-full md:w-1/2 md:mr-4'>
@@ -75,6 +108,8 @@ function Contact() {
             <TextField
               id="outlined-required"
               label={t('contact.inputs.email')}
+              value={email}
+              disabled={true}
               sx={{
                 width: '100%',
                 borderColor: 'red'
@@ -88,6 +123,8 @@ function Contact() {
               multiline
               rows={4}
               defaultValue=""
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               sx={{
                 width: '100%',
                 borderColor: 'red'
@@ -101,6 +138,8 @@ function Contact() {
                 width: '100%',
                 backgroundColor: '#15224b !important'
               }}
+              disabled={loading}
+              onClick={handleSubmit}
             >
               {t('contact.inputs.submit')}
             </Button>

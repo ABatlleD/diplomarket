@@ -33,6 +33,7 @@ export const ENDPOINTS = {
   PREMIUM: '/premium/',
   CONFIGURACION: '/configuracion/',
   CONTACT: '/contactoempresa/',
+  SEND_MAIL: '/contacto/',
   CHECKOUT: '/checkout/',
   BOFA: '/checkout/bofa/',
   CHANGE_PASSWORD: '/user/password/change/',

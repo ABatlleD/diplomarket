@@ -28,6 +28,8 @@ const resources = {
     get: async () => await getRequest(`${ENDPOINTS.COMPONENT}`)
   },
 
+  contact: async (data) => await postRequest(ENDPOINTS.SEND_MAIL, data),
+
   delivery: {
     get: async (items, municipio) => {
       const response = await axios.post('/api/checkout/checkdelivery', {
