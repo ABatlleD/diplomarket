@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Tooltip } from '@mui/material'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
 import useWindowSize from '../../hooks/WindowSize'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
@@ -12,15 +11,6 @@ import AddToCart from '../cart/AddCart'
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows'
 import { useRouter } from 'next/router'
 import { addClicks } from '../../libs/quick-tip'
-
-const theme = createTheme({
-  palette: {
-    error: {
-      main: '#b12024',
-      contrastText: '#fff'
-    }
-  }
-})
 
 function HorizontalProductItem({ product }) {
   const { t, i18n } = useTranslation()
@@ -34,21 +24,21 @@ function HorizontalProductItem({ product }) {
 
   return (
     <>
-      <div className='flex flex-row hover:shadow-button w-full border rounded-lg py-2'>
-        <div className='w-[30%] relative flex flex-row justify-center self-center h-28 md:h-44 2xl:h-60'>
+      <div className='flex flex-row hover:shadow-button w-full border rounded-lg'>
+        <div className='w-[30%] relative flex flex-row justify-center self-center h-32 md:h-44 2xl:h-60'>
           <Link href={`/products/${product.id}`}>
             <Image
               src={`${process.env.NEXT_PUBLIC_BACKEND}${product.img_principal}`}
               layout='fill'
               placeholder='blur'
               blurDataURL='/loading.gif'
-              className='hover:cursor-pointer rounded-t-lg'
+              className='hover:cursor-pointer rounded-l-lg'
             />
           </Link>
-          <div className='absolute left-0 top-2'>
+          <div className='absolute left-0 top-[6.5rem]'>
             <Tooltip title={t('quick')} placement='right'>
               <div
-                className='rounded-r-lg pr-1 pl-[0.1rem] mb-2 hover:cursor-pointer text-background-100 bg-footer-background-200'
+                className='rounded-r-lg rounded-bl-lg pr-1 pl-[0.1rem] mb-2 hover:cursor-pointer text-background-100 bg-footer-background-200'
                 onClick={() => {
                   addClicks()
                   setOpenQuickView(true)
@@ -72,31 +62,33 @@ function HorizontalProductItem({ product }) {
             </Tooltip>
           </div>
           <div className='absolute top-2 right-0'>
-            <ThemeProvider theme={theme}>
-              <div className='felx flex-col my-1 md:my-2'>
-                {product.etiquetas.map((tag) => (
-                  <div key={tag.pk}>
-                    <div
-                      className='bg-button px-1 mb-1 rounded-l-full text-background-100 font-weight-light text-[0.6rem] md:text-sm'
-                    >
-                      {i18n.language === 'es' ? tag.nombre : tag.ingles}
-                    </div>
+            <div className='felx flex-col my-1 md:my-2'>
+              {product.etiquetas.map((tag) => (
+                <div key={tag.pk}>
+                  <div
+                    className='px-1 mb-1 rounded-l-full font-weight-light text-[0.6rem] md:text-sm'
+                    style={{
+                      backgroundColor: `${tag.fondo}`,
+                      color: `${tag.texto}`
+                    }}
+                  >
+                    {i18n.language === 'es' ? tag.nombre : tag.ingles}
                   </div>
-                ))}
-                {product.promocion.activo && (
-                  <div className='hidden md:flex'>
-                    <div
-                      className='bg-button hidden md:flex px-1 rounded-r-full text-background-100 font-weight-light text-[0.5rem] md:text-xs'
-                    >
-                      -{product.promocion.descuento}%
-                    </div>
+                </div>
+              ))}
+              {product.promocion.activo && (
+                <div className='hidden md:flex'>
+                  <div
+                    className='bg-button hidden md:flex px-1 rounded-r-full text-background-100 font-weight-light text-[0.5rem] md:text-xs'
+                  >
+                    -{product.promocion.descuento}%
                   </div>
-                )}
-              </div>
-            </ThemeProvider>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-        <div className='w-[70%] flex flex-col justify-between'>
+        <div className='w-[70%] flex flex-col justify-between py-2'>
           <div className='mx-2 text-text-blue text-sm md:text-base'>
             <Link href={`/products/${product.id}`}>
               {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, 60)}
@@ -129,11 +121,11 @@ function HorizontalProductItem({ product }) {
           )}
           <div className='flex flex-row justify-between mx-1 mt-[-3px] md:mt-0'>
             <div
-              className='ml-2 hover:cursor-pointer'
+              className=' ml-1 hover:cursor-pointer'
             >
               {Number(product.cant_inventario) > 0
                 ? (
-                    <AddToCart data={product} />
+                    <AddToCart data={product} text={t('home.addCart')} sizes={{ width: 10, height: 10 }} />
                   )
                 : <></>}
             </div>

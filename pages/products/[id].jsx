@@ -184,7 +184,7 @@ function Product({ product, apiError }) {
           </p>
           <div className='flex flex-col'>
             <div className='flex flex-row justify-between w-11/12 mb-4'>
-              <div className='w-4/12 md:w-3/12'>
+              <div className='w-5/12 md:w-4/12'>
                 <div className='flex flex-row justify-between'>
                   <div
                     className='hover:cursor-pointer'
@@ -200,6 +200,7 @@ function Product({ product, apiError }) {
                               }
                             }}
                             size={[26, 26]}
+                            text={t('home.addCart')}
                           />
                         )
                       : <></>}

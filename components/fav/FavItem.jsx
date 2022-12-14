@@ -4,33 +4,23 @@ import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 import Image from 'next/image'
 import ZoomInIcon from '@mui/icons-material/ZoomIn'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
 import QuickView from '../modals/QuickView'
 import AddToFav from '../fav/AddFav'
 import AddToCart from '../cart/AddCart'
 import resources from '../../restapi/resources'
 import useWindowSize from '../../hooks/WindowSize.js'
 
-const theme = createTheme({
-  palette: {
-    error: {
-      main: '#b12024',
-      contrastText: '#fff'
-    }
-  }
-})
-
 function FavItem({ id }) {
   const { i18n } = useTranslation()
   const [openQuickView, setOpenQuickView] = useState(false)
   const [product, setProduct] = useState({})
   const size = useWindowSize()
+  const { t } = useTranslation()
 
   useEffect(() => {
     resources.products.one(id)
       .then(response => {
         setProduct(response.data)
-        console.log('🚀 ~ file: FavItem.jsx:27 ~ FavItem ~ product', product)
       })
   }, [])
 
@@ -40,7 +30,7 @@ function FavItem({ id }) {
 
   return (
     <>
-      <div className='flex flex-col hover:shadow-button w-full border rounded-lg h-[13.5rem] md:h-[20rem] 2xl:h-[26.2rem]'>
+      <div className='flex flex-col hover:shadow-button w-full border rounded-lg h-[14rem] md:h-[20rem] 2xl:h-[26.2rem]'>
         <div className='w-full relative flex flex-row justify-center self-center h-24 md:h-44 2xl:h-60'>
           {product.img_principal && (
             <Link href={`/products/${product.id}`}>
@@ -64,28 +54,30 @@ function FavItem({ id }) {
             </Tooltip>
           </div>
           <div className='absolute top-2 left-0'>
-            <ThemeProvider theme={theme}>
-              <div className='felx flex-col my-1 md:my-2'>
-                {product?.etiquetas?.map((tag) => (
-                  <div key={tag.pk}>
-                    <div
-                      className='bg-button px-1 mb-1 rounded-r-full text-background-100 font-weight-light text-[0.6rem] md:text-sm'
-                    >
-                      {i18n.language === 'es' ? tag.nombre : tag.ingles}
-                    </div>
+            <div className='felx flex-col my-1 md:my-2'>
+              {product?.etiquetas?.map((tag) => (
+                <div key={tag.pk}>
+                  <div
+                    className='px-1 mb-1 rounded-r-full font-weight-light text-[0.6rem] md:text-sm'
+                    style={{
+                      backgroundColor: `${tag.fondo}`,
+                      color: `${tag.texto}`
+                    }}
+                  >
+                    {i18n.language === 'es' ? tag.nombre : tag.ingles}
                   </div>
-                ))}
-                {product?.promocion?.activo && (
-                  <div className='hidden md:flex'>
-                    <div
-                      className='bg-button hidden md:flex px-1 rounded-r-full text-background-100 font-weight-light text-[0.5rem] md:text-xs'
-                    >
-                      -{parseFloat(product?.promocion?.descuento).toFixed(0)}%
-                    </div>
+                </div>
+              ))}
+              {product?.promocion?.activo && (
+                <div className='hidden md:flex'>
+                  <div
+                    className='bg-button hidden md:flex px-1 rounded-r-full text-background-100 font-weight-light text-[0.5rem] md:text-xs'
+                  >
+                    -{parseFloat(product?.promocion?.descuento).toFixed(0)}%
                   </div>
-                )}
-              </div>
-            </ThemeProvider>
+                </div>
+              )}
+            </div>
           </div>
         </div>
         <div className='flex flex-col h-20 md:h-32'>
@@ -120,35 +112,35 @@ function FavItem({ id }) {
             <div className='md:h-6'></div>
           )}
         </div>
-        {size.width > 768 &&
-          <Divider
-            sx={{
-              marginX: 2,
-              marginY: 1,
-              backgroundColor: '#6e717a'
-            }}
-          />
-        }
-        {size.width > 768 &&
-          <div className='flex flex-row justify-between mx-2'>
-            <div
-              className='ml-2 hover:cursor-pointer'
-            >
-              {Number(product.cant_inventario) > 0
-                ? (
-                    <AddToCart data={{
+        <Divider
+          sx={{
+            marginX: 1,
+            marginY: 1,
+            backgroundColor: '#6e717a'
+          }}
+        />
+        <div className='flex flex-row justify-between mx-2'>
+          <div
+            className='ml-1 hover:cursor-pointer'
+          >
+            {Number(product.cant_inventario) > 0
+              ? (
+                  <AddToCart
+                    data={{
                       ...product,
                       precio: {
                         cantidad: product.precio,
                         moneda: product.precio_currency
                       }
-                    }} />
-                  )
-                : <></>}
-            </div>
-            <AddToFav data={product}/>
+                    }}
+                    text={size.width > 768 ? t('home.addCart') : undefined}
+                    sizes={{ width: 11, height: 11 }}
+                  />
+                )
+              : <></>}
           </div>
-        }
+          <AddToFav data={product}/>
+        </div>
         <QuickView {...{ openQuickView, setOpenQuickView, product }}></QuickView>
       </div>
     </>

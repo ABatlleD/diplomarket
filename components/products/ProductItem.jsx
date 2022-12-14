@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Divider, Tooltip } from '@mui/material'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
 import useWindowSize from '../../hooks/WindowSize'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
@@ -13,15 +12,6 @@ import CompareArrowsIcon from '@mui/icons-material/CompareArrows'
 import { useRouter } from 'next/router'
 import { addClicks } from '../../libs/quick-tip'
 import { useCompare } from '../../store/compare/compare.context'
-
-const theme = createTheme({
-  palette: {
-    error: {
-      main: '#b12024',
-      contrastText: '#fff'
-    }
-  }
-})
 
 function ProductItem({ product }) {
   const { t, i18n } = useTranslation()
@@ -66,10 +56,10 @@ function ProductItem({ product }) {
               className='hover:cursor-pointer rounded-t-lg'
             />
           </Link>
-          <div className='absolute right-0 top-2'>
+          <div className='absolute right-0 top-[4.5rem] md:top-0'>
             <Tooltip title={t('quick')} placement='right'>
               <div
-                className='rounded-l-lg pr-1 pl-[0.1rem] mb-2 hover:cursor-pointer text-background-100 bg-footer-background-200'
+                className='rounded-l-lg rounded-tr-lg pr-1 pl-[0.1rem] mb-2 hover:cursor-pointer text-background-100 bg-footer-background-200'
                 onClick={() => {
                   addClicks()
                   setOpenQuickView(true)
@@ -79,7 +69,7 @@ function ProductItem({ product }) {
               </div>
             </Tooltip>
           </div>
-          <div className='absolute hidden md:flex right-0 top-9 md:top-10'>
+          <div className='absolute hidden md:flex right-0 top-9 md:top-8'>
             <Tooltip title={t('compare')} placement='right'>
               <div
                 className='rounded-l-lg pr-1 pl-[0.1rem] mb-2 hover:cursor-pointer text-background-100 bg-button'
@@ -90,28 +80,30 @@ function ProductItem({ product }) {
             </Tooltip>
           </div>
           <div className='absolute top-2 left-0'>
-            <ThemeProvider theme={theme}>
-              <div className='felx flex-col my-1 md:my-2'>
-                {product.etiquetas.map((tag) => (
-                  <div key={tag.pk}>
-                    <div
-                      className='bg-button px-1 mb-1 rounded-r-full text-background-100 font-weight-light text-[0.6rem] md:text-sm'
-                    >
-                      {i18n.language === 'es' ? tag.nombre : tag.ingles}
-                    </div>
+            <div className='felx flex-col my-1 md:my-2'>
+              {product.etiquetas.map((tag) => (
+                <div key={tag.pk}>
+                  <div
+                    className='px-1 mb-1 rounded-r-full font-weight-light text-[0.6rem] md:text-sm'
+                    style={{
+                      backgroundColor: `${tag.fondo}`,
+                      color: `${tag.texto}`
+                    }}
+                  >
+                    {i18n.language === 'es' ? tag.nombre : tag.ingles}
                   </div>
-                ))}
-                {product.promocion.activo && (
-                  <div className='hidden md:flex'>
-                    <div
-                      className='bg-button hidden md:flex px-1 rounded-r-full text-background-100 font-weight-light text-[0.5rem] md:text-xs'
-                    >
-                      -{parseFloat(product.promocion.descuento).toFixed(0)}%
-                    </div>
+                </div>
+              ))}
+              {product.promocion.activo && (
+                <div className='hidden md:flex'>
+                  <div
+                    className='bg-button hidden md:flex px-1 rounded-r-full text-background-100 font-weight-light text-[0.5rem] md:text-xs'
+                  >
+                    -{parseFloat(product.promocion.descuento).toFixed(0)}%
                   </div>
-                )}
-              </div>
-            </ThemeProvider>
+                </div>
+              )}
+            </div>
           </div>
         </div>
         <div className='flex flex-col h-[5.7rem] md:h-[7rem]'>
@@ -159,7 +151,7 @@ function ProductItem({ product }) {
             >
               {Number(product.cant_inventario) > 0
                 ? (
-                    <AddToCart data={product} />
+                    <AddToCart data={product} text={size.width < 768 ? undefined : t('home.addCart')} sizes={{ width: 11, height: 11 }} />
                   )
                 : <></>}
             </div>

@@ -6,7 +6,6 @@ import { useCart } from '../../store/cart/cart.context'
 import usePrice from '../../libs/use-price'
 import Image from 'next/image'
 import { useTranslation } from 'react-i18next'
-import useWindowSize from '../../hooks/WindowSize'
 
 function CartItem({ item, variant, calculateDelivery }) {
   const { i18n } = useTranslation()
@@ -14,7 +13,6 @@ function CartItem({ item, variant, calculateDelivery }) {
   const t = (msg) => {
     return msg
   }
-  const size = useWindowSize()
   const { price } = usePrice({
     amount: item.price,
     currencyCode: currency
@@ -56,7 +54,7 @@ function CartItem({ item, variant, calculateDelivery }) {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 100, rotate: 10 }}
       transition={{ }}
-      className={`flex flex-row p-1 text-sm border mt-4 rounded-lg justify-around border-opacity-75 ${
+      className={`flex flex-row p-1 text-sm border mt-4 rounded-lg border-opacity-75 ${
         isNotAvailable ? 'bg-red-100' : ''
       }`}
     >
@@ -77,17 +75,16 @@ function CartItem({ item, variant, calculateDelivery }) {
         <></>
           )}
 
-      <div className="w-16 md:w-24 ml-1 overflow-hidden bg-gray-100 mr-2 shrink-0 relative">
+      <div className="w-3/12 md:w-24 ml-1 overflow-hidden bg-gray-100 mr-2 shrink-0 relative">
         <Image
           src={`${process.env.NEXT_PUBLIC_BACKEND}${item.image || item.producto.img_principal}`}
-          width={size.width < 768 ? 80 : 100}
-          height={size.width >= 768 && size.width < 1900 ? 90 : 100}
+          layout='fill'
           placeholder='blur'
           blurDataURL='/loading.gif'
           className='hover:cursor-pointer'
         />
       </div>
-      <div>
+      <div className='w-7/12'>
         <h3 className="font-bold text-heading text-text-blue">{i18n.language === 'es' ? item.name || item.producto.nombre : item.english_name || item.producto.nombre_ingles}</h3>
         <p className="my-2.5 font-semibold text-accent text-button">US{price}</p>
         <span className="text-xs text-body">
@@ -100,6 +97,7 @@ function CartItem({ item, variant, calculateDelivery }) {
                 onIncrement={handleIncrement}
                 disabled={outOfStock}
                 className={'justify-start'}
+                size={{ width: 11, height: 11 }}
               />
             </div>
               )
@@ -121,7 +119,7 @@ function CartItem({ item, variant, calculateDelivery }) {
                 )}
         </span>
       </div>
-      <div className='flex flex-col items-end h-[5rem] md:h-[5rem] 2xl:h-[6rem] justify-between'>
+      <div className='flex flex-col items-end w-2/12 h-[6rem] md:h-[5rem] 2xl:h-[6rem] justify-between'>
         <button
           className="w-6 h-6 flex items-center justify-center shrink-0 rounded-full transition-all focus:outline-none hover:bg-accent focus:bg-accent hover:text-light focus:text-light"
           onClick={() => clearItemFromCart(item.id)}

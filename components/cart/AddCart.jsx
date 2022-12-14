@@ -11,7 +11,9 @@ function AddToCart ({
   helium,
   variation,
   disabled,
-  size
+  size,
+  sizes,
+  text
 }) {
   const {
     addItemToCart,
@@ -45,6 +47,7 @@ function AddToCart ({
         disabled={disabled || outOfStock}
         onClick={handleAddClick}
         dimentions={size}
+        text={text}
       />
       )}
       {isInCart(`${item.id}`) && (
@@ -55,6 +58,7 @@ function AddToCart ({
           className={counterClass}
           variant={helium ? 'helium' : 'details'}
           disabled={outOfStock}
+          size={sizes}
         />
       )}
     </>

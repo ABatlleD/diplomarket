@@ -132,7 +132,6 @@ function Home({
   useEffect(() => {
     if (size.width > 768) {
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-      console.log('🚀 ~ file: index.jsx:153 ~ useEffect ~ loading', loading)
       const filter = {
         offset,
         municipality_id: municipality,
@@ -149,6 +148,7 @@ function Home({
         resources.products.all(filter)
           .then(response => {
             setList(response.data)
+            console.log('🚀 ~ file: index.jsx:153 ~ useEffect ~ response.data', response.data)
             setLoading(false)
           })
       } catch (error) {

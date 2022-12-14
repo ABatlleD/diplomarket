@@ -137,14 +137,14 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
                 <p className='text-xs text-text-100 mb-3'>{resizeTitle(i18n.language === 'es' ? product.descripcion : product.descripcion_ingles, 300)}</p>
                 <div className='flex flex-col'>
                   <div className='flex flex-row justify-between mb-4'>
-                    <div className='w-4/12 md:w-3/12'>
+                    <div className='w-6/12'>
                       <div className='flex flex-row justify-between'>
                         <div
                           className='hover:cursor-pointer'
                         >
                           {Number(product.cant_inventario) > 0
                             ? (
-                                <AddToCart data={product} size={[22, 22]} />
+                                <AddToCart data={product} size={[22, 22]} text={t('home.addCart')} />
                               )
                             : <></>}
                         </div>
