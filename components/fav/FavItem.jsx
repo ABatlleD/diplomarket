@@ -4,12 +4,21 @@ import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 import Image from 'next/image'
 import ZoomInIcon from '@mui/icons-material/ZoomIn'
-// import CompareIcon from '@mui/icons-material/Compare'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 import QuickView from '../modals/QuickView'
 import AddToFav from '../fav/AddFav'
 import AddToCart from '../cart/AddCart'
 import resources from '../../restapi/resources'
 import useWindowSize from '../../hooks/WindowSize.js'
+
+const theme = createTheme({
+  palette: {
+    error: {
+      main: '#b12024',
+      contrastText: '#fff'
+    }
+  }
+})
 
 function FavItem({ id }) {
   const { i18n } = useTranslation()
@@ -21,7 +30,7 @@ function FavItem({ id }) {
     resources.products.one(id)
       .then(response => {
         setProduct(response.data)
-        console.log('🚀 ~ file: FavItem.jsx:19 ~ FavItem ~ product', response.data)
+        console.log('🚀 ~ file: FavItem.jsx:27 ~ FavItem ~ product', product)
       })
   }, [])
 
@@ -31,7 +40,7 @@ function FavItem({ id }) {
 
   return (
     <>
-      <div className='flex flex-col hover:shadow-button w-full border rounded-lg h-[13.5rem] md:h-[20rem] 2xl:h-[24rem]'>
+      <div className='flex flex-col hover:shadow-button w-full border rounded-lg h-[13.5rem] md:h-[20rem] 2xl:h-[26.2rem]'>
         <div className='w-full relative flex flex-row justify-center self-center h-24 md:h-44 2xl:h-60'>
           {product.img_principal && (
             <Link href={`/products/${product.id}`}>
@@ -54,34 +63,58 @@ function FavItem({ id }) {
               </div>
             </Tooltip>
           </div>
+          <div className='absolute top-2 left-0'>
+            <ThemeProvider theme={theme}>
+              <div className='felx flex-col my-1 md:my-2'>
+                {product?.etiquetas?.map((tag) => (
+                  <div key={tag.pk}>
+                    <div
+                      className='bg-button px-1 mb-1 rounded-r-full text-background-100 font-weight-light text-[0.6rem] md:text-sm'
+                    >
+                      {i18n.language === 'es' ? tag.nombre : tag.ingles}
+                    </div>
+                  </div>
+                ))}
+                {product?.promocion?.activo && (
+                  <div className='hidden md:flex'>
+                    <div
+                      className='bg-button hidden md:flex px-1 rounded-r-full text-background-100 font-weight-light text-[0.5rem] md:text-xs'
+                    >
+                      -{parseFloat(product?.promocion?.descuento).toFixed(0)}%
+                    </div>
+                  </div>
+                )}
+              </div>
+            </ThemeProvider>
+          </div>
         </div>
-        <div className='flex flex-col h-20 md:h-24'>
-          <div className='mx-2 text-text-blue text-sm md:text-base md:h-6'>
+        <div className='flex flex-col h-20 md:h-32'>
+          <div className='mx-2 text-text-blue text-sm md:text-base md:h-12'>
             {product.id && (
               <Link href={`/products/${product.id}`}>
-                {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, size.width < 768 ? 10 : 20)}
+                {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, size.width > 768 ? size.width > 1900 ? 60 : 50 : 18)}
               </Link>
             )}
           </div>
           <div className='mx-2 my-0 md:my-0 text-button text-sm md:text-base'>{product.proveedor?.nombre}</div>
           {(!product.promocion || !product.promocion.activo) && (
-            <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${product.precio}</div>
+            <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${parseFloat(product.precio).toFixed(2)}</div>
           )}
           {product.promocion && product.promocion.activo && (
             <div className='flex flex-col md:flex-row ml-2 leading-3'>
-              <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-xs md:text-base'>US${(product.precio - (product.precio * product.promocion.descuento / 100)).toFixed(2)} </p>
+              <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-xs md:text-base'>US${parseFloat(product.precio - (product.precio * product.promocion.descuento / 100)).toFixed(2)} </p>
               <div className='flex flex-row'>
                 <div
                   className='bg-button flex md:hidden rounded-md px-1 mr-1 text-background-100 text-xs'
                 >
-                  -{product.promocion.nombre}
+                  -{parseFloat(product.promocion.descuento).toFixed(2)}
                 </div>
-                <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-xs md:text-sm line-through'> US${product.precio}</p>
+                <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-xs md:text-sm line-through'> US${parseFloat(product.precio).toFixed(2)}</p>
               </div>
             </div>
           )}
           {product.precioxlibra !== 0 && (
-            <div className='mx-2 my-0 md:mb-0 md:my-0 text-text-100 text-xs md:text-base'>US${product.precioxlibra}/{product.um}</div>
+            <div className='mx-2 my-0 md:mb-0 md:my-0 text-text-100 text-xs md:text-base'>US${parseFloat(product.precioxlibra).toFixed(2)}/{product.um}</div>
           )}
           {product.precioxlibra === 0 && (
             <div className='md:h-6'></div>

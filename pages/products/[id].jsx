@@ -155,23 +155,23 @@ function Product({ product, apiError }) {
             }
           </div>
           {!product.promocion.activo && (
-            <div className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${product.precio}</div>
+            <div className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${parseFloat(product.precio).toFixed(2)}</div>
           )}
           {product.promocion.activo && (
             <div className='flex flex-col leading-3'>
-              <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${(product.precio - (product.precio * product.promocion.descuento / 100)).toFixed(2)} </p>
+              <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${parseFloat(product.precio - (product.precio * product.promocion.descuento / 100)).toFixed(2)} </p>
               <div className='flex flex-row my-2'>
                 <div
                   className='bg-button flex rounded-md px-1 mr-1 text-background-100 text-sm'
                 >
                   -{product.promocion.descuento}%
                 </div>
-                <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-sm md:text-sm line-through'> US${product.precio}</p>
+                <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-sm md:text-sm line-through'> US${parseFloat(product.precio).toFixed(2)}</p>
               </div>
             </div>
           )}
           {product.precioxlibra !== 0 && (
-            <div className='mb-2 md:mb-0 md:my-0 text-text-100 text-sm md:text-base'>US${product.precioxlibra}/{product.um}</div>
+            <div className='mb-2 md:mb-0 md:my-0 text-text-100 text-sm md:text-base'>US${parseFloat(product.precioxlibra).toFixed(2)}/{product.um}</div>
           )}
           <p className='mb-2'>
             <span className='font-semibold'>{t('products.subcategory')}:</span> <span className='font-semibold text-text-100'>{product.subcategoria}</span>

@@ -106,7 +106,7 @@ function ProductItem({ product }) {
                     <div
                       className='bg-button hidden md:flex px-1 rounded-r-full text-background-100 font-weight-light text-[0.5rem] md:text-xs'
                     >
-                      -{product.promocion.descuento}%
+                      -{parseFloat(product.promocion.descuento).toFixed(0)}%
                     </div>
                   </div>
                 )}
@@ -117,30 +117,30 @@ function ProductItem({ product }) {
         <div className='flex flex-col h-[5.7rem] md:h-[7rem]'>
           <div className='mx-2 text-text-blue text-sm h-9 md:h-10'>
             <Link href={`/products/${product.id}`}>
-              {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, size.width > 768 ? size.width > 1900 ? 20 : 55 : 18)}
+              {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, size.width > 768 ? size.width > 1900 ? 80 : 65 : 18)}
             </Link>
           </div>
           {size.width >= 768 && (
             <div className='mx-2 my-0 md:my-0 text-button text-sm md:text-base'>{product.proveedor.nombre}</div>
           )}
           {!product.promocion.activo && (
-            <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-base'>US${product.precio.cantidad}</div>
+            <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-base'>US${parseFloat(product.precio.cantidad).toFixed(2)}</div>
           )}
           {product.promocion.activo && (
             <div className='flex flex-col md:flex-row ml-2 leading-3'>
-              <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-base'>US${(product.precio.cantidad - (product.precio.cantidad * product.promocion.descuento / 100)).toFixed(2)} </p>
+              <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-base'>US${parseFloat(product.precio.cantidad - (product.precio.cantidad * product.promocion.descuento / 100)).toFixed(2)} </p>
               <div className='flex flex-row'>
                 <div
                   className='bg-button flex md:hidden rounded-md px-1 mr-1 text-background-100 text-xs'
                 >
-                  -{product.promocion.descuento}%
+                  -{parseFloat(product.promocion.descuento).toFixed(0)}%
                 </div>
-                <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-xs md:text-sm line-through'> US${product.precio.cantidad}</p>
+                <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-xs md:text-sm line-through'> US${parseFloat(product.precio.cantidad).toFixed(2)}</p>
               </div>
             </div>
           )}
           {product.precioxlibra.cantidad !== '0.00' && (
-            <div className='mx-2 my-0 md:mb-0 md:my-0 text-text-100 text-xs md:text-base'>US${product.precioxlibra.cantidad}/{product.um}</div>
+            <div className='mx-2 my-0 md:mb-0 md:my-0 text-text-100 text-xs md:text-base'>US${parseFloat(product.precioxlibra.cantidad).toFixed(2)}/{product.um}</div>
           )}
           {product.precioxlibra.cantidad === '0.00' && (
             <div className='md:h-6'></div>
