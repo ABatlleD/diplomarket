@@ -1,14 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AppHeader from '../components/layouts/AppHeader'
 import MainLayout from '../layouts/MainLayout'
 import { useCompare } from '../store/compare/compare.context'
 import { useTranslation } from 'react-i18next'
 import CompareItem from '../components/compare/CompareItem'
+import LayersClearIcon from '@mui/icons-material/LayersClear'
 
 function Compare() {
   const { items } = useCompare()
+  const [emptySlots, setEmptySlots] = useState([])
 
   const { t } = useTranslation()
+
+  useEffect(() => {
+    const empty = 5 - items.length
+    const slots = []
+    setEmptySlots([])
+    if (empty !== 0) {
+      for (let i = 0; i < empty; i++) {
+        slots.push(i)
+      }
+      setEmptySlots(slots)
+    }
+  }, [items])
 
   return (
     <>
@@ -18,6 +32,11 @@ function Compare() {
         {items.map((item) => (
           <div key={item.id} className='flex w-1/5'>
             <CompareItem id={item.id} />
+          </div>
+        ))}
+        {emptySlots.map((slot) => (
+          <div key={slot} className='flex flex-row h-[41rem] border items-center justify-center w-1/5'>
+            <LayersClearIcon sx={{ fontSize: '8rem' }} />
           </div>
         ))}
       </div>
