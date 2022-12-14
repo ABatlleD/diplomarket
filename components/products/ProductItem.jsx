@@ -12,6 +12,7 @@ import AddToCart from '../cart/AddCart'
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows'
 import { useRouter } from 'next/router'
 import { addClicks } from '../../libs/quick-tip'
+import { useCompare } from '../../store/compare/compare.context'
 
 const theme = createTheme({
   palette: {
@@ -30,6 +31,25 @@ function ProductItem({ product }) {
 
   const resizeTitle = (string, maxLength) => {
     return string.length > maxLength ? `${string.slice(0, maxLength)}...` : string
+  }
+
+  const {
+    items,
+    addItemToCompare,
+    removeItemFromCompare,
+    isInCompare
+  } = useCompare()
+
+  const goToCompare = (id) => {
+    if (items.length >= 5 && !isInCompare(id)) {
+      removeItemFromCompare(items[0].id)
+      addItemToCompare(id, 1)
+    } else if (!isInCompare(id)) {
+      addItemToCompare(id, 1)
+    }
+
+    addClicks()
+    router.push('/compare')
   }
 
   return (
@@ -63,10 +83,7 @@ function ProductItem({ product }) {
             <Tooltip title={t('compare')} placement='right'>
               <div
                 className='rounded-l-lg pr-1 pl-[0.1rem] mb-2 hover:cursor-pointer text-background-100 bg-button'
-                onClick={() => {
-                  addClicks()
-                  router.push('/compare')
-                }}
+                onClick={() => goToCompare(product.id)}
               >
                 <CompareArrowsIcon fontSize={size.width < 768 ? 'samll' : 'medium'} />
               </div>

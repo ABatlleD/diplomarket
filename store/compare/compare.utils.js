@@ -5,14 +5,15 @@ export function addItemWithQuantity(
 ) {
   if (quantity <= 0) { throw new Error("cartQuantity can't be zero or less than zero") }
   const existingItemIndex = items.findIndex(
-    (existingItem) => existingItem.id === item.id
+    (existingItem) => existingItem === item
   )
   if (existingItemIndex > -1) {
     const newItems = [...items]
     newItems[existingItemIndex].quantity += quantity
     return newItems
   }
-  return [...items, { ...item, quantity }]
+  return [...items, { id: item, quantity }]
+  // return []
 }
 
 export function removeItemOrQuantity(

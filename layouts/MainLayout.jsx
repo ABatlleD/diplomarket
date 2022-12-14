@@ -9,6 +9,7 @@ import { motion } from 'framer-motion'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { getCookie } from 'cookies-next'
 import { FavProvider } from '../store/fav/fav.context.jsx'
+import { CompareProvider } from '../store/compare/compare.context.jsx'
 import { CartProvider } from '../store/cart/cart.context.jsx'
 import { SessionProvider } from 'next-auth/react'
 import QuickTip from '../components/modals/QuickTip.jsx'
@@ -46,48 +47,50 @@ function MainLayout({ children }) {
   return (
     <>
       <SessionProvider session={children.session}>
+        <CompareProvider>
         <FavProvider>
           <CartProvider>
-            <QueryClientProvider client={queryClient}>
-              <motion.div
-                animate={{
-                  opacity: categoriesSideBar || mainSideBar || cartSideBar ? 0.5 : 1
-                }}
-                transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
-              >
-                <NavBar {...{
-                  categoriesSideBar,
-                  setCategoriesSideBar,
+              <QueryClientProvider client={queryClient}>
+                <motion.div
+                  animate={{
+                    opacity: categoriesSideBar || mainSideBar || cartSideBar ? 0.5 : 1
+                  }}
+                  transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
+                >
+                  <NavBar {...{
+                    categoriesSideBar,
+                    setCategoriesSideBar,
+                    mainSideBar,
+                    setMainSideBar,
+                    cartSideBar,
+                    setCartSideBar,
+                    openSelectPlace,
+                    setOpenSelectPlace
+                  }}/>
+                  <main>{children}</main>
+                  <Footer {...{
+                    cartSideBar,
+                    setCartSideBar
+                  }} />
+                </motion.div>
+                <CategoriesSideBar {...{ categoriesSideBar, setCategoriesSideBar }} />
+                <MainSideBar {...{
                   mainSideBar,
                   setMainSideBar,
-                  cartSideBar,
-                  setCartSideBar,
                   openSelectPlace,
                   setOpenSelectPlace
-                }}/>
-                <main>{children}</main>
-                <Footer {...{
-                  cartSideBar,
-                  setCartSideBar
                 }} />
-              </motion.div>
-              <CategoriesSideBar {...{ categoriesSideBar, setCategoriesSideBar }} />
-              <MainSideBar {...{
-                mainSideBar,
-                setMainSideBar,
-                openSelectPlace,
-                setOpenSelectPlace
-              }} />
-              <CartSideBar {...{ cartSideBar, setCartSideBar }} />
-              <QuickTip {...{ openQuickTip, setOpenQuickTip }} />
-              {scrollY !== 0 && (
-                <div className='fixed overflow-hidden p-2 rounded bottom-8 right-3 bg-footer-background-300 text-background-100 flex flex-row justify-center items-center shadow-md hover:cursor-pointer' onClick={() => window.scrollTo(0, 0)}>
-                  <KeyboardArrowUpIcon />
-                </div>
-              )}
-            </QueryClientProvider>
+                <CartSideBar {...{ cartSideBar, setCartSideBar }} />
+                <QuickTip {...{ openQuickTip, setOpenQuickTip }} />
+                {scrollY !== 0 && (
+                  <div className='fixed overflow-hidden p-2 rounded bottom-8 right-3 bg-footer-background-300 text-background-100 flex flex-row justify-center items-center shadow-md hover:cursor-pointer' onClick={() => window.scrollTo(0, 0)}>
+                    <KeyboardArrowUpIcon />
+                  </div>
+                )}
+              </QueryClientProvider>
           </CartProvider>
         </FavProvider>
+        </CompareProvider>
       </SessionProvider>
     </>
   )

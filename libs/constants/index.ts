@@ -1,5 +1,6 @@
 export const CART_KEY = 'dm-cart';
 export const FAV_KEY = 'dm-fav';
+export const COMPARE_KEY = 'dm-compare';
 export const TOKEN = 'token';
 export const AUTH_TOKEN_KEY = 'auth_token';
 export const AUTH_PERMISSIONS = 'auth_permissions';
