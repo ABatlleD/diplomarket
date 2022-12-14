@@ -37,8 +37,8 @@ function OrderDetails({ openOrderDetails = false, setOpenOrderDetails = () => {}
                 <></>
                   )}
             </div>
-            <p><span className='font-bold'>Precio de entrega: </span>US${item.precio_envio}</p>
-            <p className='mb-4'><span className='font-bold'>Total: </span>US${item.total}</p>
+            <p><span className='font-bold'>Precio de entrega: </span>US${parseFloat(item.precio_envio).toFixed(2)}</p>
+            <p className='mb-4'><span className='font-bold'>Total: </span>US${parseFloat(item.total).toFixed(2)}</p>
             <div className='mt-2'>
               <p className='text-text-100 font-semibold mb-2'>Datos del destinatario:</p>
               <div className='border p-2 bg-[#f2f2f2]'>

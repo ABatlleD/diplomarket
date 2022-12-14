@@ -26,9 +26,9 @@ function OrderProductItem({ item, variant }) {
       <div className='w-[60%] flex flex-row justify-center h-full items-center'>
         <h3 className="font-bold text-heading text-text-blue">{i18n.language === 'es' ? item.producto.nombre : item.producto.nombre_ingles}</h3>
       </div>
-      <div className='flex flex-row w-[20%] h-full items-center'>
+      <div className='flex flex-row w-[24%] h-full items-center'>
         <p>{item.cantidad}X</p>
-        <p className="ml-1 font-semibold text-accent text-button">US${item.respaldo}</p>
+        <p className="ml-1 font-semibold text-accent text-button">US${parseFloat(item.respaldo).toFixed(2)}</p>
       </div>
     </motion.div>
   )

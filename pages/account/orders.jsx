@@ -41,7 +41,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }))
 
 function Orders({ orders }) {
-  console.log('🚀 ~ file: orders.jsx:11 ~ Orders ~ orders', orders)
   const { t } = useTranslation()
   const { status } = useSession()
   const router = useRouter()
@@ -71,6 +70,7 @@ function Orders({ orders }) {
                 <div className='flex text-sm flex-col w-[60%] my-2'>
                   <p><span className='font-bold'>Estado: </span>{item.status}</p>
                   <p><span className='font-bold'>ID: </span>{item.id}</p>
+                  <p><span className='font-bold'>PAGO: </span>US${parseFloat(item.total).toFixed(2)}</p>
                   <p><span className='font-bold'>Fecha: </span>{DateTime.fromISO(item.fecha_creada).toLocaleString(DateTime.DATETIME_MED)}</p>
                 </div>
                 <div className='flex flex-col w-[8%] my-2' onClick={() => setOpenOrderDetails(true)}>
@@ -90,6 +90,7 @@ function Orders({ orders }) {
                   <StyledTableCell align='left'><span className='sm:text-xs md:text-base'>PASARELA</span></StyledTableCell>
                   <StyledTableCell align="left"><span className='sm:text-xs md:text-base'>ESTADO</span></StyledTableCell>
                   <StyledTableCell align="left"><span className='sm:text-xs md:text-base'>ID DE COMPRA</span></StyledTableCell>
+                  <StyledTableCell align="left"><span className='sm:text-xs md:text-base'>PAGO TOTAL</span></StyledTableCell>
                   <StyledTableCell align="left"><span className='sm:text-xs md:text-base'>FECHA DE CREADA</span></StyledTableCell>
                   <StyledTableCell align="left"></StyledTableCell>
                 </TableRow>
@@ -98,7 +99,7 @@ function Orders({ orders }) {
                 {orders.map((item) => (
                   <StyledTableRow key={item.id}>
                     <StyledTableCell align="center">
-                      <div className='relative w-3/6 sm:h-9 md:h-11'>
+                      <div className='relative w-3/6 sm:h-9 md:h-14 xl:h-14 2xl:h-[4.5rem]'>
                         <Image
                           src={`/assets/payment/${item?.tipo}/type-${item?.tipo}.png`}
                           alt='Payment Type'
@@ -108,6 +109,7 @@ function Orders({ orders }) {
                     </StyledTableCell>
                     <StyledTableCell align="left"><span className='sm:text-xs md:text-base'>{item.status}</span></StyledTableCell>
                     <StyledTableCell align="left"><span className='sm:text-xs md:text-base'>{item.id}</span></StyledTableCell>
+                    <StyledTableCell align="left"><span className='sm:text-xs md:text-base'>US${parseFloat(item.total).toFixed(2)}</span></StyledTableCell>
                     <StyledTableCell align="left"><span className='sm:text-xs md:text-base'>{DateTime.fromISO(item.fecha_creada).toLocaleString(DateTime.DATETIME_MED)}</span></StyledTableCell>
                     <StyledTableCell align="left">
                       <div className='hover:cursor-pointer' onClick={() => setOpenOrderDetails(true)}>
