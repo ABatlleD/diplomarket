@@ -64,9 +64,9 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
         sx={{ overflowY: 'scroll' }}
       >
         <Fade in={openQuickView}>
-          <div className='flex z-50 flex-col shadow-2xl bg-background-100 w-11/12 md:4/5 xl:w-1/3 mt-4 md:mt-10 mx-auto p-2'>
+          <div className='flex z-50 flex-col shadow-2xl bg-background-100 w-11/12 md:4/5 xl:w-2/5 p-2 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2'>
             <div className='flex flex-row justify-end mb-6'>
-              <HighlightOffIcon className='hover:cursor-pointer' onClick={() => setOpenQuickView(false)} />
+              <HighlightOffIcon className='hover:cursor-pointer text-footer-background-300' onClick={() => setOpenQuickView(false)} />
             </div>
             <div className='flex flex-col md:flex-row items-center md:items-start md:justify-center w-full mb-6'>
               <div className='flex flex-row w-2/3 mb-2 md:mb-0 md:w-[35%] justify-center'>
@@ -95,7 +95,7 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
               </div>
               <div className='md:w-[2%]'></div>
               <div className='flex flex-col w-full px-4 md:w-[60%]'>
-                <p className='text-base md:text-base text-text-blue'>{i18n.language === 'es' ? product.nombre : product.nombre_ingles}</p>
+                <p className='text-base md:text-base 2xl:text-lg text-text-blue'>{i18n.language === 'es' ? product.nombre : product.nombre_ingles}</p>
                 <div className='flex flex-col mb-2'>
                   {(product.etiquetas && product.etiquetas.length > 0) && (
                     <ThemeProvider theme={theme}>
@@ -108,23 +108,23 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
                   )}
                   {product.sku &&
                     <p>
-                      <span className='font-semibold text-sm'>SKU: </span> <span className='font-semibold text-sm'>{product.sku}</span>
+                      <span className='font-semibold text-sm md:text-base text-footer-background-300'>SKU: </span> <span className='font-semibold text-sm md:text-base text-footer-background-300'>{product.sku}</span>
                     </p>
                   }
                 </div>
                 {!product.promocion?.activo && (
-                  <div className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${product.precio?.cantidad || product.precio}</div>
+                  <div className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-lg'>US${product.precio?.cantidad || product.precio}</div>
                 )}
                 {product.promocion?.activo && (
                   <div className='flex flex-col leading-3'>
                     <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${((product.precio?.cantidad || product.precio) - ((product.precio?.cantidad || product.precio) * product.promocion.descuento / 100)).toFixed(2)} </p>
                     <div className='flex flex-row my-2'>
                       <div
-                        className='bg-button flex rounded-md px-1 mr-1 text-background-100 text-sm'
+                        className='bg-button flex rounded-md px-1 mr-1 text-background-100 text-sm md:text-base'
                       >
                         -{product.promocion.descuento}%
                       </div>
-                      <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-sm md:text-sm line-through'> US${product.precio?.cantidad || product.precio}</p>
+                      <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-sm md:text-base line-through'> US${product.precio?.cantidad || product.precio}</p>
                     </div>
                   </div>
                 )}
@@ -134,7 +134,7 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
                 {product.precioxlibra?.cantidad !== undefined && product.precioxlibra?.cantidad !== '0.00' && (
                   <div className='mb-2 md:mb-0 md:my-0 text-text-100 text-sm md:text-base'>US${product.precioxlibra?.cantidad}/{product.um}</div>
                 )}
-                <p className='text-xs text-text-100 mb-3'>{resizeTitle(i18n.language === 'es' ? product.descripcion : product.descripcion_ingles, 300)}</p>
+                <p className='text-xs md:text-sm text-text-100 mb-3'>{resizeTitle(i18n.language === 'es' ? product.descripcion : product.descripcion_ingles, 300)}</p>
                 <div className='flex flex-col'>
                   <div className='flex flex-row justify-between mb-4'>
                     <div className='w-6/12'>
@@ -144,7 +144,7 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
                         >
                           {Number(product.cant_inventario) > 0
                             ? (
-                                <AddToCart data={product} size={[22, 22]} text={t('home.addCart')} />
+                                <AddToCart data={product} size={[26, 26]} text={t('home.addCart')} />
                               )
                             : <></>}
                         </div>
@@ -153,7 +153,7 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
                     {Number(product.cant_inventario) > 0
                       ? (
                         <div
-                          className='bg-footer-background-200 w-6/12 shadow-lg text-background-100 py-1 text-center text-sm rounded-md hover:cursor-pointer hover:opacity-90'
+                          className='bg-footer-background-200 w-6/12 shadow-lg text-background-100 py-1 text-center text-sm md:text-base rounded-md hover:cursor-pointer hover:opacity-90'
                           onClick={handleBuyNow}
                         >
                           {t('home.shopNow')}
@@ -161,7 +161,7 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
                         )
                       : <></>}
                   </div>
-                  <div className='flex flex-row text-button hover:cursor-pointer hover:opacity-90 text-sm md:text-sm'>
+                  <div className='flex flex-row text-button hover:cursor-pointer hover:opacity-90 text-sm md:text-base'>
                     <AddToFav data={product} text={t('fav.add')} success={t('fav.in')}/>
                   </div>
                 </div>
