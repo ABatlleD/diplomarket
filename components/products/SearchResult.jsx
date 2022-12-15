@@ -31,9 +31,9 @@ function SearchResult({ data, setInputValue = () => '' }) {
               <div className='text-xs md:text-base'>{resizeTitle(i18n.language === 'es' ? data.nombre : data.nombre_ingles, size.width < 768 ? 30 : 100)}</div>
               <div className='flex flex-row'>
                 {data.promocion && data.promocion.descuento && (
-                  <div className='bg-button px-1 text-background-100 rounded-xl h-4 md:h-auto text-xs md:mr-1 md:text-base'>-{data.promocion.descuento}%</div>
+                  <div className='bg-button px-1 text-background-100 rounded-xl h-4 md:h-auto text-xs md:mr-1 md:text-base'>-{parseFloat(data.promocion.descuento).toFixed(0)}%</div>
                 )}
-                <div className='bg-button px-1 text-background-100 rounded-xl h-4 md:h-auto text-xs md:text-base'>US${data.precio}</div>
+                <div className='bg-button px-1 text-background-100 rounded-xl h-4 md:h-auto text-xs md:text-base'>US${parseFloat(data.precio).toFixed(2)}</div>
               </div>
             </div>
           </Link>

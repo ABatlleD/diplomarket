@@ -95,7 +95,7 @@ function Product({ product, apiError }) {
   }
 
   return (
-    <div className='flex flex-col items-center mx-2'>
+    <div className='flex flex-col items-center mx-2 bg-background-100'>
       <AppHeader title={t('pages.products')} />
       <div className='flex flex-col md:flex-row w-full 2xl:w-[60%] xl:w-[75%] md:justify-between my-8'>
         <div className='md:w-[45%] flex flex-row justify-center'>
@@ -150,7 +150,7 @@ function Product({ product, apiError }) {
             </ThemeProvider>
             {product.sku &&
               <p className={`${product.etiquetas.length > 0 ? 'ml-6' : ''} my-2`}>
-                <span className=''>SKU: </span> <span className='font-semibold'>{product.sku}</span>
+                <span className='text-footer-background-300'>SKU: </span> <span className='font-semibold text-footer-background-300'>{product.sku}</span>
               </p>
             }
           </div>
@@ -164,7 +164,7 @@ function Product({ product, apiError }) {
                 <div
                   className='bg-button flex rounded-md px-1 mr-1 text-background-100 text-sm'
                 >
-                  -{product.promocion.descuento}%
+                  -{parseFloat(product.promocion.descuento).toFixed(0)}%
                 </div>
                 <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-sm md:text-sm line-through'> US${parseFloat(product.precio).toFixed(2)}</p>
               </div>
@@ -174,13 +174,13 @@ function Product({ product, apiError }) {
             <div className='mb-2 md:mb-0 md:my-0 text-text-100 text-sm md:text-base'>US${parseFloat(product.precioxlibra).toFixed(2)}/{product.um}</div>
           )}
           <p className='mb-2'>
-            <span className='font-semibold'>{t('products.subcategory')}:</span> <span className='font-semibold text-text-100'>{product.subcategoria}</span>
+            <span className='font-semibold text-footer-background-300'>{t('products.subcategory')}:</span> <span className='font-semibold text-text-100'>{product.subcategoria}</span>
           </p>
           <p className='mb-2'>
-            <span className='font-semibold'>{t('products.provider')}:</span> <span className='font-semibold text-text-100'>{product.proveedor.nombre}</span>
+            <span className='font-semibold text-footer-background-300'>{t('products.provider')}:</span> <span className='font-semibold text-text-100'>{product.proveedor.nombre}</span>
           </p>
           <p className='mb-4'>
-            <span className='font-semibold'>{t('products.brand')}:</span> <span className='font-semibold text-text-100'>{product.marca.nombre}</span>
+            <span className='font-semibold text-footer-background-300'>{t('products.brand')}:</span> <span className='font-semibold text-text-100'>{product.marca.nombre}</span>
           </p>
           <div className='flex flex-col'>
             <div className='flex flex-row justify-between w-11/12 mb-4'>
@@ -232,7 +232,7 @@ function Product({ product, apiError }) {
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs
               value={value}
-              textColor="inherit"
+              sx={{ color: '#111b2c' }}
               onChange={handleChange}
               aria-label="basic tabs example"
             >
@@ -241,12 +241,14 @@ function Product({ product, apiError }) {
             </Tabs>
           </Box>
           <AppTabPanel value={value} index={0}>
-            {i18n.language === 'es' ? product.descripcion : product.descripcion_ingles}
+            <p className='text-footer-background-300'>{i18n.language === 'es' ? product.descripcion : product.descripcion_ingles}</p>
           </AppTabPanel>
           <AppTabPanel value={value} index={1}>
-            {product.municipios.map((item) => (
-              `${item.nombre}, `
-            ))}
+            <p className='text-footer-background-300'>
+              {product.municipios.map((item) => (
+                `${item.nombre}, `
+              ))}
+            </p>
           </AppTabPanel>
         </Box>
       </div>
