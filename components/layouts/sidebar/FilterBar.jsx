@@ -170,6 +170,7 @@ function FilterBar ({
               options={brands}
               onChange={(event, newValue) => setBrand(newValue)}
               renderInput={(params) => <TextField {...params} label={t('filter.brand')} />}
+              size='small'
             />
           </div>
           <div className='flex flex-col w-[95%]'>

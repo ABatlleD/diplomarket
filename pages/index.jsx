@@ -148,7 +148,6 @@ function Home({
         resources.products.all(filter)
           .then(response => {
             setList(response.data)
-            console.log('🚀 ~ file: index.jsx:153 ~ useEffect ~ response.data', response.data)
             setLoading(false)
           })
       } catch (error) {
@@ -317,6 +316,7 @@ function Home({
                 options={brands}
                 onChange={(event, newValue) => setBrand(newValue.id)}
                 renderInput={(params) => <TextField {...params} label={t('filter.brand')} />}
+                size='small'
               />
             </div>
             <div className='flex flex-col w-[95%]'>
