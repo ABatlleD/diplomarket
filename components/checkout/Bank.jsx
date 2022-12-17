@@ -4,6 +4,7 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
+import Tooltip from '@mui/material/Tooltip'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import Card from 'react-credit-cards-2'
@@ -244,6 +245,7 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
               </FormControl>
             </div>
             <div className="w-1/2">
+              <Tooltip title={t('checkout.review.placeholder.tooltip')}>
               <input
                 type="text"
                 name="estado"
@@ -253,6 +255,7 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
                 onChange={handleInputChange}
                 onFocus={handleInputFocus}
               />
+              </Tooltip>
             </div>
           </div>
           <div className="flex space-x-6 my-2">

@@ -44,7 +44,7 @@ function ProductItem({ product }) {
 
   return (
     <>
-      <div className='flex flex-col hover:shadow-button w-full border rounded-lg h-[14.5rem] md:h-[20rem] 2xl:h-[25.4rem]'>
+      <div className='flex flex-col hover:shadow-button shadow-sm w-full border rounded-lg h-[14.5rem] md:h-[20rem] 2xl:h-[25.4rem]'>
         <div className='w-full relative flex flex-row justify-center self-center md:mb-1 h-24 md:h-44 2xl:h-60'>
           <Link href={`/products/${product.id}`}>
             <Image
@@ -107,7 +107,7 @@ function ProductItem({ product }) {
           </div>
         </div>
         <div className='flex flex-col h-[5.7rem] md:h-[7rem]'>
-          <div className='mx-2 text-text-blue text-sm h-9 md:h-10'>
+          <div className='mx-2 text-text-blue text-sm h-9 md:h-10 2xl:h-11 2xl:text-base'>
             <Link href={`/products/${product.id}`}>
               {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, size.width > 768 ? size.width > 1900 ? 80 : 65 : 18)}
             </Link>
@@ -153,7 +153,9 @@ function ProductItem({ product }) {
                 ? (
                     <AddToCart data={product} text={size.width < 768 ? undefined : t('home.addCart')} sizes={{ width: 11, height: 11 }} />
                   )
-                : <></>}
+                : (
+                    <div className='bg-button text-background-300 px-2 rounded-md'>{t('oos')}</div>
+                  )}
             </div>
             <div className='mt-[-2px]'>
               <AddToFav data={product}/>

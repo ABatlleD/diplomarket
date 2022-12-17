@@ -1,4 +1,5 @@
 {
+  "loadingMessage": "Loading",
   "pages": {
     "home": "Home",
     "products": "Products",
@@ -49,12 +50,16 @@
     "addCart": "Add Cart",
     "shopNow": "Shop Now",
     "addWishList": "Add To Wishlist",
+    "delivery": {
+      "title": "Fast deliveries",
+      "description": "24-72 hrs"
+    },
     "prices": {
       "title": "Prices",
       "description": "Cheapest on the market"
     },
     "customer": {
-      "title": "The best customer service",
+      "title": "Customer service",
       "description": "Dedicated to your satisfaction"
     },
     "payments": {
@@ -336,7 +341,7 @@
     "review": {
       "title": "Order summary",
       "subtotal": "Subtotal products",
-      "delivery": "Delivery price for",
+      "delivery": "Delivery price",
       "paypal": "PayPal amount",
       "total": "Total",
       "recipients": "Sender Info",
@@ -345,11 +350,12 @@
       "placeholder": {
         "card": "Card number",
         "expiry": "Expiration",
-        "cvc": "Security code",
+        "cvc": "CVV",
         "country": "Country",
-        "state": "Administrative Area (State, Province)",
+        "state": "State/Province",
+        "tooltip": "Administrative area",
         "city": "Location (City)",
-        "zip": "Zip code",
+        "zip": "Postal code",
         "address": "Address",
         "pay": "Pay"
       }
@@ -385,5 +391,7 @@
     }
   },
   "compare": "Compare",
+  "oos": "Out of Stock",
+  "available": "Available",
   "quick": "Quick view"
 }

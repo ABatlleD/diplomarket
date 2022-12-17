@@ -14,6 +14,7 @@ import AddToFav from '../../components/fav/AddFav'
 import AppTabPanel from '../../components/AppTabPanel'
 import { useCart } from '../../store/cart/cart.context'
 import { generateCartItem } from '../../store/cart/generate-cart-item'
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
 
 const theme = createTheme({
   palette: {
@@ -184,7 +185,7 @@ function Product({ product, apiError }) {
           </p>
           <div className='flex flex-col'>
             <div className='flex flex-row justify-between w-11/12 mb-4'>
-              <div className='w-5/12 md:w-4/12'>
+              <div className='w-5/12 md:w-5/12'>
                 <div className='flex flex-row justify-between'>
                   <div
                     className='hover:cursor-pointer'
@@ -221,6 +222,7 @@ function Product({ product, apiError }) {
             <div className='flex flex-row text-button mt-1 hover:cursor-pointer hover:opacity-90'>
               <AddToFav data={product} text={'Añadir a favoritos'} success={'En favoritos'}/>
             </div>
+            <div className='text-text-100 mt-3'><p><span><AccessTimeIcon fontSize='small'/></span><span className='ml-1'>Delivery</span></p></div>
           </div>
         </div>
       </div>

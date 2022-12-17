@@ -24,7 +24,7 @@ function HorizontalProductItem({ product }) {
 
   return (
     <>
-      <div className='flex flex-row hover:shadow-button w-full border rounded-lg'>
+      <div className='flex flex-row hover:shadow-button w-full border rounded-lg shadow-sm'>
         <div className='w-[30%] relative flex flex-row justify-center self-center h-32 md:h-44 2xl:h-60'>
           <Link href={`/products/${product.id}`}>
             <Image

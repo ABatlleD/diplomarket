@@ -1,4 +1,5 @@
 export const ENDPOINTS = {
+  TIP: '/destacado/',
   CAROUSEL: '/carrusel/',
   PRODUCTS: '/producto',
   CATEGORY: '/subcategoria/arbol',

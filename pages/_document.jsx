@@ -23,7 +23,10 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
+        <Head>
+          <meta name="viewport"content="width=device-width, initial-scale=1.0" />
+          <link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'></link>
+        </Head>
         <body>
           <Main />
           <NextScript />

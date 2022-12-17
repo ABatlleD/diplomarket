@@ -84,7 +84,7 @@ function SellWithUs() {
       <AppHeader title={t('pages.swus')}/>
       <ToastContainer />
       <div
-        className="max-w-screen-xl my-8 relative px-6 md:px-12 lg:px-16 xl:px-20 lg:py-16 md:py-8 py-6 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg">
+        className="max-w-screen-xl text-footer-background-300 my-8 relative px-6 md:px-12 lg:px-16 xl:px-20 lg:py-16 md:py-8 py-6 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg">
         <div>
           <div
             className="absolute w-100 h-100 left-0"

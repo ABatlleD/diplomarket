@@ -3,9 +3,8 @@ import MainLayout from '../layouts/MainLayout'
 import resources from '../restapi/resources'
 import ListProducts from '../components/products/ListProducts'
 import CategoriesAccordion from '../components/categories/CategoriesAccordion'
-import { FormControlLabel, Pagination, RadioGroup, Radio, TextField, Autocomplete } from '@mui/material'
+import { FormControlLabel, Pagination, TextField, Autocomplete, Checkbox } from '@mui/material'
 import FilterBar from '../components/layouts/sidebar/FilterBar'
-import TuneIcon from '@mui/icons-material/Tune'
 import TableRowsIcon from '@mui/icons-material/TableRows'
 import WindowIcon from '@mui/icons-material/Window'
 import { useTranslation } from 'react-i18next'
@@ -17,6 +16,11 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import ProductItem from '../components/products/ProductItem'
 import AllProductsLoader from '../components/loaders/AllProducts'
 import HorizontalProductItem from '../components/products/HorizontalProductItem'
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined'
+import PriceCheckIcon from '@mui/icons-material/PriceCheck'
+import SentimentSatisfiedOutlinedIcon from '@mui/icons-material/SentimentSatisfiedOutlined'
+import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined'
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined'
 
 function Home({
   products,
@@ -34,10 +38,9 @@ function Home({
   const [pages, setPages] = useState(1)
   const [page, setPage] = useState(1)
   const [categories, setCategories] = useState([])
-  const [suppliers, setSuppliers] = useState()
+  const [suppliers, setSuppliers] = useState([])
   const [brands, setBrands] = useState([])
   const municipality = getCookie('NEXT_MUNICIPALITY')
-  const [featureds, setFeatureds] = useState(false)
   const [promotions, setPromotions] = useState(false)
   const [recomendations, setRecomendations] = useState(false)
 
@@ -46,9 +49,10 @@ function Home({
   const [offset, setOffset] = useState(0)
   const [subcategory, setSubcategory] = useState(undefined)
   const [brand, setBrand] = useState()
-  const [provider, setProvider] = useState(0)
+  const [provider, setProvider] = useState()
   const [min, setMin] = useState(0)
   const [max, setMax] = useState(1000)
+  const [extra, setExtra] = useState(undefined)
 
   const getMorePost = async () => {
     setOffset(offset + 15)
@@ -68,7 +72,17 @@ function Home({
         return setBrands(answer)
       })
     resources.suppliers.all()
-      .then(response => setSuppliers(response.data))
+      .then(response => {
+        const answer = []
+        response.data.results.map((item) => {
+          const el = {
+            label: item.nombre,
+            id: item.id
+          }
+          return answer.push(el)
+        })
+        return setSuppliers(answer)
+      })
     resources.categories.all()
       .then(response => setCategories(response.data.results))
   }, [])
@@ -90,10 +104,6 @@ function Home({
     setSubcategory(undefined)
     setSelectedCategory(category)
     setCategory(category.id)
-  }
-
-  const handleProviderFilter = (event) => {
-    setProvider(event.target.value)
   }
 
   const handleAllClick = () => {
@@ -131,7 +141,8 @@ function Home({
 
   useEffect(() => {
     if (size.width > 768) {
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+      const element = document.getElementById('title')
+      element.scrollIntoView()
       const filter = {
         offset,
         municipality_id: municipality,
@@ -141,7 +152,8 @@ function Home({
         brand,
         provider,
         min,
-        max
+        max,
+        extra
       }
       try {
         setLoading(true)
@@ -154,7 +166,7 @@ function Home({
         productsError = error.message
       }
     }
-  }, [offset, products, category, subcategory, brand, provider, min, max])
+  }, [offset, products, category, subcategory, brand, provider, min, max, extra])
 
   useEffect(() => {
     if (size.width <= 768) {
@@ -224,18 +236,17 @@ function Home({
   }, [list])
 
   const handleChangeType = (type) => {
-    setFeatureds(false)
     setPromotions(false)
     setRecomendations(false)
+    setExtra(undefined)
     switch (type) {
-      case 'featureds':
-        setFeatureds(true)
-        break
       case 'promotions':
         setPromotions(true)
+        setExtra('rebajados')
         break
       case 'recommendations':
         setRecomendations(true)
+        setExtra('recomendados')
         break
     }
   }
@@ -271,13 +282,16 @@ function Home({
               <div
                 onClick={() => setFilterBar(true)}
               >
-                <TuneIcon />
+                <FilterAltOutlinedIcon />
               </div>
             </div>
           </div>
           <div className='md:flex hidden mr-1 flex-col w-1/6'>
             <div className='flex flex-col'>
-              <p className='font-bold mb-2'>{t('filter.category')}</p>
+              <div className='flex flex-row mb-2 justify-between'>
+                <p className='font-bold'>{t('filter.category')}</p>
+                <div className='bg-footer-background-300 text-background-300 px-2 rounded-full hover:cursor-pointer mr-6' onClick={handleAllClick}>{t('filter.all')}</div>
+              </div>
               <div className=''>
                 {categories.map((item) => (
                   <div key={item.id} className='border-2 border-background-100'>
@@ -294,18 +308,17 @@ function Home({
               </div>
             </div>
             <div className='flex flex-col my-4'>
-              <FormControlLabel value={featureds} onChange={() => handleChangeType('featureds')} control={<Radio />} label={t('filter.featureds')} />
-              <FormControlLabel value={promotions} onChange={() => handleChangeType('featureds')} control={<Radio />} label={t('filter.promotions')} />
-              <FormControlLabel value={recomendations} onChange={() => handleChangeType('featureds')} control={<Radio />} label={t('filter.recomendations')} />
+              <FormControlLabel value={promotions} onChange={() => handleChangeType('promotions')} control={<Checkbox size='small' />} label={t('filter.promotions')} />
+              <FormControlLabel value={recomendations} onChange={() => handleChangeType('recomendations')} control={<Checkbox size='small' />} label={t('filter.recomendations')} />
             </div>
             <div className='flex flex-col mt-2 mb-4'>
               <p className='font-bold mb-2'>{t('filter.price')}</p>
               <div className='w-[92%]'>
-                <div className='mb-1 hover:cursor-pointer' onClick={() => handlePriceFilter([0, 25])}>US$0 {t('filter.to')} US$25</div>
-                <div className='mb-1 hover:cursor-pointer' onClick={() => handlePriceFilter([25, 50])}>US$25 {t('filter.to')} US$50</div>
-                <div className='mb-1 hover:cursor-pointer' onClick={() => handlePriceFilter([50, 100])}>US$50 {t('filter.to')} US$100</div>
-                <div className='mb-1 hover:cursor-pointer' onClick={() => handlePriceFilter([100, 200])}>US$100 {t('filter.to')} US$200</div>
-                <div className='mb-1 hover:cursor-pointer' onClick={() => handlePriceFilter([200, 1000])}>{t('filter.more')} US$200</div>
+                <div className='hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button' onClick={() => handlePriceFilter([0, 25])}>US$0 {t('filter.to')} US$25</div>
+                <div className='hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button' onClick={() => handlePriceFilter([25, 50])}>US$25 {t('filter.to')} US$50</div>
+                <div className='hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button' onClick={() => handlePriceFilter([50, 100])}>US$50 {t('filter.to')} US$100</div>
+                <div className='hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button' onClick={() => handlePriceFilter([100, 200])}>US$100 {t('filter.to')} US$200</div>
+                <div className='hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button' onClick={() => handlePriceFilter([200, 1000])}>{t('filter.more')} US$200</div>
               </div>
             </div>
             <div className='flex flex-col mb-4 w-[95%]'>
@@ -319,7 +332,18 @@ function Home({
                 size='small'
               />
             </div>
-            <div className='flex flex-col w-[95%]'>
+            <div className='flex flex-col mb-4 w-[95%]'>
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                value={provider}
+                options={suppliers}
+                onChange={(event, newValue) => setProvider(newValue.id)}
+                renderInput={(params) => <TextField {...params} label={t('filter.provider')} />}
+                size='small'
+              />
+            </div>
+            {/* <div className='flex flex-col w-[95%]'>
               <p className='font-bold my-2'>{t('filter.provider')}</p>
               <RadioGroup
                 aria-labelledby="demo-controlled-radio-buttons-group"
@@ -333,18 +357,17 @@ function Home({
                   ))}
                 </div>
               </RadioGroup>
-            </div>
-            <div className='my-2 underline hover:cursor-pointer' onClick={handleAllClick}>{t('filter.all')}</div>
+            </div> */}
           </div>
           <div className='flex flex-row w-full md:w-5/6'>
             <div className='flex flex-col items-center w-full'>
               {selectedCategory && (
-                <div className='font-bold w-full ml-4 mb-2 text-xl hidden md:flex'>
+                <div id='title' className='font-bold w-full ml-4 pt-4 mb-2 text-xl hidden md:flex'>
                   {i18n.language === 'es' ? selectedCategory.nombre : selectedCategory.nombre_ingles}
                 </div>
               )}
               {!selectedCategory && (
-                <div className='font-bold w-full ml-4 mb-2 text-xl hidden md:flex'>
+                <div id='title' className='font-bold w-full ml-4 mb-2 text-xl hidden md:flex'>
                   {t('filter.categories')}
                 </div>
               )}
@@ -403,6 +426,28 @@ function Home({
             handleSubcategoryFilter,
             setSelectedCategory
           }} />
+        </div>
+        <div className='flex md:flex-row flex-wrap justify-around text-footer-background-300 md:w-[95%] md:mx-auto md:my-28'>
+          <div className='flex flex-col items-center'>
+            <LocalShippingOutlinedIcon sx={{ fontSize: '3rem' }} />
+            <p className='text-footer-background-300 md:text-xl text-base'>{t('home.delivery.title')}</p>
+            <p className='text-text-100 md:text-lg text-xs'>{t('home.delivery.description')}</p>
+          </div>
+          <div className='flex flex-col  items-center'>
+            <PriceCheckIcon sx={{ fontSize: '3rem' }} />
+            <p className='text-footer-background-300 md:text-xl text-base'>{t('home.prices.title')}</p>
+            <p className='text-text-100 md:text-lg text-xs'>{t('home.prices.description')}</p>
+          </div>
+          <div className='flex flex-col items-center my-12 md:my-0'>
+            <SentimentSatisfiedOutlinedIcon sx={{ fontSize: '3rem' }} />
+            <p className='text-footer-background-300 md:text-xl text-base'>{t('home.customer.title')}</p>
+            <p className='text-text-100 md:text-lg text-xs'>{t('home.customer.description')}</p>
+          </div>
+          <div className='flex flex-col items-center my-12 md:my-0'>
+            <CreditCardOutlinedIcon sx={{ fontSize: '3rem' }} />
+            <p className='text-footer-background-300 md:text-xl text-base'>{t('home.payments.title')}</p>
+            <p className='text-text-100 md:text-lg text-xs'>{t('home.payments.description')}</p>
+          </div>
         </div>
       </div>
     </>

@@ -21,13 +21,13 @@ function Help({ faq, help, fetchError }) {
      <div className='flex flex-col my-8 mx-4 lg:mx-40'>
       <div className='flex flex-row justify-around mb-8'>
         <div
-          className='w-5/12 text-center border py-2 rounded-xl hover:cursor-pointer hover:shadow-lg'
+          className='w-5/12 text-center border py-2 rounded-xl hover:cursor-pointer text-footer-background-300 text-lg hover:shadow-lg'
           onClick={() => { handleChangeView('faq') }}
         >
           {t('help.questionTitle')}
         </div>
         <div
-          className='w-5/12 text-center border py-2 rounded-xl hover:cursor-pointer hover:shadow-lg'
+          className='w-5/12 text-center border py-2 rounded-xl hover:cursor-pointer text-footer-background-300 text-lg hover:shadow-lg'
           onClick={() => { handleChangeView('how') }}
         >
           {t('help.how.title')}
@@ -43,7 +43,7 @@ function Help({ faq, help, fetchError }) {
         ))
       }
       {view === 'how' &&
-        <div className='w-full text-center text-[7rem]'>HOW TO USE VIEW</div>
+        <div className='w-full text-center text-footer-background-300 text-[7rem]'>HOW TO USE VIEW</div>
       }
      </div>
     </>

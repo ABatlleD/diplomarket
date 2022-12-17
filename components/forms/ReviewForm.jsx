@@ -183,17 +183,15 @@ function Review({ address }) {
             <></>
               )}
         </div>
-        <ListItem sx={{ py: 1, px: 0 }}>
+        <ListItem sx={{ py: 1, px: 0, border: '0.5px solid grey', paddingX: '4px' }}>
           <ListItemText primary={t('checkout.review.subtotal')} />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             {totalPrice} {currency}
           </Typography>
         </ListItem>
-        <ListItem sx={{ py: 1, px: 0 }}>
+        <ListItem sx={{ py: 1, px: 0, border: '0.5px solid grey', paddingX: '4px' }}>
           <ListItemText
-            primary={`${t('checkout.review.delivery')} ${activeMunicipalities?.name} (${
-              activeProvinces?.name
-            })`}
+            primary={`${t('checkout.review.delivery')}`}
           />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             {typeof totalDelivery === 'undefined'
@@ -214,26 +212,26 @@ function Review({ address }) {
         </ListItem>}
         {getTypePay === 'paypal'
           ? <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary={t('checkout.review.total')} />
+          <ListItemText primary={<Typography type="body2" style={{ fontWeight: 'bold' }}>{t('checkout.review.total')}</Typography>} />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             {typeof totalDelivery === 'undefined' ? t('loadingMessage') : totalPriceWithDeliveryForPaypal} {currency}
           </Typography>
         </ListItem>
           : <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary={t('checkout.review.total')} />
+          <ListItemText primary={<Typography type="body2" style={{ fontWeight: 'bold' }}>{t('checkout.review.total')}</Typography>} />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             {typeof totalDelivery === 'undefined' ? t('loadingMessage') : totalPriceWithDelivery} {currency}
           </Typography>
         </ListItem>}
       </List>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
+        {/* <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
           {t('checkout.review.recipients')}
           </Typography>
           <Typography gutterBottom>{data?.user?.name}</Typography>
           <Typography gutterBottom>{data?.user?.email}</Typography>
-        </Grid>
+        </Grid> */}
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
           {t('checkout.review.delivery_data')}

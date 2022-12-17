@@ -45,6 +45,13 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
     return string && string.length > maxLength ? `${string.slice(0, maxLength)}...` : string
   }
 
+  const searchSubmit = (e, value) => {
+    e.preventDefault()
+    if (value && value !== 'undefined') {
+      setInputValue(value)
+    }
+  }
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -64,17 +71,29 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
                 className='bg-button'
                 onClick={() => setOpenSelectPlace(true)}
               >
-                <span className='mt-[-1px] mr-1'><AddLocationAltOutlinedIcon fontSize='small' /></span> {size.width < 1900 ? resizeTitle(district, 6) : resizeTitle(district, 14)} <span className='mt-[-1px]'></span>
+                <span className='mr-1 -mt-[0.2rem]'>
+                  <AddLocationAltOutlinedIcon sx={{
+                    fontSize: '1rem'
+                  }} />
+                </span>
+                <span className='-mb-[0.2rem]'>{size.width < 1900 ? resizeTitle(district, 6) : resizeTitle(district, 14)}</span>
             </AppButton>
           </div>
           <Autocomplete
             id="search-in-site"
             options={options}
-            onInputChange={(_, value) => setInputValue(value)}
+            onInputChange={searchSubmit}
             // @ts-ignore
-            getOptionLabel={(option) => option.nombre}
+            getOptionLabel={(option) => {
+              if (option.nombre) {
+                return option.nombre
+              }
+              return inputValue
+            }}
             noOptionsText={<p>{t('no_options')}</p>}
-            style={{ width: '100%' }}
+            style={{
+              width: '100%'
+            }}
             freeSolo
             // PaperComponent={CustomPaper}
             renderInput={(params) => {
@@ -95,9 +114,8 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
                       padding: '0 15px',
                       transition: 'all 0.3s linear',
                       WebkitTransition: 'all 0.3s linear',
-                      fontSize: '15px',
-                      fontWeight: 'normal',
-                      fontFamily: 'sans-serif'
+                      fontSize: '16px',
+                      fontWeight: 'normal'
                     }}
                     autoFocus
                   />

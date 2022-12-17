@@ -80,17 +80,17 @@ function BottomOptions({
                 fontSize='small'
               />
             </div>
-            <div className='mx-4 text-footer-background-200 font-medium hover:underline'>
+            <div className='mx-4 text-footer-background-200 mt-[0.15rem] font-medium text-lg hover:underline'>
               <Link href='/about'>
                 {t('layout.navbar.about')}
               </Link>
             </div>
-            <div className='mr-4 text-footer-background-200 font-medium hover:underline'>
+            <div className='mr-4 text-footer-background-200 font-medium text-lg mt-[0.15rem] hover:underline'>
               <Link href='/sell-with-us'>
                 {t('layout.navbar.sell-with-us')}
               </Link>
             </div>
-            <div className='text-footer-background-200 font-medium hover:underline'>
+            <div className='text-footer-background-200 font-normal text-lg hover:underline mt-[0.15rem]'>
               <Link href='/contact'>
                 {t('layout.navbar.contact')}
               </Link>

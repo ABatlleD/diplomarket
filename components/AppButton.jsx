@@ -8,6 +8,13 @@ const theme = createTheme({
       main: '#b12024',
       contrastText: '#fff'
     }
+  },
+  typography: {
+    fontFamily: '"Josefin Sans", "Helvetica", "Arial", sans-serif',
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+    fontWeightBold: 700
   }
 })
 

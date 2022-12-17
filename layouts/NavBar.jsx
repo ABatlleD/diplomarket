@@ -2,9 +2,20 @@ import React from 'react'
 import TopBar from '../components/layouts/navbar/TopBar'
 import BottomOptions from '../components/layouts/navbar/BottomOptions'
 import PropTypes from 'prop-types'
-import { Roboto } from '@next/font/google'
+import { Josefin_Sans } from '@next/font/google'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
-const roboto = Roboto({
+const theme = createTheme({
+  typography: {
+    fontFamily: '"Josefin Sans", "Helvetica", "Arial", sans-serif',
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+    fontWeightBold: 700
+  }
+})
+
+const js = Josefin_Sans({
   weight: '400',
   subsets: ['latin']
 })
@@ -20,7 +31,8 @@ function NavBar({
   setOpenSelectPlace
 }) {
   return (
-    <main className={roboto.className}>
+    <ThemeProvider theme={theme}>
+    <main className={js.className}>
       <div className='flex flex-col'>
         <TopBar {...{
           categoriesSideBar,
@@ -42,6 +54,7 @@ function NavBar({
         }} />
       </div>
     </main>
+    </ThemeProvider>
   )
 }
 

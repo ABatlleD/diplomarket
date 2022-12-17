@@ -64,7 +64,7 @@ function SignIn() {
         <div className="Img mb-4">
           <img src="/logo.png" className="max-w-max h-20 md:h-24 hover:cursor-pointer" alt="..." />
         </div>
-        <div className="Email mb-4 w-11/12 md:w-1/3">
+        <div className="Email mb-4 w-11/12 md:w-1/3 xl:w-1/4">
           <TextField
             required
             id="outlined-required"
@@ -77,7 +77,7 @@ function SignIn() {
             onChange={handleChange('username')}
           />
         </div>
-        <div className="Password mb-4 w-11/12 md:w-1/3">
+        <div className="Password mb-4 w-11/12 md:w-1/3 xl:w-1/4">
           <TextField
             required
             id="outlined-password-input"
@@ -103,7 +103,7 @@ function SignIn() {
             }}
           />
         </div>
-        <div className="Submit mb-4 w-11/12 md:w-1/3">
+        <div className="Submit mb-4 w-11/12 md:w-1/3 xl:w-1/4">
           <Button
             variant="contained"
             sx={{
@@ -115,7 +115,7 @@ function SignIn() {
             {t('auth.signin.submit')}
           </Button>
         </div>
-        <div className="Links flex flex-row justify-between w-11/12 md:w-1/3">
+        <div className="Links flex flex-row justify-between w-11/12 md:w-1/3 xl:w-1/4">
           <Link href={'/'}>
             <p className='text-footer-background-100 font-bold underline hover:cursor-pointer hover:text-footer-background-200'>{t('auth.signin.back')}</p>
           </Link>

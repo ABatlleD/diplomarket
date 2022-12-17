@@ -2,16 +2,16 @@ import React from 'react'
 import FooterBox from '../components/layouts/footer/FooterBox'
 import BrandBar from '../components/layouts/footer/BrandBar'
 import PropTypes from 'prop-types'
-import { Roboto } from '@next/font/google'
+import { Josefin_Sans } from '@next/font/google'
 
-const roboto = Roboto({
+const js = Josefin_Sans({
   weight: '400',
   subsets: ['latin']
 })
 
 function Footer({ cartSideBar, setCartSideBar }) {
   return (
-    <main className={roboto.className}>
+    <main className={js.className}>
       <div className='flex flex-col'>
         <FooterBox {...{
           cartSideBar,

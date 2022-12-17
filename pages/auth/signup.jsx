@@ -385,7 +385,7 @@ function SignUp() {
               terms: !values.terms
             })
           }} />
-          <p className='text-justify text-footer-background-100 font-semibold ml-2'>
+          <p className='text-justify text-footer-background-100 font-semibold ml-2 mt-[0.75rem]'>
             {t('auth.signup.agree')} {terms} {t('auth.signup.and')} {privacy}.
           </p>
         </div>
@@ -395,6 +395,7 @@ function SignUp() {
             disabled={!values.terms}
             sx={{
               width: '100%',
+              color: '#ffffff !important',
               backgroundColor: '#15224b !important'
             }}
             onClick={handleSubmit}

@@ -5,12 +5,27 @@ import '../i18n'
 import 'swiper/css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/globals.css'
+import '@fontsource/josefin-sans/300.css'
+import '@fontsource/josefin-sans/400.css'
+import '@fontsource/josefin-sans/500.css'
+import '@fontsource/josefin-sans/700.css'
 import SwiperCore, { Autoplay } from 'swiper'
 import WebChat from '../components/WebChat'
 import { SessionProvider } from 'next-auth/react'
-import { Roboto } from '@next/font/google'
+import { Josefin_Sans } from '@next/font/google'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
-const roboto = Roboto({
+const theme = createTheme({
+  typography: {
+    fontFamily: '"Josefin Sans", "Helvetica", "Arial", sans-serif',
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+    fontWeightBold: 700
+  }
+})
+
+const js = Josefin_Sans({
   weight: '400',
   subsets: ['latin']
 })
@@ -24,15 +39,17 @@ function MyApp({ Component, pageProps }) {
 
   return getLayout(
     <>
-      <NextNProgress color="#b12024" />
-      <SessionProvider session={pageProps.session}>
-        <QueryClientProvider client={queryClient}>
-          <main className={roboto.className}>
-            <Component {...pageProps} />
-          </main>
-        </QueryClientProvider>
-      </SessionProvider>
-      <WebChat />
+      <ThemeProvider theme={theme}>
+        <NextNProgress color="#b12024" />
+        <SessionProvider session={pageProps.session}>
+          <QueryClientProvider client={queryClient}>
+            <main className={js.className}>
+              <Component {...pageProps} />
+            </main>
+          </QueryClientProvider>
+        </SessionProvider>
+        <WebChat />
+      </ThemeProvider>
     </>
   )
 }
