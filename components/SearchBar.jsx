@@ -126,16 +126,18 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
               <SearchResult data={option} {...{ setInputValue }} />
             )}
           />
-          <AppButton
-            sx={{
-              borderTopLeftRadius: 0,
-              borderBottomLeftRadius: 0,
-              padding: '0px 0px'
-            }}
-            className='bg-button'
-          >
-            <SearchIcon />
-          </AppButton>
+          <div className='hidden md:flex'>
+            <AppButton
+              sx={{
+                borderTopLeftRadius: 0,
+                borderBottomLeftRadius: 0,
+                padding: '0px 0px'
+              }}
+              className='bg-button'
+            >
+              <SearchIcon />
+            </AppButton>
+          </div>
         </div>
       </ThemeProvider>
     </>

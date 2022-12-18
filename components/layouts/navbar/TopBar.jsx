@@ -47,7 +47,7 @@ function TopBar({
 
   return (
     <>
-      < div className='flex flex-row justify-around md:justify-between dark:bg-background-100'>
+      < div className='flex flex-row justify-between md:justify-between dark:bg-background-100'>
         <div className='flex flex-row dark:text-[black] justify-start md:ml-6 w-1/2 md:w-1/5 xl:w-[8%]'>
           <div
             className='mt-2
@@ -113,7 +113,7 @@ function TopBar({
               </Badge>
             </div>
           </ThemeProvider>
-          <div className='mt-[0.30rem] flex md:hidden'>
+          <div className='mt-[0.25rem] flex md:hidden'>
             <AccountMenu />
           </div>
           <div className='mt-[0.45rem] hidden md:flex'>

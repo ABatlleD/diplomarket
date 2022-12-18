@@ -194,7 +194,7 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
               onFocus={handleInputFocus}
             />
           </div>
-          <div className="flex space-x-6">
+          <div className="flex space-x-3">
             <div className="w-1/2">
               <input
                 type="tel"
@@ -220,7 +220,7 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
               />
             </div>
           </div>
-          <div className="flex space-x-6 mt-2">
+          <div className="flex space-x-3 mt-2">
             <div className="w-1/2">
               <FormControl sx={{ minWidth: '100%' }} size="small">
                 <InputLabel id="pais">{t('checkout.review.placeholder.country')}</InputLabel>
@@ -246,19 +246,19 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
             </div>
             <div className="w-1/2">
               <Tooltip title={t('checkout.review.placeholder.tooltip')}>
-              <input
-                type="text"
-                name="estado"
-                className="form-control"
-                placeholder={t('checkout.review.placeholder.state')}
-                required
-                onChange={handleInputChange}
-                onFocus={handleInputFocus}
-              />
+                <input
+                  type="text"
+                  name="estado"
+                  className="form-control"
+                  placeholder={t('checkout.review.placeholder.state')}
+                  required
+                  onChange={handleInputChange}
+                  onFocus={handleInputFocus}
+                />
               </Tooltip>
             </div>
           </div>
-          <div className="flex space-x-6 my-2">
+          <div className="flex space-x-3 my-2">
             <div className="w-1/2">
               <input
                 type="text"

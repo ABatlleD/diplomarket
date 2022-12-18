@@ -96,7 +96,6 @@ function Checkout({ address }) {
   const handleBack = () => {
     setActiveStep(activeStep - 1)
   }
-
   function getStepContent(step) {
     switch (step) {
       case 0:
@@ -116,7 +115,7 @@ function Checkout({ address }) {
       <ToastContainer />
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <div
-          className='md:border md:rounded-3xl md:border-text-200 my-6 md:my-12 p-4 md:p-6'
+          className='md:border md:rounded-3xl md:border-text-200 my-6 md:my-12 p-2 md:p-6'
         >
           <Typography component="h1" variant="h4" align="center">
             {t('checkout.title')}

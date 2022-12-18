@@ -129,7 +129,7 @@ function Details() {
               specialLabel={`${t('profile.details.phone')}`}
               value={phone ?? '1'}
               inputStyle={{ width: '100%', height: '100%' }}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(value) => setPhone(value)}
             />
           </div>
           <div className='md:w-10/12 md:ml-2'>
