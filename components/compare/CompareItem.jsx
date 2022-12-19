@@ -26,7 +26,7 @@ function CompareItem ({ id }) {
 
   return (
     <>
-      <div className='flex flex-col w-full border border-[#d1d1d1] h-[41rem]'>
+      <div className='flex flex-col w-full border border-[#d1d1d1] text-footer-background-300 h-[41rem]'>
         <div className='flex flex-row justify-end border-b border-[#d1d1d1] px-2 py-1'>
           <div
             className='hover:cursor-pointer'
@@ -35,7 +35,7 @@ function CompareItem ({ id }) {
             <DeleteOutlineIcon color='error' />
           </div>
         </div>
-        <div className='flex flex-row items-center border-b border-[#d1d1d1] px-2 py-1 h-16'>{product?.nombre}</div>
+        <div className='flex flex-row items-center border-b text-text-blue border-[#d1d1d1] px-2 py-1 h-16'>{product?.nombre}</div>
         <div className='flex flex-row justify-center relative border-b border-[#d1d1d1] px-2 py-1'>
           {product?.img_principal && (
             <div className='w-full relative flex flex-row justify-center self-center md:mb-1 h-24 md:h-44 2xl:h-60'>

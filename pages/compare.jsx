@@ -27,7 +27,7 @@ function Compare() {
   return (
     <>
       <AppHeader title={t('pages.compare')}/>
-      <div className='flex flex-row justify-center w-full font-bold text-2xl my-4'>Comparar Productos</div>
+      <div className='flex flex-row justify-center text-footer-background-300 w-full font-bold text-2xl my-4'>Comparar Productos</div>
       <div className='flex flex-row mx-5 mb-5'>
         {items.map((item) => (
           <div key={item.id} className='flex w-1/5'>
@@ -35,7 +35,7 @@ function Compare() {
           </div>
         ))}
         {emptySlots.map((slot) => (
-          <div key={slot} className='flex flex-row h-[41rem] border items-center justify-center w-1/5'>
+          <div key={slot} className='flex flex-row h-[41rem] text-footer-background-300 border items-center justify-center w-1/5'>
             <LayersClearIcon sx={{ fontSize: '8rem' }} />
           </div>
         ))}

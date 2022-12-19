@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import Autocomplete from '@mui/material/Autocomplete'
-import SearchIcon from './icons/search-icon'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import AppButton from './AppButton'
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined'
@@ -126,7 +125,7 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
               <SearchResult data={option} {...{ setInputValue }} />
             )}
           />
-          <div className='hidden md:flex'>
+          {/* <div className='hidden md:flex'>
             <AppButton
               sx={{
                 borderTopLeftRadius: 0,
@@ -137,7 +136,7 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
             >
               <SearchIcon />
             </AppButton>
-          </div>
+          </div> */}
         </div>
       </ThemeProvider>
     </>

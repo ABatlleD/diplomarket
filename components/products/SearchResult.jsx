@@ -17,8 +17,8 @@ function SearchResult({ data, setInputValue = () => '' }) {
       {data.tipo === 'Producto' && (
         <div className='flex flex-col mx-2 md:mx-4 my-2'>
           <Link href={`/products/${data.pk}`}>
-            <div className='w-full flex flex-row justify-between hover:cursor-pointer hover:bg-background-300' onClick={() => setInputValue('')}>
-              <div className='w-1/12 relative flex flex-row justify-center self-center md:mb-1 h-24 md:h-10 2xl:h-10'>
+            <div className='w-full flex flex-row justify-between items-center hover:cursor-pointer hover:bg-background-300' onClick={() => setInputValue('')}>
+              <div className='w-1/12 relative flex flex-row justify-center items-center self-center md:mb-1 h-24 md:h-10 2xl:h-16'>
                 <Image
                   src={`${process.env.NEXT_PUBLIC_BACKEND}${data.img_principal}`}
                   layout='fill'
@@ -28,12 +28,13 @@ function SearchResult({ data, setInputValue = () => '' }) {
                   className='hover:cursor-pointer rounded-t-lg'
                 />
               </div>
-              <div className='w-8/12 text-xs md:text-base'>{resizeTitle(i18n.language === 'es' ? data.nombre : data.nombre_ingles, size.width < 768 ? 30 : 100)}</div>
-              <div className='flex flex-row w-3/12'>
+              <div className='w-[3%]'></div>
+              <div className='w-[62%] text-xs text-text-blue md:text-base'>{resizeTitle(i18n.language === 'es' ? data.nombre : data.nombre_ingles, size.width < 768 ? 30 : 100)}</div>
+              <div className='flex flex-row w-3/12 justify-end'>
                 {data.promocion && data.promocion.descuento && (
-                  <div className='bg-button px-1 text-background-100 rounded-xl h-4 md:h-auto text-xs md:mr-1 md:text-base'>-{parseFloat(data.promocion.descuento).toFixed(0)}%</div>
+                  <div className='px-1 text-button font-bold rounded-xl text-xs md:mr-1 md:text-base'>-{parseFloat(data.promocion.descuento).toFixed(0)}%</div>
                 )}
-                <div className='bg-button px-1 text-background-100 rounded-xl h-4 md:h-auto text-xs md:text-base'>US${parseFloat(data.precio).toFixed(2)}</div>
+                <div className='px-1 text-button rounded-xl font-bold text-xs md:text-base'>US${parseFloat(data.precio).toFixed(2)}</div>
               </div>
             </div>
           </Link>
