@@ -3,7 +3,7 @@ import MainLayout from '../layouts/MainLayout'
 import resources from '../restapi/resources'
 import ListProducts from '../components/products/ListProducts'
 import CategoriesAccordion from '../components/categories/CategoriesAccordion'
-import { FormControlLabel, Pagination, TextField, Autocomplete, Checkbox } from '@mui/material'
+import { FormControlLabel, Pagination, TextField, Autocomplete, Checkbox, FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import FilterBar from '../components/layouts/sidebar/FilterBar'
 import TableRowsIcon from '@mui/icons-material/TableRows'
 import WindowIcon from '@mui/icons-material/Window'
@@ -53,6 +53,11 @@ function Home({
   const [min, setMin] = useState(0)
   const [max, setMax] = useState(1000)
   const [extra, setExtra] = useState(undefined)
+  const [age, setAge] = React.useState('recents')
+
+  const handleChange = (event) => {
+    setAge(event.target.value)
+  }
 
   const getMorePost = async () => {
     setOffset(offset + 15)
@@ -261,17 +266,17 @@ function Home({
         <div className='dark:text-[black] flex md:flex-row flex-col w-full md:w-[95%] md:mx-auto mb-3 md:my-5'>
           <div className='mx-3 flex md:hidden text-sm flex-row justify-between mb-3'>
             {selectedCategory && (
-              <div className='font-bold'>
+              <div className='font-bold mt-2'>
                 {i18n.language === 'es' ? selectedCategory.nombre : selectedCategory.nombre_ingles}
               </div>
             )}
             {!selectedCategory && (
-              <div className='font-bold'>
+              <div className='font-bold mt-2'>
                 {t('filter.categories')}
               </div>
             )}
             <div className='flex flex-row'>
-              <div className='mr-3' onClick={() => setListView(!listView)}>
+              <div className='mr-3 mt-2' onClick={() => setListView(!listView)}>
                 {listView && (
                   <WindowIcon />
                 )}
@@ -280,9 +285,29 @@ function Home({
                 )}
               </div>
               <div
+                className='mr-2 mt-2'
                 onClick={() => setFilterBar(true)}
               >
                 <FilterAltOutlinedIcon />
+              </div>
+              <div className='flex w-28'>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Order By</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={age}
+                    label="Age"
+                    size='small'
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={'recents'}>Recents</MenuItem>
+                    <MenuItem value={'highest_price'}>Highest Price</MenuItem>
+                    <MenuItem value={'lowest_price'}>Lowest Price</MenuItem>
+                    <MenuItem value={'highest_discount'}>Highest Discount</MenuItem>
+                    <MenuItem value={'lowest_discount'}>Lowest Discount</MenuItem>
+                  </Select>
+                </FormControl>
               </div>
             </div>
           </div>
@@ -343,34 +368,40 @@ function Home({
                 size='small'
               />
             </div>
-            {/* <div className='flex flex-col w-[95%]'>
-              <p className='font-bold my-2'>{t('filter.provider')}</p>
-              <RadioGroup
-                aria-labelledby="demo-controlled-radio-buttons-group"
-                name="controlled-radio-buttons-group"
-                value={provider}
-                onChange={handleProviderFilter}
-              >
-                <div className='flex flex-wrap'>
-                  {suppliers?.results?.map((item) => (
-                    <FormControlLabel key={item.id} value={item.id} control={<Radio />} label={item.nombre} />
-                  ))}
-                </div>
-              </RadioGroup>
-            </div> */}
           </div>
           <div className='flex flex-row w-full md:w-5/6'>
             <div className='flex flex-col items-center w-full'>
-              {selectedCategory && (
-                <div id='title' className='font-bold w-full ml-4 pt-4 mb-2 text-xl hidden md:flex'>
-                  {i18n.language === 'es' ? selectedCategory.nombre : selectedCategory.nombre_ingles}
+              <div className='flex flex-row justify-between w-full md:w-[98%] mb-4'>
+                {selectedCategory && (
+                  <div id='title' className='font-bold w-1/2 ml-4 mb-2 text-xl hidden md:flex'>
+                    {i18n.language === 'es' ? selectedCategory.nombre : selectedCategory.nombre_ingles}
+                  </div>
+                )}
+                {!selectedCategory && (
+                  <div id='title' className='font-bold w-1/2 ml-4 mb-2 text-xl hidden md:flex'>
+                    {t('filter.categories')}
+                  </div>
+                )}
+                <div className='hidden md:flex w-[25%]'>
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Order By</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={age}
+                      label="Age"
+                      size='small'
+                      onChange={handleChange}
+                    >
+                      <MenuItem value={'recents'}>Recents</MenuItem>
+                      <MenuItem value={'highest_price'}>Highest Price</MenuItem>
+                      <MenuItem value={'lowest_price'}>Lowest Price</MenuItem>
+                      <MenuItem value={'highest_discount'}>Highest Discount</MenuItem>
+                      <MenuItem value={'lowest_discount'}>Lowest Discount</MenuItem>
+                    </Select>
+                  </FormControl>
                 </div>
-              )}
-              {!selectedCategory && (
-                <div id='title' className='font-bold w-full ml-4 mb-2 text-xl hidden md:flex'>
-                  {t('filter.categories')}
-                </div>
-              )}
+              </div>
               {size.width <= 768 && loading && (
                 <AllProductsLoader />
               )}

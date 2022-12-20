@@ -102,3 +102,7 @@ a:hover {
   color: inherit !important;
 }
 
+#demo-simple-select-label {
+  margin-top: -0.4rem;
+}
+
