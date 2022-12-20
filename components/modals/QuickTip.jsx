@@ -52,7 +52,10 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
 
   useEffect(() => {
     resources.products.tip(municipality)
-      .then(response => setProduct(response.data))
+      .then(response => {
+        console.log('🚀 ~ file: QuickTip.jsx:59 ~ useEffect ~ response', response.data)
+        setProduct(response.data[0])
+      })
   }, [])
 
   const handleBuyNow = () => {
@@ -77,7 +80,8 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
         <Fade in={openQuickTip}>
           <main className={js.className}>
             <div className='flex z-50 flex-col shadow-2xl bg-background-100 w-11/12 md:4/5 xl:w-2/5 p-2 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2'>
-              <div className='flex flex-row justify-end mb-6'>
+              <div className='flex flex-row justify-between w-full mb-6'>
+                <div className='font-bold text-footer-background-300 text-lg ml-2'>Sugerencia</div>
                 <HighlightOffIcon className='hover:cursor-pointer text-footer-background-300' onClick={() => setOpenQuickTip(false)} />
               </div>
               <div className='flex flex-col md:flex-row items-center md:items-start md:justify-center w-full mb-6'>
