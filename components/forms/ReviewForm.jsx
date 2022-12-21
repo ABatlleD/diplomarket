@@ -6,9 +6,11 @@ import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 import Grid from '@mui/material/Grid'
 import { useCart } from '../../store/cart/cart.context'
+import { Checkbox, Tooltip } from '@mui/material'
 import usePrice from '../../libs/use-price'
 import { checkCart } from '../../libs/check-items'
 import CartItem from '../../components/cart/CartItem'
+import Link from 'next/link'
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js'
 import { useSession } from 'next-auth/react'
 import { isEmpty } from '../../libs/serialize'
@@ -21,6 +23,7 @@ import { useTranslation } from 'react-i18next'
 import { useDelivery } from '../../restapi/delivery'
 import { useConfig } from '../../restapi/config'
 import Bank from '../checkout/Bank'
+import HelpIcon from '@mui/icons-material/Help'
 
 const errorsAtom = atom(false)
 
@@ -31,6 +34,7 @@ function Review({ address }) {
   const [isLocationAllowed, setIsLocationAllowed] = useState(false)
   const [loading, setLoading] = useState(false)
   const [disableButton, setDisableButton] = useState(false)
+  const [check, setCheck] = useState(false)
   const [amountTotal, setAmountTotal] = useState(0)
   const { addressees, countries, municipalities, provinces, typePay } = address
   const [getAddressees] = addressees
@@ -151,18 +155,34 @@ function Review({ address }) {
   const { price: totalPrice } = usePrice({
     amount: total
   })
+
+  const privacy = (
+    <Link href={'/privacy'}>
+      <span className='text-footer-background-200 underline hover:cursor-pointer font-bold'>{t('auth.signup.privacy')}</span>
+    </Link>
+  )
+
+  const terms = (
+    <Link href={'/terms'}>
+      <span className='text-footer-background-200 underline hover:cursor-pointer font-bold'>{t('auth.signup.terms')}</span>
+    </Link>
+  )
+
   const { price: totalPriceWithDelivery } = usePrice({
     amount: deliveryAndTotal,
     currencyCode: currency
   })
+
   const { price: totalPriceWithDeliveryForPaypal } = usePrice({
     amount: deliveryAndTotal + deliveryAndTotal * 0.05 + 0.49,
     currencyCode: currency
   })
+
   const { price: totalPriceWithDeliveryAndTax } = usePrice({
     amount: deliveryAndTotal * 0.05 + 0.49,
     currencyCode: currency
   })
+
   return (
     <>
       <h6 className="mb-1">{t('checkout.review.title')}</h6>
@@ -174,7 +194,6 @@ function Review({ address }) {
               <CartItem
                 item={item}
                 key={key}
-                variant={'pillVertical'}
                 calculateDelivery={calculateDelivery}
               />
                 ))
@@ -183,15 +202,39 @@ function Review({ address }) {
             <></>
               )}
         </div>
-        <ListItem sx={{ py: 1, px: 0, border: '0.5px solid grey', paddingX: '4px' }}>
+        <ListItem sx={{
+          mt: 2,
+          px: 0,
+          borderTop: '2px solid #e4e7ea',
+          borderBottom: '2px solid #e4e7ea',
+          borderLeft: '2px solid #e4e7ea',
+          borderRight: '2px solid #e4e7ea',
+          paddingX: '4px'
+        }}>
           <ListItemText primary={t('checkout.review.subtotal')} />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             {totalPrice} {currency}
           </Typography>
         </ListItem>
-        <ListItem sx={{ py: 1, px: 0, border: '0.5px solid grey', paddingX: '4px' }}>
+        <ListItem sx={{
+          py: 1,
+          px: 0,
+          borderBottom: '2px solid #e4e7ea',
+          borderLeft: '2px solid #e4e7ea',
+          borderRight: '2px solid #e4e7ea',
+          paddingX: '4px'
+        }}>
           <ListItemText
-            primary={`${t('checkout.review.delivery')}`}
+            primary={
+              <p>
+                {t('checkout.review.delivery')}
+                <Tooltip
+                  sx={{ ml: 1 }}
+                  title={t('checkout.review.delivery_info')}
+                >
+                  <HelpIcon />
+                </Tooltip>
+              </p>}
           />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             {typeof totalDelivery === 'undefined'
@@ -204,20 +247,39 @@ function Review({ address }) {
                 }).format(totalDelivery)}
           </Typography>
         </ListItem>
-        {getTypePay === 'paypal' && <ListItem sx={{ py: 1, px: 0 }}>
+        {getTypePay === 'paypal' &&
+        <ListItem sx={{
+          py: 1,
+          px: 0.5,
+          borderBottom: '2px solid #e4e7ea',
+          borderLeft: '2px solid #e4e7ea',
+          borderRight: '2px solid #e4e7ea'
+        }}>
           <ListItemText primary={t('checkout.review.paypal')} />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             {typeof totalDelivery === 'undefined' ? t('loadingMessage') : totalPriceWithDeliveryAndTax} {currency}
           </Typography>
         </ListItem>}
         {getTypePay === 'paypal'
-          ? <ListItem sx={{ py: 1, px: 0 }}>
+          ? <ListItem sx={{
+            py: 1,
+            px: 0.5,
+            borderBottom: '2px solid #e4e7ea',
+            borderLeft: '2px solid #e4e7ea',
+            borderRight: '2px solid #e4e7ea'
+          }}>
           <ListItemText primary={<Typography type="body2" style={{ fontWeight: 'bold' }}>{t('checkout.review.total')}</Typography>} />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             {typeof totalDelivery === 'undefined' ? t('loadingMessage') : totalPriceWithDeliveryForPaypal} {currency}
           </Typography>
         </ListItem>
-          : <ListItem sx={{ py: 1, px: 0 }}>
+          : <ListItem sx={{
+            py: 1,
+            px: 0.5,
+            borderBottom: '2px solid #e4e7ea',
+            borderLeft: '2px solid #e4e7ea',
+            borderRight: '2px solid #e4e7ea'
+          }}>
           <ListItemText primary={<Typography type="body2" style={{ fontWeight: 'bold' }}>{t('checkout.review.total')}</Typography>} />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             {typeof totalDelivery === 'undefined' ? t('loadingMessage') : totalPriceWithDelivery} {currency}
@@ -225,13 +287,6 @@ function Review({ address }) {
         </ListItem>}
       </List>
       <Grid container spacing={2}>
-        {/* <Grid item xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-          {t('checkout.review.recipients')}
-          </Typography>
-          <Typography gutterBottom>{data?.user?.name}</Typography>
-          <Typography gutterBottom>{data?.user?.email}</Typography>
-        </Grid> */}
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
           {t('checkout.review.delivery_data')}
@@ -249,7 +304,15 @@ function Review({ address }) {
             </Grid>
           </React.Fragment>
         </Grid>
-        <Grid item container direction="column" xs={12}>
+        {getTypePay !== 'banco' && (
+          <div className="ZipCode flex flex-row mx-2">
+            <Checkbox onChange={() => setCheck(!check)} />
+            <p className='text-justify text-footer-background-300 font-semibold mt-[0.6rem]'>
+              {t('auth.signup.agree')} {terms} {t('auth.signup.and')} {privacy}.
+            </p>
+          </div>
+        )}
+          <Grid item container direction="column" xs={12}>
           {getTypePay === 'banco' && !isEmpty(items) && pasarelas?.banco ? (
             <div className="w-full rounded-lg text-xl font-bold">
               <Bank
@@ -331,9 +394,9 @@ function Review({ address }) {
                       }
                     })
                 }}
-                disabled={disableButton || loading}
+                disabled={disableButton || loading || !check}
               >
-                <img src="/assets/payment/directo/boton-directo.png" className="bg-white" />
+                <img src="/assets/payment/directo/boton-directo.png" className={`bg-white ${!check ? 'opacity-30 hover:cursor-not-allowed' : ''}`} />
               </button>
             </div>
           ) : getTypePay === 'zelle' && !isEmpty(items) && pasarelas?.zelle ? (
@@ -401,9 +464,9 @@ function Review({ address }) {
                       }
                     })
                 }}
-                disabled={disableButton || loading}
+                disabled={disableButton || loading || !check}
               >
-                <img src="/assets/payment/zelle/boton-zelle.png" className="bg-white" />
+                <img src="/assets/payment/zelle/boton-zelle.png" className={`bg-white ${!check ? 'opacity-30 hover:cursor-not-allowed' : ''}`} />
               </button>
             </div>
           ) : getTypePay === 'tropipay' && !isEmpty(items) && pasarelas?.tropipay ? (
@@ -469,9 +532,9 @@ function Review({ address }) {
                       }
                     })
                 }}
-                disabled={disableButton || loading}
+                disabled={disableButton || loading || !check}
               >
-                <img src="/assets/payment/tropipay/boton-tropipay.png" className="bg-white" />
+                <img src="/assets/payment/tropipay/boton-tropipay.png" className={`bg-white ${!check ? 'opacity-30 hover:cursor-not-allowed' : ''}`} />
               </button>
             </div>
           ) : getTypePay === 'paypal' && !isEmpty(items) && pasarelas?.paypal ? (

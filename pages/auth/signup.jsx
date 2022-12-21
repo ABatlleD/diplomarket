@@ -124,7 +124,7 @@ function SignUp() {
       return toast.error('Introduzca un email válido.')
     }
     if (values.password !== values.confirmPassword) {
-      return toast.error('Las contrasñas no coinciden.')
+      return toast.error('Las contraseñas no coinciden.')
     }
     const data = {
       name: values.fullname,

@@ -15,7 +15,7 @@ import {
 } from '../restapi/get-places'
 import { getCookie } from 'cookies-next'
 
-const CheckoutPage = ({ get_user_addresse }) => {
+const CheckoutPage = ({ get_user_addresses }) => {
   const { t } = useTranslation()
   const NEXT_MUNICIPALITY = getCookie('NEXT_MUNICIPALITY')
   const municipality_id = NEXT_MUNICIPALITY
@@ -24,11 +24,10 @@ const CheckoutPage = ({ get_user_addresse }) => {
     countries = [],
     municipalities = [],
     provinces = []
-  } = get_user_addresse
+  } = get_user_addresses
   return (
     <>
-      {/* //! Cambiar header */}
-      <AppHeader title={t('pages.recipients')} />
+      <AppHeader title={t('pages.checkout')} />
       <Checkout address={{ addressees, countries, municipalities, provinces, municipality_id }}/>
     </>
   )
@@ -47,20 +46,20 @@ export const getServerSideProps = async ({ req, res }) => {
       const addressees_user = addressee_response.filter(
         ({ usuario }) => usuario === user.id
       )
-      const ordenby_active_addressees_user = addressees_user.sort((a, b) =>
+      const orderby_active_addressees_user = addressees_user.sort((a, b) =>
         a.activo > b.activo ? -1 : 1
       )
       const countries = await getCountries(
-        ordenby_active_addressees_user[0] ?? {}
+        orderby_active_addressees_user[0] ?? {}
       )
       const provinces = await getProvinces(
-        ordenby_active_addressees_user[0] ?? {}
+        orderby_active_addressees_user[0] ?? {}
       )
       const municipalities = await getMunicipalities(
-        ordenby_active_addressees_user[0] ?? {}
+        orderby_active_addressees_user[0] ?? {}
       )
       const addressees_user_filters = []
-      for await (const items of ordenby_active_addressees_user) {
+      for await (const items of orderby_active_addressees_user) {
         const addressees_user = {
           id: items?.id,
           nombre: items?.nombre,
@@ -84,7 +83,7 @@ export const getServerSideProps = async ({ req, res }) => {
       }
       return {
         props: {
-          get_user_addresse: {
+          get_user_addresses: {
             addressees: addressees_user_filters,
             countries,
             municipalities,
