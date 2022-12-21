@@ -25,7 +25,7 @@
       "about": "¿Quienes somos?",
       "contact": "Contáctenos",
       "sell-with-us": "Vende con nosotros",
-      "categories": "Categorias",
+      "categories": "Categorías",
       "lang": {
         "es": "Español",
         "en": "Inglés"
@@ -46,7 +46,7 @@
     "allProducts": "Todos los Productos",
     "featuredProducts": "Productos destacados",
     "recentlySold": "Más Vendidos Recientemente",
-    "todayRecomendation": "Recomendaciones de Hoy",
+    "todayRecommendation": "Recomendaciones de Hoy",
     "addCart": "Añadir al Carrito",
     "addWishList": "Añadir a la Lista de Deseos",
     "shopNow": "Comprar Ahora",
@@ -69,11 +69,11 @@
   },
   "products": {
     "subcategory": "Subcategoría",
-    "provider": "Proveedeor",
+    "provider": "Proveedor",
     "brand": "Marca",
     "category": "Categoría",
     "description": "Descripción",
-    "shipmentsFrom": "Envios Desde",
+    "shipmentsFrom": "Envíos Desde",
     "relatedProducts": "Productos Relacionados"
   },
   "filter": {
@@ -88,8 +88,8 @@
     "to": "hasta",
     "more": "Más de",
     "promotions": "Productos en oferta",
-    "featureds": "Productos destacados",
-    "recomendations": "Recomendaciones de hoy"
+    "features": "Productos destacados",
+    "recommendations": "Recomendaciones de hoy"
   },
   "cart": {
     "no": "No hay",
@@ -127,7 +127,7 @@
       },
       "3": {
         "title": "EL PROCESO DE COMPRA, DATOS APORTADOS Y CÓMO SON GUARDADOS",
-        "text": "Para realizar el proceso de compra usted necesita registrarse. En este primer paso debe brindar su información personal (nombre completo, correo, contraseña, dirección,telefono, país y ciudad) que se obtiene en la formulario de registro. A través de su dirección de correo, se confirma su cuenta, se le notifican sus órdenes y como el estado en que se encuentran. También aporta información cuando llena el formulario sobre los datos del destinatario, que quedan registrados en su lista de destinatarios para futuras compras. Estos son utilizados únicamente para efectuar la entrega. El resto de la información que usted brinda, como la relacionada con su tarjeta de crédito en el momento en que efectúa el pago, no es almacenada en nuestro sitio ya que en este proceso solo interviene la pasarela de pago."
+        "text": "Para realizar el proceso de compra usted necesita registrarse. En este primer paso debe brindar su información personal (nombre completo, correo, contraseña, dirección, teléfono, país y ciudad) que se obtiene en la formulario de registro. A través de su dirección de correo, se confirma su cuenta, se le notifican sus órdenes y como el estado en que se encuentran. También aporta información cuando llena el formulario sobre los datos del destinatario, que quedan registrados en su lista de destinatarios para futuras compras. Estos son utilizados únicamente para efectuar la entrega. El resto de la información que usted brinda, como la relacionada con su tarjeta de crédito en el momento en que efectúa el pago, no es almacenada en nuestro sitio ya que en este proceso solo interviene la pasarela de pago."
       },
       "4": {
         "title": "COOKIES",
@@ -135,7 +135,7 @@
       },
       "5": {
         "title": "OTRAS CUESTIONES ACERCA DE SU PRIVACIDAD",
-        "text": "Este sitio aboga el derecho de divulgar la información de sus clientes, en caso de considerarlo extremadamente necesario, una emergencia personal, protección de los derechos o propiedades del sitio, identificación, contacto o acciones legales contra alguien que interfiera en nuestros derechos o propiedades, intencionalmente o no, y cuando alguna persona sea afectada por dichas actividades. Los cambios en el uso de la información personal seran comunicados en versiones futuras de esta Política de Privacidad."
+        "text": "Este sitio aboga el derecho de divulgar la información de sus clientes, en caso de considerarlo extremadamente necesario, una emergencia personal, protección de los derechos o propiedades del sitio, identificación, contacto o acciones legales contra alguien que interfiera en nuestros derechos o propiedades, intencionalmente o no, y cuando alguna persona sea afectada por dichas actividades. Los cambios en el uso de la información personal serán comunicados en versiones futuras de esta Política de Privacidad."
       }
     }
   },
@@ -179,7 +179,7 @@
         "text": {
           "1": "Además de aquellas entidades restringidas por las regulaciones del Departamento de Estado de los EUA, para saber más por favor",
           "2": "Click Aquí",
-          "3": "Nuestras empresas o asociados no somos responsables del resultado negativo de sus compras, que podrá incluir bloquear cuentas de compradores por instituciones federales, cancelaciones de órdenes, demoras de reembolsos al comprador, no entrega de mercancías a destinos finales, entre otras que lo puede afectar. Por favor, al menos que se encuentre dentro de la lista de QUIEN PUEDE COMPRAR EN ESTA WEB*, por favor no realizar transacciones.",
+          "3": "Nuestras empresas o asociados no somos responsables del resultado negativo de sus compras, que podrá incluir bloquear cuentas de compradores por instituciones federales, cancelaciones de órdenes, demoras de reembolso al comprador, no entrega de mercancías a destinos finales, entre otras que lo puede afectar. Por favor, al menos que se encuentre dentro de la lista de QUIEN PUEDE COMPRAR EN ESTA WEB*, por favor no realizar transacciones.",
           "4": "No obstante, debido a que existe regulaciones que aplican para casos específicos, sean para personas naturales o extranjeras, estatales o privadas, nuestras empresas están dispuestas a trabajar de conjunto y según regulaciones vigentes en E.U.A. al momento que usted lea nuestra web, por favor contáctenos"
         }
       },

@@ -42,7 +42,7 @@ function Home({
   const [brands, setBrands] = useState([])
   const municipality = getCookie('NEXT_MUNICIPALITY')
   const [promotions, setPromotions] = useState(false)
-  const [recomendations, setRecomendations] = useState(false)
+  const [recommendations, setRecommendations] = useState(false)
 
   const [category, setCategory] = useState(undefined)
   const [selectedCategory, setSelectedCategory] = useState(undefined)
@@ -53,7 +53,7 @@ function Home({
   const [min, setMin] = useState(0)
   const [max, setMax] = useState(1000)
   const [extra, setExtra] = useState(undefined)
-  const [age, setAge] = React.useState('recents')
+  const [age, setAge] = React.useState('recent')
 
   const handleChange = (event) => {
     setAge(event.target.value)
@@ -242,7 +242,7 @@ function Home({
 
   const handleChangeType = (type) => {
     setPromotions(false)
-    setRecomendations(false)
+    setRecommendations(false)
     setExtra(undefined)
     switch (type) {
       case 'promotions':
@@ -250,7 +250,7 @@ function Home({
         setExtra('rebajados')
         break
       case 'recommendations':
-        setRecomendations(true)
+        setRecommendations(true)
         setExtra('recomendados')
         break
     }
@@ -301,7 +301,7 @@ function Home({
                     size='small'
                     onChange={handleChange}
                   >
-                    <MenuItem value={'recents'}>Recents</MenuItem>
+                    <MenuItem value={'recent'}>Recent</MenuItem>
                     <MenuItem value={'highest_price'}>Highest Price</MenuItem>
                     <MenuItem value={'lowest_price'}>Lowest Price</MenuItem>
                     <MenuItem value={'highest_discount'}>Highest Discount</MenuItem>
@@ -334,7 +334,7 @@ function Home({
             </div>
             <div className='flex flex-col my-4'>
               <FormControlLabel value={promotions} onChange={() => handleChangeType('promotions')} control={<Checkbox size='small' />} label={t('filter.promotions')} />
-              <FormControlLabel value={recomendations} onChange={() => handleChangeType('recomendations')} control={<Checkbox size='small' />} label={t('filter.recomendations')} />
+              <FormControlLabel value={recommendations} onChange={() => handleChangeType('recommendations')} control={<Checkbox size='small' />} label={t('filter.recommendations')} />
             </div>
             <div className='flex flex-col mt-2 mb-4'>
               <p className='font-bold mb-2'>{t('filter.price')}</p>
@@ -393,7 +393,7 @@ function Home({
                       size='small'
                       onChange={handleChange}
                     >
-                      <MenuItem value={'recents'}>Recents</MenuItem>
+                      <MenuItem value={'recent'}>Recent</MenuItem>
                       <MenuItem value={'highest_price'}>Highest Price</MenuItem>
                       <MenuItem value={'lowest_price'}>Lowest Price</MenuItem>
                       <MenuItem value={'highest_discount'}>Highest Discount</MenuItem>
