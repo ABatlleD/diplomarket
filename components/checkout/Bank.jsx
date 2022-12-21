@@ -4,10 +4,12 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
+import { Checkbox } from '@mui/material'
 import Tooltip from '@mui/material/Tooltip'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import Card from 'react-credit-cards-2'
+import Link from 'next/link'
 import { EXCLUSIVE_COUNTRIES } from '../../libs/constants'
 import {
   formatCreditCardNumber,
@@ -20,6 +22,7 @@ import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
 const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) => {
+  const [check, setCheck] = useState(false)
   const { t } = useTranslation()
   const formRef = useRef(null)
   const { push } = useRouter()
@@ -170,6 +173,18 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
   }
   const { name, number, expiry, cvc, pais, focused, issuer } = data
 
+  const privacy = (
+    <Link href={'/privacy'}>
+      <span className='text-footer-background-200 underline hover:cursor-pointer font-bold'>{t('auth.signup.privacy')}</span>
+    </Link>
+  )
+
+  const terms = (
+    <Link href={'/terms'}>
+      <span className='text-footer-background-200 underline hover:cursor-pointer font-bold'>{t('auth.signup.terms')}</span>
+    </Link>
+  )
+
   return (
     <div key="Payment">
       <div className="App-Payment">
@@ -294,8 +309,14 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
             />
           </div>
           <input type="hidden" name="issuer" value={issuer} />
+          <div className="ZipCode flex flex-row mt-2">
+            <Checkbox onChange={() => setCheck(!check)} />
+            <p className='text-justify text-sm text-footer-background-300 font-semibold mt-[0.75rem]'>
+              {t('auth.signup.agree')} {terms} {t('auth.signup.and')} {privacy}.
+            </p>
+          </div>
           <div className="my-2">
-            <button className="p-2 rounded-xl bg-dm-red text-white w-full bg-button uppercase">{t('checkout.review.placeholder.pay')}</button>
+            <button disabled={!check} className={`p-2 rounded-xl bg-dm-red text-white w-full bg-button uppercase ${!check ? 'opacity-30 hover:cursor-not-allowed' : ''}`}>{t('checkout.review.placeholder.pay')}</button>
           </div>
         </form>
       </div>
