@@ -21,6 +21,12 @@ import PriceCheckIcon from '@mui/icons-material/PriceCheck'
 import SentimentSatisfiedOutlinedIcon from '@mui/icons-material/SentimentSatisfiedOutlined'
 import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined'
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined'
+import { useSession } from 'next-auth/react'
+import dynamic from 'next/dynamic'
+
+const NotificationsTip = dynamic(() => import('../components/modals/NotificationsTip'), {
+  loading: () => 'Loading...'
+})
 
 function Home({
   products,
@@ -54,6 +60,8 @@ function Home({
   const [max, setMax] = useState(1000)
   const [extra, setExtra] = useState(undefined)
   const [age, setAge] = React.useState('recent')
+  const { status, data } = useSession()
+  const [openNotificationsTip, setOpenNotificationsTip] = useState(false)
 
   const handleChange = (event) => {
     setAge(event.target.value)
@@ -91,6 +99,12 @@ function Home({
     resources.categories.all()
       .then(response => setCategories(response.data.results))
   }, [])
+
+  useEffect(() => {
+    if (status !== 'unauthenticated' && data && !data.rss) {
+      setOpenNotificationsTip(true)
+    }
+  }, [status])
 
   const handlePriceFilter = (prices) => {
     setMin(prices[0])
@@ -480,6 +494,7 @@ function Home({
             <p className='text-text-100 md:text-lg text-xs'>{t('home.payments.description')}</p>
           </div>
         </div>
+        <NotificationsTip {...{ openNotificationsTip, setOpenNotificationsTip }}/>
       </div>
     </>
   )
