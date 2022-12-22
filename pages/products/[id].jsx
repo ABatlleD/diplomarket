@@ -142,7 +142,7 @@ function Product({ product, apiError }) {
           </Carousel>
         </div>
         <div className='flex flex-col md:mt-0 md:w-1/2'>
-          <p className='text-lg md:text-xl text-text-blue mb-2 md:mt-0'>{i18n.language === 'es' ? product.nombre : product.nombre_ingles}</p>
+          <p className='text-xl md:text-3xl text-text-blue mb-2 md:mt-0'>{i18n.language === 'es' ? product.nombre : product.nombre_ingles}</p>
           <div className='flex flex-row'>
             <ThemeProvider theme={theme}>
               <div className='flex flex-row'>
@@ -158,11 +158,11 @@ function Product({ product, apiError }) {
             }
           </div>
           {!product.promocion.activo && (
-            <div className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${parseFloat(product.precio).toFixed(2)}</div>
+            <div className='my-4 md:mb-0 md:my-0 text-button font-bold text-xl md:text-3xl'>US${parseFloat(product.precio).toFixed(2)}</div>
           )}
           {product.promocion.activo && (
             <div className='flex flex-col leading-3'>
-              <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${parseFloat(product.precio - (product.precio * product.promocion.descuento / 100)).toFixed(2)} </p>
+              <p className='my-4 md:mb-0 md:my-0 text-button font-bold text-xl md:text-3xl'>US${parseFloat(product.precio - (product.precio * product.promocion.descuento / 100)).toFixed(2)} </p>
               <div className='flex flex-row my-2'>
                 <div
                   className='bg-button flex rounded-md px-1 mr-1 text-background-100 text-sm'
@@ -185,7 +185,7 @@ function Product({ product, apiError }) {
           <p className='mb-1'>
             <span className='font-semibold text-footer-background-300'>{t('products.brand')}:</span> <span className='font-semibold text-text-100'>{product.marca.nombre}</span>
           </p>
-          <div className='flex flex-wrap w-full mb-10 mt-4'>
+          <div className={`flex flex-wrap w-full ${Number(product.cant_inventario) > 0 ? 'mb-2' : 'mb-1'} mt-4`}>
             {product?.grupos.map((item) => (
               <div className='text-footer-background-300 w-1/4' key={item.pk}>
                 <RelatedCard item={item} />
@@ -193,41 +193,35 @@ function Product({ product, apiError }) {
             ))}
           </div>
           <div className='flex flex-col'>
+          {Number(product.cant_inventario) > 0 &&
             <div className='flex flex-row justify-between w-11/12 mb-4'>
-              <div className='w-5/12 md:w-5/12'>
+              <div className='w-6/12 md:w-5/12'>
                 <div className='flex flex-row justify-between'>
                   <div
                     className='hover:cursor-pointer'
                   >
-                    {Number(product.cant_inventario) > 0
-                      ? (
-                          <AddToCart
-                            data={{
-                              ...product,
-                              precio: {
-                                cantidad: product.precio,
-                                moneda: product.precio_currency
-                              }
-                            }}
-                            size={[26, 26]}
-                            text={t('home.addCart')}
-                          />
-                        )
-                      : <></>}
+                    <AddToCart
+                      data={{
+                        ...product,
+                        precio: {
+                          cantidad: product.precio,
+                          moneda: product.precio_currency
+                        }
+                      }}
+                      size={[31.5, 26]}
+                      text={t('home.addCart')}
+                    />
                   </div>
                 </div>
               </div>
-              {Number(product.cant_inventario) > 0
-                ? (
-                    <div
-                      className='bg-footer-background-200 w-6/12 shadow-lg text-background-100 py-1 text-center rounded-md hover:cursor-pointer hover:opacity-90'
-                      onClick={handleBuyNow}
-                    >
-                      {t('home.shopNow')}
-                    </div>
-                  )
-                : <></>}
+              <div
+                className='bg-footer-background-200 w-6/12 shadow-lg text-background-100 py-1 text-center rounded-md hover:cursor-pointer hover:opacity-90'
+                onClick={handleBuyNow}
+              >
+                {t('home.shopNow')}
+              </div>
             </div>
+            }
             <div className='flex flex-row text-button mt-1 hover:cursor-pointer hover:opacity-90'>
               <AddToFav data={product} text={'Añadir a favoritos'} success={'En favoritos'}/>
             </div>
