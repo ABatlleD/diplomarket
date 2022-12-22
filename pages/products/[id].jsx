@@ -15,6 +15,7 @@ import AppTabPanel from '../../components/AppTabPanel'
 import { useCart } from '../../store/cart/cart.context'
 import { generateCartItem } from '../../store/cart/generate-cart-item'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import RelatedCard from '../../components/products/RelatedCard'
 
 const theme = createTheme({
   palette: {
@@ -70,6 +71,7 @@ function Product({ product, apiError }) {
       resources.products_related.all(product.id, 1)
         .then(response => setRelatedProducts(response.data))
       setLoading(false)
+      console.log('🚀 ~ file: [id].jsx:75 ~ Product ~ product', product)
     }
   }, [product])
 
@@ -99,7 +101,7 @@ function Product({ product, apiError }) {
     <div className='flex flex-col items-center mx-2 bg-background-100'>
       <AppHeader title={t('pages.products')} />
       <div className='flex flex-col md:flex-row w-full 2xl:w-[60%] xl:w-[75%] md:justify-between my-8'>
-        <div className='md:w-[45%] flex flex-row justify-center'>
+        <div className='md:w-[45%] flex flex-row justify-center items-start'>
           <Carousel
             showStatus={false}
             showArrows={false}
@@ -143,7 +145,7 @@ function Product({ product, apiError }) {
           <p className='text-lg md:text-xl text-text-blue mb-2 md:mt-0'>{i18n.language === 'es' ? product.nombre : product.nombre_ingles}</p>
           <div className='flex flex-row'>
             <ThemeProvider theme={theme}>
-              <div className='felx flex-row'>
+              <div className='flex flex-row'>
                 {product.etiquetas.map((tag) => (
                   <Chip key={tag.pk} sx={{ marginRight: 1, marginBottom: 1 }} label={i18n.language === 'es' ? tag.nombre : tag.ingles} color="error" />
                 ))}
@@ -180,9 +182,16 @@ function Product({ product, apiError }) {
           <p className='mb-2'>
             <span className='font-semibold text-footer-background-300'>{t('products.provider')}:</span> <span className='font-semibold text-text-100'>{product.proveedor.nombre}</span>
           </p>
-          <p className='mb-4'>
+          <p className='mb-1'>
             <span className='font-semibold text-footer-background-300'>{t('products.brand')}:</span> <span className='font-semibold text-text-100'>{product.marca.nombre}</span>
           </p>
+          <div className='flex flex-wrap w-full mb-10 mt-4'>
+            {product?.grupos.map((item) => (
+              <div className='text-footer-background-300 w-1/4' key={item.pk}>
+                <RelatedCard item={item} />
+              </div>
+            ))}
+          </div>
           <div className='flex flex-col'>
             <div className='flex flex-row justify-between w-11/12 mb-4'>
               <div className='w-5/12 md:w-5/12'>
@@ -222,7 +231,7 @@ function Product({ product, apiError }) {
             <div className='flex flex-row text-button mt-1 hover:cursor-pointer hover:opacity-90'>
               <AddToFav data={product} text={'Añadir a favoritos'} success={'En favoritos'}/>
             </div>
-            <div className='text-text-100 mt-3'><p><span><AccessTimeIcon fontSize='small'/></span><span className='ml-1'>Delivery</span></p></div>
+            <div className='flex flex-row items-center text-text-100 mt-3'><div className='flex flex-row items-center'><AccessTimeIcon fontSize='small'/><span className='ml-1 mt-[0.2rem]'>{i18n.language === 'es' ? product.tiempo_envio : product.tiempo_envio_ingles}</span></div></div>
           </div>
         </div>
       </div>
