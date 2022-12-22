@@ -40,10 +40,6 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
     isInCart
   } = useCart()
 
-  const resizeTitle = (string, maxLength) => {
-    return string?.length > maxLength ? `${string.slice(0, maxLength)}...` : string
-  }
-
   useEffect(() => {
     if (product.img_principal && product.galeria) {
       setImages([product.img_principal, ...product.galeria])
@@ -150,7 +146,6 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
                   {product.precioxlibra?.cantidad !== undefined && product.precioxlibra?.cantidad !== '0.00' && (
                     <div className='mb-2 md:mb-0 md:my-0 text-text-100 text-sm md:text-base'>US${product.precioxlibra?.cantidad}/{product.um}</div>
                   )}
-                  <p className='text-xs md:text-base text-text-100 mb-3'>{resizeTitle(i18n.language === 'es' ? product.descripcion : product.descripcion_ingles, 300)}</p>
                   <div className='flex flex-col'>
                     <div className='flex flex-row justify-between mb-4'>
                       <div className='w-6/12'>

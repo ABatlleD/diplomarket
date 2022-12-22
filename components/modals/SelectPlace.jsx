@@ -155,7 +155,7 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
                     variant="contained"
                     sx={{
                       width: '100%',
-                      backgroundColor: '#ff4a4a !important'
+                      backgroundColor: '#b12024 !important'
                     }}
                     onClick={handleSubmit}
                   >

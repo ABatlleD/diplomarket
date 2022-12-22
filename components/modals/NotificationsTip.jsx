@@ -19,6 +19,7 @@ function NotificationsTip({ openNotificationsTip = false, setOpenNotificationsTi
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={openNotificationsTip}
+        onClose={() => setOpenNotificationsTip(false)}
         closeAfterTransition
         sx={{ overflowY: 'scroll' }}
       >

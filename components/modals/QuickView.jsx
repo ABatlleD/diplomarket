@@ -64,9 +64,6 @@ function QuickView({ openQuickView = false, setOpenQuickView = () => {}, product
         open={openQuickView}
         onClose={() => setOpenQuickView(false)}
         closeAfterTransition
-        BackdropProps={{
-          timeout: 500
-        }}
         sx={{ overflowY: 'scroll' }}
       >
         <Fade in={openQuickView}>

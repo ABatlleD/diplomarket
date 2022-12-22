@@ -63,8 +63,8 @@ function AddRecipient({
       >
         <Fade in={openAddRecipient}>
           <main className={js.className}>
-            <div className='flex flex-col shadow-2xl rounded-xl bg-background-100 w-11/12 md:w-2/5 md:mt-4 mx-auto p-2'>
-              <div className='flex flex-row justify-end'>
+            <div className='flex flex-col shadow-2xl rounded-xl bg-background-100 w-11/12 md:w-2/5 md:mt-4 mx-auto p-2 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2'>
+              <div className='flex flex-row justify-end text-footer-background-300'>
                 <HighlightOffIcon className='hover:cursor-pointer' onClick={() => setOpenAddRecipient(false)} />
               </div>
               <div className='flex flex-row justify-center mt-4'>
@@ -97,7 +97,7 @@ function AddRecipient({
                   variant="contained"
                   sx={{
                     width: '100%',
-                    backgroundColor: '#ff4a4a !important'
+                    backgroundColor: '#b12024 !important'
                   }}
                   onClick={handleSubmit}
                 >
