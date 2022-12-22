@@ -4,6 +4,7 @@ import FavList from '../components/fav/FavList'
 import { useFav } from '../store/fav/fav.context'
 import { useTranslation } from 'react-i18next'
 import AppHeader from '../components/layouts/AppHeader'
+import LayersClearIcon from '@mui/icons-material/LayersClear'
 
 function Wishlist() {
   const { items } = useFav()
@@ -15,9 +16,14 @@ function Wishlist() {
       <AppHeader title={t('pages.wishlist')} />
       <div className='flex flex-col items-center my-10'>
         <div className='flex mb-4 flex-row justify-center'>
-          <div className='font-bold text-2xl md:text-3xl'>{t('wishlist.title')}</div>
+          <div className='font-bold text-2xl md:text-3xl text-footer-background-300'>{t('wishlist.title')}</div>
         </div>
-        <FavList products={items} loading={loading} />
+        {items.length > 0
+          ? <FavList products={items} loading={loading} />
+          : <div className='text-footer-background-300 mt-10 mb-20'>
+            <LayersClearIcon sx={{ fontSize: '16rem' }} />
+          </div>
+        }
       </div>
     </>
   )
