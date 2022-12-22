@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Autocomplete from '@mui/material/Autocomplete'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { FormControl, OutlinedInput, InputAdornment, IconButton } from '@mui/material'
+import { styled, createTheme, ThemeProvider } from '@mui/material/styles'
 import AppButton from './AppButton'
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined'
 import { useTranslation } from 'react-i18next'
@@ -8,6 +9,7 @@ import { getCookie } from 'cookies-next'
 import resources from '../restapi/resources'
 import SearchResult from './products/SearchResult'
 import useWindowSize from '../hooks/WindowSize'
+import { Search } from '@mui/icons-material'
 
 const theme = createTheme({
   palette: {
@@ -15,6 +17,15 @@ const theme = createTheme({
       main: '#b12024',
       contrastText: '#fff'
     }
+  }
+})
+
+const CssOutlinedInput = styled(OutlinedInput)({
+  '& .MuiInputBase-input': {
+    padding: 3
+  },
+  '& .MuiInputBase-focused': {
+    padding: 3
   }
 })
 
@@ -98,26 +109,21 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
             renderInput={(params) => {
               return (
                 <div ref={params.InputProps.ref}>
-                  <input
-                    {...params.inputProps}
-                    type="text"
-                    id={'search_bar'}
-                    placeholder={t('layout.navbar.search')}
-                    style={{
-                      width: '100%',
-                      height: '42px',
-                      border: '1px solid #D1D1D1',
-                      backgroundColor: '#fff',
-                      color: '#000',
-                      borderRadius: '0',
-                      padding: '0 15px',
-                      transition: 'all 0.3s linear',
-                      WebkitTransition: 'all 0.3s linear',
-                      fontSize: '16px',
-                      fontWeight: 'normal'
-                    }}
-                    autoFocus
-                  />
+                  <FormControl fullWidth variant="outlined">
+                    <CssOutlinedInput
+                      id="outlined-adornment-search"
+                      type='text'
+                      size='small'
+                      {...params.inputProps}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton>
+                            <Search />
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                    />
+                  </FormControl>
                 </div>
               )
             }}

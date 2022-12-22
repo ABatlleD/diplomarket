@@ -106,3 +106,7 @@ a:hover {
   margin-top: -0.4rem;
 }
 
+.MuiAutocomplete-hasClearIcon.css-1qqsdnr-MuiAutocomplete-root .MuiOutlinedInput-root {
+  padding-right: 9px !important;
+}
+
