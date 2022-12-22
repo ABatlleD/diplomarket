@@ -12,6 +12,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import parsePhoneNumber from 'libphonenumber-js'
 
 function Contact() {
   const { t, i18n } = useTranslation()
@@ -63,14 +64,14 @@ function Contact() {
             {contacts.map((contact) => (
               <div key={contact.id}>
                 {contact.tipo === 'whatsapp' && (
-                  <div>
+                  <div className='hover:underline hover:text-button'>
                     <WhatsAppIcon
                       sx={{
                         color: '#49c95a',
                         fontSize: 25
                       }}
                     />
-                    <a href={`https://api.whatsapp.com/send?phone=${contact.contenido}&text=Hola,%20Diplomarket%E2%84%A2`} className='ml-1'>{contact.contenido}</a>
+                    <a href={`https://api.whatsapp.com/send?phone=${contact.contenido}&text=Hola,%20Diplomarket%E2%84%A2`} className='ml-1'>{parsePhoneNumber(`+${contact.contenido}`)?.formatInternational()}</a>
                   </div>
                 )}
               </div>
@@ -90,7 +91,7 @@ function Contact() {
               {contact.tipo === 'direccion' && (
                 <div>
                   <p className='mb-1'>{contact.contenido}</p>
-                  <p className='hover:cursor-pointer mb-2'>
+                  <p className='hover:cursor-pointer hover:underline hover:text-button mb-2'>
                     <span><LocationOnOutlinedIcon /></span>
                     <a href={contact.link}>
                       {i18n.language === 'es' ? contact.descripcion : contact.descripcion_ingles}
