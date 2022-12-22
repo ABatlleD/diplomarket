@@ -83,14 +83,22 @@
     "brand": "Brand",
     "provider": "Provider",
     "clear": "Clear",
-    "all": "Clear Filter",
+    "all": "Clear",
     "filter": "Filter",
     "categories": "All categories",
     "to": "to",
     "more": "More than",
     "promotions": "Hot deals",
     "features": "Featured products",
-    "recommendations": "Today's recommendations"
+    "recommendations": "Today's recommendations",
+    "order": {
+      "title": "Order By",
+      "recent": "Recent",
+      "asc_price": "Highest Price",
+      "desc_price": "Lowest Price",
+      "asc_discount": "Highest Discount",
+      "desc_discount": "Lowest Discount"
+    }
   },
   "cart": {
     "no": "No",

@@ -59,12 +59,12 @@ function Home({
   const [min, setMin] = useState(0)
   const [max, setMax] = useState(1000)
   const [extra, setExtra] = useState(undefined)
-  const [age, setAge] = React.useState('recent')
+  const [order, setOrder] = React.useState('recent')
   const { status, data } = useSession()
   const [openNotificationsTip, setOpenNotificationsTip] = useState(false)
 
   const handleChange = (event) => {
-    setAge(event.target.value)
+    setOrder(event.target.value)
   }
 
   const getMorePost = async () => {
@@ -306,20 +306,20 @@ function Home({
               </div>
               <div className='flex w-28'>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Order By</InputLabel>
+                  <InputLabel id="demo-simple-select-label">{t('filter.order.title')}</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={age}
-                    label="Age"
+                    value={order}
+                    label="Order"
                     size='small'
                     onChange={handleChange}
                   >
-                    <MenuItem value={'recent'}>Recent</MenuItem>
-                    <MenuItem value={'highest_price'}>Highest Price</MenuItem>
-                    <MenuItem value={'lowest_price'}>Lowest Price</MenuItem>
-                    <MenuItem value={'highest_discount'}>Highest Discount</MenuItem>
-                    <MenuItem value={'lowest_discount'}>Lowest Discount</MenuItem>
+                    <MenuItem value={'recent'}>{t('filter.order.recent')}</MenuItem>
+                    <MenuItem value={'highest_price'}>{t('filter.order.asc_price')}</MenuItem>
+                    <MenuItem value={'lowest_price'}>{t('filter.order.desc_price')}</MenuItem>
+                    <MenuItem value={'highest_discount'}>{t('filter.order.asc_discount')}</MenuItem>
+                    <MenuItem value={'lowest_discount'}>{t('filter.order.desc_discount')}</MenuItem>
                   </Select>
                 </FormControl>
               </div>
@@ -392,28 +392,28 @@ function Home({
                   </div>
                 )}
                 {!selectedCategory && (
-                  <div id='title' className='font-bold w-1/2 ml-4 mb-2 text-xl hidden md:flex'>
+                  <div id='title' className='font-bold w-1/2 mb-2 text-xl hidden md:flex'>
                     {t('filter.categories')}
                   </div>
                 )}
                 <div className='hidden md:flex w-[25%]'>
-                  <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Order By</InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={age}
-                      label="Age"
-                      size='small'
-                      onChange={handleChange}
-                    >
-                      <MenuItem value={'recent'}>Recent</MenuItem>
-                      <MenuItem value={'highest_price'}>Highest Price</MenuItem>
-                      <MenuItem value={'lowest_price'}>Lowest Price</MenuItem>
-                      <MenuItem value={'highest_discount'}>Highest Discount</MenuItem>
-                      <MenuItem value={'lowest_discount'}>Lowest Discount</MenuItem>
-                    </Select>
-                  </FormControl>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">{t('filter.order.title')}</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={order}
+                    label="Order"
+                    size='small'
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={'recent'}>{t('filter.order.recent')}</MenuItem>
+                    <MenuItem value={'highest_price'}>{t('filter.order.asc_price')}</MenuItem>
+                    <MenuItem value={'lowest_price'}>{t('filter.order.desc_price')}</MenuItem>
+                    <MenuItem value={'highest_discount'}>{t('filter.order.asc_discount')}</MenuItem>
+                    <MenuItem value={'lowest_discount'}>{t('filter.order.desc_discount')}</MenuItem>
+                  </Select>
+                </FormControl>
                 </div>
               </div>
               {size.width <= 768 && loading && (
@@ -442,7 +442,9 @@ function Home({
                 </InfiniteScroll>
               )}
               {size.width > 768 && loading && (
-                <AllProductsLoader />
+                <div className='ml-4'>
+                  <AllProductsLoader />
+                </div>
               )}
               {size.width > 768 && !loading && (
                 <ListProducts products={list} loading={loading} />

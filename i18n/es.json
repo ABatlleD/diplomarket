@@ -83,14 +83,22 @@
     "brand": "Marca",
     "provider": "Proveedor",
     "clear": "Limpiar",
-    "all": "Limpiar Filtro",
+    "all": "Limpiar",
     "filter": "Filtrar",
     "categories": "Todas las categorías",
     "to": "hasta",
     "more": "Más de",
     "promotions": "Productos en oferta",
     "features": "Productos destacados",
-    "recommendations": "Recomendaciones de hoy"
+    "recommendations": "Recomendaciones de hoy",
+    "order": {
+      "title": "Ordenar Por",
+      "recent": "Recientes",
+      "asc_price": "Mayor Precio",
+      "desc_price": "Menor Precio",
+      "asc_discount": "Mayor Descuento",
+      "desc_discount": "Menor Descuento"
+    }
   },
   "cart": {
     "no": "No hay",
