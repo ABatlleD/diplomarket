@@ -22,9 +22,17 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang='es'>
         <Head>
           <link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'></link>
+          <meta
+            name="description"
+            content="Diplomarket™ is an online store developed by CUSPINERA SURL, in order to satisfy your purchases and deliveries, both for you and dearest. We are pleased to bring you the BEST! .... ALWAYS!!!"
+          />
+          <meta
+            name="keywords"
+            content="Diplomarket,diplomarket,Diplomático,diplomático,embajada,Embajada,importar,franquicia,franquicia diplomática,import from USA,servicio a diplomáticos,sector diplomático,office supplies,appliances,purchases in USA,Embassy,embassies,import,franchise,without customs payments,diplomats purchase office supplies,appliances,purchases in USA,ventas sector diplomático,ventas a diplomáticos,Sales to diplomats,offers,promotions,ofertas,promociones"
+          />
         </Head>
         <body>
           <Main />
