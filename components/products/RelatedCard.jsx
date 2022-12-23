@@ -21,7 +21,7 @@ function RelatedCard({ item }) {
           </div>
         </div>
         <div className='flex flex-row justify-center items-center py-2'>
-          <p className='text-button text-lg font-bold'>US${parseFloat(item.precio.cantidad).toFixed(2)}</p>
+          <p className='text-button text-lg font-bold'>US${parseFloat(item.promocion?.descuento ? (parseFloat(item.precio.cantidad) - (parseFloat(item.precio.cantidad) * item.promocion.descuento / 100)) : item.precio.cantidad).toFixed(2)}</p>
         </div>
       </div>
     </>

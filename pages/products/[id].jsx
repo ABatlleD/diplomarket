@@ -185,7 +185,7 @@ function Product({ product, apiError }) {
           <p className='mb-1'>
             <span className='font-semibold text-footer-background-300'>{t('products.brand')}:</span> <span className='font-semibold text-text-100'>{product.marca.nombre}</span>
           </p>
-          <div className={`flex flex-wrap w-full ${Number(product.cant_inventario) > 0 ? 'mb-2' : 'mb-1'} mt-4`}>
+          <div className={`flex flex-wrap w-full ${Number(product.cant_inventario) > 0 ? 'mb-4' : 'mb-1'} mt-4`}>
             {product?.grupos.map((item) => (
               <div className='text-footer-background-300 w-1/4' key={item.pk}>
                 <RelatedCard item={item} />

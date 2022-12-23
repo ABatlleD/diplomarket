@@ -150,7 +150,6 @@ function Home({
       max: mobileFilter.max,
       extra: mobileFilter.extra
     }
-    console.log('🚀 ~ file: index.jsx:142 ~ handleMobileFilter ~ filter', filter)
     try {
       resources.products.all(filter)
         .then(response => setMobileList(response.data.results))
@@ -351,8 +350,8 @@ function Home({
               </div>
             </div>
             <div className='flex flex-col my-4'>
-              <FormControlLabel value={promotions} onChange={() => handleChangeType('promotions')} control={<Checkbox size='small' />} label={t('filter.promotions')} />
-              <FormControlLabel value={recommendations} onChange={() => handleChangeType('recommendations')} control={<Checkbox size='small' />} label={t('filter.recommendations')} />
+              <FormControlLabel value={promotions} onChange={() => handleChangeType('promotions')} control={<Checkbox size='small' checked={promotions} />} label={t('filter.promotions')} />
+              <FormControlLabel value={recommendations} onChange={() => handleChangeType('recommendations')} control={<Checkbox size='small' checked={recommendations} />} label={t('filter.recommendations')} />
             </div>
             <div className='flex flex-col mt-2 mb-4'>
               <p className='font-bold mb-2'>{t('filter.price')}</p>
