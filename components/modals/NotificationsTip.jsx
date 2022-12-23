@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Modal, Fade, TextField } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
@@ -18,26 +18,30 @@ const js = Josefin_Sans({
 function NotificationsTip({ openNotificationsTip = false, setOpenNotificationsTip = () => {} }) {
   const { data } = useSession()
   const { t } = useTranslation()
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = async () => {
-    console.log('🚀 ~ file: NotificationsTip.jsx:20 ~ NotificationsTip ~ data', data)
-    const activeAccount = {
-      id: data?.id,
-      email: data?.user?.email,
-      name: data.user.name,
-      ...data,
-      rss: true
-    }
-    try {
-      await axios.post('/api/details', {
-        account: [activeAccount]
-      }).then((res) => {
-        toast.info(res.data.message)
-        Router.push('/auth/signin')
-      })
-    } catch (error) {
-      console.log('🚀 ~ file: details.jsx:87 ~ handleSubmit ~ error', error)
-      toast.error('Contacte al administrador')
+    if (!loading) {
+      setLoading(true)
+      const activeAccount = {
+        id: data?.id,
+        email: data?.user?.email,
+        name: data.user.name,
+        ...data,
+        rss: true
+      }
+      try {
+        await axios.post('/api/details', {
+          account: [activeAccount]
+        }).then((res) => {
+          toast.info(res.data.message)
+          Router.push('/auth/signin')
+          setLoading(false)
+        })
+      } catch (error) {
+        setLoading(false)
+        toast.error('Contacte al administrador')
+      }
     }
   }
 
@@ -74,7 +78,7 @@ function NotificationsTip({ openNotificationsTip = false, setOpenNotificationsTi
                   <TextField id="outlined-basic" defaultValue={data?.user?.email} fullWidth label="Email" disabled variant="outlined" size='small' />
                 </div>
                 <div className='flex flex-row justify-center mb-4'>
-                  <div onClick={handleSubmit} className='bg-footer-background-100 hover:cursor-pointer text-center py-1 px-3 rounded-md text-lg text-background-100'>{t('notifications-tip.activate')}</div>
+                  <div onClick={handleSubmit} className={`${loading ? 'text-text-100 bg-background-300 hover:cursor-not-allowed' : 'bg-footer-background-300 text-background-100 hover:cursor-pointer'} text-center py-1 px-3 rounded-md text-lg`}>{t('notifications-tip.activate')}</div>
                 </div>
               </div>
             </div>

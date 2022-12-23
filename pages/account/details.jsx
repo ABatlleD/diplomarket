@@ -28,6 +28,7 @@ function Details() {
   const [city, setCity] = useState('')
   const [zip, setZip] = useState('')
   const [rss, setRss] = useState('')
+  const [loading, setLoading] = useState(false)
 
   if (status === 'unauthenticated') {
     router.push('/auth/signin')
@@ -52,40 +53,44 @@ function Details() {
   }, [session])
 
   const handleSubmit = async () => {
-    console.log('entra')
-    if (
-      email === '' ||
-      name === '' ||
-      address === '' ||
-      city === '' ||
-      state === '' ||
-      zip === '' ||
-      phone === ''
-    ) {
-      return toast.error('Rellene todos los campos')
-    }
-    const activeAccount = {
-      id,
-      email,
-      name,
-      is_superuser: isu,
-      direccion: address,
-      pais: country,
-      ciudad: city,
-      estado: state,
-      codigo_postal: zip,
-      telefono: phone,
-      rss
-    }
-    try {
-      const saveAccount = await axios.post('/api/details', {
-        account: [activeAccount]
-      })
-      toast.info(saveAccount.data.message)
-      signOut()
-    } catch (error) {
-      console.log('🚀 ~ file: details.jsx:87 ~ handleSubmit ~ error', error)
-      toast.error('Contacte al administrador')
+    if (!loading) {
+      setLoading(true)
+      if (
+        email === '' ||
+        name === '' ||
+        address === '' ||
+        city === '' ||
+        state === '' ||
+        zip === '' ||
+        phone === ''
+      ) {
+        return toast.error('Rellene todos los campos')
+      }
+      const activeAccount = {
+        id,
+        email,
+        name,
+        is_superuser: isu,
+        direccion: address,
+        pais: country,
+        ciudad: city,
+        estado: state,
+        codigo_postal: zip,
+        telefono: phone,
+        rss
+      }
+      try {
+        await axios.post('/api/details', {
+          account: [activeAccount]
+        }).then((res) => {
+          toast.info(res.data.message)
+          signOut()
+          setLoading(false)
+        })
+      } catch (error) {
+        setLoading(false)
+        toast.error('Contacte al administrador')
+      }
     }
   }
 
@@ -196,16 +201,23 @@ function Details() {
             </p>
           </div>
           <div className='flex flex-row md:justify-end w-10/12 ml-2'>
-            <Button
-              variant="contained"
-              sx={{
-                height: '2.1rem',
-                backgroundColor: '#15224b !important'
-              }}
-              onClick={handleSubmit}
-            >
-              {t('profile.details.submit')}
-            </Button>
+              <Button
+                disabled={loading}
+                variant="contained"
+                sx={loading
+                  ? {
+                      height: '2.1rem'
+                    }
+                  : {
+                      height: '2.1rem',
+                      color: '#ffffff',
+                      backgroundColor: '#111b2c !important'
+                    }
+                }
+                onClick={handleSubmit}
+              >
+                {t('profile.details.submit')}
+              </Button>
           </div>
         </div>
       </div>
