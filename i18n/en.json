@@ -403,5 +403,11 @@
   "compare": "Compare",
   "oos": "Out of Stock",
   "available": "Available",
-  "quick": "Quick view"
+  "quick": "Quick view",
+  "for-you": "For you",
+  "notifications-tip": {
+    "title": "Notifications",
+    "subtitle": "Text from Belle Template",
+    "activate": "Activate"
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { InputAdornment, IconButton, TextField, Checkbox, Autocomplete, Button } from '@mui/material'
 import Link from 'next/link'
 import Visibility from '@mui/icons-material/Visibility'
@@ -43,6 +43,8 @@ function SignUp() {
   const [countryError, setCountryError] = useState(false)
   const [stateError, setStateError] = useState(false)
   const [cityError, setCityError] = useState(false)
+  const buttonRef = useRef(null)
+  const [loading, setLoading] = useState(false)
 
   const { executeRecaptcha } = useGoogleReCaptcha()
 
@@ -105,53 +107,63 @@ function SignUp() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    if (!executeRecaptcha) {
-      return toast.error('execute-recapcha')
-    }
-    checkFieldError()
-    if (!(
-      !!values.email &&
-      !!values.fullname &&
-      !!values.address &&
-      !!values.country &&
-      !!values.city &&
-      !!values.state &&
-      !!values.phone
-    )) {
-      return toast.error('register-fill-error')
-    }
-    if (!values.email.replace(/\s+/g, '').match(emailRegex)) {
-      return toast.error('Introduzca un email válido.')
-    }
-    if (values.password !== values.confirmPassword) {
-      return toast.error('Las contraseñas no coinciden.')
-    }
-    const data = {
-      name: values.fullname,
-      email: values.email,
-      password: values.password,
-      direccion: values.address,
-      pais: values.country,
-      ciudad: values.city,
-      estado: values.state,
-      telefono: values.phone,
-      codigo_postal: values.zip,
-      is_superuser: false
-    }
-    resources.auth.signup(data)
-      .then((response) => {
-        router.push('/auth/signin')
-        return toast.success('Usuario guardado satisfactoriamente.')
-      })
-      .catch((error) => {
-        if (error.response.status === 400) {
-          if (error.response.data.email) {
-            return toast.error(error.response.data.email[0])
+    if (!loading) {
+      setLoading(true)
+      if (!executeRecaptcha) {
+        setLoading(false)
+        return toast.error('execute-recapcha')
+      }
+      checkFieldError()
+      if (!(
+        !!values.email &&
+        !!values.fullname &&
+        !!values.address &&
+        !!values.country &&
+        !!values.city &&
+        !!values.state &&
+        !!values.phone
+      )) {
+        setLoading(false)
+        return toast.error('register-fill-error')
+      }
+      if (!values.email.replace(/\s+/g, '').match(emailRegex)) {
+        setLoading(false)
+        return toast.error('Introduzca un email válido.')
+      }
+      if (values.password !== values.confirmPassword) {
+        setLoading(false)
+        return toast.error('Las contraseñas no coinciden.')
+      }
+      const data = {
+        name: values.fullname,
+        email: values.email,
+        password: values.password,
+        direccion: values.address,
+        pais: values.country,
+        ciudad: values.city,
+        estado: values.state,
+        telefono: values.phone,
+        codigo_postal: values.zip,
+        is_superuser: false
+      }
+      resources.auth.signup(data)
+        .then((response) => {
+          router.push('/auth/signin')
+          setLoading(false)
+          return toast.success('Usuario guardado satisfactoriamente.')
+        })
+        .catch((error) => {
+          if (error.response.status === 400) {
+            if (error.response.data.email) {
+              setLoading(false)
+              return toast.error(error.response.data.email[0])
+            }
+          } else {
+            setLoading(false)
+            return toast.error('Ocurrió un error inesperado. Contacte con soporte técnico.')
           }
-        } else {
-          return toast.error('Ocurrió un error inesperado. Contacte con soporte técnico.')
-        }
-      })
+        })
+    }
   }
 
   const privacy = (
@@ -165,6 +177,12 @@ function SignUp() {
       <span className='text-footer-background-200 underline hover:cursor-pointer font-bold'>{t('auth.signup.terms')}</span>
     </Link>
   )
+
+  const handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      handleSubmit(e)
+    }
+  }
 
   return (
     <>
@@ -187,6 +205,7 @@ function SignUp() {
               })
               setFullnameError(false)
             }}
+            onKeyDown={handleKeyPress}
             sx={{
               width: '100%',
               borderColor: 'red'
@@ -207,6 +226,7 @@ function SignUp() {
               })
               setEmailError(false)
             }}
+            onKeyDown={handleKeyPress}
             sx={{
               width: '100%',
               borderColor: 'red'
@@ -235,6 +255,7 @@ function SignUp() {
                               </IconButton>
                             </InputAdornment>
             }}
+            onKeyDown={handleKeyPress}
             sx={{
               width: '100%'
             }}
@@ -262,6 +283,7 @@ function SignUp() {
                               </IconButton>
                             </InputAdornment>
             }}
+            onKeyDown={handleKeyPress}
             sx={{
               width: '100%'
             }}
@@ -280,6 +302,7 @@ function SignUp() {
               })
               setAddressError(false)
             }}
+            onKeyDown={handleKeyPress}
             sx={{
               width: '100%',
               borderColor: 'red'
@@ -300,6 +323,7 @@ function SignUp() {
             })
             setPhoneError(false)
           }}
+          onKeyDown={handleKeyPress}
           inputStyle={{ width: '100%', height: '100%', marginBottom: '1rem' }}
         />
         </div>
@@ -320,6 +344,7 @@ function SignUp() {
             width: '100%',
             color: 'red'
           }}
+          onKeyDown={handleKeyPress}
           renderInput={(params) => <TextField {...params} label={`${t('auth.signup.country')}*`} />}
         />
         </div>
@@ -336,6 +361,7 @@ function SignUp() {
               })
               setStateError(false)
             }}
+            onKeyDown={handleKeyPress}
             sx={{
               width: '100%',
               borderColor: 'red'
@@ -355,6 +381,7 @@ function SignUp() {
               })
               setCityError(false)
             }}
+            onKeyDown={handleKeyPress}
             sx={{
               width: '100%',
               borderColor: 'red'
@@ -372,6 +399,7 @@ function SignUp() {
                 zip: e.target.value
               })
             }}
+            onKeyDown={handleKeyPress}
             sx={{
               width: '100%',
               borderColor: 'red'
@@ -379,24 +407,28 @@ function SignUp() {
           />
         </div>
         <div className="ZipCode flex flex-row mb-4 w-11/12 md:w-1/3">
-          <Checkbox onChange={() => {
-            setValues({
-              ...values,
-              terms: !values.terms
-            })
-          }} />
+          <Checkbox
+            onChange={() => {
+              setValues({
+                ...values,
+                terms: !values.terms
+              })
+            }}
+          />
           <p className='text-justify text-footer-background-100 font-semibold ml-2 mt-[0.75rem]'>
             {t('auth.signup.agree')} {terms} {t('auth.signup.and')} {privacy}.
           </p>
         </div>
-        <div className="Submit mb-4 w-11/12 md:w-1/3">
+        <div className={`"Submit mb-4 w-11/12 md:w-1/3 ${(!loading && values.terms) && 'bg-footer-background-100 text-background-100'}`}>
           <Button
             variant="contained"
-            disabled={!values.terms}
+            ref={buttonRef}
+            disabled={!values.terms || loading}
             sx={{
               width: '100%',
-              color: '#ffffff !important',
-              backgroundColor: '#15224b !important'
+              '&:hover': {
+                backgroundColor: '#111b2c'
+              }
             }}
             onClick={handleSubmit}
           >

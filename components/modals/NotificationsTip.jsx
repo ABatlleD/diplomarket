@@ -4,6 +4,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Josefin_Sans } from '@next/font/google'
 import { useSession } from 'next-auth/react'
+import { useTranslation } from 'react-i18next'
 
 const js = Josefin_Sans({
   weight: '400',
@@ -12,6 +13,7 @@ const js = Josefin_Sans({
 
 function NotificationsTip({ openNotificationsTip = false, setOpenNotificationsTip = () => {} }) {
   const { data } = useSession()
+  const { t } = useTranslation()
 
   return (
     <>
@@ -33,19 +35,19 @@ function NotificationsTip({ openNotificationsTip = false, setOpenNotificationsTi
               </div>
               <div className='flex flex-col w-[65%] my-2 mr-2'>
                 <div className='flex flex-row justify-between mb-6'>
-                  <div className='font-bold text-footer-background-300 text-lg ml-2'>Sugerencia</div>
+                  <div className='font-bold text-footer-background-300 text-lg ml-2'>{t('notifications-tip.title')}</div>
                   <HighlightOffIcon className='hover:cursor-pointer text-footer-background-300' onClick={() => setOpenNotificationsTip(false)} />
                 </div>
                 <div className='flex mx-2 mb-4'>
                   <p className='text-justify text-lg text-footer-background-300'>
-                    Únete ya a nuestro email list
+                  {t('notifications-tip.subtitle')}
                   </p>
                 </div>
                 <div className=' mx-2 mb-4'>
                   <TextField id="outlined-basic" defaultValue={data?.user?.email} fullWidth label="Email" disabled variant="outlined" size='small' />
                 </div>
                 <div className='flex flex-row justify-center mb-4'>
-                  <div className='bg-footer-background-100 text-center py-1 px-3 rounded-md text-lg text-background-100'>Activar Notificaciones</div>
+                  <div className='bg-footer-background-100 text-center py-1 px-3 rounded-md text-lg text-background-100'>{t('notifications-tip.activate')}</div>
                 </div>
               </div>
             </div>

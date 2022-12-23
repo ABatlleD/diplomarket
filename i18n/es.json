@@ -403,5 +403,11 @@
   "compare": "Comparar",
   "oos": "Agotado",
   "available": "Disponible",
-  "quick": "Vista rápida"
+  "quick": "Vista rápida",
+  "for-you": "Para tí",
+  "notifications-tip": {
+    "title": "Notificaciones",
+    "subtitle": "Texto de la plantilla Belle",
+    "activate": "Activar"
+  }
 }
