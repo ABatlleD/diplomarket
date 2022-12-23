@@ -14,7 +14,7 @@ const clientUser = async (username, password) => {
       const users = await resources.users.all()
       const { results } = users.data
       const user = results.find((user) => user.email === username)
-      const { email, name, direccion, ciudad, codigo_postal, is_active, id, premium, fecha_inicio, fecha_fin } =
+      const { email, name, direccion, ciudad, codigo_postal, is_active, id, premium, fecha_inicio, fecha_fin, rss } =
         user ?? {}
       if (is_active) {
         return (
@@ -28,7 +28,8 @@ const clientUser = async (username, password) => {
             id,
             premium,
             fecha_inicio,
-            fecha_fin
+            fecha_fin,
+            rss
           } ?? {}
         )
       } else {

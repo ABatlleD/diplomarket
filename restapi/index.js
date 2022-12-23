@@ -23,6 +23,10 @@ export async function putRequest(URL, payload) {
   return await AxiosBackendClient.put(`${URL}`, payload).then(response => response)
 }
 
+export async function patchRequest(URL, payload) {
+  return await AxiosBackendClient.patch(`${URL}`, payload).then(response => response)
+}
+
 export async function deleteRequest(URL) {
   return await AxiosBackendClient.delete(`${URL}`).then(response => response)
 }

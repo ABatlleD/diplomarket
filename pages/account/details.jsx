@@ -11,6 +11,7 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/material.css'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import axios from 'axios'
 
 function Details() {
   const { t } = useTranslation()
@@ -33,6 +34,7 @@ function Details() {
   }
 
   useEffect(() => {
+    console.log('🚀 ~ file: details.jsx:51 ~ Details ~ session', session)
     resources.users.get(session?.user?.email)
       .then((res) => {
         setId(res?.id)
@@ -66,7 +68,6 @@ function Details() {
       id,
       email,
       name,
-      password: '123',
       is_superuser: isu,
       direccion: address,
       pais: country,
@@ -76,14 +77,16 @@ function Details() {
       telefono: phone,
       rss
     }
-    await resources.users.update(id, activeAccount)
-      .then((res) => {
-        toast.success('Datos guardados')
-        signOut()
+    try {
+      const saveAccount = await axios.post('/api/details', {
+        account: [activeAccount]
       })
-      .catch((err) => {
-        return toast.error(err.message)
-      })
+      toast.info(saveAccount.data.message)
+      signOut()
+    } catch (error) {
+      console.log('🚀 ~ file: details.jsx:87 ~ handleSubmit ~ error', error)
+      toast.error('Contacte al administrador')
+    }
   }
 
   return (
@@ -187,7 +190,7 @@ function Details() {
         </div>
         <div className='flex flex-col md:flex-row justify-end w-11/12 mb-8'>
           <div className='w-10/12 mr-2 flex flex-row mb-4 md:mb-0'>
-            <Checkbox label='' checked={rss} value={!rss} onChange={(e) => setName(e.target.value)} />
+            <Checkbox label='' checked={rss} value={!rss} onChange={() => setRss(!rss)} />
             <p className='text-justify text-footer-background-100 font-semibold text-sm md:text-base ml-1 md:mt-2 mt-[0.7rem]'>
             {t('profile.details.rss')}
             </p>

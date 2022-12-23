@@ -1,6 +1,6 @@
 import { ENDPOINTS } from './endpoints'
 import axios from 'axios'
-import { getRequest, postRequest, putRequest } from '.'
+import { getRequest, postRequest, putRequest, patchRequest } from '.'
 
 const resources = {
   auth: {
@@ -131,7 +131,7 @@ const resources = {
       const { results } = users.data
       return results.find(user => user.email === email)
     },
-    update: async (id, data) => await putRequest(`${ENDPOINTS.USERS}${id}/`, data)
+    update: async (id, data) => await patchRequest(`${ENDPOINTS.USERS}${id}/`, data)
   },
 
   recipients: {

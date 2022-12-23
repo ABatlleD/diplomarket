@@ -102,6 +102,7 @@ function Home({
 
   useEffect(() => {
     if (status !== 'unauthenticated' && data && !data.rss) {
+      console.log('🚀 ~ file: index.jsx:105 ~ useEffect ~ data', data)
       setOpenNotificationsTip(true)
     }
   }, [status])

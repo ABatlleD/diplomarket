@@ -5,6 +5,10 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Josefin_Sans } from '@next/font/google'
 import { useSession } from 'next-auth/react'
 import { useTranslation } from 'react-i18next'
+import axios from 'axios'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import Router from 'next/router'
 
 const js = Josefin_Sans({
   weight: '400',
@@ -15,8 +19,31 @@ function NotificationsTip({ openNotificationsTip = false, setOpenNotificationsTi
   const { data } = useSession()
   const { t } = useTranslation()
 
+  const handleSubmit = async () => {
+    console.log('🚀 ~ file: NotificationsTip.jsx:20 ~ NotificationsTip ~ data', data)
+    const activeAccount = {
+      id: data?.id,
+      email: data?.user?.email,
+      name: data.user.name,
+      ...data,
+      rss: true
+    }
+    try {
+      await axios.post('/api/details', {
+        account: [activeAccount]
+      }).then((res) => {
+        toast.info(res.data.message)
+        Router.push('/auth/signin')
+      })
+    } catch (error) {
+      console.log('🚀 ~ file: details.jsx:87 ~ handleSubmit ~ error', error)
+      toast.error('Contacte al administrador')
+    }
+  }
+
   return (
     <>
+      <ToastContainer />
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -47,7 +74,7 @@ function NotificationsTip({ openNotificationsTip = false, setOpenNotificationsTi
                   <TextField id="outlined-basic" defaultValue={data?.user?.email} fullWidth label="Email" disabled variant="outlined" size='small' />
                 </div>
                 <div className='flex flex-row justify-center mb-4'>
-                  <div className='bg-footer-background-100 text-center py-1 px-3 rounded-md text-lg text-background-100'>{t('notifications-tip.activate')}</div>
+                  <div onClick={handleSubmit} className='bg-footer-background-100 hover:cursor-pointer text-center py-1 px-3 rounded-md text-lg text-background-100'>{t('notifications-tip.activate')}</div>
                 </div>
               </div>
             </div>
