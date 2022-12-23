@@ -29,10 +29,10 @@ function FilterBar ({
   const [brand, setBrand] = useState()
   const [provider, setProvider] = useState()
   const { t } = useTranslation()
-  const [featureds, setFeatureds] = useState(false)
   const [promotions, setPromotions] = useState(false)
-  const [recomendations, setRecomendations] = useState(false)
+  const [recommendations, setRecommendations] = useState(false)
   const [selectedPrice, setSelectedPrice] = useState(0)
+  const [extra, setExtra] = useState(undefined)
 
   useEffect(() => {
     resources.brands.all()
@@ -93,7 +93,8 @@ function FilterBar ({
       brand: brand ? brand.id : undefined,
       provider,
       min: prices[0],
-      max: prices[1]
+      max: prices[1],
+      extra
     }
     handleMobileFilter(filter)
     setFilterBar((filterBar) => !filterBar)
@@ -110,18 +111,17 @@ function FilterBar ({
   }
 
   const handleChangeType = (type) => {
-    setFeatureds(false)
     setPromotions(false)
-    setRecomendations(false)
+    setRecommendations(false)
+    setExtra(undefined)
     switch (type) {
-      case 'featureds':
-        setFeatureds(true)
-        break
       case 'promotions':
         setPromotions(true)
+        setExtra('rebajados')
         break
       case 'recommendations':
-        setRecomendations(true)
+        setRecommendations(true)
+        setExtra('recomendados')
         break
     }
   }
@@ -161,9 +161,8 @@ function FilterBar ({
             </div>
           </div>
           <div className='flex flex-col my-4'>
-            <FormControlLabel value={featureds} onChange={() => handleChangeType('featureds')} control={<Checkbox />} label={t('filter.featureds')} />
-            <FormControlLabel value={promotions} onChange={() => handleChangeType('featureds')} control={<Checkbox />} label={t('filter.promotions')} />
-            <FormControlLabel value={recomendations} onChange={() => handleChangeType('featureds')} control={<Checkbox />} label={t('filter.recomendations')} />
+            <FormControlLabel value={promotions} onChange={() => handleChangeType('promotions')} control={<Checkbox size='small' checked={promotions} />} label={t('filter.promotions')} />
+            <FormControlLabel value={recommendations} onChange={() => handleChangeType('recommendations')} control={<Checkbox size='small' checked={recommendations} />} label={t('filter.recommendations')} />
           </div>
           <div className='flex flex-col mt-2 mb-4'>
             <p className='font-bold mb-2'>{t('filter.price')}</p>

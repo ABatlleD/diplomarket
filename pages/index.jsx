@@ -102,7 +102,6 @@ function Home({
 
   useEffect(() => {
     if (status !== 'unauthenticated' && data && !data.rss) {
-      console.log('🚀 ~ file: index.jsx:105 ~ useEffect ~ data', data)
       setOpenNotificationsTip(true)
     }
   }, [status])
@@ -148,8 +147,10 @@ function Home({
       brand: mobileFilter.brand,
       provider: mobileFilter.provider,
       min: mobileFilter.min,
-      max: mobileFilter.max
+      max: mobileFilter.max,
+      extra: mobileFilter.extra
     }
+    console.log('🚀 ~ file: index.jsx:142 ~ handleMobileFilter ~ filter', filter)
     try {
       resources.products.all(filter)
         .then(response => setMobileList(response.data.results))
@@ -200,7 +201,8 @@ function Home({
         brand,
         provider,
         min,
-        max
+        max,
+        extra
       }
       try {
         setLoading(true)
@@ -213,7 +215,7 @@ function Home({
         productsError = error.message
       }
     }
-  }, [products, category, subcategory, brand, provider, min, max])
+  }, [products, category, subcategory, brand, provider, min, max, extra])
 
   useEffect(() => {
     if (size.width <= 768) {
@@ -226,7 +228,8 @@ function Home({
         brand,
         provider,
         min,
-        max
+        max,
+        extra
       }
       try {
         resources.products.all(filter)
