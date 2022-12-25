@@ -109,7 +109,7 @@ function ProductItem({ product }) {
         <div className='flex flex-col h-[5.7rem] md:h-[7rem]'>
           <div className='mx-2 text-text-blue text-sm h-9 md:h-10 2xl:h-11 2xl:text-base'>
             <Link href={`/products/${product.id}`}>
-              {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, size.width > 768 ? size.width > 1900 ? 80 : 65 : 18)}
+              {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, size.width > 768 ? size.width > 1900 ? 65 : 45 : 18)}
             </Link>
           </div>
           {size.width >= 768 && (

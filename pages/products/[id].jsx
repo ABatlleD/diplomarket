@@ -257,7 +257,7 @@ function Product({ product, apiError }) {
           </AppTabPanel>
         </Box>
       </div>
-      <div className='w-full 2xl:w-[60%] xl:w-[75%] mb-4'>
+      <div className='w-full 2xl:w-[90%] xl:w-[80%] mb-20 mt-10'>
         <p className='font-bold text-center text-xl mb-2 md:mb-4'>{t('products.relatedProducts')}</p>
         <ProductsCarousel products={relatedProducts} />
       </div>
