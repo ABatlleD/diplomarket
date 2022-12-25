@@ -133,14 +133,14 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
                           t('pay_complete')
                         )
                         resetCart()
-                        push('/page/payment-success').then()
+                        push('/payment-success').then()
                         break
                       case 'success':
                         toast.success(
                           t('pay_complete')
                         )
                         resetCart()
-                        push('/page/payment-success').then()
+                        push('/payment-success').then()
                         break
                       case 'error_payment':
                         toast.error(
@@ -152,18 +152,18 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
                           t('pay_error_gateway')
                         )
                         resetCart()
-                        push('/page/payment-error').then()
+                        push('/payment-error').then()
                         break
                       default:
                         resetCart()
-                        push('/page/payment-error').then()
+                        push('/payment-error').then()
                         break
                     }
                   }).catch(() => {
-                    push('/page/payment-error').then()
+                    push('/payment-error').then()
                   })
               } else {
-                push('/page/payment-error').then()
+                push('/payment-error').then()
               }
             })
             .then()

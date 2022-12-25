@@ -22,8 +22,8 @@ function OrderDetails({ openOrderDetails = false, setOpenOrderDetails = () => {}
         sx={{ overflowY: 'scroll' }}
       >
         <Fade in={openOrderDetails}>
-          <main className={js.className}>
-            <div className='flex z-50 flex-col shadow-2xl bg-background-100 w-11/12 md:4/5 xl:w-1/3 mt-4 md:mt-10 mx-auto p-4'>
+          <div className='flex z-50 flex-col shadow-2xl bg-background-100 w-11/12 md:4/5 xl:w-1/3 mt-4 md:mt-10 mx-auto p-4'>
+            <div className={js.className}>
               <div className='flex flex-row justify-between mb-6'>
                 <div className='font-bold text-lg'>Orden: {item.id}</div>
                 <HighlightOffIcon className='hover:cursor-pointer' onClick={() => setOpenOrderDetails(false)} />
@@ -55,7 +55,7 @@ function OrderDetails({ openOrderDetails = false, setOpenOrderDetails = () => {}
                 </div>
               </div>
             </div>
-          </main>
+          </div>
         </Fade>
       </Modal>
     </>

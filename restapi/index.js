@@ -9,6 +9,13 @@ export const AxiosBackendClient = axios.create({
   }
 })
 
+export const AxiosInstanceApi = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_LOCAL_API_ENDPOINT,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+
 // Axios Verbs
 
 export async function getRequest(URL) {

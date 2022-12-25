@@ -409,5 +409,29 @@
     "title": "Notifications",
     "subtitle": "Join our exclusive email list and be the first to know about new products and special offers",
     "activate": "Activate"
-  }
+  },
+  "direct": {
+    "title": "Order Created Successfully",
+    "ticket": "Your purchase ticket",
+    "copied": "Ticked copied",
+    "message_first": "We have received your purchase request. We will contact you as soon as possible, in the same way you can contact us at",
+    "message_second": ". Your ticket is unique and non-transferable, do not share it with anyone.",
+    "close": "Close"
+  },
+  "zelle": {
+    "message_first": "You must send the 'Total' reflected in this message to the email address",
+    "message_second": "minutes to make the payment or your order will be cancelled. After that time, if you still want to pay the invoice, you must contact the email",
+    "message_three": "or our online chat service. Your ticket is unique and non-transferable, do not share it with anyone.",
+    "exclusively": "exclusively with the purchase receipt written in the 'Memo' section (this is not optional). You have"
+  },
+  "pay_error": {
+    "title": "Payment error",
+    "description": "Algo salió mal, inténtelo más tarde. Si continúa el error, contacte con soporte."
+  },
+  "pay_success": {
+    "title": "Pago completado",
+    "description": "Se ha completado satisfactoriamente el pago solicitado."
+  },
+  "view_orders": "Ver mis órdenes",
+  "back": "Volver a inicio"
 }

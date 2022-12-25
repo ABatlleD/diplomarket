@@ -24,11 +24,16 @@ import { useDelivery } from '../../restapi/delivery'
 import { useConfig } from '../../restapi/config'
 import Bank from '../checkout/Bank'
 import HelpIcon from '@mui/icons-material/Help'
+import DirectPayment from '../modals/DirectPayment'
+import ZellePayment from '../modals/ZellePayment'
 
 const errorsAtom = atom(false)
 
 function Review({ address }) {
   const { pasarelas } = useConfig()
+  const [openZelleModal, setOpenZelleModal] = useState(false)
+  const [openDirectModal, setOpenDirectModal] = useState(false)
+  const [modalData, setModalData] = useState({})
   // eslint-disable-next-line no-unused-vars
   const [error, setError] = useAtom(errorsAtom)
   const [isLocationAllowed, setIsLocationAllowed] = useState(false)
@@ -185,7 +190,9 @@ function Review({ address }) {
 
   return (
     <>
-      <h6 className="mb-1">{t('checkout.review.title')}</h6>
+      <DirectPayment {...{ openDirectModal, setOpenDirectModal, modalData }} />
+      <ZellePayment {...{ openZelleModal, setOpenZelleModal, modalData }} />
+      <h6 className="mb-1 text-footer-background-300">{t('checkout.review.title')}</h6>
       <List disablePadding className="">
         <div className="overflow-auto" style={{ height: '250px' }}>
           {items.length > 0
@@ -376,7 +383,8 @@ function Review({ address }) {
                                   const ticket = payment?.data?.data ?? false
                                   const failed = payment?.data?.failed ?? false
                                   if (ticket) {
-                                    // openModal('DIRECTO', { ticket, total: Number(checkCart()?.total) + totalDelivery })
+                                    setModalData({ ticket, total: Number(checkCart()?.total) + totalDelivery })
+                                    setOpenDirectModal(true)
                                     resetCart()
                                   } else if (failed) {
                                     toast.error(
@@ -446,7 +454,8 @@ function Review({ address }) {
                                   const ticket = payment?.data?.data ?? false
                                   const failed = payment?.data?.failed ?? false
                                   if (ticket) {
-                                    // openModal('ZELLE', { ticket, total: Number(checkCart()?.total) + totalDelivery })
+                                    setModalData({ ticket, total: Number(checkCart()?.total) + totalDelivery })
+                                    setOpenZelleModal(true)
                                     resetCart()
                                   } else if (failed) {
                                     toast.error(

@@ -3,7 +3,7 @@ import { getSession } from 'next-auth/react'
 import { DateTime } from 'luxon'
 import { isEmpty } from '../../../libs/serialize'
 import resources from '../../../restapi/resources'
-import axios from 'axios'
+import { AxiosInstanceApi } from '../../../restapi'
 
 const handler = async (req, res) => {
   try {
@@ -22,7 +22,10 @@ const handler = async (req, res) => {
           return item?.free_shipping === true
         })
         if (!free) {
-          const delivery_req = await axios.post('/api/checkout/checkdelivery', { items: products, municipio: addresses?.municipio })
+          const delivery_req = await AxiosInstanceApi.post('/api/checkout/checkdelivery', { items: products, municipio: addresses?.municipio })
+            .catch((err) => {
+              console.log('🚀 ~ file: addressees.js:29 ~ handler ~ err', err)
+            })
           deliveryPay = delivery_req?.data?.total
         }
         if (deliveryPay !== 0 && !free && !(deliveryPay)) { return res.status(200).json({ statusCode: 500, message: 'Revise su destinatario.' }) }
@@ -103,8 +106,10 @@ const handler = async (req, res) => {
             return res.status(200).json({ statusCode: 500, message: 'Contacte al administrator' })
           }
         } else if (type === 'zelle') {
+          console.log('zelle')
           const checkItem = products?.filter((product) => product?.max < product?.quantity)
           if (!isEmpty(checkItem)) {
+            console.log('empty')
             return res.status(200).json({ statusCode: 200, failed: true })
           }
           // eslint-disable-next-line no-unused-vars
@@ -134,9 +139,11 @@ const handler = async (req, res) => {
             tipo: type ?? 'tropipay'
           }
           try {
+            console.log('🚀 ~ file: addressees.js:138 ~ handler ~ order', order)
             const makePayment = await resources.checkout(order)
             return res.status(200).json({ statusCode: 200, data: makePayment?.data, message: 'Pago completo.' })
           } catch (_) {
+            console.log('🚀 ~ file: addressees.js:140 ~ handler ~ _')
             if (_?.response?.status === '401') { return res.status(200).json({ statusCode: 200, data: _?.response?.data, message: 'Pago completo.' }) }
             return res.status(200).json({ statusCode: 500, failed: true, message: 'Contacte al administrator' })
           }
@@ -247,6 +254,7 @@ const handler = async (req, res) => {
     }
     return res.status(200).json({ statusCode: 401, failed: true, message: 'Error en la solicitud.' })
   } catch (_) {
+    console.log('🚀 ~ file: addressees.js:254 ~ handler ~ _', _)
     return res.status(200).json({ statusCode: 500, failed: true, message: 'Contacte al administrator' })
   }
 }
