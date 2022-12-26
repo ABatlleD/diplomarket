@@ -12,12 +12,14 @@ import CompareArrowsIcon from '@mui/icons-material/CompareArrows'
 import { useRouter } from 'next/router'
 import { addClicks } from '../../libs/quick-tip'
 import { useCompare } from '../../store/compare/compare.context'
+import { useSession } from 'next-auth/react'
 
 function ProductItem({ product }) {
   const { t, i18n } = useTranslation()
   const router = useRouter()
   const [openQuickView, setOpenQuickView] = useState(false)
   const size = useWindowSize()
+  const { data } = useSession()
 
   const resizeTitle = (string, maxLength) => {
     return string.length > maxLength ? `${string.slice(0, maxLength)}...` : string
@@ -115,28 +117,36 @@ function ProductItem({ product }) {
           {size.width >= 768 && (
             <div className='mx-2 my-0 md:my-0 text-button text-sm md:text-base'>{product.proveedor.nombre}</div>
           )}
-          {!product.promocion.activo && (
-            <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-base'>US${parseFloat(product.precio.cantidad).toFixed(2)}</div>
-          )}
-          {product.promocion.activo && (
-            <div className='flex flex-col md:flex-row ml-2 leading-3'>
-              <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-base'>US${parseFloat(product.precio.cantidad - (product.precio.cantidad * product.promocion.descuento / 100)).toFixed(2)} </p>
-              <div className='flex flex-row'>
-                <div
-                  className='bg-button flex md:hidden rounded-md px-1 mr-1 text-background-100 text-xs'
-                >
-                  -{parseFloat(product.promocion.descuento).toFixed(0)}%
-                </div>
-                <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-xs md:text-sm line-through'> US${parseFloat(product.precio.cantidad).toFixed(2)}</p>
-              </div>
-            </div>
-          )}
-          {product.precioxlibra.cantidad !== '0.00' && (
-            <div className='mx-2 my-0 md:mb-0 md:my-0 text-text-100 text-xs md:text-base'>US${parseFloat(product.precioxlibra.cantidad).toFixed(2)}/{product.um}</div>
-          )}
-          {product.precioxlibra.cantidad === '0.00' && (
-            <div className='md:h-6'></div>
-          )}
+          {data && data.mayorista
+            ? (
+                <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-base'>US${parseFloat(product.precio_b2b.cantidad).toFixed(2)}</div>
+              )
+            : (
+                <>
+                  {!product.promocion.activo && (
+                  <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-base'>US${parseFloat(product.precio.cantidad).toFixed(2)}</div>
+                  )}
+                  {product.promocion.activo && (
+                    <div className='flex flex-col md:flex-row ml-2 leading-3'>
+                      <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-base'>US${parseFloat(product.precio.cantidad - (product.precio.cantidad * product.promocion.descuento / 100)).toFixed(2)} </p>
+                      <div className='flex flex-row'>
+                        <div
+                          className='bg-button flex md:hidden rounded-md px-1 mr-1 text-background-100 text-xs'
+                        >
+                          -{parseFloat(product.promocion.descuento).toFixed(0)}%
+                        </div>
+                        <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-xs md:text-sm line-through'> US${parseFloat(product.precio.cantidad).toFixed(2)}</p>
+                      </div>
+                    </div>
+                  )}
+                  {product.precioxlibra.cantidad !== '0.00' && (
+                  <div className='mx-2 my-0 md:mb-0 md:my-0 text-text-100 text-xs md:text-base'>US${parseFloat(product.precioxlibra.cantidad).toFixed(2)}/{product.um}</div>
+                  )}
+                  {product.precioxlibra.cantidad === '0.00' && (
+                    <div className='md:h-6'></div>
+                  )}
+                </>
+              )}
         </div>
           <Divider
             sx={{
