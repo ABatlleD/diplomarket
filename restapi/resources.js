@@ -55,7 +55,7 @@ const resources = {
 
   products: {
     all: async (options) => {
-      const { offset, limit, municipality_id, min, max, category, subcategory, brand, provider, extra } = options
+      const { offset, limit, municipality_id, min, max, category, subcategory, brand, provider, extra, ordering } = options
       let filter = `?offset=${offset}&limit=${limit}&municipios=${municipality_id}`
 
       if (min) filter += `&min=${min}`
@@ -65,6 +65,7 @@ const resources = {
       if (brand) filter += `&marca=${brand}`
       if (provider) filter += `&proveedor=${provider}`
       if (extra) filter += `&extra=${extra}`
+      if (ordering) filter += `&ordering=${ordering}`
 
       return await getRequest(`${ENDPOINTS.PRODUCTS}/${filter}`)
     },

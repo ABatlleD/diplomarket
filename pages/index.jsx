@@ -153,7 +153,8 @@ function Home({
       provider: mobileFilter.provider,
       min: mobileFilter.min,
       max: mobileFilter.max,
-      extra: mobileFilter.extra
+      extra: mobileFilter.extra,
+      ordering: order
     }
     try {
       resources.products.all(filter)
@@ -178,7 +179,8 @@ function Home({
         provider,
         min,
         max,
-        extra
+        extra,
+        ordering: order
       }
       try {
         setLoading(true)
@@ -191,7 +193,7 @@ function Home({
         productsError = error.message
       }
     }
-  }, [offset, products, category, subcategory, brand, provider, min, max, extra])
+  }, [offset, products, category, subcategory, brand, provider, min, max, extra, order])
 
   useEffect(() => {
     if (size.width <= 768) {
@@ -206,7 +208,8 @@ function Home({
         provider,
         min,
         max,
-        extra
+        extra,
+        ordering: order
       }
       try {
         setLoading(true)
@@ -219,7 +222,7 @@ function Home({
         productsError = error.message
       }
     }
-  }, [products, category, subcategory, brand, provider, min, max, extra])
+  }, [products, category, subcategory, brand, provider, min, max, extra, order])
 
   useEffect(() => {
     if (size.width <= 768) {
@@ -233,7 +236,8 @@ function Home({
         provider,
         min,
         max,
-        extra
+        extra,
+        ordering: order
       }
       try {
         resources.products.all(filter)
@@ -247,7 +251,7 @@ function Home({
   useEffect(() => {
     setOffset(0)
     setPage(1)
-  }, [category, subcategory, brand, provider, min, max])
+  }, [category, subcategory, brand, provider, min, max, extra, order])
 
   const handlePaginationChange = async (event, value) => {
     setOffset((value - 1) * 15)
@@ -324,10 +328,10 @@ function Home({
                     onChange={handleChange}
                   >
                     <MenuItem value={'recent'}>{t('filter.order.recent')}</MenuItem>
-                    <MenuItem value={'highest_price'}>{t('filter.order.asc_price')}</MenuItem>
-                    <MenuItem value={'lowest_price'}>{t('filter.order.desc_price')}</MenuItem>
-                    <MenuItem value={'highest_discount'}>{t('filter.order.asc_discount')}</MenuItem>
-                    <MenuItem value={'lowest_discount'}>{t('filter.order.desc_discount')}</MenuItem>
+                    <MenuItem value={'precio_dsc'}>{t('filter.order.asc_price')}</MenuItem>
+                    <MenuItem value={'precio_asc'}>{t('filter.order.desc_price')}</MenuItem>
+                    <MenuItem value={'descuento_dsc'}>{t('filter.order.asc_discount')}</MenuItem>
+                    <MenuItem value={'descuento_asc'}>{t('filter.order.desc_discount')}</MenuItem>
                   </Select>
                 </FormControl>
               </div>
