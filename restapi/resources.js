@@ -9,6 +9,10 @@ const resources = {
     changePassword: async (data) => await postRequest(ENDPOINTS.CHANGE_PASSWORD, data)
   },
 
+  banner: {
+    all: async () => await getRequest(`${ENDPOINTS.BANNER}`)
+  },
+
   bofa: async (data) => await postRequest(ENDPOINTS.BOFA, data),
 
   carousel: {

@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next'
 import AppHeader from '../components/layouts/AppHeader'
 import { getCookie } from 'cookies-next'
 import MainCarousel from '../components/home/MainCarousel'
+import { CarouselProvider, Slider, Slide } from 'pure-react-carousel'
 import useWindowSize from '../hooks/WindowSize'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import ProductItem from '../components/products/ProductItem'
@@ -23,6 +24,7 @@ import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined'
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined'
 import { useSession } from 'next-auth/react'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 
 const NotificationsTip = dynamic(() => import('../components/modals/NotificationsTip'), {
   loading: () => 'Loading...'
@@ -53,6 +55,7 @@ function Home({
   const [category, setCategory] = useState(undefined)
   const [selectedCategory, setSelectedCategory] = useState(undefined)
   const [offset, setOffset] = useState(0)
+  const [banners, setBanners] = useState([])
   const [subcategory, setSubcategory] = useState(undefined)
   const [brand, setBrand] = useState()
   const [provider, setProvider] = useState()
@@ -96,6 +99,8 @@ function Home({
         })
         return setSuppliers(answer)
       })
+    resources.banner.all()
+      .then(response => setBanners(response.data))
     resources.categories.all()
       .then(response => setCategories(response.data.results))
   }, [])
@@ -281,7 +286,7 @@ function Home({
           <MainCarousel carousel={carousel} />
         </div>
         <div className='dark:text-[black] flex md:flex-row flex-col w-full md:w-[95%] md:mx-auto mb-3 md:my-5'>
-          <div className='mx-3 flex md:hidden text-sm flex-row justify-between mb-3'>
+          <div className='md:mx-3 flex md:hidden text-sm flex-row justify-between md:mb-3'>
             {selectedCategory && (
               <div className='font-bold mt-2'>
                 {i18n.language === 'es' ? selectedCategory.nombre : selectedCategory.nombre_ingles}
@@ -362,6 +367,32 @@ function Home({
                 <div className='hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button' onClick={() => handlePriceFilter([100, 200])}>US$100 {t('filter.to')} US$200</div>
                 <div className='hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button' onClick={() => handlePriceFilter([200, 1000])}>{t('filter.more')} US$200</div>
               </div>
+            </div>
+            <div className='flex flex-col mt-2 mb-4 mr-4'>
+              <CarouselProvider
+                naturalSlideWidth={50}
+                naturalSlideHeight={50}
+                totalSlides={banners.count}
+                isPlaying={true}
+                interval={6000}
+                infinite={true}
+              >
+                <Slider>
+                  {banners?.results?.map((result) => {
+                    return (
+                      <Slide key={result.imagen} index={result.imagen}>
+                        <Link href={result.enlace}>
+                          <img
+                            src={`${process.env.NEXT_PUBLIC_BACKEND}${result.imagen}`
+                            }
+                            className="w-full hover:cursor-pointer h-full" alt="..."
+                          />
+                        </Link>
+                      </Slide>
+                    )
+                  })}
+                </Slider>
+              </CarouselProvider>
             </div>
             <div className='flex flex-col mb-4 w-[95%]'>
               <Autocomplete

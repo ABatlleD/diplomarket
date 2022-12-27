@@ -1,4 +1,5 @@
 export const ENDPOINTS = {
+  BANNER: '/banner/',
   TIP: '/destacado/',
   CAROUSEL: '/carrusel/',
   PRODUCTS: '/producto',

@@ -6,6 +6,8 @@ import CategoriesAccordion from '../../categories/CategoriesAccordion'
 import { Autocomplete, TextField, FormControlLabel, Checkbox } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { Josefin_Sans } from '@next/font/google'
+import { CarouselProvider, Slider, Slide } from 'pure-react-carousel'
+import Link from 'next/link'
 
 const js = Josefin_Sans({
   weight: '400',
@@ -24,6 +26,7 @@ function FilterBar ({
 }) {
   const [categories, setCategories] = useState([])
   const [suppliers, setSuppliers] = useState([])
+  const [banners, setBanners] = useState([])
   const [brands, setBrands] = useState([])
   const [prices, setPrices] = useState([0, 1000])
   const [brand, setBrand] = useState()
@@ -59,6 +62,8 @@ function FilterBar ({
         })
         return setSuppliers(answer)
       })
+    resources.banner.all()
+      .then(response => setBanners(response.data))
     resources.categories.all()
       .then(response => setCategories(response.data.results))
   }, [])
@@ -173,6 +178,32 @@ function FilterBar ({
               <div className={`mb-1 hover:cursor-pointer ${selectedPrice === 4 ? 'text-button font-semibold' : ''}`} onClick={() => handlePriceFilter([100, 200])}>US$100 {t('filter.to')} US$200</div>
               <div className={`mb-1 hover:cursor-pointer ${selectedPrice === 5 ? 'text-button font-semibold' : ''}`} onClick={() => handlePriceFilter([200, 1000])}>{t('filter.more')} US$200</div>
             </div>
+          </div>
+          <div className='flex flex-col mt-2 mb-4 mr-4'>
+            <CarouselProvider
+              naturalSlideWidth={50}
+              naturalSlideHeight={50}
+              totalSlides={banners.count}
+              isPlaying={true}
+              interval={6000}
+              infinite={true}
+            >
+              <Slider>
+                {banners?.results?.map((result) => {
+                  return (
+                    <Slide key={result.imagen} index={result.imagen}>
+                      <Link href={result.enlace}>
+                        <img
+                          src={`${process.env.NEXT_PUBLIC_BACKEND}${result.imagen}`
+                          }
+                          className="w-full hover:cursor-pointer h-full" alt="..."
+                        />
+                      </Link>
+                    </Slide>
+                  )
+                })}
+              </Slider>
+            </CarouselProvider>
           </div>
           <div className='flex flex-col mb-4 w-[95%]'>
             <Autocomplete
