@@ -89,6 +89,7 @@
     "to": "to",
     "more": "More than",
     "promotions": "Hot deals",
+    "exist": "Only available",
     "features": "Featured products",
     "recommendations": "Today's recommendations",
     "order": {
@@ -307,6 +308,7 @@
     "recipients": {
       "title": "Edit my recipients",
       "subtitle": "Recipients Details:",
+      "pickup": "Pick up in:",
       "name": "Recipient Name",
       "first": "Name",
       "second": "Sur Name",

@@ -9,6 +9,7 @@ const handler = async (req, res) => {
   try {
     if (req.method === 'POST') {
       const { amount, currency, products, addresses, details, type } = req.body
+      console.log('🚀 ~ file: addressees.js:12 ~ handler ~ addresses', req.body)
       const session = await getSession({ req })
       if (!session?.user?.email) {
         return res.status(401).json({ statusCode: 401, message: 'Error en la solicitud.' })

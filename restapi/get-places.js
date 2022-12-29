@@ -33,7 +33,7 @@ export const getMunicipalities = async (active) => {
   const municipality = await resources.place.district.all()
   const municipality_response = municipality.data.results
   return municipality_response.reduce(function (filtered, option) {
-    const municipalities = { name: option.nombre, isActive: activeId === option.id, id: option.id, /*  deliveryPrice: option.precio_entrega, */ provinceId: option.provincia }
+    const municipalities = { name: option.nombre, isActive: activeId === option.id, id: option.id, provinceId: option.provincia }
     filtered.push(municipalities)
     return filtered
   }, [])

@@ -45,6 +45,7 @@ function Orders({ orders }) {
   const { status } = useSession()
   const router = useRouter()
   const size = useWindowSize()
+  const [details, setDetails] = useState({})
   const [openOrderDetails, setOpenOrderDetails] = useState()
 
   if (status === 'unauthenticated') {
@@ -54,6 +55,7 @@ function Orders({ orders }) {
   return (
     <>
       <AppHeader title={t('pages.orders')} />
+      <OrderDetails item={details} {...{ openOrderDetails, setOpenOrderDetails }}/>
       <div className='flex flex-col border rounded-3xl p-4'>
         <p className='font-bold text-footer-background-200 sm:text-xl md:text-4xl mb-2'>Consulta tus órdenes</p>
         {size.width <= 700 && (
@@ -73,10 +75,12 @@ function Orders({ orders }) {
                   <p><span className='font-bold'>PAGO: </span>US${parseFloat(item.total).toFixed(2)}</p>
                   <p><span className='font-bold'>Fecha: </span>{DateTime.fromISO(item.fecha_creada).toLocaleString(DateTime.DATETIME_MED)}</p>
                 </div>
-                <div className='flex flex-col w-[8%] my-2' onClick={() => setOpenOrderDetails(true)}>
+                <div className='flex flex-col w-[8%] my-2' onClick={() => {
+                  setDetails(item)
+                  setOpenOrderDetails(true)
+                }}>
                   <PreviewIcon fontSize='medium' color='primary' />
                 </div>
-                <OrderDetails {...{ openOrderDetails, setOpenOrderDetails, item }}/>
               </div>
             ))}
           </>
@@ -112,11 +116,13 @@ function Orders({ orders }) {
                     <StyledTableCell align="left"><span className='sm:text-xs md:text-base'>US${parseFloat(item.total).toFixed(2)}</span></StyledTableCell>
                     <StyledTableCell align="left"><span className='sm:text-xs md:text-base'>{DateTime.fromISO(item.fecha_creada).toLocaleString(DateTime.DATETIME_MED)}</span></StyledTableCell>
                     <StyledTableCell align="left">
-                      <div className='hover:cursor-pointer' onClick={() => setOpenOrderDetails(true)}>
+                      <div className='hover:cursor-pointer' onClick={() => {
+                        setDetails(item)
+                        setOpenOrderDetails(true)
+                      }}>
                         <PreviewIcon fontSize='large' color='primary' />
                       </div>
                     </StyledTableCell>
-                    <OrderDetails {...{ openOrderDetails, setOpenOrderDetails, item }}/>
                   </StyledTableRow>
                 ))}
               </TableBody>

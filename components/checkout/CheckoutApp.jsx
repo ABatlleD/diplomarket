@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CssBaseline from '@mui/material/CssBaseline'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import AddressForm from '../forms/RecipientsForm'
+import HeadquarterForm from '../forms/HeadquarterForm'
 import PaymentForm from '../forms/PaymentForm'
 import Review from '../forms/ReviewForm'
 import { useTranslation } from 'react-i18next'
@@ -17,6 +18,8 @@ import { useCart } from '../../store/cart/cart.context'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 import { isEmpty } from '../../libs/serialize'
+import resources from '../../restapi/resources'
+import { getCookie } from 'cookies-next'
 
 function Copyright() {
   return (
@@ -42,16 +45,20 @@ function Checkout({ address }) {
     `${t('paymentMethod')}`,
     `${t('pay')}`
   ]
+  const [sede, setSede] = useState(false)
 
   const { addressees, countries, municipalities, provinces, municipality_id } =
     address
   const { items } = useCart()
+  const [activeProvince, setActiveProvince] = useState({})
+  const [activeDistrict, setActiveDistrict] = useState({})
   const [getTypePay, setTypePay] = useState('paypal')
+  const [recipient, setRecipient] = useState(undefined)
   const [getAddressees, setAddressees] = useState(addressees)
   const [getCountries, setCountries] = useState(countries)
   const [getMunicipalities, setMunicipalities] = useState(municipalities)
   const [getProvinces, setProvinces] = useState(provinces)
-  const activeAddressees = getAddressees?.find(({ activo }) => activo === true)
+  let activeAddressees = getAddressees?.find(({ activo }) => activo === true)
   const activeCountries = getCountries?.find(
     ({ isActive }) => isActive === true
   )
@@ -63,7 +70,6 @@ function Checkout({ address }) {
   )
 
   const [activeStep, setActiveStep] = useState(0)
-
   const addressee = {
     addressees: [getAddressees, setAddressees],
     countries: [getCountries, setCountries],
@@ -73,19 +79,22 @@ function Checkout({ address }) {
   }
 
   const handleNext = () => {
+    if (sede) {
+      activeAddressees = recipient
+    }
     if (!activeAddressees) toast.error('Seleccione el destinatario.')
     else if (
       !(
         !!activeAddressees.nombre_remitente &&
-        !!activeAddressees.apellido1 &&
-        !!activeAddressees.ci &&
-        !!activeAddressees.telefono &&
-        !!activeAddressees.direccion
+          !!activeAddressees.apellido1 &&
+          !!activeAddressees.ci &&
+          !!activeAddressees.telefono &&
+          !!activeAddressees.direccion
       )
     ) {
       toast.error('Rellene todos los datos.')
-    // eslint-disable-next-line eqeqeq
-    } else if (!activeCountries && !activeMunicipalities && !activeProvinces) { toast.error('Rellene todos los datos.') } else if (activeMunicipalities?.id != municipality_id) {
+      // eslint-disable-next-line eqeqeq
+    } else if (!activeCountries && !activeMunicipalities && !activeProvinces) { toast.error('Rellene todos los datos.') } else if (!sede && activeMunicipalities?.id != municipality_id) {
       toast.error(
         'El municipio y provincia del destinatario debe coincidir con la ubicación de entrega.'
       )
@@ -96,14 +105,44 @@ function Checkout({ address }) {
   const handleBack = () => {
     setActiveStep(activeStep - 1)
   }
+
+  useEffect(() => {
+    resources.place.district.one(getCookie('NEXT_MUNICIPALITY'))
+      .then(response => {
+        if (response.data.es_sede) {
+          setSede(true)
+          resources.recipients.one(response.data.destinatario)
+            .then((res) => {
+              setRecipient(res.data)
+            })
+          setActiveDistrict({
+            name: response.data.nombre,
+            isActive: true,
+            id: response.data.id,
+            provinceId: response.data.provincia
+          })
+          console.log(activeDistrict)
+          resources.place.city.one(response.data.provincia)
+            .then(res => {
+              setActiveProvince({
+                name: res.data.nombre,
+                isActive: true,
+                id: res.data.id
+              })
+              console.log(activeProvince)
+            })
+        }
+      })
+  }, [])
+
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <AddressForm address={addressee} />
+        return sede ? <HeadquarterForm recipient={recipient} address={addressee} /> : <AddressForm address={addressee} />
       case 1:
         return <PaymentForm address={addressee} />
       case 2:
-        return <Review address={addressee} />
+        return <Review recipient= {recipient} sede={sede} address={addressee} activeDistrict={activeDistrict} activeProvince={activeProvince} />
       default:
         throw new Error('Unknown step')
     }

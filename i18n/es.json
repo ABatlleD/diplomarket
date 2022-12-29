@@ -89,6 +89,7 @@
     "to": "hasta",
     "more": "Más de",
     "promotions": "Productos en oferta",
+    "exist": "Solo disponibles",
     "features": "Productos destacados",
     "recommendations": "Recomendaciones de hoy",
     "order": {
@@ -307,6 +308,7 @@
     "recipients": {
       "title": "Editar mis destinatarios",
       "subtitle": "Detalles de mis destinatarios:",
+      "pickup": "Recoger en:",
       "name": "Nombre del destinatario",
       "first": "Nombre del receptor",
       "second": "Primer Apellido",

@@ -29,7 +29,9 @@ import ZellePayment from '../modals/ZellePayment'
 
 const errorsAtom = atom(false)
 
-function Review({ address }) {
+function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
+  console.log('🚀 ~ file: ReviewForm.jsx:33 ~ Review ~ activeDistrict', activeDistrict)
+  console.log('🚀 ~ file: ReviewForm.jsx:33 ~ Review ~ activeProvince', activeProvince)
   const { pasarelas } = useConfig()
   const [openZelleModal, setOpenZelleModal] = useState(false)
   const [openDirectModal, setOpenDirectModal] = useState(false)
@@ -48,14 +50,17 @@ function Review({ address }) {
   const [getProvinces] = provinces
   const [getTypePay] = typePay
   const [currency, setCurrency] = React.useState('USD')
-  const activeAddressees = getAddressees.find(({ activo }) => activo === true)
+  if (sede) {
+    recipient.activo = true
+  }
+  const activeAddressees = sede ? recipient : getAddressees.find(({ activo }) => activo === true)
   const activeCountries = getCountries.find(
     ({ isActive }) => isActive === true
   )
-  const activeMunicipalities = getMunicipalities.find(
+  const activeMunicipalities = sede ? activeDistrict : getMunicipalities.find(
     ({ isActive }) => isActive === true
   )
-  const activeProvinces = getProvinces.find(
+  const activeProvinces = sede ? activeProvince : getProvinces.find(
     ({ isActive }) => isActive === true
   )
   const details = {}

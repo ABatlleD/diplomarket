@@ -30,7 +30,7 @@ function OrderDetails({ openOrderDetails = false, setOpenOrderDetails = () => {}
               </div>
               <div className='font-bold'>Productos</div>
               <div className="overflow-auto mb-4">
-                {item.components.length > 0
+                {item.components?.length > 0
                   ? (
                       item.components.map((item, key) => (
                         <OrderProductItem

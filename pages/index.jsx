@@ -51,6 +51,7 @@ function Home({
   const municipality = getCookie('NEXT_MUNICIPALITY')
   const [promotions, setPromotions] = useState(false)
   const [recommendations, setRecommendations] = useState(false)
+  const [exist, setExist] = useState(false)
 
   const [category, setCategory] = useState(undefined)
   const [selectedCategory, setSelectedCategory] = useState(undefined)
@@ -269,6 +270,7 @@ function Home({
   const handleChangeType = (type) => {
     setPromotions(false)
     setRecommendations(false)
+    setExist(false)
     setExtra(undefined)
     switch (type) {
       case 'promotions':
@@ -278,6 +280,10 @@ function Home({
       case 'recommendations':
         setRecommendations(true)
         setExtra('recomendados')
+        break
+      case 'exist':
+        setExist(true)
+        setExtra('existencias')
         break
     }
   }
@@ -361,6 +367,7 @@ function Home({
             <div className='flex flex-col my-4'>
               <FormControlLabel value={promotions} onChange={() => handleChangeType('promotions')} control={<Checkbox size='small' checked={promotions} />} label={t('filter.promotions')} />
               <FormControlLabel value={recommendations} onChange={() => handleChangeType('recommendations')} control={<Checkbox size='small' checked={recommendations} />} label={t('filter.recommendations')} />
+              <FormControlLabel value={exist} onChange={() => handleChangeType('exist')} control={<Checkbox size='small' checked={exist} />} label={t('filter.exist')} />
             </div>
             <div className='flex flex-col mt-2 mb-4'>
               <p className='font-bold mb-2'>{t('filter.price')}</p>
