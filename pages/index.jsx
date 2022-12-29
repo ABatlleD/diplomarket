@@ -296,7 +296,7 @@ function Home({
           <MainCarousel carousel={carousel} />
         </div>
         <div className='dark:text-[black] flex md:flex-row flex-col w-full md:w-[95%] md:mx-auto mb-3 md:my-5'>
-          <div className='md:mx-3 flex md:hidden text-sm flex-row justify-between md:mb-3'>
+          <div className='md:mx-3 flex md:hidden text-base mt-1 flex-row justify-between md:mb-3'>
             {selectedCategory && (
               <div className='font-bold mt-2'>
                 {i18n.language === 'es' ? selectedCategory.nombre : selectedCategory.nombre_ingles}
@@ -520,22 +520,22 @@ function Home({
           }} />
         </div>
         <div className='flex md:flex-row flex-wrap justify-around text-footer-background-300 md:w-[95%] md:mx-auto md:my-28'>
-          <div className='flex flex-col items-center'>
+          <div className='flex flex-col items-center w-1/2 md:w-auto'>
             <LocalShippingOutlinedIcon sx={{ fontSize: '3rem' }} />
             <p className='text-footer-background-300 md:text-xl text-base'>{t('home.delivery.title')}</p>
             <p className='text-text-100 md:text-lg text-xs'>{t('home.delivery.description')}</p>
           </div>
-          <div className='flex flex-col  items-center'>
+          <div className='flex flex-col  items-center w-1/2 md:w-auto'>
             <PriceCheckIcon sx={{ fontSize: '3rem' }} />
             <p className='text-footer-background-300 md:text-xl text-base'>{t('home.prices.title')}</p>
             <p className='text-text-100 md:text-lg text-xs'>{t('home.prices.description')}</p>
           </div>
-          <div className='flex flex-col items-center my-12 md:my-0'>
+          <div className='flex flex-col items-center my-12 md:my-0 w-1/2 md:w-auto'>
             <SentimentSatisfiedOutlinedIcon sx={{ fontSize: '3rem' }} />
             <p className='text-footer-background-300 md:text-xl text-base'>{t('home.customer.title')}</p>
             <p className='text-text-100 md:text-lg text-xs'>{t('home.customer.description')}</p>
           </div>
-          <div className='flex flex-col items-center my-12 md:my-0'>
+          <div className='flex flex-col items-center my-12 md:my-0  w-1/2 md:w-auto'>
             <CreditCardOutlinedIcon sx={{ fontSize: '3rem' }} />
             <p className='text-footer-background-300 md:text-xl text-base'>{t('home.payments.title')}</p>
             <p className='text-text-100 md:text-lg text-xs'>{t('home.payments.description')}</p>

@@ -91,7 +91,7 @@ function HorizontalProductItem({ product }) {
           </div>
         </div>
         <div className='w-[70%] flex flex-col justify-between py-2'>
-          <div className='mx-2 text-text-blue text-sm md:text-base'>
+          <div className='mx-2 text-text-blue text-base'>
             <Link href={`/products/${product.id}`}>
               {resizeTitle(i18n.language === 'es' ? product.nombre : product.nombre_ingles, 60)}
             </Link>

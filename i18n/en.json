@@ -103,7 +103,7 @@
   },
   "cart": {
     "no": "No",
-    "total": "products in cart",
+    "total": "product(s) in cart",
     "no-products": "NO PRODUCTS",
     "pay": "Pay"
   },

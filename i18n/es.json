@@ -103,7 +103,7 @@
   },
   "cart": {
     "no": "No hay",
-    "total": "productos en el carrito",
+    "total": "producto(s) en el carrito",
     "no-products": "SIN PRODUCTOS",
     "pay": "Pagar"
   },

@@ -154,7 +154,7 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
                   </>)}
                   <div className='flex flex-col'>
                     <div className='flex flex-row justify-between mb-4'>
-                      <div className='w-6/12'>
+                      <div className='w-7/12'>
                         <div className='flex flex-row justify-between'>
                           <div
                             className='hover:cursor-pointer'
@@ -170,7 +170,7 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
                       {Number(product.cant_inventario) > 0
                         ? (
                           <div
-                            className='bg-footer-background-200 w-6/12 shadow-lg text-background-100 py-1 text-center text-sm md:text-base rounded-md hover:cursor-pointer hover:opacity-90'
+                            className='bg-footer-background-200 w-5/12 shadow-lg text-background-100 py-1 text-center text-sm md:text-base rounded-md hover:cursor-pointer hover:opacity-90'
                             onClick={handleBuyNow}
                           >
                             {t('home.shopNow')}
