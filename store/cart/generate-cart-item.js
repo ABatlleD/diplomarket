@@ -6,6 +6,7 @@ export function generateCartItem(item, variation) {
     imagen,
     img_principal,
     precio,
+    precio_b2b,
     discount,
     sale_price,
     free_shipping,
@@ -23,6 +24,7 @@ export function generateCartItem(item, variation) {
     max,
     free_shipping,
     price: Number(sale_price || precio.cantidad),
+    price_b2b: Number(sale_price || precio_b2b.cantidad),
     discount
   }
 }

@@ -13,6 +13,7 @@ import { useRouter } from 'next/router'
 import { Josefin_Sans } from '@next/font/google'
 import resources from '../../restapi/resources'
 import { getCookie } from 'cookies-next'
+import { useSession } from 'next-auth/react'
 
 const js = Josefin_Sans({
   weight: '400',
@@ -34,6 +35,7 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
   const router = useRouter()
   const [product, setProduct] = useState({})
   const municipality = getCookie('NEXT_MUNICIPALITY')
+  const { data } = useSession()
 
   const {
     addItemToCart,
@@ -123,28 +125,33 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
                       </p>
                     }
                   </div>
-                  {!product.promocion?.activo && (
-                    <div className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-lg'>US${product.precio?.cantidad || product.precio}</div>
-                  )}
-                  {product.promocion?.activo && (
-                    <div className='flex flex-col leading-3'>
-                      <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${((product.precio?.cantidad || product.precio) - ((product.precio?.cantidad || product.precio) * product.promocion.descuento / 100)).toFixed(2)} </p>
-                      <div className='flex flex-row my-2'>
-                        <div
-                          className='bg-button flex rounded-md px-1 mr-1 text-background-100 text-sm md:text-base'
-                        >
-                          -{product.promocion.descuento}%
+                  {data && data.mayorista
+                    ? (<>
+                    <div className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-lg'>US${product.precio_b2b?.cantidad || product.precio_b2b}</div></>)
+                    : (<>
+                      {!product.promocion?.activo && (
+                        <div className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-lg'>US${product.precio?.cantidad || product.precio}</div>
+                      )}
+                      {product.promocion?.activo && (
+                        <div className='flex flex-col leading-3'>
+                          <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${((product.precio?.cantidad || product.precio) - ((product.precio?.cantidad || product.precio) * product.promocion.descuento / 100)).toFixed(2)} </p>
+                          <div className='flex flex-row my-2'>
+                            <div
+                              className='bg-button flex rounded-md px-1 mr-1 text-background-100 text-sm md:text-base'
+                            >
+                              -{product.promocion.descuento}%
+                            </div>
+                            <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-sm md:text-base line-through'> US${product.precio?.cantidad || product.precio}</p>
+                          </div>
                         </div>
-                        <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-sm md:text-base line-through'> US${product.precio?.cantidad || product.precio}</p>
-                      </div>
-                    </div>
-                  )}
-                  {(typeof (product.precioxlibra) === 'number' && product.precioxlibra !== 0) && (
-                    <div className='mb-2 md:mb-0 md:my-0 text-text-100 text-sm md:text-base'>US${product.precioxlibra}/{product.um}</div>
-                  )}
-                  {product.precioxlibra?.cantidad !== undefined && product.precioxlibra?.cantidad !== '0.00' && (
-                    <div className='mb-2 md:mb-0 md:my-0 text-text-100 text-sm md:text-base'>US${product.precioxlibra?.cantidad}/{product.um}</div>
-                  )}
+                      )}
+                      {(typeof (product.precioxlibra) === 'number' && product.precioxlibra !== 0) && (
+                        <div className='mb-2 md:mb-0 md:my-0 text-text-100 text-sm md:text-base'>US${product.precioxlibra}/{product.um}</div>
+                      )}
+                      {product.precioxlibra?.cantidad !== undefined && product.precioxlibra?.cantidad !== '0.00' && (
+                        <div className='mb-2 md:mb-0 md:my-0 text-text-100 text-sm md:text-base'>US${product.precioxlibra?.cantidad}/{product.um}</div>
+                      )}
+                  </>)}
                   <div className='flex flex-col'>
                     <div className='flex flex-row justify-between mb-4'>
                       <div className='w-6/12'>

@@ -9,6 +9,7 @@ import AddToFav from '../fav/AddFav'
 import AddToCart from '../cart/AddCart'
 import resources from '../../restapi/resources'
 import useWindowSize from '../../hooks/WindowSize.js'
+import { useSession } from 'next-auth/react'
 
 function FavItem({ id }) {
   const { i18n } = useTranslation()
@@ -16,6 +17,7 @@ function FavItem({ id }) {
   const [product, setProduct] = useState({})
   const size = useWindowSize()
   const { t } = useTranslation()
+  const { data } = useSession()
 
   useEffect(() => {
     resources.products.one(id)
@@ -89,28 +91,33 @@ function FavItem({ id }) {
             )}
           </div>
           <div className='mx-2 my-0 md:my-0 text-button text-sm md:text-base'>{product.proveedor?.nombre}</div>
-          {(!product.promocion || !product.promocion.activo) && (
-            <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${parseFloat(product.precio).toFixed(2)}</div>
-          )}
-          {product.promocion && product.promocion.activo && (
-            <div className='flex flex-col md:flex-row ml-2 leading-3'>
-              <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-xs md:text-base'>US${parseFloat(product.precio - (product.precio * product.promocion.descuento / 100)).toFixed(2)} </p>
-              <div className='flex flex-row'>
-                <div
-                  className='bg-button flex md:hidden rounded-md px-1 mr-1 text-background-100 text-xs'
-                >
-                  -{parseFloat(product.promocion.descuento).toFixed(2)}
+          {data && data.mayorista
+            ? (<>
+            <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${parseFloat(product.precio_b2b).toFixed(2)}</div></>)
+            : (<>
+              {(!product.promocion || !product.promocion.activo) && (
+                <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${parseFloat(product.precio).toFixed(2)}</div>
+              )}
+              {product.promocion && product.promocion.activo && (
+                <div className='flex flex-col md:flex-row ml-2 leading-3'>
+                  <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-xs md:text-base'>US${parseFloat(product.precio - (product.precio * product.promocion.descuento / 100)).toFixed(2)} </p>
+                  <div className='flex flex-row'>
+                    <div
+                      className='bg-button flex md:hidden rounded-md px-1 mr-1 text-background-100 text-xs'
+                    >
+                      -{parseFloat(product.promocion.descuento).toFixed(2)}
+                    </div>
+                    <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-xs md:text-sm line-through'> US${parseFloat(product.precio).toFixed(2)}</p>
+                  </div>
                 </div>
-                <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-xs md:text-sm line-through'> US${parseFloat(product.precio).toFixed(2)}</p>
-              </div>
-            </div>
-          )}
-          {product.precioxlibra !== 0 && (
-            <div className='mx-2 my-0 md:mb-0 md:my-0 text-text-100 text-xs md:text-base'>US${parseFloat(product.precioxlibra).toFixed(2)}/{product.um}</div>
-          )}
-          {product.precioxlibra === 0 && (
-            <div className='md:h-6'></div>
-          )}
+              )}
+              {product.precioxlibra !== 0 && (
+                <div className='mx-2 my-0 md:mb-0 md:my-0 text-text-100 text-xs md:text-base'>US${parseFloat(product.precioxlibra).toFixed(2)}/{product.um}</div>
+              )}
+              {product.precioxlibra === 0 && (
+                <div className='md:h-6'></div>
+              )}
+          </>)}
         </div>
         <Divider
           sx={{

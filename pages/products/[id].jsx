@@ -16,6 +16,7 @@ import { useCart } from '../../store/cart/cart.context'
 import { generateCartItem } from '../../store/cart/generate-cart-item'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import RelatedCard from '../../components/products/RelatedCard'
+import { useSession } from 'next-auth/react'
 
 const theme = createTheme({
   palette: {
@@ -42,6 +43,7 @@ function Product({ product, apiError }) {
     backgroundPosition: '0% 0%'
   })
   const [hover, setHover] = useState(false)
+  const { data } = useSession()
 
   const {
     addItemToCart,
@@ -71,7 +73,6 @@ function Product({ product, apiError }) {
       resources.products_related.all(product.id, 1)
         .then(response => setRelatedProducts(response.data))
       setLoading(false)
-      console.log('🚀 ~ file: [id].jsx:75 ~ Product ~ product', product)
     }
   }, [product])
 
@@ -143,7 +144,7 @@ function Product({ product, apiError }) {
         </div>
         <div className='flex flex-col md:mt-0 md:w-1/2'>
           <p className='text-xl md:text-3xl text-text-blue mb-2 md:mt-0'>{i18n.language === 'es' ? product.nombre : product.nombre_ingles}</p>
-          <div className='flex flex-row'>
+          <div className='flex flex-col'>
             <ThemeProvider theme={theme}>
               <div className='flex flex-row'>
                 {product.etiquetas.map((tag) => (
@@ -152,14 +153,18 @@ function Product({ product, apiError }) {
               </div>
             </ThemeProvider>
             {product.sku &&
-              <p className={`${product.etiquetas.length > 0 ? 'ml-6' : ''} my-2`}>
+              <p className='my-2'>
                 <span className='text-footer-background-300'>SKU: </span> <span className='font-semibold text-footer-background-300'>{product.sku}</span>
               </p>
             }
           </div>
-          {!product.promocion.activo && (
+          {data && data.mayorista
+            ? (<>
+            <div className='my-4 md:mb-0 md:my-0 text-button font-bold text-xl md:text-3xl'>US${parseFloat(product.precio_b2b).toFixed(2)}</div></>)
+            : (<>
+            {!product.promocion.activo && (
             <div className='my-4 md:mb-0 md:my-0 text-button font-bold text-xl md:text-3xl'>US${parseFloat(product.precio).toFixed(2)}</div>
-          )}
+            )}
           {product.promocion.activo && (
             <div className='flex flex-col leading-3'>
               <p className='my-4 md:mb-0 md:my-0 text-button font-bold text-xl md:text-3xl'>US${parseFloat(product.precio - (product.precio * product.promocion.descuento / 100)).toFixed(2)} </p>
@@ -175,7 +180,7 @@ function Product({ product, apiError }) {
           )}
           {product.precioxlibra !== 0 && (
             <div className='mb-2 md:mb-0 md:my-0 text-text-100 text-sm md:text-base'>US${parseFloat(product.precioxlibra).toFixed(2)}/{product.um}</div>
-          )}
+          )}</>)}
           <p className='mb-2'>
             <span className='font-semibold text-footer-background-300'>{t('products.subcategory')}:</span> <span className='font-semibold text-text-100'>{product.subcategoria}</span>
           </p>

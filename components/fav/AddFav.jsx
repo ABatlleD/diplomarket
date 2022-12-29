@@ -5,6 +5,7 @@ import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined'
 import { generateFavItem } from '../../store/fav/generate-fav-item'
 import useWindowSize from '../../hooks/WindowSize'
 import { addClicks } from '../../libs/quick-tip'
+import { useSession } from 'next-auth/react'
 
 function AddToFav({
   data,
@@ -14,18 +15,24 @@ function AddToFav({
   variation,
   disabled
 }) {
+  console.log('🚀 ~ file: AddFav.jsx:18 ~ data', data)
   const size = useWindowSize()
   const {
     addItemToFav,
     removeItemFromFav,
     isInFav
   } = useFav()
+  const session = useSession()
   const item = generateFavItem(data, variation)
+  console.log('🚀 ~ file: AddFav.jsx:27 ~ item', item)
   const handleAddClick = (
     e
   ) => {
     e.stopPropagation()
     addClicks()
+    if (session && session.data && session.data.mayorista) {
+      item.price = item.price_b2b
+    }
     addItemToFav(item, 1)
   }
   const handleRemoveClick = (e) => {

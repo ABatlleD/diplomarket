@@ -4,10 +4,12 @@ import { useCompare } from '../../store/compare/compare.context'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 // import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
+import { useSession } from 'next-auth/react'
 
 function CompareItem ({ id }) {
   const [product, setProduct] = useState({})
   // const { i18n } = useTranslation()
+  const { data } = useSession()
 
   const {
     removeItemFromCompare
@@ -50,7 +52,7 @@ function CompareItem ({ id }) {
             </div>
           )}
         </div>
-        <div className='flex flex-row border-b border-[#d1d1d1] px-2 py-1'>US${parseFloat(product.precio).toFixed(2)}</div>
+        <div className='flex flex-row border-b border-[#d1d1d1] px-2 py-1'>US${parseFloat(data && data.mayorista ? product.precio_b2b : product.precio).toFixed(2)}</div>
         <div className='flex flex-row bg-[#d1d1d1] px-2 py-1'>Descripción del producto</div>
         <div className='flex flex-row items-center border-b border-[#d1d1d1] px-2 py-1 text-sm text-text-100 h-52'>{resizeTitle(product.descripcion, 450)}</div>
         <div className='flex flex-row border-b border-[#d1d1d1] px-2 py-1'>

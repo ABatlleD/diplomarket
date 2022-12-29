@@ -11,12 +11,14 @@ import AddToCart from '../cart/AddCart'
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows'
 import { useRouter } from 'next/router'
 import { addClicks } from '../../libs/quick-tip'
+import { useSession } from 'next-auth/react'
 
 function HorizontalProductItem({ product }) {
   const { t, i18n } = useTranslation()
   const router = useRouter()
   const [openQuickView, setOpenQuickView] = useState(false)
   const size = useWindowSize()
+  const { data } = useSession()
 
   const resizeTitle = (string, maxLength) => {
     return string.length > maxLength ? `${string.slice(0, maxLength)}...` : string
@@ -97,28 +99,33 @@ function HorizontalProductItem({ product }) {
           {size.width >= 768 && (
             <div className='mx-2 my-0 md:my-0 text-button text-sm md:text-base'>{product.proveedor.nombre}</div>
           )}
-          {!product.promocion.activo && (
-            <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-base'>US${product.precio.cantidad}</div>
-          )}
-          {product.promocion.activo && (
-            <div className='flex flex-col md:flex-row ml-2 leading-3'>
-              <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-base'>US${(product.precio.cantidad - (product.precio.cantidad * product.promocion.descuento / 100)).toFixed(2)} </p>
-              <div className='flex flex-row'>
-                <div
-                  className='bg-button flex md:hidden rounded-md px-1 mr-1 text-background-100 text-xs'
-                >
-                  -{product.promocion.descuento}%
+          {data && data.mayorista
+            ? (<>
+            <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-base'>US${product.precio_b2b.cantidad}</div></>)
+            : (<>
+              {!product.promocion.activo && (
+                <div className='mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-base'>US${product.precio.cantidad}</div>
+              )}
+              {product.promocion.activo && (
+                <div className='flex flex-col md:flex-row ml-2 leading-3'>
+                  <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-base'>US${(product.precio.cantidad - (product.precio.cantidad * product.promocion.descuento / 100)).toFixed(2)} </p>
+                  <div className='flex flex-row'>
+                    <div
+                      className='bg-button flex md:hidden rounded-md px-1 mr-1 text-background-100 text-xs'
+                    >
+                      -{product.promocion.descuento}%
+                    </div>
+                    <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-xs md:text-sm line-through'> US${product.precio.cantidad}</p>
+                  </div>
                 </div>
-                <p className='my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-xs md:text-sm line-through'> US${product.precio.cantidad}</p>
-              </div>
-            </div>
-          )}
-          {product.precioxlibra.cantidad !== '0.00' && (
-            <div className='mx-2 my-0 md:mb-0 md:my-0 text-text-100 text-xs md:text-base'>US${product.precioxlibra.cantidad}/{product.um}</div>
-          )}
-          {product.precioxlibra.cantidad === '0.00' && (
-            <div className='md:h-6'></div>
-          )}
+              )}
+              {product.precioxlibra.cantidad !== '0.00' && (
+                <div className='mx-2 my-0 md:mb-0 md:my-0 text-text-100 text-xs md:text-base'>US${product.precioxlibra.cantidad}/{product.um}</div>
+              )}
+              {product.precioxlibra.cantidad === '0.00' && (
+                <div className='md:h-6'></div>
+              )}
+            </>)}
           <div className='flex flex-row justify-between mx-1 mt-[-3px] md:mt-0'>
             <div
               className=' ml-1 hover:cursor-pointer'
@@ -127,7 +134,9 @@ function HorizontalProductItem({ product }) {
                 ? (
                     <AddToCart data={product} text={t('home.addCart')} sizes={{ width: 10, height: 10 }} />
                   )
-                : <></>}
+                : (
+                    <div className='bg-button text-background-300 px-2 rounded-md'>{t('oos')}</div>
+                  )}
             </div>
             <div className='mt-[-2px]'>
               <AddToFav data={product}/>

@@ -2,6 +2,7 @@
 const isEmpty = (obj) => [Object, Array].includes((obj || {}).constructor) && !Object.entries((obj || {})).length
 
 export function generateFavItem(item, variation) {
+  console.log('🚀 ~ file: generate-fav-item.js:5 ~ generateFavItem ~ item', item)
   const {
     id,
     name,
@@ -10,6 +11,7 @@ export function generateFavItem(item, variation) {
     imagen,
     img_principal,
     price,
+    precio_b2b,
     sale_price,
     quantity,
     unit,
@@ -27,6 +29,9 @@ export function generateFavItem(item, variation) {
       price: Number(
         variation.sale_price ? variation.sale_price : variation.price
       ),
+      price_b2b: Number(
+        variation.sale_price ? variation.sale_price : variation.price_b2b
+      ),
       image: image?.thumbnail,
       variationId: variation.id
     }
@@ -39,6 +44,7 @@ export function generateFavItem(item, variation) {
     is_digital,
     image: img_principal || imagen,
     stock: quantity,
-    price: Number(sale_price || price)
+    price: Number(sale_price || price),
+    price_b2b: Number(sale_price || precio_b2b)
   }
 }

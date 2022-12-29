@@ -4,6 +4,7 @@ import AddToCartBtn from './AddCartBtn'
 import { useCart } from '../../store/cart/cart.context'
 import { generateCartItem } from '../../store/cart/generate-cart-item'
 import { addClicks } from '../../libs/quick-tip'
+import { useSession } from 'next-auth/react'
 
 function AddToCart ({
   data,
@@ -24,12 +25,16 @@ function AddToCart ({
   } = useCart()
   const item = generateCartItem(data, variation)
   const outOfStock = isInCart(`${item.id}`) && !isInStock(`${item.id}`)
+  const session = useSession()
 
   const handleAddClick = (
     e
   ) => {
     e.stopPropagation()
     addClicks()
+    if (session && session.data && session.data.mayorista) {
+      item.price = item.price_b2b
+    }
     addItemToCart(item, 1)
   }
 

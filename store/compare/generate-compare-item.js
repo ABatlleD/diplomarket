@@ -10,6 +10,7 @@ export function generateCompareItem(item, variation) {
     imagen,
     img_principal,
     price,
+    price_b2b,
     sale_price,
     quantity,
     unit,
@@ -25,7 +26,7 @@ export function generateCompareItem(item, variation) {
       is_digital: variation?.is_digital,
       stock: variation.quantity,
       price: Number(
-        variation.sale_price ? variation.sale_price : variation.price
+        variation.sale_price ? variation.sale_price : variation.price_b2b
       ),
       image: image?.thumbnail,
       variationId: variation.id
@@ -39,6 +40,7 @@ export function generateCompareItem(item, variation) {
     is_digital,
     image: img_principal || imagen,
     stock: quantity,
-    price: Number(sale_price || price)
+    price: Number(sale_price || price),
+    price_b2b: Number(sale_price || price_b2b)
   }
 }
