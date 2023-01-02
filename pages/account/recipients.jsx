@@ -55,20 +55,20 @@ export const getServerSideProps = async ({ req, res }) => {
       const addressees_user = addressee_response.filter(
         ({ usuario }) => usuario === user.id
       )
-      const ordenby_active_addressees_user = addressees_user.sort((a, b) =>
+      const orderby_active_addressees_user = addressees_user.sort((a, b) =>
         a.activo > b.activo ? -1 : 1
       )
       const countries = await getCountries(
-        ordenby_active_addressees_user[0] ?? {}
+        orderby_active_addressees_user[0] ?? {}
       )
       const provinces = await getProvinces(
-        ordenby_active_addressees_user[0] ?? {}
+        orderby_active_addressees_user[0] ?? {}
       )
       const municipalities = await getMunicipalities(
-        ordenby_active_addressees_user[0] ?? {}
+        orderby_active_addressees_user[0] ?? {}
       )
       const addressees_user_filters = []
-      for await (const items of ordenby_active_addressees_user) {
+      for await (const items of orderby_active_addressees_user) {
         const addressees_user = {
           id: items?.id,
           nombre: items?.nombre,

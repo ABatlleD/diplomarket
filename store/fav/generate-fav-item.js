@@ -2,7 +2,6 @@
 const isEmpty = (obj) => [Object, Array].includes((obj || {}).constructor) && !Object.entries((obj || {})).length
 
 export function generateFavItem(item, variation) {
-  console.log('🚀 ~ file: generate-fav-item.js:5 ~ generateFavItem ~ item', item)
   const {
     id,
     name,

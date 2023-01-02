@@ -1,7 +1,6 @@
 import resources from '../../../restapi/resources'
 
 const handler = async (req, res) => {
-  console.log('checkdelivery')
   try {
     if (req.method === 'POST') {
       const { items, municipio } = req.body

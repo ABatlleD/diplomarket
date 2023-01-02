@@ -77,12 +77,12 @@ function ProductItem({ product }) {
                 className='rounded-l-lg pr-1 pl-[0.1rem] mb-2 hover:cursor-pointer text-background-100 bg-button'
                 onClick={() => goToCompare(product.id)}
               >
-                <CompareArrowsIcon fontSize={size.width < 768 ? 'samll' : 'medium'} />
+                <CompareArrowsIcon fontSize={size.width < 768 ? 'small' : 'medium'} />
               </div>
             </Tooltip>
           </div>
           <div className='absolute top-2 left-0'>
-            <div className='felx flex-col my-1 md:my-2'>
+            <div className='flex flex-col my-1 md:my-2'>
               {product.etiquetas.map((tag) => (
                 <div key={tag.pk}>
                   <div

@@ -29,7 +29,6 @@ const handler = async (req, res) => {
     }
     return res.status(401).json({ statusCode: 401, message: 'Error en la solicitud.' })
   } catch (err) {
-    // console.log(err)
     return res.status(500).json({ statusCode: 200, message: 'Contacte al administrator' })
   }
 }

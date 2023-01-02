@@ -59,12 +59,12 @@ function HorizontalProductItem({ product }) {
                   router.push('/compare')
                 }}
               >
-                <CompareArrowsIcon fontSize={size.width < 768 ? 'samll' : 'medium'} />
+                <CompareArrowsIcon fontSize={size.width < 768 ? 'small' : 'medium'} />
               </div>
             </Tooltip>
           </div>
           <div className='absolute top-2 right-0'>
-            <div className='felx flex-col my-1 md:my-2'>
+            <div className='flex flex-col my-1 md:my-2'>
               {product.etiquetas.map((tag) => (
                 <div key={tag.pk}>
                   <div

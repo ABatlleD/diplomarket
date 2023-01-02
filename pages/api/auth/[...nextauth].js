@@ -67,7 +67,6 @@ export const authOptions = {
             throw new Error('error_recaptcha_fail')
           }
         } catch (_) {
-          // console.log(_)
           throw new Error('error_recaptcha_form')
         }
         const username = credentials.username.replace(/\s+/g, '').toLowerCase()

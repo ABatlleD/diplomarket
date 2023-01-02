@@ -2,9 +2,7 @@ import { getSession } from 'next-auth/react'
 import resources from '../../restapi/resources'
 
 const handler = async (req, res) => {
-  console.log('🚀 ~ file: details.js:5 ~ handler ~ req', req.body)
   try {
-    console.log('🚀 ~ file: details.js:38 ~ before if')
     if (req.method === 'POST') {
       const { account: [activeAccount] } = req.body
       const session = await getSession({ req })
@@ -27,10 +25,8 @@ const handler = async (req, res) => {
           }
         }
         try {
-          console.log('🚀 ~ file: details.js:31 ~ handler ~ accounts', accounts)
           await resources.users.update(user?.id, accounts)
         } catch (err) {
-          console.log(err)
           return res.status(500).json({ statusCode: 500, message: 'Contacte al administrator' })
         }
         return res.status(200).json({ statusCode: 200, message: 'Datos guardados' })
@@ -39,7 +35,6 @@ const handler = async (req, res) => {
       }
     }
   } catch (_) {
-    console.log('🚀 ~ file: details.js:38 ~ last catch')
     res.status(500).json({ statusCode: 500, message: 'Contacte al administrator' })
   }
 }

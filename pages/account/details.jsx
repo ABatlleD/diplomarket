@@ -35,7 +35,6 @@ function Details() {
   }
 
   useEffect(() => {
-    console.log('🚀 ~ file: details.jsx:51 ~ Details ~ session', session)
     resources.users.get(session?.user?.email)
       .then((res) => {
         setId(res?.id)

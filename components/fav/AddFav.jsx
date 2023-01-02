@@ -15,7 +15,6 @@ function AddToFav({
   variation,
   disabled
 }) {
-  console.log('🚀 ~ file: AddFav.jsx:18 ~ data', data)
   const size = useWindowSize()
   const {
     addItemToFav,
@@ -24,7 +23,6 @@ function AddToFav({
   } = useFav()
   const session = useSession()
   const item = generateFavItem(data, variation)
-  console.log('🚀 ~ file: AddFav.jsx:27 ~ item', item)
   const handleAddClick = (
     e
   ) => {

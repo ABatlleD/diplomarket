@@ -51,7 +51,7 @@ function AddToCart ({
       <AddToCartBtn
         disabled={disabled || outOfStock}
         onClick={handleAddClick}
-        dimentions={size}
+        dimensions={size}
         text={text}
       />
       )}

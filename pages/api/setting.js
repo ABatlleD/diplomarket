@@ -35,7 +35,6 @@ const handler = async (req, res) => {
       }
     }
   } catch (_) {
-    // console.log(_)
     res.status(500).json({ statusCode: 500, message: 'Contacte al administrator' })
   }
 }

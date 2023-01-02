@@ -38,7 +38,6 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
     setState(event.target.value)
     const _arr = []
     for (const item of pivots.results) {
-      console.log(event.target.value.id === item.provincia)
       if (event.target.value.id === item.provincia) {
         _arr.push(item)
       }

@@ -121,7 +121,6 @@ function Checkout({ address }) {
             id: response.data.id,
             provinceId: response.data.provincia
           })
-          console.log(activeDistrict)
           resources.place.city.one(response.data.provincia)
             .then(res => {
               setActiveProvince({
@@ -129,7 +128,6 @@ function Checkout({ address }) {
                 isActive: true,
                 id: res.data.id
               })
-              console.log(activeProvince)
             })
         }
       })

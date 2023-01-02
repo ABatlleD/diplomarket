@@ -5,7 +5,6 @@ import resources from '../../restapi/resources'
 
 const handler = async (req, res) => {
   try {
-    console.log(req.body)
     if (req.method === 'POST') {
       const {
         addressee: [addressees, country, municipality, province]

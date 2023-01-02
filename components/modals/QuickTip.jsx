@@ -112,7 +112,7 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
                   <div className='flex flex-col mb-2'>
                     {(product.etiquetas && product.etiquetas.length > 0) && (
                       <ThemeProvider theme={theme}>
-                        <div className='felx flex-row mr-2 my-1'>
+                        <div className='flex flex-row mr-2 my-1'>
                           {product.etiquetas.map((tag) => (
                             <Chip key={tag.pk} sx={{ marginRight: 1, marginBottom: 1, borderRadius: '6px' }} label={tag.nombre} color="error" />
                           ))}
