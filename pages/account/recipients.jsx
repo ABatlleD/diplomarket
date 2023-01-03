@@ -1,7 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSession, getSession } from 'next-auth/react'
-import { useRouter } from 'next/router'
+import { getSession } from 'next-auth/react'
 import resources from '../../restapi/resources.js'
 import {
   getCountries,
@@ -20,8 +19,6 @@ const MyAddressees = dynamic(() => import('../../components/account/MyAddresses'
 
 function Recipients({ get_user_addresse }) {
   const { t } = useTranslation()
-  const { status } = useSession()
-  const router = useRouter()
 
   const {
     addressees = [],
@@ -29,10 +26,6 @@ function Recipients({ get_user_addresse }) {
     municipalities = [],
     provinces = []
   } = get_user_addresse
-
-  if (status === 'unauthenticated') {
-    router.push('/auth/signin')
-  }
 
   return (
     <>

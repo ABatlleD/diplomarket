@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSession, getSession } from 'next-auth/react'
-import Router from 'next/router'
+import { getSession } from 'next-auth/react'
+// import { useRouter } from 'next/router'
 import resources from '../../restapi/resources.js'
 import { styled } from '@mui/material/styles'
 import Table from '@mui/material/Table'
@@ -44,14 +44,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 function Orders({ orders }) {
   const { t } = useTranslation()
-  const { status } = useSession()
+  // const router = useRouter()
+  // const { status } = useSession()
   const size = useWindowSize()
   const [details, setDetails] = useState({})
   const [openOrderDetails, setOpenOrderDetails] = useState()
 
-  if (status === 'unauthenticated') {
-    Router.push('/auth/signin')
-  }
+  // if (status === 'unauthenticated') {
+  //   router.push('/auth/signin')
+  // }
 
   return (
     <>

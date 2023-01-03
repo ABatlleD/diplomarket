@@ -89,6 +89,7 @@ function Details() {
           setLoading(false)
         })
       } catch (error) {
+        console.log('🚀 ~ file: details.jsx:92 ~ handleSubmit ~ error', error)
         setLoading(false)
         toast.error('Contacte al administrador')
       }
