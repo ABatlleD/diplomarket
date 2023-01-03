@@ -114,27 +114,52 @@ function FilterBar ({
     setSelectedCategory(undefined)
     setProvider(undefined)
     setBrand(undefined)
+    setExtra(undefined)
+    setPromotions(false)
+    setRecommendations(false)
+    setExist(false)
     setPrices([0, 1000])
     setSelectedPrice(0)
   }
 
   const handleChangeType = (type) => {
-    setPromotions(false)
-    setRecommendations(false)
-    setExist(false)
     setExtra(undefined)
     switch (type) {
       case 'promotions':
-        setPromotions(true)
-        setExtra('rebajados')
+        if (promotions) {
+          setExist(false)
+          setPromotions(false)
+          setRecommendations(false)
+        } else {
+          setPromotions(true)
+          setExist(false)
+          setRecommendations(false)
+          setExtra('rebajados')
+        }
         break
       case 'recommendations':
-        setRecommendations(true)
-        setExtra('recomendados')
+        if (recommendations) {
+          setExist(false)
+          setPromotions(false)
+          setRecommendations(false)
+        } else {
+          setRecommendations(true)
+          setExist(false)
+          setPromotions(false)
+          setExtra('recomendados')
+        }
         break
       case 'exist':
-        setExist(true)
-        setExtra('existencias')
+        if (exist) {
+          setExist(false)
+          setPromotions(false)
+          setRecommendations(false)
+        } else {
+          setExist(true)
+          setPromotions(false)
+          setRecommendations(false)
+          setExtra('existencias')
+        }
         break
     }
   }

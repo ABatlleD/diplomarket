@@ -138,6 +138,10 @@ function Home({
     setCategory(undefined)
     setSubcategory(undefined)
     setSelectedCategory(undefined)
+    setExist(undefined)
+    setPromotions(false)
+    setRecommendations(false)
+    setExist(false)
     setMin(0)
     setMax(1000)
   }
@@ -269,22 +273,43 @@ function Home({
   }, [list])
 
   const handleChangeType = (type) => {
-    setPromotions(false)
-    setRecommendations(false)
-    setExist(false)
     setExtra(undefined)
     switch (type) {
       case 'promotions':
-        setPromotions(true)
-        setExtra('rebajados')
+        if (promotions) {
+          setExist(false)
+          setPromotions(false)
+          setRecommendations(false)
+        } else {
+          setPromotions(true)
+          setExist(false)
+          setRecommendations(false)
+          setExtra('rebajados')
+        }
         break
       case 'recommendations':
-        setRecommendations(true)
-        setExtra('recomendados')
+        if (recommendations) {
+          setExist(false)
+          setPromotions(false)
+          setRecommendations(false)
+        } else {
+          setRecommendations(true)
+          setExist(false)
+          setPromotions(false)
+          setExtra('recomendados')
+        }
         break
       case 'exist':
-        setExist(true)
-        setExtra('existencias')
+        if (exist) {
+          setExist(false)
+          setPromotions(false)
+          setRecommendations(false)
+        } else {
+          setExist(true)
+          setPromotions(false)
+          setRecommendations(false)
+          setExtra('existencias')
+        }
         break
     }
   }
@@ -335,8 +360,8 @@ function Home({
                     onChange={handleChange}
                   >
                     <MenuItem value={'recent'}>{t('filter.order.recent')}</MenuItem>
-                    <MenuItem value={'precio_dsc'}>{t('filter.order.asc_price')}</MenuItem>
-                    <MenuItem value={'precio_asc'}>{t('filter.order.desc_price')}</MenuItem>
+                    <MenuItem value={data && data.mayorista ? 'precio_b2b_dsc' : 'precio_dsc'}>{t('filter.order.asc_price')}</MenuItem>
+                    <MenuItem value={data && data.mayorista ? 'precio_b2b_asc' : 'precio_asc'}>{t('filter.order.desc_price')}</MenuItem>
                     <MenuItem value={'descuento_dsc'}>{t('filter.order.asc_discount')}</MenuItem>
                     <MenuItem value={'descuento_asc'}>{t('filter.order.desc_discount')}</MenuItem>
                   </Select>
@@ -454,10 +479,10 @@ function Home({
                     onChange={handleChange}
                   >
                     <MenuItem value={'recent'}>{t('filter.order.recent')}</MenuItem>
-                    <MenuItem value={'highest_price'}>{t('filter.order.asc_price')}</MenuItem>
-                    <MenuItem value={'lowest_price'}>{t('filter.order.desc_price')}</MenuItem>
-                    <MenuItem value={'highest_discount'}>{t('filter.order.asc_discount')}</MenuItem>
-                    <MenuItem value={'lowest_discount'}>{t('filter.order.desc_discount')}</MenuItem>
+                    <MenuItem value={data && data.mayorista ? 'precio_b2b_dsc' : 'precio_dsc'}>{t('filter.order.asc_price')}</MenuItem>
+                    <MenuItem value={data && data.mayorista ? 'precio_b2b_asc' : 'precio_asc'}>{t('filter.order.desc_price')}</MenuItem>
+                    <MenuItem value={'descuento_dsc'}>{t('filter.order.asc_discount')}</MenuItem>
+                    <MenuItem value={'descuento_asc'}>{t('filter.order.desc_discount')}</MenuItem>
                   </Select>
                 </FormControl>
                 </div>
