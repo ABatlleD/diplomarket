@@ -2,17 +2,19 @@ import React, { useState, useEffect } from 'react'
 import DensityMediumIcon from '@mui/icons-material/DensityMedium'
 import { Badge, Divider } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import LangSelector from './LangSelector'
 import LockIcon from '@mui/icons-material/Lock'
 import useWindowSize from '../../../hooks/WindowSize'
-import SearchBar from '../../SearchBar'
-import AccountMenu from './AccountMenu'
 import Link from 'next/link'
-import SelectPlace from '../../modals/SelectPlace'
 import { useFav } from '../../../store/fav/fav.context'
 import { useCart } from '../../../store/cart/cart.context'
-import CartHomeIcon from '../../icons/cart-home-icon'
-import HeartIcon from '../../icons/heart-icon'
+import dynamic from 'next/dynamic'
+
+const LangSelector = dynamic(() => import('./LangSelector'))
+const SearchBar = dynamic(() => import('../../SearchBar'))
+const AccountMenu = dynamic(() => import('./AccountMenu'))
+const SelectPlace = dynamic(() => import('../../modals/SelectPlace'))
+const CartHomeIcon = dynamic(() => import('../../icons/cart-home-icon'))
+const HeartIcon = dynamic(() => import('../../icons/heart-icon'))
 
 const theme = createTheme({
   palette: {

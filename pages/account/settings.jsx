@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
-import MainLayout from '../../layouts/MainLayout.jsx'
-import AccountLayout from '../../layouts/AccountLayout.jsx'
 import { InputAdornment, IconButton, TextField, Button } from '@mui/material'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import AppHeader from '../../components/layouts/AppHeader.jsx'
 import { useTranslation } from 'react-i18next'
 import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
+import dynamic from 'next/dynamic'
+
+const MainLayout = dynamic(() => import('../../layouts/MainLayout'))
+const AccountLayout = dynamic(() => import('../../layouts/AccountLayout'))
+const AppHeader = dynamic(() => import('../../components/layouts/AppHeader'))
 
 function Settings() {
   const { t } = useTranslation()

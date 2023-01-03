@@ -12,7 +12,9 @@ import 'react-toastify/dist/ReactToastify.css'
 import resources from '../../restapi/resources'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
-import AppHeader from '../../components/layouts/AppHeader'
+import dynamic from 'next/dynamic'
+
+const AppHeader = dynamic(() => import('../../components/layouts/AppHeader'))
 
 const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
 

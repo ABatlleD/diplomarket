@@ -9,7 +9,6 @@ import { useCart } from '../../store/cart/cart.context'
 import { Checkbox, Tooltip } from '@mui/material'
 import usePrice from '../../libs/use-price'
 import { checkCart } from '../../libs/check-items'
-import CartItem from '../../components/cart/CartItem'
 import Link from 'next/link'
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js'
 import { useSession } from 'next-auth/react'
@@ -24,14 +23,16 @@ import { useDelivery } from '../../restapi/delivery'
 import { useConfig } from '../../restapi/config'
 import Bank from '../checkout/Bank'
 import HelpIcon from '@mui/icons-material/Help'
-import DirectPayment from '../modals/DirectPayment'
-import ZellePayment from '../modals/ZellePayment'
+
+import dynamic from 'next/dynamic'
+
+const CartItem = dynamic(() => import('../cart/CartItem'))
+const DirectPayment = dynamic(() => import('../modals/DirectPayment'))
+const ZellePayment = dynamic(() => import('../modals/ZellePayment'))
 
 const errorsAtom = atom(false)
 
 function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
-  console.log('🚀 ~ file: ReviewForm.jsx:33 ~ Review ~ activeDistrict', activeDistrict)
-  console.log('🚀 ~ file: ReviewForm.jsx:33 ~ Review ~ activeProvince', activeProvince)
   const { pasarelas } = useConfig()
   const [openZelleModal, setOpenZelleModal] = useState(false)
   const [openDirectModal, setOpenDirectModal] = useState(false)

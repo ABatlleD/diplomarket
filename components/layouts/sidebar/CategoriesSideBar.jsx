@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react'
 import Drawer from '@mui/material/Drawer'
 import { Divider } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
-import CategoriesAccordion from '../../categories/CategoriesAccordion'
 import resources from '../../../restapi/resources'
+import dynamic from 'next/dynamic'
+
+const CategoriesAccordion = dynamic(() => import('../../categories/CategoriesAccordion'))
 
 function CategoriesSideBar ({ categoriesSideBar = false, setCategoriesSideBar = () => {} }) {
   const [categories, setCategories] = useState([])

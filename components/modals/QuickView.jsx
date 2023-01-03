@@ -4,14 +4,16 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
-import AddToCart from '../cart/AddCart'
-import AddToFav from '../fav/AddFav'
 import { useTranslation } from 'react-i18next'
 import { useCart } from '../../store/cart/cart.context'
 import { generateCartItem } from '../../store/cart/generate-cart-item'
 import { useRouter } from 'next/router'
 import { Josefin_Sans } from '@next/font/google'
 import { useSession } from 'next-auth/react'
+import dynamic from 'next/dynamic'
+
+const AddToCart = dynamic(() => import('../cart/AddCart'))
+const AddToFav = dynamic(() => import('../fav/AddFav'))
 
 const js = Josefin_Sans({
   weight: '400',

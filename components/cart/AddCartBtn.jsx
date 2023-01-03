@@ -1,6 +1,8 @@
 import React from 'react'
-import Cart from '../icons/cart'
+import dynamic from 'next/dynamic'
 import useWindowSize from '../../hooks/WindowSize'
+
+const Cart = dynamic(() => import('../icons/cart'))
 
 function AddToCartBtn({ onClick, disabled, dimensions, text }) {
   const size = useWindowSize()

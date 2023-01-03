@@ -1,8 +1,10 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import MainLayout from '../layouts/MainLayout'
-import AppHeader from '../components/layouts/AppHeader'
 import { Josefin_Sans } from '@next/font/google'
+import dynamic from 'next/dynamic'
+
+const MainLayout = dynamic(() => import('../layouts/MainLayout'))
+const AppHeader = dynamic(() => import('../components/layouts/AppHeader'))
 
 const js = Josefin_Sans({
   weight: '400',

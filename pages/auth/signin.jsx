@@ -3,7 +3,6 @@ import { TextField, Button, InputAdornment, IconButton } from '@mui/material'
 import Link from 'next/link'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import AppHeader from '../../components/layouts/AppHeader'
 import { useTranslation } from 'react-i18next'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
@@ -11,6 +10,10 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty'
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
+import dynamic from 'next/dynamic'
+
+const AppHeader = dynamic(() => import('../../components/layouts/AppHeader'))
+
 const googleSiteKey = process.env.NEXT_PUBLIC_CLIENT_RECAPTCHA
 
 function SignIn() {

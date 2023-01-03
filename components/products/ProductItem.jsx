@@ -5,14 +5,16 @@ import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 import Image from 'next/image'
 import ZoomInIcon from '@mui/icons-material/ZoomIn'
-import QuickView from '../modals/QuickView'
-import AddToFav from '../fav/AddFav'
-import AddToCart from '../cart/AddCart'
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows'
 import { useRouter } from 'next/router'
 import { addClicks } from '../../libs/quick-tip'
 import { useCompare } from '../../store/compare/compare.context'
 import { useSession } from 'next-auth/react'
+import dynamic from 'next/dynamic'
+
+const QuickView = dynamic(() => import('../modals/QuickView'))
+const AddToCart = dynamic(() => import('../cart/AddCart'))
+const AddToFav = dynamic(() => import('../fav/AddFav'))
 
 function ProductItem({ product }) {
   const { t, i18n } = useTranslation()

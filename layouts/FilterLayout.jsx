@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useTreeCategories } from '../restapi/hooks'
 import { serialize } from '../libs/serialize'
-import CategoriesAccordion from '../components/categories/CategoriesAccordion'
 import { Slider, FormControlLabel, Checkbox } from '@mui/material'
 import resources from '../restapi/resources'
+import dynamic from 'next/dynamic'
+
+const CategoriesAccordion = dynamic(() => import('../components/categories/CategoriesAccordion'))
 
 function FilterLayout({ children, props }) {
   const { categories } = useTreeCategories()

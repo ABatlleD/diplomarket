@@ -1,9 +1,11 @@
 import React from 'react'
-import TopBar from '../components/layouts/navbar/TopBar'
-import BottomOptions from '../components/layouts/navbar/BottomOptions'
 import PropTypes from 'prop-types'
 import { Josefin_Sans } from '@next/font/google'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import dynamic from 'next/dynamic'
+
+const TopBar = dynamic(() => import('../components/layouts/navbar/TopBar'))
+const BottomOptions = dynamic(() => import('../components/layouts/navbar/BottomOptions'))
 
 const theme = createTheme({
   typography: {

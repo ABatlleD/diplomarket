@@ -1,22 +1,24 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import MainLayout from '../../layouts/MainLayout'
 import { Chip, Box, Tabs, Tab } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import AppHeader from '../../components/layouts/AppHeader'
 import { useTranslation } from 'react-i18next'
 import resources from '../../restapi/resources'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
-import ProductsCarousel from '../../components/products/ProductsSwiper.jsx'
-import AddToCart from '../../components/cart/AddCart'
-import AddToFav from '../../components/fav/AddFav'
-import AppTabPanel from '../../components/AppTabPanel'
 import { useCart } from '../../store/cart/cart.context'
 import { generateCartItem } from '../../store/cart/generate-cart-item'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
-import RelatedCard from '../../components/products/RelatedCard'
 import { useSession } from 'next-auth/react'
+import dynamic from 'next/dynamic'
+
+const MainLayout = dynamic(() => import('../../layouts/MainLayout'))
+const AppHeader = dynamic(() => import('../../components/layouts/AppHeader'))
+const ProductsCarousel = dynamic(() => import('../../components/products/ProductsSwiper'))
+const AddToCart = dynamic(() => import('../../components/cart/AddCart'))
+const AddToFav = dynamic(() => import('../../components/fav/AddFav'))
+const AppTabPanel = dynamic(() => import('../../components/AppTabPanel'))
+const RelatedCard = dynamic(() => import('../../components/products/RelatedCard'))
 
 const theme = createTheme({
   palette: {

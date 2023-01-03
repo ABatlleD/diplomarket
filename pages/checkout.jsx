@@ -1,7 +1,4 @@
 import React from 'react'
-import Checkout from '../components/checkout/CheckoutApp'
-import MainLayout from '../layouts/MainLayout.jsx'
-import AppHeader from '../components/layouts/AppHeader.jsx'
 import { useTranslation } from 'react-i18next'
 import { getSession } from 'next-auth/react'
 import resources from '../restapi/resources.js'
@@ -14,6 +11,11 @@ import {
   getMunicipalitiesId
 } from '../restapi/get-places'
 import { getCookie } from 'cookies-next'
+import dynamic from 'next/dynamic'
+
+const MainLayout = dynamic(() => import('../layouts/MainLayout'))
+const AppHeader = dynamic(() => import('../components/layouts/AppHeader'))
+const Checkout = dynamic(() => import('../components/checkout/CheckoutApp'))
 
 const CheckoutPage = ({ get_user_addresses }) => {
   const { t } = useTranslation()

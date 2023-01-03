@@ -3,7 +3,6 @@ import Drawer from '@mui/material/Drawer'
 import LangSelector from '../navbar/LangSelector'
 import LockIcon from '@mui/icons-material/Lock'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
-import AppButton from '../../AppButton'
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined'
 import { useTranslation } from 'react-i18next'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
@@ -13,6 +12,9 @@ import { getCookie } from 'cookies-next'
 import Link from 'next/link'
 import resources from '../../../restapi/resources'
 import parsePhoneNumber from 'libphonenumber-js'
+import dynamic from 'next/dynamic'
+
+const AppButton = dynamic(() => import('../../AppButton'))
 
 function MainSideBar ({ mainSideBar = false, setMainSideBar = () => {}, openSelectPlace, setOpenSelectPlace }) {
   const { t } = useTranslation()

@@ -9,10 +9,6 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import AddressForm from '../forms/RecipientsForm'
-import HeadquarterForm from '../forms/HeadquarterForm'
-import PaymentForm from '../forms/PaymentForm'
-import Review from '../forms/ReviewForm'
 import { useTranslation } from 'react-i18next'
 import { useCart } from '../../store/cart/cart.context'
 import { ToastContainer, toast } from 'react-toastify'
@@ -20,6 +16,12 @@ import 'react-toastify/dist/ReactToastify.min.css'
 import { isEmpty } from '../../libs/serialize'
 import resources from '../../restapi/resources'
 import { getCookie } from 'cookies-next'
+import dynamic from 'next/dynamic'
+
+const AddressForm = dynamic(() => import('../forms/RecipientsForm'))
+const HeadquarterForm = dynamic(() => import('../forms/HeadquarterForm'))
+const PaymentForm = dynamic(() => import('../forms/PaymentForm'))
+const Review = dynamic(() => import('../forms/ReviewForm'))
 
 function Copyright() {
   return (

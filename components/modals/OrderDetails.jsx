@@ -1,9 +1,11 @@
 import React from 'react'
 import { Modal, Fade } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
-import OrderProductItem from '../orders/OrderProductItem'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Josefin_Sans } from '@next/font/google'
+import dynamic from 'next/dynamic'
+
+const OrderProductItem = dynamic(() => import('../orders/OrderProductItem'))
 
 const js = Josefin_Sans({
   weight: '400',

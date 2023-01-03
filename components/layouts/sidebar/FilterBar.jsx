@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import Drawer from '@mui/material/Drawer'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import resources from '../../../restapi/resources'
-import CategoriesAccordion from '../../categories/CategoriesAccordion'
 import { Autocomplete, TextField, FormControlLabel, Checkbox } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { Josefin_Sans } from '@next/font/google'
 import { CarouselProvider, Slider, Slide } from 'pure-react-carousel'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
+
+const CategoriesAccordion = dynamic(() => import('../../categories/CategoriesAccordion'))
 
 const js = Josefin_Sans({
   weight: '400',

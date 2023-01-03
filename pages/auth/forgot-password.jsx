@@ -1,7 +1,9 @@
 import React from 'react'
 import { TextField, Button } from '@mui/material'
-import AppHeader from '../../components/layouts/AppHeader'
 import { useTranslation } from 'react-i18next'
+import dynamic from 'next/dynamic'
+
+const AppHeader = dynamic(() => import('../../components/layouts/AppHeader'))
 
 function ForgotPassword() {
   const { t } = useTranslation()

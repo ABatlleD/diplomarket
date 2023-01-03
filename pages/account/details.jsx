@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import MainLayout from '../../layouts/MainLayout.jsx'
-import AccountLayout from '../../layouts/AccountLayout.jsx'
 import { TextField, Checkbox, Button } from '@mui/material'
-import AppHeader from '../../components/layouts/AppHeader.jsx'
 import { useTranslation } from 'react-i18next'
 import { useSession, signOut } from 'next-auth/react'
 import resources from '../../restapi/resources.js'
@@ -12,6 +9,11 @@ import 'react-phone-input-2/lib/material.css'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
+import dynamic from 'next/dynamic'
+
+const MainLayout = dynamic(() => import('../../layouts/MainLayout'))
+const AccountLayout = dynamic(() => import('../../layouts/AccountLayout'))
+const AppHeader = dynamic(() => import('../../components/layouts/AppHeader'))
 
 function Details() {
   const { t } = useTranslation()

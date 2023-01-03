@@ -4,9 +4,11 @@ import { Button } from '@mui/material'
 import Router from 'next/router'
 import { useCart } from '../../store/cart/cart.context'
 import { useTranslation } from 'react-i18next'
-import MainLayout from '../../layouts/MainLayout'
 // eslint-disable-next-line import/no-absolute-path
 import ErrorPayImg from '/public/assets/user-message/105614.png'
+import dynamic from 'next/dynamic'
+
+const MainLayout = dynamic(() => import('../../layouts/MainLayout'))
 
 const PaymentError = () => {
   const { t } = useTranslation('', {

@@ -1,10 +1,12 @@
 import React from 'react'
-import AppCounter from '../AppCounter'
-import AddToCartBtn from './AddCartBtn'
+import dynamic from 'next/dynamic'
 import { useCart } from '../../store/cart/cart.context'
 import { generateCartItem } from '../../store/cart/generate-cart-item'
 import { addClicks } from '../../libs/quick-tip'
 import { useSession } from 'next-auth/react'
+
+const AddToCartBtn = dynamic(() => import('./AddCartBtn'))
+const AppCounter = dynamic(() => import('../AppCounter'))
 
 function AddToCart ({
   data,

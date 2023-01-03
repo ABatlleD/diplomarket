@@ -10,10 +10,12 @@ import '@fontsource/josefin-sans/400.css'
 import '@fontsource/josefin-sans/500.css'
 import '@fontsource/josefin-sans/700.css'
 import SwiperCore, { Autoplay } from 'swiper'
-import WebChat from '../components/WebChat'
 import { SessionProvider } from 'next-auth/react'
 import { Josefin_Sans } from '@next/font/google'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import dynamic from 'next/dynamic'
+
+const WebChat = dynamic(() => import('../components/WebChat'))
 
 const theme = createTheme({
   typography: {

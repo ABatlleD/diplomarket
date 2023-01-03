@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import ProductItem from './ProductItem'
-import AllProductsLoader from '../loaders/AllProducts'
+import dynamic from 'next/dynamic'
+
+const ProductItem = dynamic(() => import('./ProductItem'))
+const AllProductsLoader = dynamic(() => import('../loaders/AllProducts'))
 
 function ListProducts({ products, loading }) {
   const [isLoading, setLoading] = useState(false)

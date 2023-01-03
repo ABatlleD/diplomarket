@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react'
 import Autocomplete from '@mui/material/Autocomplete'
 import { FormControl, OutlinedInput, InputAdornment, IconButton } from '@mui/material'
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles'
-import AppButton from './AppButton'
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined'
 import { useTranslation } from 'react-i18next'
 import { getCookie } from 'cookies-next'
 import resources from '../restapi/resources'
-import SearchResult from './products/SearchResult'
 import useWindowSize from '../hooks/WindowSize'
 import { Search } from '@mui/icons-material'
+import dynamic from 'next/dynamic'
+
+const AppButton = dynamic(() => import('./AppButton'))
+const SearchResult = dynamic(() => import('./products/SearchResult'))
 
 const theme = createTheme({
   palette: {

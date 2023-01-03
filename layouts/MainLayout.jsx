@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import NavBar from './NavBar.jsx'
-import Footer from './Footer.jsx'
-import CategoriesSideBar from '../components/layouts/sidebar/CategoriesSideBar'
-import MainSideBar from '../components/layouts/sidebar/MainSideBar'
-import CartSideBar from '../components/layouts/sidebar/CartSideBar'
 import { motion } from 'framer-motion'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { getCookie } from 'cookies-next'
@@ -12,10 +7,17 @@ import { FavProvider } from '../store/fav/fav.context.jsx'
 import { CompareProvider } from '../store/compare/compare.context.jsx'
 import { CartProvider } from '../store/cart/cart.context.jsx'
 import { SessionProvider } from 'next-auth/react'
-import QuickTip from '../components/modals/QuickTip.jsx'
 import { addClicks, clicks } from '../libs/quick-tip'
 import useScrollY from '../hooks/Scroll.js'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
+import dynamic from 'next/dynamic'
+
+const NavBar = dynamic(() => import('./NavBar'))
+const Footer = dynamic(() => import('./Footer'))
+const CategoriesSideBar = dynamic(() => import('../components/layouts/sidebar/CategoriesSideBar'))
+const MainSideBar = dynamic(() => import('../components/layouts/sidebar/MainSideBar'))
+const CartSideBar = dynamic(() => import('../components/layouts/sidebar/CartSideBar'))
+const QuickTip = dynamic(() => import('../components/modals/QuickTip'))
 
 function MainLayout({ children }) {
   const [categoriesSideBar, setCategoriesSideBar] = useState(false)

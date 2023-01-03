@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import MainLayout from '../layouts/MainLayout'
-import AppHeader from '../components/layouts/AppHeader'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import MailOutlineIcon from '@mui/icons-material/MailOutline'
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined'
@@ -13,6 +11,10 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import parsePhoneNumber from 'libphonenumber-js'
+import dynamic from 'next/dynamic'
+
+const MainLayout = dynamic(() => import('../layouts/MainLayout'))
+const AppHeader = dynamic(() => import('../components/layouts/AppHeader'))
 
 function Contact() {
   const { t, i18n } = useTranslation()

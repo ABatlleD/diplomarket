@@ -1,11 +1,13 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import AppCounter from '../AppCounter'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import { useCart } from '../../store/cart/cart.context'
 import usePrice from '../../libs/use-price'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import { useTranslation } from 'react-i18next'
+
+const AppCounter = dynamic(() => import('../AppCounter'))
 
 function CartItem({ item, variant, calculateDelivery }) {
   const { i18n } = useTranslation()

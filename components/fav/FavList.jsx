@@ -1,5 +1,7 @@
 import React from 'react'
-import FavItem from './FavItem'
+import dynamic from 'next/dynamic'
+
+const FavItem = dynamic(() => import('./FavItem'))
 
 function FavList({ products, loading }) {
   return (

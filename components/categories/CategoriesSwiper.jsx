@@ -1,6 +1,8 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import CategoryItem from './CategoryItem'
+import dynamic from 'next/dynamic'
+
+const CategoryItem = dynamic(() => import('./CategoryItem'))
 
 function CategoriesSwiper({ categories }) {
   return (

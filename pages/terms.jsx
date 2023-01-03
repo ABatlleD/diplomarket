@@ -1,8 +1,10 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import MainLayout from '../layouts/MainLayout'
-import AppHeader from '../components/layouts/AppHeader'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
+
+const MainLayout = dynamic(() => import('../layouts/MainLayout'))
+const AppHeader = dynamic(() => import('../components/layouts/AppHeader'))
 
 function Terms() {
   const { t } = useTranslation()

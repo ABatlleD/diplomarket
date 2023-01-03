@@ -9,8 +9,10 @@ import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import 'react-phone-input-2/lib/material.css'
 import { removeDuplicateObjects } from '../../libs/serialize'
-import AddRecipient from '../modals/AddRecipient'
 import { useTranslation } from 'react-i18next'
+import dynamic from 'next/dynamic'
+
+const AddRecipient = dynamic(() => import('../modals/AddRecipient'))
 
 // Alternative Contact
 

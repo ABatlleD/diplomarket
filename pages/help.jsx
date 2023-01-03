@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import MainLayout from '../layouts/MainLayout'
-import AppHeader from '../components/layouts/AppHeader'
-import AppAccordion from '../components/AppAccordion'
 import resources from '../restapi/resources'
+import dynamic from 'next/dynamic'
+
+const MainLayout = dynamic(() => import('../layouts/MainLayout'))
+const AppHeader = dynamic(() => import('../components/layouts/AppHeader'))
+const AppAccordion = dynamic(() => import('../components/AppAccordion'))
 
 function Help({ faq, help, fetchError }) {
   const { t, i18n } = useTranslation()

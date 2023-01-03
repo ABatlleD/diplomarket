@@ -4,6 +4,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import { isEmpty } from '../../../libs/serialize'
 import resources from '../../../restapi/resources'
 import axios from 'axios'
+
 const googleServerKey = process.env.SECRET_RECAPTCHA
 
 const clientUser = async (username, password) => {
@@ -54,7 +55,8 @@ export const authOptions = {
         username: { label: 'Username', type: 'text', placeholder: 'jsmith' },
         password: { label: 'Password', type: 'password' }
       },
-      async authorize(credentials) {
+      authorize: async (credentials) => {
+        console.log('🚀 ~ file: [...nextauth].js:59 ~ authorize: ~ credentials', credentials)
         try {
           const recaptchaVerify = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${googleServerKey}&response=${credentials?.gReCaptchaToken}`,
             {}, {
@@ -66,7 +68,7 @@ export const authOptions = {
           if (recaptchaVerifyData?.score && recaptchaVerifyData?.score < 0.5) {
             throw new Error('error_recaptcha_fail')
           }
-        } catch (_) {
+        } catch (err) {
           throw new Error('error_recaptcha_form')
         }
         const username = credentials.username.replace(/\s+/g, '').toLowerCase()

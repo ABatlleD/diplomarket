@@ -4,12 +4,14 @@ import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 import Image from 'next/image'
 import ZoomInIcon from '@mui/icons-material/ZoomIn'
-import QuickView from '../modals/QuickView'
-import AddToFav from '../fav/AddFav'
-import AddToCart from '../cart/AddCart'
 import resources from '../../restapi/resources'
 import useWindowSize from '../../hooks/WindowSize.js'
 import { useSession } from 'next-auth/react'
+import dynamic from 'next/dynamic'
+
+const QuickView = dynamic(() => import('../modals/QuickView'))
+const AddToFav = dynamic(() => import('../fav/AddFav'))
+const AddToCart = dynamic(() => import('../cart/AddCart'))
 
 function FavItem({ id }) {
   const { i18n } = useTranslation()

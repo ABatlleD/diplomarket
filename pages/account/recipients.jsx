@@ -1,7 +1,4 @@
 import React from 'react'
-import MainLayout from '../../layouts/MainLayout.jsx'
-import AccountLayout from '../../layouts/AccountLayout.jsx'
-import AppHeader from '../../components/layouts/AppHeader.jsx'
 import { useTranslation } from 'react-i18next'
 import { useSession, getSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
@@ -14,7 +11,12 @@ import {
   getProvincesId,
   getMunicipalitiesId
 } from '../../restapi/get-places'
-import MyAddressees from '../../components/account/MyAddresses'
+import dynamic from 'next/dynamic'
+
+const MainLayout = dynamic(() => import('../../layouts/MainLayout'))
+const AccountLayout = dynamic(() => import('../../layouts/AccountLayout'))
+const AppHeader = dynamic(() => import('../../components/layouts/AppHeader'))
+const MyAddressees = dynamic(() => import('../../components/account/MyAddresses'))
 
 function Recipients({ get_user_addresse }) {
   const { t } = useTranslation()

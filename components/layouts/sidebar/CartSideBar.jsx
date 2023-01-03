@@ -4,11 +4,13 @@ import { Divider } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import RemoveShoppingCartOutlinedIcon from '@mui/icons-material/RemoveShoppingCartOutlined'
 import { useCart } from '../../../store/cart/cart.context'
-import CartItem from '../../cart/CartItem'
 import usePrice from '../../../libs/use-price'
 import { t } from 'i18next'
 import Link from 'next/link'
 import { AnimatePresence } from 'framer-motion'
+import dynamic from 'next/dynamic'
+
+const CartItem = dynamic(() => import('../../cart/CartItem'))
 
 function CartSideBar ({ cartSideBar = false, setCartSideBar = () => {} }) {
   const currency = 'USD'

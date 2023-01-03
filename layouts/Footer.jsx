@@ -1,8 +1,10 @@
 import React from 'react'
-import FooterBox from '../components/layouts/footer/FooterBox'
-import BrandBar from '../components/layouts/footer/BrandBar'
 import PropTypes from 'prop-types'
 import { Josefin_Sans } from '@next/font/google'
+import dynamic from 'next/dynamic'
+
+const FooterBox = dynamic(() => import('../components/layouts/footer/FooterBox'))
+const BrandBar = dynamic(() => import('../components/layouts/footer/BrandBar'))
 
 const js = Josefin_Sans({
   weight: '400',

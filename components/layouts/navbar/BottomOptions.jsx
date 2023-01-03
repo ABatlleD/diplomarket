@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import SearchBar from '../../SearchBar'
-import AppButton from '../../AppButton'
 import { useTranslation } from 'react-i18next'
 import WhatsAppBusinessIcon from '../../icons/whats-app-business-icon'
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined'
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined'
 import LockIcon from '@mui/icons-material/Lock'
 import { Divider } from '@mui/material'
-import LangSelector from './LangSelector'
 import DensityMediumIcon from '@mui/icons-material/DensityMedium'
 import Link from 'next/link'
 import { getCookie } from 'cookies-next'
 import resources from '../../../restapi/resources'
 import parsePhoneNumber from 'libphonenumber-js'
+import dynamic from 'next/dynamic'
+
+const SearchBar = dynamic(() => import('../../SearchBar'))
+const AppButton = dynamic(() => import('../../AppButton'))
+const LangSelector = dynamic(() => import('./LangSelector'))
 
 function BottomOptions({
   categoriesSideBar,

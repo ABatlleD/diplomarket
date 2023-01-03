@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import MainLayout from '../layouts/MainLayout'
-import FavList from '../components/fav/FavList'
 import { useFav } from '../store/fav/fav.context'
 import { useTranslation } from 'react-i18next'
-import AppHeader from '../components/layouts/AppHeader'
 import LayersClearIcon from '@mui/icons-material/LayersClear'
+import dynamic from 'next/dynamic'
+
+const MainLayout = dynamic(() => import('../layouts/MainLayout'))
+const AppHeader = dynamic(() => import('../components/layouts/AppHeader'))
+const FavList = dynamic(() => import('../components/fav/FavList'))
 
 function Wishlist() {
   const { items } = useFav()

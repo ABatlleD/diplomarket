@@ -1,30 +1,31 @@
 import React, { useState, useEffect } from 'react'
-import MainLayout from '../layouts/MainLayout'
 import resources from '../restapi/resources'
-import ListProducts from '../components/products/ListProducts'
-import CategoriesAccordion from '../components/categories/CategoriesAccordion'
 import { FormControlLabel, Pagination, TextField, Autocomplete, Checkbox, FormControl, InputLabel, MenuItem, Select } from '@mui/material'
-import FilterBar from '../components/layouts/sidebar/FilterBar'
 import TableRowsIcon from '@mui/icons-material/TableRows'
 import WindowIcon from '@mui/icons-material/Window'
 import { useTranslation } from 'react-i18next'
-import AppHeader from '../components/layouts/AppHeader'
 import { getCookie } from 'cookies-next'
-import MainCarousel from '../components/home/MainCarousel'
 import { CarouselProvider, Slider, Slide } from 'pure-react-carousel'
 import useWindowSize from '../hooks/WindowSize'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import ProductItem from '../components/products/ProductItem'
-import AllProductsLoader from '../components/loaders/AllProducts'
-import HorizontalProductItem from '../components/products/HorizontalProductItem'
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined'
 import PriceCheckIcon from '@mui/icons-material/PriceCheck'
 import SentimentSatisfiedOutlinedIcon from '@mui/icons-material/SentimentSatisfiedOutlined'
 import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined'
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined'
 import { useSession } from 'next-auth/react'
-import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
+
+const MainLayout = dynamic(() => import('../layouts/MainLayout'))
+const AppHeader = dynamic(() => import('../components/layouts/AppHeader'))
+const ListProducts = dynamic(() => import('../components/products/ListProducts'))
+const CategoriesAccordion = dynamic(() => import('../components/categories/CategoriesAccordion'))
+const FilterBar = dynamic(() => import('../components/layouts/sidebar/FilterBar'))
+const MainCarousel = dynamic(() => import('../components/home/MainCarousel'))
+const ProductItem = dynamic(() => import('../components/products/ProductItem'))
+const AllProductsLoader = dynamic(() => import('../components/loaders/AllProducts'))
+const HorizontalProductItem = dynamic(() => import('../components/products/HorizontalProductItem'))
 
 const NotificationsTip = dynamic(() => import('../components/modals/NotificationsTip'), {
   loading: () => 'Loading...'
