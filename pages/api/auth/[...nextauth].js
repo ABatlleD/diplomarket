@@ -52,11 +52,10 @@ export const authOptions = {
       id: 'credentials',
       name: 'Credentials',
       credentials: {
-        username: { label: 'Username', type: 'text', placeholder: 'jsmith' },
+        username: { label: 'Username', type: 'text', placeholder: 'Username' },
         password: { label: 'Password', type: 'password' }
       },
       authorize: async (credentials) => {
-        console.log('🚀 ~ file: [...nextauth].js:59 ~ authorize: ~ credentials', credentials)
         try {
           const recaptchaVerify = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${googleServerKey}&response=${credentials?.gReCaptchaToken}`,
             {}, {
