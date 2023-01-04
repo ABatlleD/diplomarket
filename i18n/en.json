@@ -435,5 +435,6 @@
     "description": "Se ha completado satisfactoriamente el pago solicitado."
   },
   "view_orders": "Ver mis órdenes",
-  "back": "Volver a inicio"
+  "back": "Volver a inicio",
+  "free_shipping": "Free"
 }

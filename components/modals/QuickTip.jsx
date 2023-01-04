@@ -110,7 +110,7 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
                 </div>
                 <div className='md:w-[2%]'></div>
                 <div className='flex flex-col w-full px-4 md:w-[60%]'>
-                  <p className='text-base md:text-base 2xl:text-lg text-text-blue'>{i18n.language === 'es' ? product.nombre : product.nombre_ingles}</p>
+                  <p className='text-lg md:text-base 2xl:text-lg text-text-blue'>{i18n.language === 'es' ? product.nombre : product.nombre_ingles}</p>
                   <div className='flex flex-col mb-2'>
                     {(product.etiquetas && product.etiquetas.length > 0) && (
                       <ThemeProvider theme={theme}>
@@ -129,14 +129,14 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
                   </div>
                   {data && data.mayorista
                     ? (<>
-                    <div className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-lg'>US${product.precio_b2b?.cantidad || product.precio_b2b}</div></>)
+                    <div className='my-0 md:mb-0 md:my-0 text-button font-bold text-2xl md:text-lg'>US${product.precio_b2b?.cantidad || product.precio_b2b}</div></>)
                     : (<>
                       {!product.promocion?.activo && (
-                        <div className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-lg'>US${product.precio?.cantidad || product.precio}</div>
+                        <div className='my-0 md:mb-0 md:my-0 text-button font-bold text-2xl md:text-lg'>US${product.precio?.cantidad || product.precio}</div>
                       )}
                       {product.promocion?.activo && (
                         <div className='flex flex-col leading-3'>
-                          <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base'>US${((product.precio?.cantidad || product.precio) - ((product.precio?.cantidad || product.precio) * product.promocion.descuento / 100)).toFixed(2)} </p>
+                          <p className='my-0 md:mb-0 md:my-0 text-button font-bold text-2xl md:text-base'>US${((product.precio?.cantidad || product.precio) - ((product.precio?.cantidad || product.precio) * product.promocion.descuento / 100)).toFixed(2)} </p>
                           <div className='flex flex-row my-2'>
                             <div
                               className='bg-button flex rounded-md px-1 mr-1 text-background-100 text-sm md:text-base'
