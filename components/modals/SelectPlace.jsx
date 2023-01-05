@@ -98,8 +98,8 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
         sx={{ overflowY: 'scroll' }}
       >
         <Fade in={openSelectPlace}>
-          <main className={js.className}>
-            <div className='flex flex-col shadow-2xl h-screen md:h-auto md:rounded-xl bg-background-100 w-full md:w-[30%] absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 p-2'>
+          <div className={js.className}>
+            <div className='flex flex-col shadow-2xl h-screen md:h-auto md:rounded-xl bg-background-100 w-full md:w-[25%] absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 p-2'>
               <div className='flex flex-row justify-end'>
                 <HighlightOffIcon className='hover:cursor-pointer' onClick={handleClose} />
               </div>
@@ -115,7 +115,7 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
                 </p>
               </div>
               <div className='flex flex-col md:flex-row justify-between mx-2 mt-8'>
-                <div className='md:w-[45%] mb-4 md:mb-0'>
+                <div className='md:w-[49%] mb-4 md:mb-0'>
                   <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">{t('place.state')}</InputLabel>
                     <Select
@@ -131,7 +131,7 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
                     </Select>
                   </FormControl>
                 </div>
-                <div className='md:w-[45%]'>
+                <div className='md:w-[49%]'>
                   <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">{t('place.district')}</InputLabel>
                     <Select
@@ -163,7 +163,7 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
                 </Link>
               </div>
             </div>
-          </main>
+          </div>
         </Fade>
       </Modal>
     </>

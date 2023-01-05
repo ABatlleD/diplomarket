@@ -103,13 +103,13 @@ function FooterBox({ cartSideBar, setCartSideBar }) {
           )}
           {configurations.pasarela_bofa &&
             <>
-              <img src="/assets/payment/banco/card-visa.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
-              <img src="/assets/payment/banco/card-master.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
-              <img src="/assets/payment/banco/card-american-express.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
-              <img src="/assets/payment/banco/card-maestro.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
-              <img src="/assets/payment/banco/card-discover.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
-              <img src="/assets/payment/banco/card-uatp.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
-              <img src="/assets/payment/banco/card-jcb.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
+              <img src="/assets/payment/bofa/card-visa.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
+              <img src="/assets/payment/bofa/card-master.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
+              <img src="/assets/payment/bofa/card-american-express.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
+              <img src="/assets/payment/bofa/card-maestro.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
+              <img src="/assets/payment/bofa/card-discover.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
+              <img src="/assets/payment/bofa/card-uatp.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
+              <img src="/assets/payment/bofa/card-jcb.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
             </>}
         </div>
       </div>

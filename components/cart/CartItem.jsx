@@ -57,7 +57,7 @@ function CartItem({ item, variant, calculateDelivery }) {
       exit={{ opacity: 0, x: 100, rotate: 10 }}
       transition={{ }}
       className={`flex flex-row p-1 text-sm border mt-4 rounded-lg border-opacity-75 ${
-        isNotAvailable ? 'bg-red-100' : ''
+        isNotAvailable ? 'bg-[#ff9494]' : ''
       }`}
     >
       {variant === 'pillVertical'

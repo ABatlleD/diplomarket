@@ -47,7 +47,7 @@ function PaymentForm({ address }) {
           <a href="#!" onClick={() => {
             setTypePay('banco')
           }}>
-            <img className={getTypePay === 'banco' ? 'border-2 rounded-lg border-button w-auto' : 'w-auto'} src="/assets/payment/banco/banco.png" alt="banco" />
+            <img className={getTypePay === 'banco' ? 'border-2 rounded-lg border-button w-auto' : 'w-auto'} src="/assets/payment/bofa/banco.png" alt="banco" />
           </a>
         </Grid>}
       </Grid>

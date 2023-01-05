@@ -204,11 +204,11 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
           {items.length > 0
             ? (
                 items.map((item, key) => (
-              <CartItem
-                item={item}
-                key={key}
-                calculateDelivery={calculateDelivery}
-              />
+                  <CartItem
+                    item={item}
+                    key={key}
+                    calculateDelivery={calculateDelivery}
+                  />
                 ))
               )
             : (
