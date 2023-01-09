@@ -34,7 +34,7 @@ function SearchResult({ info, setInputValue = () => '' }) {
               <div className='w-[59%] text-xs text-text-blue md:text-base'>{resizeTitle(i18n.language === 'es' ? info.nombre : info.nombre_ingles, size.width < 768 ? 100 : 100)}</div>
               <div className='w-[3%]'></div>
               <div className='flex flex-row w-3/12 justify-end'>
-                {!data.mayorista && info.promocion && info.promocion.descuento && (
+                {(!data || !data.mayorista) && info.promocion && info.promocion.descuento && (
                   <div className='px-1 text-button font-bold rounded-xl text-xs md:mr-1 md:text-base'>-{parseFloat(info.promocion.descuento).toFixed(0)}%</div>
                 )}
                 <div className='px-1 text-button rounded-xl font-bold text-xs md:text-base'>

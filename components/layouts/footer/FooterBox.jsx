@@ -37,9 +37,9 @@ function FooterBox({ cartSideBar, setCartSideBar }) {
         <p className='text-text-200 text-justify italic font-semibold'>
           {t('footer.description')}
         </p>
-        <div className='flex flex-row justify-between text-background-100 w-1/2 mt-4'>
+        <div className='flex flex-row text-background-100 w-1/2 mt-4'>
           {socialMedias.map((social) => (
-            <a key={social.id} href={social.contenido} target="_blank" rel="noopener noreferrer" title={social.tipo}>
+            <a key={social.id} className='mr-2' href={social.contenido} target="_blank" rel="noopener noreferrer" title={social.tipo}>
               {SocialMedia[social.tipo]}
             </a>
           ))}
