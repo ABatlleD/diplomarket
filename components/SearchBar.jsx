@@ -130,7 +130,7 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
               )
             }}
             renderOption={(props, option) => (
-              <SearchResult data={option} {...{ setInputValue }} />
+              <SearchResult info={option} {...{ setInputValue }} />
             )}
           />
           {/* <div className='hidden md:flex'>

@@ -200,8 +200,8 @@ function Product({ product, apiError }) {
             ))}
           </div>
           <div className='flex flex-col'>
-          {Number(product.cant_inventario) > 0 &&
-            <div className='flex flex-row justify-between w-11/12 mb-4'>
+          {Number(product.cant_inventario) > 0
+            ? <div className='flex flex-row justify-between w-11/12 mb-4'>
               <div className='w-6/12 md:w-5/12'>
                 <div className='flex flex-row justify-between'>
                   <div
@@ -228,6 +228,7 @@ function Product({ product, apiError }) {
                 {t('home.shopNow')}
               </div>
             </div>
+            : <div className='bg-button text-background-300 px-2 rounded-md mb-4 text-center w-1/3'>{t('oos')}</div>
             }
             <div className='flex flex-row text-button mt-1 hover:cursor-pointer hover:opacity-90'>
               <AddToFav data={product} text={'Añadir a favoritos'} success={'En favoritos'}/>

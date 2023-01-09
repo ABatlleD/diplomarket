@@ -7,6 +7,8 @@ import { useTranslation } from 'react-i18next'
 import { getCookie } from 'cookies-next'
 import { CarouselProvider, Slider, Slide } from 'pure-react-carousel'
 import useWindowSize from '../hooks/WindowSize'
+import CircularProgress from '@mui/material/CircularProgress'
+
 import InfiniteScroll from 'react-infinite-scroll-component'
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined'
 import PriceCheckIcon from '@mui/icons-material/PriceCheck'
@@ -322,7 +324,7 @@ function Home({
           <MainCarousel carousel={carousel} />
         </div>
         <div className='dark:text-[black] flex md:flex-row flex-col w-full md:w-[95%] md:mx-auto mb-3 md:my-5'>
-          <div className='md:mx-3 flex md:hidden text-base mt-1 flex-row justify-between md:mb-3'>
+          <div className='md:mx-3 flex md:hidden text-base mt-1 flex-row justify-between md:mb-3 mx-2'>
             {selectedCategory && (
               <div className='font-bold mt-2'>
                 {i18n.language === 'es' ? selectedCategory.nombre : selectedCategory.nombre_ingles}
@@ -495,7 +497,7 @@ function Home({
                   dataLength={mobileList.length}
                   next={getMorePost}
                   hasMore={true}
-                  loader={<div className='flex flex-row w-full justify-center my-6 text-text-blue'> Loading...</div>}
+                  loader={<div className='flex flex-row w-full justify-center my-6 text-text-blue'><CircularProgress /></div>}
                   endMessage={<h4>Nothing more to show</h4>}
                 >
                   <div className='flex flex-wrap justify-evenly w-full'>
