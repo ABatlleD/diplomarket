@@ -90,7 +90,9 @@ function FooterBox({ cartSideBar, setCartSideBar }) {
       </div>
       <div className='flex flex-col md:w-3/12 text-background-100'>
         <h2 className='mb-4 font-semibold'>{t('footer.app')}</h2>
-        <img src="/assets/google-play.png" className="max-w-max h-14 rounded-md mb-2" alt="..." />
+        <a href="https://play.google.com/store/apps/details?id=com.octagi.diplomarket&hl=es&gl=US">
+          <img src="/assets/google-play.png" className="max-w-max h-14 rounded-md mb-2" alt="..." />
+        </a>
         <div className='flex flex-wrap md:w-2/3 mt-4'>
           {configurations.pasarela_paypal && (
             <img src="/assets/payment/paypal/type-paypal.png" className="max-w-max h-10 rounded-md mb-2 mr-1" alt="..." />
