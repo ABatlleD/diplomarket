@@ -310,7 +310,7 @@ function Home({
           setExist(true)
           setPromotions(false)
           setRecommendations(false)
-          setExtra('existencias')
+          setExtra('disponibles')
         }
         break
     }
