@@ -8,13 +8,33 @@ function AllProductsLoader() {
   const size = useWindowSize()
 
   return (
-    <div className='flex flex-wrap justify-evenly w-full'>
+    <div className="flex flex-wrap justify-evenly w-full">
       {items.map((item) => (
-        <div key={item} className='w-[30%] md:w-1/3 xl:w-[20%] mb-4'>
-          <Skeleton variant="rectangular" width={size.width < 768 ? 120 : 280} height={140} sx={{ marginBottom: 1 }} />
-          <Skeleton variant="rectangular" width={size.width < 768 ? 120 : 280} height={25} sx={{ marginBottom: 1 }} />
-          <Skeleton variant="rectangular" width={size.width < 768 ? 120 : 280} height={25} sx={{ marginBottom: 1 }} />
-          <Skeleton variant="rounded" width={size.width < 768 ? 120 : 280} height={25} sx={{ marginBottom: 1 }} />
+        <div key={item} className="w-[30%] md:w-1/3 xl:w-[20%] mb-4">
+          <Skeleton
+            variant="rectangular"
+            width={size.width < 768 ? 120 : 280}
+            height={140}
+            sx={{ marginBottom: 1 }}
+          />
+          <Skeleton
+            variant="rectangular"
+            width={size.width < 768 ? 120 : 280}
+            height={25}
+            sx={{ marginBottom: 1 }}
+          />
+          <Skeleton
+            variant="rectangular"
+            width={size.width < 768 ? 120 : 280}
+            height={25}
+            sx={{ marginBottom: 1 }}
+          />
+          <Skeleton
+            variant="rounded"
+            width={size.width < 768 ? 120 : 280}
+            height={25}
+            sx={{ marginBottom: 1 }}
+          />
         </div>
       ))}
     </div>

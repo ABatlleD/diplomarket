@@ -12,6 +12,7 @@ import '@fontsource/josefin-sans/700.css'
 import SwiperCore, { Autoplay } from 'swiper'
 import { SessionProvider } from 'next-auth/react'
 import { Josefin_Sans } from '@next/font/google'
+import localFont from '@next/font/local'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import dynamic from 'next/dynamic'
 
@@ -19,18 +20,20 @@ const WebChat = dynamic(() => import('../components/WebChat'))
 
 const theme = createTheme({
   typography: {
-    fontFamily: '"Josefin Sans", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Arial", "Helvetica", sans-serif',
     fontWeightLight: 300,
     fontWeightRegular: 400,
     fontWeightMedium: 500,
-    fontWeightBold: 700
-  }
+    fontWeightBold: 700,
+  },
 })
 
 const js = Josefin_Sans({
   weight: '400',
-  subsets: ['latin']
+  subsets: ['latin'],
 })
+
+const arial = localFont({ src: '../public/assets/font/arial/Arial.ttf' })
 
 SwiperCore.use([Autoplay])
 
@@ -45,7 +48,7 @@ function MyApp({ Component, pageProps }) {
         <NextNProgress color="#b12024" />
         <SessionProvider session={pageProps.session}>
           <QueryClientProvider client={queryClient}>
-            <main className={js.className}>
+            <main className={arial.className}>
               <Component {...pageProps} />
             </main>
           </QueryClientProvider>

@@ -1,0 +1,11 @@
+@font-face {
+	font-family: 'Arial';
+	src: url('./Arial.eot');
+	src: local('Arial'), url('./Arial.woff') format('woff'), url('./Arial.ttf') format('truetype');
+}
+/* use this class to attach this font to any element i.e. <p class="fontsforweb_fontid_1080">Text with this font applied</p> */
+.fontsforweb_fontid_1080 {
+	font-family: 'Arial' !important;
+}
+
+/* Font downloaded from FontsForWeb.com */

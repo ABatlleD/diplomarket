@@ -18,13 +18,15 @@
     "orders": "Orders",
     "recipients": "Recipients",
     "settings": "Settings",
-    "wishlist": "Wishlist"
+    "wishlist": "Wishlist",
+    "providers": "Providers"
   },
   "layout": {
     "navbar": {
       "allProducts": "All Products",
       "about": "About us",
       "contact": "Contact us",
+      "providers": "Providers",
       "sell-with-us": "Sell with us",
       "categories": "Categories",
       "lang": {

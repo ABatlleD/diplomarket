@@ -4,17 +4,20 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import { removeDuplicateObjects } from '../../libs/serialize'
 import { useTranslation } from 'react-i18next'
 import { Josefin_Sans } from '@next/font/google'
+import localFont from '@next/font/local'
 
 const js = Josefin_Sans({
   weight: '400',
-  subsets: ['latin']
+  subsets: ['latin'],
 })
+
+const arial = localFont({ src: '../../public/assets/font/arial/Arial.ttf' })
 
 function AddRecipient({
   openAddRecipient = false,
   setOpenAddRecipient = () => {},
   getAddressees,
-  setAddressees = () => {}
+  setAddressees = () => {},
 }) {
   const { t } = useTranslation()
   const [address, setAddress] = useState('')
@@ -30,7 +33,7 @@ function AddRecipient({
     ciudad: '',
     direccion: '',
     nota_entrega: '',
-    activo: true
+    activo: true,
   }
 
   const activeAddressees = getAddressees.find(({ activo }) => activo === true)
@@ -39,10 +42,16 @@ function AddRecipient({
     if (address !== '') {
       if (activeAddressees) {
         activeAddressees.activo = false
-        const addressees = removeDuplicateObjects([...getAddressees, activeAddressees], 'nombre')
+        const addressees = removeDuplicateObjects(
+          [...getAddressees, activeAddressees],
+          'nombre'
+        )
         setAddressees(addressees)
       }
-      const addressees = removeDuplicateObjects([...getAddressees, { nombre: address, ...emptyAddress }], 'nombre')
+      const addressees = removeDuplicateObjects(
+        [...getAddressees, { nombre: address, ...emptyAddress }],
+        'nombre'
+      )
       setAddressees(addressees)
       setOpenAddRecipient(false)
     }
@@ -57,31 +66,36 @@ function AddRecipient({
         onClose={() => setOpenAddRecipient(false)}
         closeAfterTransition
         BackdropProps={{
-          timeout: 500
+          timeout: 500,
         }}
         sx={{ overflowY: 'scroll' }}
       >
         <Fade in={openAddRecipient}>
-          <main className={js.className}>
-            <div className='flex flex-col shadow-2xl rounded-xl bg-background-100 w-11/12 md:w-2/5 md:mt-4 mx-auto p-2 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2'>
-              <div className='flex flex-row justify-end text-footer-background-300'>
-                <HighlightOffIcon className='hover:cursor-pointer' onClick={() => setOpenAddRecipient(false)} />
+          <main className={arial.className}>
+            <div className="flex flex-col shadow-2xl rounded-xl bg-background-100 w-11/12 md:w-2/5 md:mt-4 mx-auto p-2 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+              <div className="flex flex-row justify-end text-footer-background-300">
+                <HighlightOffIcon
+                  className="hover:cursor-pointer"
+                  onClick={() => setOpenAddRecipient(false)}
+                />
               </div>
-              <div className='flex flex-row justify-center mt-4'>
-                <p className='font-bold text-lg text-footer-background-100'>{t('profile.recipients.modal.title')}</p>
-              </div>
-              <div className='flex flex-row justify-center mt-4 mx-12'>
-                <p className='font-semibold text-footer-background-100 text-justify'>
-                {t('profile.recipients.modal.subtitle')}
+              <div className="flex flex-row justify-center mt-4">
+                <p className="font-bold text-lg text-footer-background-100">
+                  {t('profile.recipients.modal.title')}
                 </p>
               </div>
-              <div className='flex flex-row justify-between mx-12 mt-8'>
-                <div className='w-full'>
-                <FormControl fullWidth>
+              <div className="flex flex-row justify-center mt-4 mx-12">
+                <p className="font-semibold text-footer-background-100 text-justify">
+                  {t('profile.recipients.modal.subtitle')}
+                </p>
+              </div>
+              <div className="flex flex-row justify-between mx-12 mt-8">
+                <div className="w-full">
+                  <FormControl fullWidth>
                     <TextField
                       required
                       id="select-addresses"
-                      name='addresses'
+                      name="addresses"
                       value={address}
                       label={t('profile.recipients.modal.name')}
                       fullWidth
@@ -92,12 +106,12 @@ function AddRecipient({
                   </FormControl>
                 </div>
               </div>
-              <div className='mx-12 my-4'>
+              <div className="mx-12 my-4">
                 <Button
                   variant="contained"
                   sx={{
                     width: '100%',
-                    backgroundColor: '#b12024 !important'
+                    backgroundColor: '#b12024 !important',
                   }}
                   onClick={handleSubmit}
                 >

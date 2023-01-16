@@ -9,16 +9,16 @@ body::-webkit-scrollbar {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 body {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: Josefin Sans, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: Arial, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
@@ -33,21 +33,22 @@ a {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: white;
-    font-family: Josefin Sans, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: Arial, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+      Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   }
   body {
     color: white;
     background: white;
-    font-family: Josefin Sans, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: Arial, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+      Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   }
 }
 
 .shadow-top {
-  --tw-shadow: 0 0 8px 8px rgba(0,0,0,.2);
+  --tw-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.2);
   --tw-shadow-colored: 0 0 10px 10px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .MuiDrawer-paper {
@@ -65,7 +66,7 @@ a {
 }
 
 .Mui-focused {
-  color: #15224b !important
+  color: #15224b !important;
 }
 
 div.Mui-focused .MuiOutlinedInput-notchedOutline {
@@ -78,7 +79,7 @@ div.Mui-focused .MuiOutlinedInput-notchedOutline {
 
 figure {
   width: 300px;
-  background-repeat: no-repeat
+  background-repeat: no-repeat;
 }
 
 figure:hover {
@@ -106,7 +107,7 @@ a:hover {
   margin-top: -0.4rem;
 }
 
-.MuiAutocomplete-hasClearIcon.css-1qqsdnr-MuiAutocomplete-root .MuiOutlinedInput-root {
+.MuiAutocomplete-hasClearIcon.css-1qqsdnr-MuiAutocomplete-root
+  .MuiOutlinedInput-root {
   padding-right: 9px !important;
 }
-

@@ -11,7 +11,7 @@ class MyDocument extends Document {
         // Useful for wrapping the whole react tree
         enhanceApp: (App) => App,
         // Useful for wrapping in a per-page basis
-        enhanceComponent: (Component) => Component
+        enhanceComponent: (Component) => Component,
       })
 
     // Run the parent `getInitialProps`, it now includes the custom `renderPage`
@@ -22,9 +22,8 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang='es'>
+      <Html lang="es">
         <Head>
-          <link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'></link>
           <meta
             name="description"
             content="Diplomarket™ is an online store developed by CUSPINERA SURL, in order to satisfy your purchases and deliveries, both for you and dearest. We are pleased to bring you the BEST! .... ALWAYS!!!"

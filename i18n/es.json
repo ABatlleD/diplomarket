@@ -18,13 +18,15 @@
     "orders": "Órdenes",
     "recipients": "Destinatarios",
     "settings": "Ajustes",
-    "wishlist": "Favoritos"
+    "wishlist": "Favoritos",
+    "providers": "Proveedores"
   },
   "layout": {
     "navbar": {
       "allProducts": "Todos los productos",
       "about": "¿Quienes somos?",
       "contact": "Contáctenos",
+      "providers": "Proveedores",
       "sell-with-us": "Vende con nosotros",
       "categories": "Categorías",
       "lang": {

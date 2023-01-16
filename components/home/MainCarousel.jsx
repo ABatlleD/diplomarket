@@ -4,7 +4,7 @@ import 'pure-react-carousel/dist/react-carousel.es.css'
 import Link from 'next/link'
 import useWindowSize from '../../hooks/WindowSize'
 
-function MainCarousel({ carousel }) {
+function MainCarousel({ carousel, count }) {
   const size = useWindowSize()
   const [slideHeight, setSlideHeight] = useState(0)
   let slide = 0
@@ -30,24 +30,26 @@ function MainCarousel({ carousel }) {
       <CarouselProvider
         naturalSlideWidth={100}
         naturalSlideHeight={slideHeight}
-        totalSlides={carousel.count}
+        totalSlides={count}
         isPlaying={true}
         interval={6000}
         infinite={true}
       >
         <Slider>
-          {carousel.results.map((result) => {
+          {carousel?.map((result) => {
             const pivot = slide
             slide++
             return (
               <Slide key={pivot} index={pivot}>
-                <Link href={result.enlace}>
+                <Link href={result?.enlace}>
                   <img
-                    src={size.width >= 768
-                      ? `${process.env.NEXT_PUBLIC_BACKEND}${result.imagen}`
-                      : `${process.env.NEXT_PUBLIC_BACKEND}${result.img_movil}`
+                    src={
+                      size.width >= 768
+                        ? `${process.env.NEXT_PUBLIC_BACKEND}${result?.imagen}`
+                        : `${process.env.NEXT_PUBLIC_BACKEND}${result?.img_movil}`
                     }
-                    className="w-full hover:cursor-pointer h-full" alt="..."
+                    className="w-full hover:cursor-pointer h-full"
+                    alt="..."
                   />
                 </Link>
               </Slide>

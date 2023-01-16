@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import resources from '../restapi/resources'
-import { FormControlLabel, Pagination, TextField, Autocomplete, Checkbox, FormControl, InputLabel, MenuItem, Select } from '@mui/material'
+import {
+  FormControlLabel,
+  Pagination,
+  TextField,
+  Autocomplete,
+  Checkbox,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from '@mui/material'
 import TableRowsIcon from '@mui/icons-material/TableRows'
 import WindowIcon from '@mui/icons-material/Window'
 import { useTranslation } from 'react-i18next'
@@ -8,6 +18,7 @@ import { getCookie } from 'cookies-next'
 import { CarouselProvider, Slider, Slide } from 'pure-react-carousel'
 import useWindowSize from '../hooks/WindowSize'
 import CircularProgress from '@mui/material/CircularProgress'
+import MainCarousel from '../components/home/MainCarousel'
 
 import InfiniteScroll from 'react-infinite-scroll-component'
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined'
@@ -18,57 +29,95 @@ import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
+import { useAllCarousel, useFilterProducts } from '../restapi/query'
+import { useRouter } from 'next/router'
+import Image from 'next/image'
+import storeAltImg from '../public/assets/store.png'
 
 const MainLayout = dynamic(() => import('../layouts/MainLayout'))
 const AppHeader = dynamic(() => import('../components/layouts/AppHeader'))
-const ListProducts = dynamic(() => import('../components/products/ListProducts'))
-const CategoriesAccordion = dynamic(() => import('../components/categories/CategoriesAccordion'))
-const FilterBar = dynamic(() => import('../components/layouts/sidebar/FilterBar'))
-const MainCarousel = dynamic(() => import('../components/home/MainCarousel'))
+const ListProducts = dynamic(() =>
+  import('../components/products/ListProducts')
+)
+const CategoriesAccordion = dynamic(() =>
+  import('../components/categories/CategoriesAccordion')
+)
+const FilterBar = dynamic(() =>
+  import('../components/layouts/sidebar/FilterBar')
+)
 const ProductItem = dynamic(() => import('../components/products/ProductItem'))
-const AllProductsLoader = dynamic(() => import('../components/loaders/AllProducts'))
-const HorizontalProductItem = dynamic(() => import('../components/products/HorizontalProductItem'))
+const AllProductsLoader = dynamic(() =>
+  import('../components/loaders/AllProducts')
+)
+const HorizontalProductItem = dynamic(() =>
+  import('../components/products/HorizontalProductItem')
+)
 
-const NotificationsTip = dynamic(() => import('../components/modals/NotificationsTip'), {
-  loading: () => 'Loading...'
-})
+const NotificationsTip = dynamic(
+  () => import('../components/modals/NotificationsTip'),
+  {
+    loading: () => 'Loading...',
+  }
+)
 
-function Home({
-  products,
-  productsError,
-  carousel,
-  carouselError
-}) {
+function Home() {
+  const municipality = getCookie('NEXT_MUNICIPALITY')
+  const router = useRouter()
+  const { id } = router.query
+  const { carousel, carouselCount, carouselIsLoading, carouselError } =
+    useAllCarousel()
   const size = useWindowSize()
   const { t, i18n } = useTranslation()
-  const [list, setList] = useState(products)
-  const [mobileList, setMobileList] = useState(products.results)
   const [listView, setListView] = useState(true)
-  const [loading, setLoading] = useState()
   const [filterBar, setFilterBar] = useState(false)
   const [pages, setPages] = useState(1)
   const [page, setPage] = useState(1)
   const [categories, setCategories] = useState([])
   const [suppliers, setSuppliers] = useState([])
   const [brands, setBrands] = useState([])
-  const municipality = getCookie('NEXT_MUNICIPALITY')
   const [promotions, setPromotions] = useState(false)
   const [recommendations, setRecommendations] = useState(false)
   const [exist, setExist] = useState(false)
+  const [img, setImg] = useState(false)
+  const [providerDisplay, setProviderDisplay] = useState(undefined)
+  const [storeImg, setStoreImg] = useState(
+    `${process.env.NEXT_PUBLIC_BACKEND}/${providerDisplay?.img}`
+  )
 
   const [category, setCategory] = useState(undefined)
   const [selectedCategory, setSelectedCategory] = useState(undefined)
   const [offset, setOffset] = useState(0)
   const [banners, setBanners] = useState([])
   const [subcategory, setSubcategory] = useState(undefined)
-  const [brand, setBrand] = useState()
-  const [provider, setProvider] = useState()
+  const [brand, setBrand] = useState({ label: '', id: 0 })
+  const [provider, setProvider] = useState({ label: '', id: 0 })
   const [min, setMin] = useState(0)
   const [max, setMax] = useState(1000)
   const [extra, setExtra] = useState(undefined)
   const [order, setOrder] = React.useState('recent')
   const { status, data } = useSession()
   const [openNotificationsTip, setOpenNotificationsTip] = useState(false)
+  const {
+    products,
+    productsCount,
+    productsTotal,
+    productsIsLoading,
+    productsError,
+  } = useFilterProducts({
+    offset,
+    municipality_id: municipality,
+    limit: 15,
+    category,
+    subcategory,
+    brand,
+    provider,
+    min,
+    max,
+    extra,
+    ordering: order,
+  })
+
+  const [mobileList, setMobileList] = useState(products)
 
   const handleChange = (event) => {
     setOrder(event.target.value)
@@ -79,34 +128,32 @@ function Home({
   }
 
   useEffect(() => {
-    resources.brands.all()
-      .then(response => {
-        const answer = []
-        response.data.results.map((item) => {
-          const el = {
-            label: item.nombre,
-            id: item.id
-          }
-          return answer.push(el)
-        })
-        return setBrands(answer)
+    resources.brands.all().then((response) => {
+      const answer = []
+      response.data.results.map((item) => {
+        const el = {
+          label: item.nombre,
+          id: item.id,
+        }
+        return answer.push(el)
       })
-    resources.suppliers.all()
-      .then(response => {
-        const answer = []
-        response.data.results.map((item) => {
-          const el = {
-            label: item.nombre,
-            id: item.id
-          }
-          return answer.push(el)
-        })
-        return setSuppliers(answer)
+      return setBrands(answer)
+    })
+    resources.suppliers.all().then((response) => {
+      const answer = []
+      response.data.results.map((item) => {
+        const el = {
+          label: item.nombre,
+          id: item.pk,
+        }
+        return answer.push(el)
       })
-    resources.banner.all()
-      .then(response => setBanners(response.data))
-    resources.categories.all()
-      .then(response => setCategories(response.data.results))
+      return setSuppliers(answer)
+    })
+    resources.banner.all().then((response) => setBanners(response.data))
+    resources.categories
+      .all()
+      .then((response) => setCategories(response.data.results))
   }, [])
 
   useEffect(() => {
@@ -135,42 +182,36 @@ function Home({
   }
 
   const handleAllClick = () => {
-    setProvider(0)
-    setBrand(0)
+    setProviderDisplay(undefined)
+    setProvider({ label: '', id: 0 })
+    setImg(false)
+    setBrand({ label: '', id: 0 })
     setCategory(undefined)
     setSubcategory(undefined)
     setSelectedCategory(undefined)
     setExist(undefined)
     setPromotions(false)
     setRecommendations(false)
+    setExtra(undefined)
     setExist(false)
     setMin(0)
     setMax(1000)
   }
 
+  useEffect(() => {
+    if (provider && provider > 0) {
+      setImg(true)
+    }
+  }, [provider])
+
   const handleMobileFilter = (mobileFilter) => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-    setLoading(true)
-    const filter = {
-      offset,
-      municipality_id: municipality,
-      limit: 15,
-      category,
-      subcategory,
-      brand: mobileFilter.brand,
-      provider: mobileFilter.provider,
-      min: mobileFilter.min,
-      max: mobileFilter.max,
-      extra: mobileFilter.extra,
-      ordering: order
-    }
-    try {
-      resources.products.all(filter)
-        .then(response => setMobileList(response.data.results))
-    } catch (error) {
-      productsError = error.message
-    }
-    setLoading(false)
+    setProviderDisplay(mobileFilter.providerDisplay)
+    setBrand(mobileFilter.brand)
+    setProvider(mobileFilter.provider)
+    setMin(mobileFilter.min)
+    setMax(mobileFilter.max)
+    setExtra(mobileFilter.extra)
   }
 
   useEffect(() => {
@@ -188,23 +229,25 @@ function Home({
         min,
         max,
         extra,
-        ordering: order
-      }
-      try {
-        setLoading(true)
-        resources.products.all(filter)
-          .then(response => {
-            setList(response.data)
-            setLoading(false)
-          })
-      } catch (error) {
-        productsError = error.message
+        ordering: order,
       }
     }
-  }, [offset, products, category, subcategory, brand, provider, min, max, extra, order])
+  }, [
+    offset,
+    products,
+    category,
+    subcategory,
+    brand,
+    provider,
+    min,
+    max,
+    extra,
+    order,
+  ])
 
   useEffect(() => {
     if (size.width <= 768) {
+      setMobileList([])
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
       const filter = {
         offset: 0,
@@ -217,20 +260,10 @@ function Home({
         min,
         max,
         extra,
-        ordering: order
-      }
-      try {
-        setLoading(true)
-        resources.products.all(filter)
-          .then(response => {
-            setMobileList(response.data.results)
-            setLoading(false)
-          })
-      } catch (error) {
-        productsError = error.message
+        ordering: order,
       }
     }
-  }, [products, category, subcategory, brand, provider, min, max, extra, order])
+  }, [category, subcategory, brand, provider, min, max, extra, order])
 
   useEffect(() => {
     if (size.width <= 768) {
@@ -245,16 +278,14 @@ function Home({
         min,
         max,
         extra,
-        ordering: order
-      }
-      try {
-        resources.products.all(filter)
-          .then(response => setMobileList((mobileList) => [...mobileList, ...response.data.results]))
-      } catch (error) {
-        productsError = error.message
+        ordering: order,
       }
     }
   }, [offset])
+
+  useEffect(() => {
+    setMobileList((mobileList) => [...mobileList, ...products])
+  }, [products])
 
   useEffect(() => {
     setOffset(0)
@@ -267,12 +298,21 @@ function Home({
   }
 
   useEffect(() => {
-    if (list.total % 15 !== 0) {
-      setPages(Math.floor(list.total / 15) + 1)
+    if (productsTotal % 15 !== 0) {
+      setPages(Math.floor(productsTotal / 15) + 1)
     } else {
-      setPages(list.total / 15)
+      setPages(productsTotal / 15)
     }
-  }, [list])
+  }, [productsTotal])
+
+  useEffect(() => {
+    if (id) {
+      resources.suppliers.one(id).then((response) => {
+        setProvider({ label: response.data.nombre, id: response.data.pk })
+        setProviderDisplay(response.data)
+      })
+    }
+  }, [])
 
   const handleChangeType = (type) => {
     setExtra(undefined)
@@ -319,95 +359,155 @@ function Home({
   return (
     <>
       <AppHeader title={t('pages.products')} />
-      <div className='flex flex-col dark:bg-background-100'>
-        <div className='mb-3 md:mb-0'>
-          <MainCarousel carousel={carousel} />
+      <div className="flex flex-col dark:bg-background-100">
+        <div className="mb-3 md:mb-0">
+          {!carouselIsLoading && (
+            <MainCarousel carousel={carousel} count={carouselCount} />
+          )}
         </div>
-        <div className='dark:text-[black] flex md:flex-row flex-col w-full md:w-[95%] md:mx-auto mb-3 md:my-5'>
-          <div className='md:mx-3 flex md:hidden text-base mt-1 flex-row justify-between md:mb-3 mx-2'>
+        <div className="dark:text-[black] flex md:flex-row flex-col w-full md:w-[95%] md:mx-auto mb-3 md:my-5">
+          <div className="md:mx-3 flex md:hidden text-base mt-1 flex-row justify-between md:mb-3 mx-2">
             {selectedCategory && (
-              <div className='font-bold mt-2'>
-                {i18n.language === 'es' ? selectedCategory.nombre : selectedCategory.nombre_ingles}
+              <div className="font-bold mt-2">
+                {i18n.language === 'es'
+                  ? selectedCategory.nombre
+                  : selectedCategory.nombre_ingles}
               </div>
             )}
             {!selectedCategory && (
-              <div className='font-bold mt-2'>
-                {t('filter.categories')}
-              </div>
+              <div className="font-bold mt-2">{t('filter.categories')}</div>
             )}
-            <div className='flex flex-row'>
-              <div className='mr-3 mt-2' onClick={() => setListView(!listView)}>
-                {listView && (
-                  <WindowIcon />
-                )}
-                {!listView && (
-                  <TableRowsIcon />
-                )}
+            <div className="flex flex-row">
+              <div className="mr-3 mt-2" onClick={() => setListView(!listView)}>
+                {listView && <WindowIcon />}
+                {!listView && <TableRowsIcon />}
               </div>
-              <div
-                className='mr-2 mt-2'
-                onClick={() => setFilterBar(true)}
-              >
+              <div className="mr-2 mt-2" onClick={() => setFilterBar(true)}>
                 <FilterAltOutlinedIcon />
               </div>
-              <div className='flex w-28'>
+              <div className="flex w-28">
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">{t('filter.order.title')}</InputLabel>
+                  <InputLabel id="demo-simple-select-label">
+                    {t('filter.order.title')}
+                  </InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={order}
                     label="Order"
-                    size='small'
+                    size="small"
                     onChange={handleChange}
                   >
-                    <MenuItem value={'recent'}>{t('filter.order.recent')}</MenuItem>
-                    <MenuItem value={data && data.mayorista ? 'precio_b2b_dsc' : 'precio_dsc'}>{t('filter.order.asc_price')}</MenuItem>
-                    <MenuItem value={data && data.mayorista ? 'precio_b2b_asc' : 'precio_asc'}>{t('filter.order.desc_price')}</MenuItem>
-                    <MenuItem value={'descuento_dsc'}>{t('filter.order.asc_discount')}</MenuItem>
-                    <MenuItem value={'descuento_asc'}>{t('filter.order.desc_discount')}</MenuItem>
+                    <MenuItem value={'recent'}>
+                      {t('filter.order.recent')}
+                    </MenuItem>
+                    <MenuItem
+                      value={
+                        data && data.mayorista ? 'precio_b2b_dsc' : 'precio_dsc'
+                      }
+                    >
+                      {t('filter.order.asc_price')}
+                    </MenuItem>
+                    <MenuItem
+                      value={
+                        data && data.mayorista ? 'precio_b2b_asc' : 'precio_asc'
+                      }
+                    >
+                      {t('filter.order.desc_price')}
+                    </MenuItem>
+                    <MenuItem value={'descuento_dsc'}>
+                      {t('filter.order.asc_discount')}
+                    </MenuItem>
+                    <MenuItem value={'descuento_asc'}>
+                      {t('filter.order.desc_discount')}
+                    </MenuItem>
                   </Select>
                 </FormControl>
               </div>
             </div>
           </div>
-          <div className='md:flex hidden mr-1 flex-col w-1/6'>
-            <div className='flex flex-col'>
-              <div className='flex flex-row mb-2 justify-between'>
-                <p className='font-bold'>{t('filter.category')}</p>
-                <div className='bg-footer-background-300 text-background-300 px-2 rounded-full hover:cursor-pointer mr-6' onClick={handleAllClick}>{t('filter.all')}</div>
+          <div className="md:flex hidden mr-1 flex-col w-1/6">
+            <div className="flex flex-col">
+              <div className="flex flex-row mb-2 justify-between">
+                <p className="font-bold">{t('filter.category')}</p>
+                <div
+                  className="bg-footer-background-300 text-background-300 px-2 rounded-full hover:cursor-pointer mr-6"
+                  onClick={handleAllClick}
+                >
+                  {t('filter.all')}
+                </div>
               </div>
-              <div className=''>
+              <div className="">
                 {categories.map((item) => (
-                  <div key={item.id} className='border-2 border-background-100'>
+                  <div key={item.id} className="border-2 border-background-100">
                     <CategoriesAccordion
                       category={item}
                       items={item.subcategorias}
                       {...{
                         handleCategoryFilter,
-                        handleSubcategoryFilter
+                        handleSubcategoryFilter,
                       }}
                     />
                   </div>
                 ))}
               </div>
             </div>
-            <div className='flex flex-col my-4'>
-              <FormControlLabel value={promotions} onChange={() => handleChangeType('promotions')} control={<Checkbox size='small' checked={promotions} />} label={t('filter.promotions')} />
-              <FormControlLabel value={recommendations} onChange={() => handleChangeType('recommendations')} control={<Checkbox size='small' checked={recommendations} />} label={t('filter.recommendations')} />
-              <FormControlLabel value={exist} onChange={() => handleChangeType('exist')} control={<Checkbox size='small' checked={exist} />} label={t('filter.exist')} />
+            <div className="flex flex-col my-4">
+              <FormControlLabel
+                value={promotions}
+                onChange={() => handleChangeType('promotions')}
+                control={<Checkbox size="small" checked={promotions} />}
+                label={t('filter.promotions')}
+              />
+              <FormControlLabel
+                value={recommendations}
+                onChange={() => handleChangeType('recommendations')}
+                control={<Checkbox size="small" checked={recommendations} />}
+                label={t('filter.recommendations')}
+              />
+              <FormControlLabel
+                value={exist}
+                onChange={() => handleChangeType('exist')}
+                control={<Checkbox size="small" checked={exist} />}
+                label={t('filter.exist')}
+              />
             </div>
-            <div className='flex flex-col mt-2 mb-4'>
-              <p className='font-bold mb-2'>{t('filter.price')}</p>
-              <div className='w-[92%]'>
-                <div className='hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button' onClick={() => handlePriceFilter([0, 25])}>US$0 {t('filter.to')} US$25</div>
-                <div className='hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button' onClick={() => handlePriceFilter([25, 50])}>US$25 {t('filter.to')} US$50</div>
-                <div className='hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button' onClick={() => handlePriceFilter([50, 100])}>US$50 {t('filter.to')} US$100</div>
-                <div className='hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button' onClick={() => handlePriceFilter([100, 200])}>US$100 {t('filter.to')} US$200</div>
-                <div className='hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button' onClick={() => handlePriceFilter([200, 1000])}>{t('filter.more')} US$200</div>
+            <div className="flex flex-col mt-2 mb-4">
+              <p className="font-bold mb-2">{t('filter.price')}</p>
+              <div className="w-[92%]">
+                <div
+                  className="hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button"
+                  onClick={() => handlePriceFilter([0, 25])}
+                >
+                  US$0 {t('filter.to')} US$25
+                </div>
+                <div
+                  className="hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button"
+                  onClick={() => handlePriceFilter([25, 50])}
+                >
+                  US$25 {t('filter.to')} US$50
+                </div>
+                <div
+                  className="hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button"
+                  onClick={() => handlePriceFilter([50, 100])}
+                >
+                  US$50 {t('filter.to')} US$100
+                </div>
+                <div
+                  className="hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button"
+                  onClick={() => handlePriceFilter([100, 200])}
+                >
+                  US$100 {t('filter.to')} US$200
+                </div>
+                <div
+                  className="hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button"
+                  onClick={() => handlePriceFilter([200, 1000])}
+                >
+                  {t('filter.more')} US$200
+                </div>
               </div>
             </div>
-            <div className='flex flex-col mt-2 mb-4 mr-4'>
+            <div className="flex flex-col mt-2 mb-4 mr-4">
               <CarouselProvider
                 naturalSlideWidth={50}
                 naturalSlideHeight={50}
@@ -422,9 +522,9 @@ function Home({
                       <Slide key={result.imagen} index={result.imagen}>
                         <Link href={result.enlace}>
                           <img
-                            src={`${process.env.NEXT_PUBLIC_BACKEND}${result.imagen}`
-                            }
-                            className="w-full hover:cursor-pointer h-full" alt="..."
+                            src={`${process.env.NEXT_PUBLIC_BACKEND}${result.imagen}`}
+                            className="w-full hover:cursor-pointer h-full"
+                            alt="..."
                           />
                         </Link>
                       </Slide>
@@ -433,101 +533,170 @@ function Home({
                 </Slider>
               </CarouselProvider>
             </div>
-            <div className='flex flex-col mb-4 w-[95%]'>
+            <div className="flex flex-col mb-4 w-[95%]">
               <Autocomplete
                 disablePortal
                 id="combo-box-demo"
                 value={brand}
                 options={brands}
-                onChange={(event, newValue) => setBrand(newValue.id)}
-                renderInput={(params) => <TextField {...params} label={t('filter.brand')} />}
-                size='small'
+                onChange={(event, newValue) =>
+                  setBrand({ label: newValue?.label, id: newValue?.id })
+                }
+                renderInput={(params) => (
+                  <TextField {...params} label={t('filter.brand')} />
+                )}
+                size="small"
               />
             </div>
-            <div className='flex flex-col mb-4 w-[95%]'>
+            <div className="flex flex-col mb-4 w-[95%]">
               <Autocomplete
                 disablePortal
                 id="combo-box-demo"
                 value={provider}
                 options={suppliers}
-                onChange={(event, newValue) => setProvider(newValue.id)}
-                renderInput={(params) => <TextField {...params} label={t('filter.provider')} />}
-                size='small'
+                onChange={(event, newValue) => {
+                  setProvider({ label: newValue?.label, id: newValue?.id })
+                  resources.suppliers.one(newValue?.id).then((response) => {
+                    setProviderDisplay(response.data)
+                  })
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} label={t('filter.provider')} />
+                )}
+                size="small"
               />
             </div>
           </div>
-          <div className='flex flex-row w-full md:w-5/6'>
-            <div className='flex flex-col items-center w-full'>
-              <div className='flex flex-row justify-between w-full md:w-[98%] mb-4'>
+          <div className="flex flex-row w-full md:w-5/6">
+            <div className="flex flex-col items-center w-full">
+              <div className="flex flex-row justify-between w-full md:w-[98%] mb-1 md:mb-3">
                 {selectedCategory && (
-                  <div id='title' className='font-bold w-1/2 ml-4 mb-2 text-xl hidden md:flex'>
-                    {i18n.language === 'es' ? selectedCategory.nombre : selectedCategory.nombre_ingles}
+                  <div
+                    id="title"
+                    className="font-bold w-1/2 ml-4 mb-2 text-xl hidden md:flex"
+                  >
+                    {i18n.language === 'es'
+                      ? selectedCategory.nombre
+                      : selectedCategory.nombre_ingles}
                   </div>
                 )}
                 {!selectedCategory && (
-                  <div id='title' className='font-bold w-1/2 mb-2 text-xl hidden md:flex'>
+                  <div
+                    id="title"
+                    className="font-bold w-1/2 mb-2 text-xl hidden md:flex"
+                  >
                     {t('filter.categories')}
                   </div>
                 )}
-                <div className='hidden md:flex w-[25%]'>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">{t('filter.order.title')}</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={order}
-                    label="Order"
-                    size='small'
-                    onChange={handleChange}
-                  >
-                    <MenuItem value={'recent'}>{t('filter.order.recent')}</MenuItem>
-                    <MenuItem value={data && data.mayorista ? 'precio_b2b_dsc' : 'precio_dsc'}>{t('filter.order.asc_price')}</MenuItem>
-                    <MenuItem value={data && data.mayorista ? 'precio_b2b_asc' : 'precio_asc'}>{t('filter.order.desc_price')}</MenuItem>
-                    <MenuItem value={'descuento_dsc'}>{t('filter.order.asc_discount')}</MenuItem>
-                    <MenuItem value={'descuento_asc'}>{t('filter.order.desc_discount')}</MenuItem>
-                  </Select>
-                </FormControl>
+                <div className="hidden md:flex w-[25%]">
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">
+                      {t('filter.order.title')}
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={order}
+                      label="Order"
+                      size="small"
+                      onChange={handleChange}
+                    >
+                      <MenuItem value={'recent'}>
+                        {t('filter.order.recent')}
+                      </MenuItem>
+                      <MenuItem
+                        value={
+                          data && data.mayorista
+                            ? 'precio_b2b_dsc'
+                            : 'precio_dsc'
+                        }
+                      >
+                        {t('filter.order.asc_price')}
+                      </MenuItem>
+                      <MenuItem
+                        value={
+                          data && data.mayorista
+                            ? 'precio_b2b_asc'
+                            : 'precio_asc'
+                        }
+                      >
+                        {t('filter.order.desc_price')}
+                      </MenuItem>
+                      <MenuItem value={'descuento_dsc'}>
+                        {t('filter.order.asc_discount')}
+                      </MenuItem>
+                      <MenuItem value={'descuento_asc'}>
+                        {t('filter.order.desc_discount')}
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
                 </div>
               </div>
-              {size.width <= 768 && loading && (
-                <AllProductsLoader />
+              {providerDisplay && (
+                <div className="flex flex-row items-center h-24 w-[98%] bg-background-200 mb-1 md:mb-3 rounded-lg">
+                  <div className="flex ml-4 relative items-center justify-center h-20 w-20 rounded-full">
+                    <Image
+                      src={storeImg}
+                      layout="fill"
+                      alt="Diplomarket product"
+                      placeholder="blur"
+                      onError={() => setStoreImg(storeAltImg)}
+                      blurDataURL="/loading.gif"
+                      className="hover:cursor-pointer rounded-t-lg"
+                    />
+                  </div>
+                  <div className="flex flex-col ml-4">
+                    <p className="font-bold text-lg">
+                      {providerDisplay.nombre}
+                    </p>
+                    {/* <p className="text-text-100 underline">Detalles</p> */}
+                  </div>
+                </div>
               )}
-              {size.width <= 768 && municipality && !loading && (
+              {/* {size.width <= 768 && productsIsLoading && <AllProductsLoader />} */}
+              {size.width <= 768 && municipality && (
                 <InfiniteScroll
                   dataLength={mobileList.length}
                   next={getMorePost}
                   hasMore={true}
-                  loader={<div className='flex flex-row w-full justify-center my-6 text-text-blue'><CircularProgress /></div>}
+                  loader={
+                    <div className="flex flex-row w-full justify-center my-6 text-text-blue">
+                      <CircularProgress />
+                    </div>
+                  }
                   endMessage={<h4>Nothing more to show</h4>}
                 >
-                  <div className='flex flex-wrap justify-evenly w-full'>
+                  <div className="flex flex-wrap justify-evenly w-full">
                     {mobileList.map((data) => (
-                      <div className={listView ? 'w-full mx-2 my-2' : 'w-[30%] md:w-1/4 xl:w-[19%] mb-4'} key={data.id}>
-                        {!listView && (
-                          <ProductItem product={data} />
-                        )}
-                        {listView && (
-                          <HorizontalProductItem product={data} />
-                        )}
+                      <div
+                        className={
+                          listView
+                            ? 'w-full mx-2 my-2'
+                            : 'w-[30%] md:w-1/4 xl:w-[19%] mb-4'
+                        }
+                        key={data.id}
+                      >
+                        {!listView && <ProductItem product={data} />}
+                        {listView && <HorizontalProductItem product={data} />}
                       </div>
                     ))}
                   </div>
                 </InfiniteScroll>
               )}
-              {size.width > 768 && loading && (
-                <div className='ml-4'>
+              {size.width > 768 && productsIsLoading && (
+                <div className="ml-4">
                   <AllProductsLoader />
                 </div>
               )}
-              {size.width > 768 && !loading && (
-                <ListProducts products={list} loading={loading} />
+              {size.width > 768 && (
+                <ListProducts products={products} loading={productsIsLoading} />
               )}
               {size.width > 768 && (
-                <div className='mt-2'>
+                <div className="mt-2">
                   <Pagination
                     count={pages}
                     showFirstButton
-                    size='medium'
+                    size="medium"
                     showLastButton
                     page={page}
                     onChange={handlePaginationChange}
@@ -536,93 +705,109 @@ function Home({
               )}
             </div>
           </div>
-          <FilterBar {...{
-            filterBar,
-            setFilterBar,
-            handleMobileFilter,
-            handleCategoryFilter,
-            setCategory,
-            setSubcategory,
-            handleSubcategoryFilter,
-            setSelectedCategory
-          }} />
+          <FilterBar
+            {...{
+              filterBar,
+              setFilterBar,
+              handleMobileFilter,
+              handleCategoryFilter,
+              setCategory,
+              setSubcategory,
+              handleSubcategoryFilter,
+              setSelectedCategory,
+            }}
+          />
         </div>
-        <div className='flex md:flex-row flex-wrap justify-around text-footer-background-300 md:w-[95%] md:mx-auto md:my-28'>
-          <div className='flex flex-col items-center w-1/2 md:w-auto'>
+        <div className="flex md:flex-row flex-wrap justify-around text-footer-background-300 md:w-[95%] md:mx-auto md:my-28">
+          <div className="flex flex-col items-center w-1/2 md:w-auto">
             <LocalShippingOutlinedIcon sx={{ fontSize: '3rem' }} />
-            <p className='text-footer-background-300 md:text-xl text-base'>{t('home.delivery.title')}</p>
-            <p className='text-text-100 md:text-lg text-xs'>{t('home.delivery.description')}</p>
+            <p className="text-footer-background-300 md:text-xl text-base">
+              {t('home.delivery.title')}
+            </p>
+            <p className="text-text-100 md:text-lg text-xs">
+              {t('home.delivery.description')}
+            </p>
           </div>
-          <div className='flex flex-col  items-center w-1/2 md:w-auto'>
+          <div className="flex flex-col  items-center w-1/2 md:w-auto">
             <PriceCheckIcon sx={{ fontSize: '3rem' }} />
-            <p className='text-footer-background-300 md:text-xl text-base'>{t('home.prices.title')}</p>
-            <p className='text-text-100 md:text-lg text-xs'>{t('home.prices.description')}</p>
+            <p className="text-footer-background-300 md:text-xl text-base">
+              {t('home.prices.title')}
+            </p>
+            <p className="text-text-100 md:text-lg text-xs">
+              {t('home.prices.description')}
+            </p>
           </div>
-          <div className='flex flex-col items-center my-12 md:my-0 w-1/2 md:w-auto'>
+          <div className="flex flex-col items-center my-12 md:my-0 w-1/2 md:w-auto">
             <SentimentSatisfiedOutlinedIcon sx={{ fontSize: '3rem' }} />
-            <p className='text-footer-background-300 md:text-xl text-base'>{t('home.customer.title')}</p>
-            <p className='text-text-100 md:text-lg text-xs'>{t('home.customer.description')}</p>
+            <p className="text-footer-background-300 md:text-xl text-base">
+              {t('home.customer.title')}
+            </p>
+            <p className="text-text-100 md:text-lg text-xs">
+              {t('home.customer.description')}
+            </p>
           </div>
-          <div className='flex flex-col items-center my-12 md:my-0  w-1/2 md:w-auto'>
+          <div className="flex flex-col items-center my-12 md:my-0  w-1/2 md:w-auto">
             <CreditCardOutlinedIcon sx={{ fontSize: '3rem' }} />
-            <p className='text-footer-background-300 md:text-xl text-base'>{t('home.payments.title')}</p>
-            <p className='text-text-100 md:text-lg text-xs'>{t('home.payments.description')}</p>
+            <p className="text-footer-background-300 md:text-xl text-base">
+              {t('home.payments.title')}
+            </p>
+            <p className="text-text-100 md:text-lg text-xs">
+              {t('home.payments.description')}
+            </p>
           </div>
         </div>
-        <NotificationsTip {...{ openNotificationsTip, setOpenNotificationsTip }}/>
+        <NotificationsTip
+          {...{ openNotificationsTip, setOpenNotificationsTip }}
+        />
       </div>
     </>
   )
 }
 
-export async function getServerSideProps({ req, res }, context) {
-  const municipality = getCookie('NEXT_MUNICIPALITY', { req, res })
-  const { products, productsError } = await fetchProducts(municipality)
-  const { carousel, carouselError } = await fetchCarousel()
+// export async function getServerSideProps({ req, res }, context) {
+//   const municipality = getCookie('NEXT_MUNICIPALITY', { req, res })
+//   const { products, productsError } = await fetchProducts(municipality)
+//   const { carousel, carouselError } = await fetchCarousel()
 
-  return {
-    props: {
-      products,
-      productsError,
-      carousel,
-      carouselError
-    }
-  }
-}
+//   return {
+//     props: {
+//       products,
+//       productsError,
+//       carousel,
+//       carouselError,
+//     },
+//   }
+// }
 
-async function fetchProducts(municipality) {
-  let productsError = ''
-  let products = []
-  const filter = {
-    offset: 0,
-    limit: 15,
-    municipality_id: municipality
-  }
-  try {
-    products = await (await resources.products.all(filter)).data
-  } catch (error) {
-    productsError = error.message
-  }
-  return { products, productsError }
-}
+// async function fetchProducts(municipality) {
+//   let productsError = ''
+//   let products = []
+//   const filter = {
+//     offset: 0,
+//     limit: 15,
+//     municipality_id: municipality,
+//   }
+//   try {
+//     products = await (await resources.products.all(filter)).data
+//   } catch (error) {
+//     productsError = error.message
+//   }
+//   return { products, productsError }
+// }
 
-async function fetchCarousel() {
-  let carouselError = ''
-  let carousel = []
-  try {
-    carousel = await (await resources.carousel.all()).data
-  } catch (error) {
-    carouselError = error.message
-  }
-  return { carousel, carouselError }
-}
+// async function fetchCarousel() {
+//   let carouselError = ''
+//   let carousel = []
+//   try {
+//     carousel = await (await resources.carousel.all()).data
+//   } catch (error) {
+//     carouselError = error.message
+//   }
+//   return { carousel, carouselError }
+// }
 
 Home.getLayout = function getLayout(page) {
-  return (
-    <MainLayout pageProps={page}>
-      {page}
-    </MainLayout>
-  )
+  return <MainLayout pageProps={page}>{page}</MainLayout>
 }
 
 export default Home

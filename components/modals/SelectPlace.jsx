@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Modal, Fade, FormControl, InputLabel, MenuItem, Select } from '@mui/material'
+import {
+  Button,
+  Modal,
+  Fade,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import resources from '../../restapi/resources'
 import { getCookie, setCookie } from 'cookies-next'
@@ -9,13 +17,19 @@ import { useCart } from '../../store/cart/cart.context'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Josefin_Sans } from '@next/font/google'
+import localFont from '@next/font/local'
 
 const js = Josefin_Sans({
   weight: '400',
-  subsets: ['latin']
+  subsets: ['latin'],
 })
 
-function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} }) {
+const arial = localFont({ src: '../../public/assets/font/arial/Arial.ttf' })
+
+function SelectPlace({
+  openSelectPlace = false,
+  setOpenSelectPlace = () => {},
+}) {
   const { t } = useTranslation()
   const [cities, setCities] = useState({})
   const [districts, setDistricts] = useState([])
@@ -23,15 +37,11 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
   const [state, setState] = useState({})
   const [district, setDistrict] = useState({})
 
-  const {
-    resetCart
-  } = useCart()
+  const { resetCart } = useCart()
 
   useEffect(() => {
-    resources.place.city.all()
-      .then(response => setCities(response.data))
-    resources.place.district.all()
-      .then(response => setPivots(response.data))
+    resources.place.city.all().then((response) => setCities(response.data))
+    resources.place.district.all().then((response) => setPivots(response.data))
   }, [])
 
   const handleStateChange = (event) => {
@@ -93,31 +103,42 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
         onClose={handleClose}
         closeAfterTransition
         BackdropProps={{
-          timeout: 500
+          timeout: 500,
         }}
         sx={{ overflowY: 'scroll' }}
       >
         <Fade in={openSelectPlace}>
-          <div className={js.className}>
-            <div className='flex flex-col shadow-2xl h-screen md:h-auto md:rounded-xl bg-background-100 w-full md:w-[25%] absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 p-2'>
-              <div className='flex flex-row justify-end'>
-                <HighlightOffIcon className='hover:cursor-pointer' onClick={handleClose} />
+          <div className={arial.className}>
+            <div className="flex flex-col shadow-2xl h-screen md:h-auto md:rounded-xl bg-background-100 w-full md:w-[25%] absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 p-2">
+              <div className="flex flex-row justify-end">
+                <HighlightOffIcon
+                  className="hover:cursor-pointer"
+                  onClick={handleClose}
+                />
               </div>
-              <div className='flex flex-row justify-center mt-4'>
-                <p className='font-bold text-xl text-footer-background-100'>{t('place.title')}</p>
-              </div>
-              <div className='flex flex-row justify-center mt-4'>
-                <img src="/delivery-top.png" className="max-w-max h-44 hover:cursor-pointer" alt="..." />
-              </div>
-              <div className='flex flex-row justify-center mt-4 mx-2'>
-                <p className='font-semibold text-footer-background-100 text-justify'>
-                {t('place.subtitle')}
+              <div className="flex flex-row justify-center mt-4">
+                <p className="font-bold text-xl text-footer-background-100">
+                  {t('place.title')}
                 </p>
               </div>
-              <div className='flex flex-col md:flex-row justify-between mx-2 mt-8'>
-                <div className='md:w-[49%] mb-4 md:mb-0'>
+              <div className="flex flex-row justify-center mt-4">
+                <img
+                  src="/delivery-top.png"
+                  className="max-w-max h-44 hover:cursor-pointer"
+                  alt="..."
+                />
+              </div>
+              <div className="flex flex-row justify-center mt-4 mx-2">
+                <p className="font-semibold text-footer-background-100 text-justify">
+                  {t('place.subtitle')}
+                </p>
+              </div>
+              <div className="flex flex-col md:flex-row justify-between mx-2 mt-8">
+                <div className="md:w-[49%] mb-4 md:mb-0">
                   <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">{t('place.state')}</InputLabel>
+                    <InputLabel id="demo-simple-select-label">
+                      {t('place.state')}
+                    </InputLabel>
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
@@ -126,14 +147,18 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
                       onChange={handleStateChange}
                     >
                       {cities?.results?.map((item) => (
-                        <MenuItem key={item.id} value={item}>{item.nombre}</MenuItem>
+                        <MenuItem key={item.id} value={item}>
+                          {item.nombre}
+                        </MenuItem>
                       ))}
                     </Select>
                   </FormControl>
                 </div>
-                <div className='md:w-[49%]'>
+                <div className="md:w-[49%]">
                   <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">{t('place.district')}</InputLabel>
+                    <InputLabel id="demo-simple-select-label">
+                      {t('place.district')}
+                    </InputLabel>
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
@@ -142,19 +167,21 @@ function SelectPlace({ openSelectPlace = false, setOpenSelectPlace = () => {} })
                       onChange={handleDistrictChange}
                     >
                       {districts?.map((item) => (
-                        <MenuItem key={item.id} value={item}>{item.nombre}</MenuItem>
+                        <MenuItem key={item.id} value={item}>
+                          {item.nombre}
+                        </MenuItem>
                       ))}
                     </Select>
                   </FormControl>
                 </div>
               </div>
-              <div className='mx-2 my-4'>
+              <div className="mx-2 my-4">
                 <Link href={'/'}>
                   <Button
                     variant="contained"
                     sx={{
                       width: '100%',
-                      backgroundColor: '#b12024 !important'
+                      backgroundColor: '#b12024 !important',
                     }}
                     onClick={handleSubmit}
                   >
