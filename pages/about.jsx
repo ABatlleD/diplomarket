@@ -1,16 +1,10 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Josefin_Sans } from '@next/font/google'
 import dynamic from 'next/dynamic'
 import localFont from '@next/font/local'
 
 const MainLayout = dynamic(() => import('../layouts/MainLayout'))
 const AppHeader = dynamic(() => import('../components/layouts/AppHeader'))
-
-const js = Josefin_Sans({
-  weight: '400',
-  subsets: ['latin'],
-})
 
 const arial = localFont({ src: '../public/assets/font/arial/Arial.ttf' })
 

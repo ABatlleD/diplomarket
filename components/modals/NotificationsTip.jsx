@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Modal, Fade, TextField } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import { Josefin_Sans } from '@next/font/google'
 import { useSession } from 'next-auth/react'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
@@ -10,11 +9,6 @@ import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Router from 'next/router'
 import localFont from '@next/font/local'
-
-const js = Josefin_Sans({
-  weight: '400',
-  subsets: ['latin'],
-})
 
 const arial = localFont({ src: '../../public/assets/font/arial/Arial.ttf' })
 

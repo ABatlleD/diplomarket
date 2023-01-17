@@ -9,7 +9,6 @@ import {
   Checkbox,
 } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { Josefin_Sans } from '@next/font/google'
 import { CarouselProvider, Slider, Slide } from 'pure-react-carousel'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
@@ -20,11 +19,6 @@ const CategoriesAccordion = dynamic(() =>
 )
 
 const arial = localFont({ src: '../../../public/assets/font/arial/Arial.ttf' })
-
-const js = Josefin_Sans({
-  weight: '400',
-  subsets: ['latin'],
-})
 
 function FilterBar({
   filterBar = false,

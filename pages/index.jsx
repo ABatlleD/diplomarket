@@ -64,8 +64,7 @@ function Home() {
   const municipality = getCookie('NEXT_MUNICIPALITY')
   const router = useRouter()
   const { id } = router.query
-  const { carousel, carouselCount, carouselIsLoading, carouselError } =
-    useAllCarousel()
+  const { carousel, carouselCount, carouselIsLoading } = useAllCarousel()
   const size = useWindowSize()
   const { t, i18n } = useTranslation()
   const [listView, setListView] = useState(true)
@@ -78,11 +77,8 @@ function Home() {
   const [promotions, setPromotions] = useState(false)
   const [recommendations, setRecommendations] = useState(false)
   const [exist, setExist] = useState(false)
-  const [img, setImg] = useState(false)
   const [providerDisplay, setProviderDisplay] = useState(undefined)
-  const [storeImg, setStoreImg] = useState(
-    `${process.env.NEXT_PUBLIC_BACKEND}/${providerDisplay?.img}`
-  )
+  const [storeImg, setStoreImg] = useState('')
 
   const [category, setCategory] = useState(undefined)
   const [selectedCategory, setSelectedCategory] = useState(undefined)
@@ -97,13 +93,7 @@ function Home() {
   const [order, setOrder] = React.useState('recent')
   const { status, data } = useSession()
   const [openNotificationsTip, setOpenNotificationsTip] = useState(false)
-  const {
-    products,
-    productsCount,
-    productsTotal,
-    productsIsLoading,
-    productsError,
-  } = useFilterProducts({
+  const { products, productsTotal, productsIsLoading } = useFilterProducts({
     offset,
     municipality_id: municipality,
     limit: 15,
@@ -162,6 +152,12 @@ function Home() {
     }
   }, [status])
 
+  useEffect(() => {
+    if (providerDisplay) {
+      setStoreImg(`${process.env.NEXT_PUBLIC_BACKEND}${providerDisplay?.img}`)
+    }
+  }, [providerDisplay])
+
   const handlePriceFilter = (prices) => {
     setMin(prices[0])
     setMax(prices[1])
@@ -184,7 +180,6 @@ function Home() {
   const handleAllClick = () => {
     setProviderDisplay(undefined)
     setProvider({ label: '', id: 0 })
-    setImg(false)
     setBrand({ label: '', id: 0 })
     setCategory(undefined)
     setSubcategory(undefined)
@@ -197,12 +192,6 @@ function Home() {
     setMin(0)
     setMax(1000)
   }
-
-  useEffect(() => {
-    if (provider && provider > 0) {
-      setImg(true)
-    }
-  }, [provider])
 
   const handleMobileFilter = (mobileFilter) => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
@@ -218,19 +207,19 @@ function Home() {
     if (size.width > 768) {
       const element = document.getElementById('title')
       element.scrollIntoView()
-      const filter = {
-        offset,
-        municipality_id: municipality,
-        limit: 15,
-        category,
-        subcategory,
-        brand,
-        provider,
-        min,
-        max,
-        extra,
-        ordering: order,
-      }
+      // const filter = {
+      //   offset,
+      //   municipality_id: municipality,
+      //   limit: 15,
+      //   category,
+      //   subcategory,
+      //   brand,
+      //   provider,
+      //   min,
+      //   max,
+      //   extra,
+      //   ordering: order,
+      // }
     }
   }, [
     offset,
@@ -249,37 +238,37 @@ function Home() {
     if (size.width <= 768) {
       setMobileList([])
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-      const filter = {
-        offset: 0,
-        municipality_id: municipality,
-        limit: 15,
-        category,
-        subcategory,
-        brand,
-        provider,
-        min,
-        max,
-        extra,
-        ordering: order,
-      }
+      // const filter = {
+      //   offset: 0,
+      //   municipality_id: municipality,
+      //   limit: 15,
+      //   category,
+      //   subcategory,
+      //   brand,
+      //   provider,
+      //   min,
+      //   max,
+      //   extra,
+      //   ordering: order,
+      // }
     }
   }, [category, subcategory, brand, provider, min, max, extra, order])
 
   useEffect(() => {
     if (size.width <= 768) {
-      const filter = {
-        offset,
-        municipality_id: municipality,
-        limit: 15,
-        category,
-        subcategory,
-        brand,
-        provider,
-        min,
-        max,
-        extra,
-        ordering: order,
-      }
+      // const filter = {
+      //   offset,
+      //   municipality_id: municipality,
+      //   limit: 15,
+      //   category,
+      //   subcategory,
+      //   brand,
+      //   provider,
+      //   min,
+      //   max,
+      //   extra,
+      //   ordering: order,
+      // }
     }
   }, [offset])
 
@@ -306,13 +295,14 @@ function Home() {
   }, [productsTotal])
 
   useEffect(() => {
+    console.log('🚀 ~ file: index.jsx:299 ~ useEffect ~ id', id)
     if (id) {
       resources.suppliers.one(id).then((response) => {
         setProvider({ label: response.data.nombre, id: response.data.pk })
         setProviderDisplay(response.data)
       })
     }
-  }, [])
+  }, [id])
 
   const handleChangeType = (type) => {
     setExtra(undefined)

@@ -11,7 +11,6 @@ import '@fontsource/josefin-sans/500.css'
 import '@fontsource/josefin-sans/700.css'
 import SwiperCore, { Autoplay } from 'swiper'
 import { SessionProvider } from 'next-auth/react'
-import { Josefin_Sans } from '@next/font/google'
 import localFont from '@next/font/local'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import dynamic from 'next/dynamic'
@@ -26,11 +25,6 @@ const theme = createTheme({
     fontWeightMedium: 500,
     fontWeightBold: 700,
   },
-})
-
-const js = Josefin_Sans({
-  weight: '400',
-  subsets: ['latin'],
 })
 
 const arial = localFont({ src: '../public/assets/font/arial/Arial.ttf' })

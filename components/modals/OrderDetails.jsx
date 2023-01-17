@@ -2,16 +2,10 @@ import React from 'react'
 import { Modal, Fade } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import { Josefin_Sans } from '@next/font/google'
 import dynamic from 'next/dynamic'
 import localFont from '@next/font/local'
 
 const OrderProductItem = dynamic(() => import('../orders/OrderProductItem'))
-
-const js = Josefin_Sans({
-  weight: '400',
-  subsets: ['latin'],
-})
 
 const arial = localFont({ src: '../../public/assets/font/arial/Arial.ttf' })
 

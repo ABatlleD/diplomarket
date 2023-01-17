@@ -118,9 +118,11 @@ function ProductItem({ product }) {
             </Link>
           </div>
           {size.width >= 768 && (
-            <div className="mx-2 my-0 md:my-0 text-button text-sm md:text-base">
-              {product.proveedor.nombre}
-            </div>
+            <Link href={{ pathname: '/', query: { id: product.proveedor.pk } }}>
+              <div className="mx-2 my-0 md:my-0 text-button text-sm md:text-base">
+                {product.proveedor.nombre}
+              </div>
+            </Link>
           )}
           {data && data.mayorista ? (
             <div className="mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-base">

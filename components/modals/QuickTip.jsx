@@ -8,7 +8,6 @@ import { useTranslation } from 'react-i18next'
 import { useCart } from '../../store/cart/cart.context'
 import { generateCartItem } from '../../store/cart/generate-cart-item'
 import { useRouter } from 'next/router'
-import { Josefin_Sans } from '@next/font/google'
 import resources from '../../restapi/resources'
 import { getCookie } from 'cookies-next'
 import { useSession } from 'next-auth/react'
@@ -17,11 +16,6 @@ import localFont from '@next/font/local'
 
 const AddToCart = dynamic(() => import('../cart/AddCart'))
 const AddToFav = dynamic(() => import('../fav/AddFav'))
-
-const js = Josefin_Sans({
-  weight: '400',
-  subsets: ['latin'],
-})
 
 const arial = localFont({ src: '../../public/assets/font/arial/Arial.ttf' })
 

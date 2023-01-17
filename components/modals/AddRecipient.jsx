@@ -3,13 +3,7 @@ import { Button, Modal, Fade, FormControl, TextField } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import { removeDuplicateObjects } from '../../libs/serialize'
 import { useTranslation } from 'react-i18next'
-import { Josefin_Sans } from '@next/font/google'
 import localFont from '@next/font/local'
-
-const js = Josefin_Sans({
-  weight: '400',
-  subsets: ['latin'],
-})
 
 const arial = localFont({ src: '../../public/assets/font/arial/Arial.ttf' })
 

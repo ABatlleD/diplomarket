@@ -45,9 +45,8 @@ function a11yProps(index) {
 function Product() {
   const router = useRouter()
   const { id } = router.query
-  const { product, productIsLoading, productError } = useOneProduct(id)
+  const { product, productIsLoading } = useOneProduct(id)
   const [relatedProducts, setRelatedProducts] = useState([])
-  const [isLoading, setLoading] = useState(false)
   const [value, setValue] = React.useState(0)
   const [state, setState] = useState({
     backgroundPosition: '0% 0%',
@@ -76,11 +75,9 @@ function Product() {
   useEffect(() => {
     if (product) {
       setImages([product.img_principal, ...product.galeria])
-      setLoading(true)
       resources.products_related
         .all(product.id, 1)
         .then((response) => setRelatedProducts(response.data))
-      setLoading(false)
     }
   }, [product])
 

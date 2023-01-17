@@ -16,13 +16,7 @@ import Link from 'next/link'
 import { useCart } from '../../store/cart/cart.context'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { Josefin_Sans } from '@next/font/google'
 import localFont from '@next/font/local'
-
-const js = Josefin_Sans({
-  weight: '400',
-  subsets: ['latin'],
-})
 
 const arial = localFont({ src: '../../public/assets/font/arial/Arial.ttf' })
 
