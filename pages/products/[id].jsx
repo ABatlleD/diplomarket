@@ -359,51 +359,6 @@ function Product() {
   )
 }
 
-// export async function getStaticPaths() {
-//   const { products } = await fetchAllProducts()
-
-//   const paths = products.map((product) => ({
-//     params: { id: product.id.toString() },
-//   }))
-
-//   return { paths, fallback: true }
-// }
-
-// export async function getStaticProps({ params }) {
-//   const { product, apiError } = await fetchOneProduct(params.id)
-
-//   return {
-//     props: {
-//       product,
-//       apiError,
-//     },
-//     revalidate: 10,
-//   }
-// }
-
-// async function fetchAllProducts() {
-//   let apiError = ''
-//   let products = []
-//   try {
-//     products = await (await resources.products.all()).data
-//   } catch (error) {
-//     apiError = error.message
-//   }
-//   return { products, apiError }
-// }
-
-// async function fetchOneProduct(id) {
-//   let apiError = ''
-//   let product = {}
-//   try {
-//     product = await (await resources.products.one(id)).data
-//     console.log('🚀 ~ file: [id].jsx:393 ~ fetchOneProduct ~ product', product)
-//   } catch (error) {
-//     apiError = error.message
-//   }
-//   return { product, apiError }
-// }
-
 Product.getLayout = function getLayout(page) {
   return <MainLayout>{page}</MainLayout>
 }

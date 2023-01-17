@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 function useScrollY() {
   const [scrollY, setScrollY] = useState(0)
 
-  // ? Controlar posición del scroll en tiempo real
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY)

@@ -107,7 +107,6 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
               width: '100%'
             }}
             freeSolo
-            // PaperComponent={CustomPaper}
             renderInput={(params) => {
               return (
                 <div ref={params.InputProps.ref}>

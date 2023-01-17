@@ -14,8 +14,6 @@ import dynamic from 'next/dynamic'
 
 const AddRecipient = dynamic(() => import('../modals/AddRecipient'))
 
-// Alternative Contact
-
 function AddressForm({ address }) {
   const { t } = useTranslation()
   const { addressees, countries, municipalities, provinces } = address

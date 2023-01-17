@@ -99,18 +99,31 @@ function FilterBar({
   }
 
   const handleFilter = async () => {
-    await resources.suppliers.one(provider.id).then((response) => {
-      const filter = {
-        brand,
-        provider,
-        providerDisplay: response.data,
-        min: prices[0],
-        max: prices[1],
-        extra,
-      }
-      handleMobileFilter(filter)
-      setFilterBar((filterBar) => !filterBar)
-    })
+    await resources.suppliers
+      .one(provider.id)
+      .then((response) => {
+        const filter = {
+          brand,
+          provider,
+          providerDisplay: response.data,
+          min: prices[0],
+          max: prices[1],
+          extra,
+        }
+        handleMobileFilter(filter)
+        setFilterBar((filterBar) => !filterBar)
+      })
+      .catch(() => {
+        const filter = {
+          brand,
+          provider,
+          min: prices[0],
+          max: prices[1],
+          extra,
+        }
+        handleMobileFilter(filter)
+        setFilterBar((filterBar) => !filterBar)
+      })
   }
 
   const handleAllClick = () => {

@@ -15,7 +15,6 @@ const Paypal = ({
 }) => {
   // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = loading_
-  // const [amount, setAmount] = useState<number | 0>(1);
   const parseAmount = parseFloat(amount).toFixed(2)
   const { push } = useRouter()
 
@@ -48,8 +47,6 @@ const Paypal = ({
           }}
           onApprove={(data, actions) => {
             return actions.order.capture().then((details) => {
-              // mostrar mensaje o mandar datos por api en details
-              // console.log(details)
               axios
                 .post('/api/addressee', {
                   addressee: [
@@ -86,18 +83,6 @@ const Paypal = ({
                       })
                   }
                 })
-              // resetCart();
-              // toast.info(saveAddressee.data.message ?? 'Contact the administrator')
-
-              /* if (saveAddressee.data?.data) {
-                                const payment = await axios.post('/api/checkout/addressee', {amount, currency, products, addresses: saveAddressee.data.data, details, type: 'paypal'})
-                                if (payment?.data?.message) {
-                                    // toast.info(payment.data.message ?? 'Contact the administrator')
-                                    resetCart();
-                                    push("/").then()
-                                }
-                            } */
-              // push("/payment-successful").then()
             })
           }}
           onError={() => {

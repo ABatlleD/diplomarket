@@ -46,7 +46,6 @@ function AddToCart ({
     removeItemFromCart(`${item.id}`)
   }
 
-  //! Hydration error because isInCart method
   return (
     <>
       {!isInCart(`${item.id}`) && (

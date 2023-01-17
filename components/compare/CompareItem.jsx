@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react'
 import resources from '../../restapi/resources'
 import { useCompare } from '../../store/compare/compare.context'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
-// import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 
 function CompareItem ({ id }) {
   const [product, setProduct] = useState({})
-  // const { i18n } = useTranslation()
   const { data } = useSession()
 
   const {

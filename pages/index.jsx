@@ -295,7 +295,6 @@ function Home() {
   }, [productsTotal])
 
   useEffect(() => {
-    console.log('🚀 ~ file: index.jsx:299 ~ useEffect ~ id', id)
     if (id) {
       resources.suppliers.one(id).then((response) => {
         setProvider({ label: response.data.nombre, id: response.data.pk })
