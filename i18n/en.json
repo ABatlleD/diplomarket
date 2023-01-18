@@ -440,5 +440,6 @@
   },
   "view_orders": "Ver mis órdenes",
   "back": "Volver a inicio",
-  "free_shipping": "Free"
+  "free_shipping": "Free",
+  "no-more-products": "Nothing more to show"
 }

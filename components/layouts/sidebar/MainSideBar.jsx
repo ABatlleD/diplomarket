@@ -152,8 +152,14 @@ function MainSideBar({
                 <p>
                   <span>
                     <EmailOutlinedIcon sx={{ marginTop: '-3px' }} />
-                  </span>{' '}
-                  {item.contenido}
+                  </span>
+                  <a
+                    className="hover:underline"
+                    href={`mailto:${item.contenido}`}
+                  >
+                    {' '}
+                    {item.contenido}
+                  </a>
                 </p>
               )}
               {item.tipo === 'whatsapp' && (
@@ -161,12 +167,16 @@ function MainSideBar({
                   <span>
                     <WhatsAppBusinessIcon />
                   </span>{' '}
-                  <span className="ml-1 mt-[-0.2rem]">
-                    {' '}
-                    {parsePhoneNumber(
-                      `+${item.contenido}`
-                    )?.formatInternational()}
-                  </span>
+                  <a
+                    href={`https://api.whatsapp.com/send?phone=${item.contenido}&text=Hola,%20Diplomarket%E2%84%A2`}
+                  >
+                    <span className="ml-1 mt-[-0.2rem] hover:underline">
+                      {' '}
+                      {parsePhoneNumber(
+                        `+${item.contenido}`
+                      )?.formatInternational()}
+                    </span>
+                  </a>
                 </p>
               )}
             </div>

@@ -12,6 +12,7 @@ import {
   Select,
 } from '@mui/material'
 import TableRowsIcon from '@mui/icons-material/TableRows'
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart'
 import WindowIcon from '@mui/icons-material/Window'
 import { useTranslation } from 'react-i18next'
 import { getCookie } from 'cookies-next'
@@ -642,18 +643,32 @@ function Home() {
                   </div>
                 </div>
               )}
-              {/* {size.width <= 768 && productsIsLoading && <AllProductsLoader />} */}
               {size.width <= 768 && municipality && (
                 <InfiniteScroll
                   dataLength={mobileList.length}
                   next={getMorePost}
-                  hasMore={true}
+                  hasMore={mobileList.length < productsTotal}
                   loader={
                     <div className="flex flex-row w-full justify-center my-6 text-text-blue">
                       <CircularProgress />
                     </div>
                   }
-                  endMessage={<h4>Nothing more to show</h4>}
+                  endMessage={
+                    <div className="flex flex-col my-6 items-center w-full">
+                      {mobileList.length <= 0 && (
+                        <RemoveShoppingCartIcon
+                          sx={{
+                            fontSize: '10rem',
+                            color: '#6e717a',
+                            marginBottom: '1rem',
+                          }}
+                        />
+                      )}
+                      <h4 className="font-bold text-[#6e717a]">
+                        {t('no-more-products')}
+                      </h4>
+                    </div>
+                  }
                 >
                   <div className="flex flex-wrap justify-evenly w-full">
                     {mobileList.map((data) => (
@@ -680,7 +695,21 @@ function Home() {
               {size.width > 768 && (
                 <ListProducts products={products} loading={productsIsLoading} />
               )}
-              {size.width > 768 && (
+              {size.width > 768 && productsTotal === 0 && (
+                <div className="flex flex-col my-6 items-center w-full">
+                  <RemoveShoppingCartIcon
+                    sx={{
+                      fontSize: '30rem',
+                      color: '#6e717a',
+                      marginBottom: '1rem',
+                    }}
+                  />
+                  <h4 className="font-bold text-[#6e717a] text-[2rem]">
+                    {t('no-more-products')}
+                  </h4>
+                </div>
+              )}
+              {size.width > 768 && productsTotal > 0 && (
                 <div className="mt-2">
                   <Pagination
                     count={pages}
