@@ -143,6 +143,19 @@ function MainSideBar({
               </p>
             </Link>
           </div>
+          <div
+            onClick={() => setMainSideBar((mainSideBar) => false)}
+            className="mt-4 text-footer-background-200 hover:text-footer-background-100 font-semibold text-lg"
+          >
+            <Link href="/jobs">
+              <p className="hover:cursor-pointer hover:underline">
+                {t('pages.jobs')}{' '}
+                <span>
+                  <KeyboardArrowRightIcon sx={{ marginTop: '-1px' }} />
+                </span>
+              </p>
+            </Link>
+          </div>
           {contacts.map((item) => (
             <div
               key={item.id}
