@@ -106,8 +106,11 @@ function BottomOptions({
             <div className="mr-4 text-footer-background-200 font-normal text-lg hover:underline mt-[0.15rem]">
               <Link href="/contact">{t('layout.navbar.contact')}</Link>
             </div>
-            <div className="text-footer-background-200 font-normal text-lg hover:underline mt-[0.15rem]">
+            <div className="mr-4 text-footer-background-200 font-normal text-lg hover:underline mt-[0.15rem]">
               <Link href="/providers">{t('layout.navbar.providers')}</Link>
+            </div>
+            <div className="text-footer-background-200 font-normal text-lg hover:underline mt-[0.15rem]">
+              <Link href="/jobs">{t('layout.navbar.jobs')}</Link>
             </div>
           </div>
           <div className="flex flex-row">

@@ -19,7 +19,8 @@
     "recipients": "Destinatarios",
     "settings": "Ajustes",
     "wishlist": "Favoritos",
-    "providers": "Proveedores"
+    "providers": "Proveedores",
+    "jobs": "Empleos"
   },
   "layout": {
     "navbar": {
@@ -27,6 +28,7 @@
       "about": "¿Quienes somos?",
       "contact": "Contáctenos",
       "providers": "Proveedores",
+      "jobs": "Empleos",
       "sell-with-us": "Vende con nosotros",
       "categories": "Categorías",
       "lang": {

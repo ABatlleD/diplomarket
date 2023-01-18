@@ -19,7 +19,8 @@
     "recipients": "Recipients",
     "settings": "Settings",
     "wishlist": "Wishlist",
-    "providers": "Providers"
+    "providers": "Providers",
+    "jobs": "Jobs"
   },
   "layout": {
     "navbar": {
@@ -27,6 +28,7 @@
       "about": "About us",
       "contact": "Contact us",
       "providers": "Providers",
+      "jobs": "Jobs",
       "sell-with-us": "Sell with us",
       "categories": "Categories",
       "lang": {

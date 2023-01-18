@@ -25,7 +25,7 @@ function ProviderItem({ provider }) {
           </Link>
         </div>
         <Link href={{ pathname: '/', query: { id: provider.pk } }}>
-          <div className="flex md:justify-center mt-2 mx-2 text-lg font-bold h-[4rem] md:h-auto">
+          <div className="flex md:justify-center text-footer-background-300 mt-2 mx-2 text-lg font-bold h-[4rem] md:h-auto">
             {provider.nombre}
           </div>
         </Link>
