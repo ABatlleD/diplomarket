@@ -2,17 +2,27 @@ import { useQuery } from "@tanstack/react-query";
 import resources from "./resources";
 
 export function useFilterProducts(options) {
-  const { data, isLoading, error } = useQuery(
-    [`/filter-products`, options],
-    () => resources.products.all(options)
-  );
-  return {
-    products: data?.data?.results ?? [],
-    productsTotal: data?.data?.total ?? 0,
-    productsCount: data?.data?.count ?? 0,
-    productsIsLoading: isLoading,
-    productsError: error,
-  };
+  if (options.municipality_id) {
+    const { data, isLoading, error } = useQuery(
+      [`/filter-products`, options],
+      () => resources.products.all(options)
+    );
+    return {
+      products: data?.data?.results ?? [],
+      productsTotal: data?.data?.total ?? 0,
+      productsCount: data?.data?.count ?? 0,
+      productsIsLoading: isLoading,
+      productsError: error,
+    };
+  } else {
+    return {
+      products: [],
+      productsTotal: 0,
+      productsCount: 0,
+      productsIsLoading: false,
+      productsError: false,
+    };
+  }
 }
 
 export function useOneProduct(id) {

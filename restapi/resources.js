@@ -60,6 +60,7 @@ const resources = {
   products: {
     all: async (options) => {
       const { offset, limit, municipality_id, min, max, category, subcategory, brand, provider, extra, ordering } = options
+
       let filter = `?offset=${offset}&limit=${limit}&municipios=${municipality_id}`
 
       if (min) filter += `&min=${min}`
