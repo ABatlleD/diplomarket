@@ -45,9 +45,11 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
   }, [product])
 
   useEffect(() => {
-    resources.products.tip(municipality).then((response) => {
-      setProduct(response.data[0])
-    })
+    if (municipality) {
+      resources.products.tip(municipality).then((response) => {
+        setProduct(response.data[0])
+      })
+    }
   }, [])
 
   const handleBuyNow = () => {
