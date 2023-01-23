@@ -509,15 +509,15 @@ function Home() {
                 <Slider>
                   {banners?.results?.map((result) => {
                     return (
-                      <Slide key={result.imagen} index={result.imagen}>
-                        <Link href={result.enlace}>
+                      <Link key={result.imagen} href={result.enlace}>
+                        <Slide index={result.imagen}>
                           <img
                             src={`${process.env.NEXT_PUBLIC_BACKEND}${result.imagen}`}
                             className="w-full hover:cursor-pointer h-full"
                             alt="..."
                           />
-                        </Link>
-                      </Slide>
+                        </Slide>
+                      </Link>
                     )
                   })}
                 </Slider>

@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { CarouselProvider, Slider, Slide } from 'pure-react-carousel'
+import {
+  CarouselProvider,
+  Slider,
+  Slide,
+  ButtonBack,
+  ButtonNext,
+} from 'pure-react-carousel'
 import 'pure-react-carousel/dist/react-carousel.es.css'
 import Link from 'next/link'
 import useWindowSize from '../../hooks/WindowSize'
+import ArrowRightIcon from '@mui/icons-material/ArrowRight'
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft'
 
 function MainCarousel({ carousel, count }) {
   const size = useWindowSize()
@@ -40,8 +48,8 @@ function MainCarousel({ carousel, count }) {
             const pivot = slide
             slide++
             return (
-              <Slide key={pivot} index={pivot}>
-                <Link href={result?.enlace}>
+              <Link key={pivot} href={result?.enlace}>
+                <Slide index={pivot}>
                   <img
                     src={
                       size.width >= 768
@@ -51,11 +59,21 @@ function MainCarousel({ carousel, count }) {
                     className="w-full hover:cursor-pointer h-full"
                     alt="..."
                   />
-                </Link>
-              </Slide>
+                </Slide>
+              </Link>
             )
           })}
         </Slider>
+        <ButtonBack className="absolute top-1/2 left-10">
+          <div className="bg-footer-background-100 text-background-100 shadow-md rounded-full md:p-2">
+            <ArrowLeftIcon />
+          </div>
+        </ButtonBack>
+        <ButtonNext className="absolute top-1/2 right-10">
+          <div className="bg-footer-background-100 text-background-100 shadow-md rounded-full md:p-2">
+            <ArrowRightIcon />
+          </div>
+        </ButtonNext>
       </CarouselProvider>
     </>
   )
