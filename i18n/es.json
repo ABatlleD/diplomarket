@@ -441,5 +441,7 @@
   "view_orders": "Ver mis órdenes",
   "back": "Volver a inicio",
   "free_shipping": "Gratis",
-  "no-more-products": "No hay más productos para mostrar"
+  "no-more-products": "No hay más productos para mostrar",
+  "category": "Categoría",
+  "subcategory": "Subcategoría"
 }

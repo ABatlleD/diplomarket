@@ -64,7 +64,7 @@ const NotificationsTip = dynamic(
 function Home() {
   const municipality = getCookie('NEXT_MUNICIPALITY')
   const router = useRouter()
-  const { id } = router.query
+  const { id, categoryId, subcategoryId } = router.query
   const { carousel, carouselCount, carouselIsLoading } = useAllCarousel()
   const size = useWindowSize()
   const { t, i18n } = useTranslation()
@@ -295,6 +295,24 @@ function Home() {
     }
   }, [productsTotal])
 
+  const getCategory = (id) => {
+    for (const item of categories) {
+      if (item.id === parseInt(id)) {
+        return item
+      }
+    }
+  }
+
+  const getSubcategory = (id) => {
+    for (const item of categories) {
+      for (const element of item?.subcategorias) {
+        if (element.pk === parseInt(id)) {
+          return element
+        }
+      }
+    }
+  }
+
   useEffect(() => {
     if (id) {
       resources.suppliers.one(id).then((response) => {
@@ -302,7 +320,15 @@ function Home() {
         setProviderDisplay(response.data)
       })
     }
-  }, [id])
+    if (categoryId) {
+      setCategory(categoryId)
+      setSelectedCategory(getCategory(categoryId))
+    }
+    if (subcategoryId) {
+      setSubcategory(subcategoryId)
+      setSelectedCategory(getSubcategory(subcategoryId))
+    }
+  }, [id, categoryId, subcategoryId])
 
   const handleChangeType = (type) => {
     setExtra(undefined)
@@ -529,9 +555,11 @@ function Home() {
                 id="combo-box-demo"
                 value={brand}
                 options={brands}
-                onChange={(event, newValue) =>
-                  setBrand({ label: newValue?.label, id: newValue?.id })
-                }
+                onChange={(event, newValue, reason) => {
+                  return reason === 'clear'
+                    ? setBrand({ label: '', id: 0 })
+                    : setBrand({ label: newValue?.label, id: newValue?.id })
+                }}
                 renderInput={(params) => (
                   <TextField {...params} label={t('filter.brand')} />
                 )}
@@ -544,11 +572,16 @@ function Home() {
                 id="combo-box-demo"
                 value={provider}
                 options={suppliers}
-                onChange={(event, newValue) => {
-                  setProvider({ label: newValue?.label, id: newValue?.id })
-                  resources.suppliers.one(newValue?.id).then((response) => {
-                    setProviderDisplay(response.data)
-                  })
+                onChange={(event, newValue, reason) => {
+                  if (reason === 'clear') {
+                    setProvider({ label: '', id: 0 })
+                    setProviderDisplay(undefined)
+                  } else {
+                    setProvider({ label: newValue?.label, id: newValue?.id })
+                    resources.suppliers.one(newValue?.id).then((response) => {
+                      setProviderDisplay(response.data)
+                    })
+                  }
                 }}
                 renderInput={(params) => (
                   <TextField {...params} label={t('filter.provider')} />

@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import Autocomplete from '@mui/material/Autocomplete'
-import { FormControl, OutlinedInput, InputAdornment, IconButton } from '@mui/material'
+import {
+  FormControl,
+  OutlinedInput,
+  InputAdornment,
+  IconButton,
+} from '@mui/material'
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles'
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined'
 import { useTranslation } from 'react-i18next'
@@ -17,18 +22,18 @@ const theme = createTheme({
   palette: {
     error: {
       main: '#b12024',
-      contrastText: '#fff'
-    }
-  }
+      contrastText: '#fff',
+    },
+  },
 })
 
 const CssOutlinedInput = styled(OutlinedInput)({
   '& .MuiInputBase-input': {
-    padding: 3
+    padding: 3,
   },
   '& .MuiInputBase-focused': {
-    padding: 3
-  }
+    padding: 3,
+  },
 })
 
 function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
@@ -46,7 +51,8 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
 
   useEffect(() => {
     if (inputValue.length > 2) {
-      resources.products.search(NEXT_MUNICIPALITY, inputValue)
+      resources.products
+        .search(NEXT_MUNICIPALITY, inputValue)
         .then((response) => setOptions(response.data))
     } else {
       setOptions([])
@@ -54,7 +60,9 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
   }, [inputValue])
 
   const resizeTitle = (string, maxLength) => {
-    return string && string.length > maxLength ? `${string.slice(0, maxLength)}...` : string
+    return string && string.length > maxLength
+      ? `${string.slice(0, maxLength)}...`
+      : string
   }
 
   const searchSubmit = (e, value) => {
@@ -67,28 +75,34 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <div className='flex flex-row'>
-          <div className='hidden md:w-[14%] md:flex'>
+        <div className="flex flex-row">
+          <div className="hidden md:w-[14%] md:flex">
             <AppButton
-                sx={{
-                  fontSize: {
-                    xs: 10,
-                    sm: 10,
-                    md: 12
-                  },
-                  borderTopRightRadius: 0,
-                  width: '100%',
-                  borderBottomRightRadius: 0
-                }}
-                className='bg-button'
-                onClick={() => setOpenSelectPlace(true)}
-              >
-                <span className='mr-1 -mt-[0.2rem]'>
-                  <AddLocationAltOutlinedIcon sx={{
-                    fontSize: '1rem'
-                  }} />
-                </span>
-                <span className='-mb-[0.2rem]'>{size.width < 1900 ? resizeTitle(district, 6) : resizeTitle(district, 14)}</span>
+              sx={{
+                fontSize: {
+                  xs: 10,
+                  sm: 10,
+                  md: 12,
+                },
+                borderTopRightRadius: 0,
+                width: '100%',
+                borderBottomRightRadius: 0,
+              }}
+              className="bg-button"
+              onClick={() => setOpenSelectPlace(true)}
+            >
+              <span className="mr-1 -mt-[0.2rem]">
+                <AddLocationAltOutlinedIcon
+                  sx={{
+                    fontSize: '1rem',
+                  }}
+                />
+              </span>
+              <span className="">
+                {size.width < 1900
+                  ? resizeTitle(district, 6)
+                  : resizeTitle(district, 14)}
+              </span>
             </AppButton>
           </div>
           <Autocomplete
@@ -104,7 +118,7 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
             }}
             noOptionsText={<p>{t('no_options')}</p>}
             style={{
-              width: '100%'
+              width: '100%',
             }}
             freeSolo
             renderInput={(params) => {
@@ -113,8 +127,8 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
                   <FormControl fullWidth variant="outlined">
                     <CssOutlinedInput
                       id="outlined-adornment-search"
-                      type='text'
-                      size='small'
+                      type="text"
+                      size="small"
                       {...params.inputProps}
                       endAdornment={
                         <InputAdornment position="end">

@@ -65,12 +65,12 @@ function MainCarousel({ carousel, count }) {
           })}
         </Slider>
         <ButtonBack className="absolute top-1/2 left-10">
-          <div className="bg-footer-background-100 text-background-100 shadow-md rounded-full md:p-2">
+          <div className="hidden md:flex bg-footer-background-100 text-background-100 shadow-md rounded-full p-2">
             <ArrowLeftIcon />
           </div>
         </ButtonBack>
         <ButtonNext className="absolute top-1/2 right-10">
-          <div className="bg-footer-background-100 text-background-100 shadow-md rounded-full md:p-2">
+          <div className="hidden md:flex bg-footer-background-100 text-background-100 shadow-md rounded-full p-2">
             <ArrowRightIcon />
           </div>
         </ButtonNext>

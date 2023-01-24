@@ -18,7 +18,7 @@ function Jobs({ jobs }) {
           {jobs?.results?.map((element) => (
             <div
               key={element.titulo}
-              className="flex flex-col space-y-1 w-full mb-8 border-footer-background-100 p-4 border rounded-md shadow-lg"
+              className="flex flex-col space-y-1 w-full mb-8 border-footer-background-100 text-footer-background-300 p-4 border rounded-md shadow-lg"
             >
               <div className="md:text-lg font-bold">{element.titulo}</div>
               <div className="text-justify text-sm md:text-base">
