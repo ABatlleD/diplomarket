@@ -313,9 +313,11 @@ function FilterBar({
                 id="combo-box-demo"
                 value={brand}
                 options={brands}
-                onChange={(event, newValue) =>
-                  setBrand({ label: newValue?.label, id: newValue?.id })
-                }
+                onChange={(event, newValue, reason) => {
+                  return reason === 'clear'
+                    ? setBrand({ label: '', id: 0 })
+                    : setBrand({ label: newValue?.label, id: newValue?.id })
+                }}
                 renderInput={(params) => (
                   <TextField {...params} label={t('filter.brand')} />
                 )}
@@ -328,9 +330,11 @@ function FilterBar({
                 id="combo-box-demo"
                 value={provider}
                 options={suppliers}
-                onChange={(event, newValue) =>
-                  setProvider({ label: newValue?.label, id: newValue?.id })
-                }
+                onChange={(event, newValue, reason) => {
+                  reason === 'clear'
+                    ? setProvider({ label: '', id: 0 })
+                    : setProvider({ label: newValue?.label, id: newValue?.id })
+                }}
                 renderInput={(params) => (
                   <TextField {...params} label={t('filter.provider')} />
                 )}

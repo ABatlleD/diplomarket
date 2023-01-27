@@ -36,7 +36,7 @@ function MainLayout({ children }) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (clicks >= 20) {
+      if (clicks === 1) {
         addClicks()
         setOpenQuickTip(true)
       }
