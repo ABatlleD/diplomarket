@@ -10,6 +10,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Tooltip,
 } from '@mui/material'
 import TableRowsIcon from '@mui/icons-material/TableRows'
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart'
@@ -399,7 +400,9 @@ function Home() {
                 {!listView && <TableRowsIcon />}
               </div>
               <div className="mr-2 mt-2" onClick={() => setFilterBar(true)}>
-                <FilterAltOutlinedIcon />
+                <Tooltip title="Filtrar" open={true} placement="top">
+                  <FilterAltOutlinedIcon />
+                </Tooltip>
               </div>
               <div className="flex w-28">
                 <FormControl fullWidth>
@@ -680,7 +683,9 @@ function Home() {
                 <InfiniteScroll
                   dataLength={mobileList.length}
                   next={getMorePost}
-                  hasMore={mobileList.length < productsTotal}
+                  hasMore={
+                    mobileList.length < productsTotal || productsIsLoading
+                  }
                   loader={
                     <div className="flex flex-row w-full justify-center my-6 text-text-blue">
                       <CircularProgress />
@@ -688,7 +693,7 @@ function Home() {
                   }
                   endMessage={
                     <div className="flex flex-col my-6 items-center w-full">
-                      {mobileList.length <= 0 && (
+                      {mobileList.length <= 0 && !productsIsLoading && (
                         <RemoveShoppingCartIcon
                           sx={{
                             fontSize: '10rem',
@@ -728,20 +733,22 @@ function Home() {
               {size.width > 768 && (
                 <ListProducts products={products} loading={productsIsLoading} />
               )}
-              {size.width > 768 && productsTotal === 0 && (
-                <div className="flex flex-col my-6 items-center w-full">
-                  <RemoveShoppingCartIcon
-                    sx={{
-                      fontSize: '30rem',
-                      color: '#6e717a',
-                      marginBottom: '1rem',
-                    }}
-                  />
-                  <h4 className="font-bold text-[#6e717a] text-[2rem]">
-                    {t('no-more-products')}
-                  </h4>
-                </div>
-              )}
+              {size.width > 768 &&
+                productsTotal === 0 &&
+                !productsIsLoading && (
+                  <div className="flex flex-col my-6 items-center w-full">
+                    <RemoveShoppingCartIcon
+                      sx={{
+                        fontSize: '30rem',
+                        color: '#6e717a',
+                        marginBottom: '1rem',
+                      }}
+                    />
+                    <h4 className="font-bold text-[#6e717a] text-[2rem]">
+                      {t('no-more-products')}
+                    </h4>
+                  </div>
+                )}
               {size.width > 768 && productsTotal > 0 && (
                 <div className="mt-2">
                   <Pagination
