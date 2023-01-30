@@ -110,7 +110,7 @@ function BottomOptions({
               <Link href="/providers">{t('layout.navbar.providers')}</Link>
             </div>
             <div className="text-footer-background-200 font-normal text-lg hover:underline mt-[0.15rem]">
-              <Link href="/jobs">{t('layout.navbar.jobs')}</Link>
+              <Link href="/empleos">{t('layout.navbar.jobs')}</Link>
             </div>
           </div>
           <div className="flex flex-row">

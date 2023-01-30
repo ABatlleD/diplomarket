@@ -147,7 +147,7 @@ function MainSideBar({
             onClick={() => setMainSideBar((mainSideBar) => false)}
             className="mt-4 text-footer-background-200 hover:text-footer-background-100 font-semibold text-lg"
           >
-            <Link href="/jobs">
+            <Link href="/empleos">
               <p className="hover:cursor-pointer hover:underline">
                 {t('pages.jobs')}{' '}
                 <span>
