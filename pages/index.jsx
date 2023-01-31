@@ -152,7 +152,6 @@ function Home() {
     if (!id) {
       resources.suppliers.one(1).then((response) => {
         setProvider({ label: response.data.nombre, id: response.data.pk })
-        setProviderDisplay(response.data)
       })
     }
   }, [])
@@ -825,8 +824,9 @@ function Home() {
       {size.width <= 768 && (
         <div
           className={`fixed overflow-hidden p-2 rounded-full ${
-            scrollY !== 0 ? 'top-[37rem]' : 'top-[41rem]'
-          } right-3 bg-text-blue text-background-100 flex flex-row justify-center items-center shadow-2xl hover:cursor-pointer`}
+            scrollY !== 0 ? 'bottom-24' : 'bottom-8'
+          } right-3 bg-text-blue text-background-100 flex flex-row 
+          justify-center items-center shadow-2xl hover:cursor-pointer`}
           onClick={() => window.scrollTo(0, 0)}
         >
           <motion.div
@@ -846,48 +846,6 @@ function Home() {
     </>
   )
 }
-
-// export async function getServerSideProps({ req, res }, context) {
-//   const municipality = getCookie('NEXT_MUNICIPALITY', { req, res })
-//   const { products, productsError } = await fetchProducts(municipality)
-//   const { carousel, carouselError } = await fetchCarousel()
-
-//   return {
-//     props: {
-//       products,
-//       productsError,
-//       carousel,
-//       carouselError,
-//     },
-//   }
-// }
-
-// async function fetchProducts(municipality) {
-//   let productsError = ''
-//   let products = []
-//   const filter = {
-//     offset: 0,
-//     limit: 15,
-//     municipality_id: municipality,
-//   }
-//   try {
-//     products = await (await resources.products.all(filter)).data
-//   } catch (error) {
-//     productsError = error.message
-//   }
-//   return { products, productsError }
-// }
-
-// async function fetchCarousel() {
-//   let carouselError = ''
-//   let carousel = []
-//   try {
-//     carousel = await (await resources.carousel.all()).data
-//   } catch (error) {
-//     carouselError = error.message
-//   }
-//   return { carousel, carouselError }
-// }
 
 Home.getLayout = function getLayout(page) {
   return (
