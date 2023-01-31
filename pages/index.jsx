@@ -10,7 +10,6 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  Tooltip,
 } from '@mui/material'
 import TableRowsIcon from '@mui/icons-material/TableRows'
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart'
@@ -35,6 +34,8 @@ import { useAllCarousel, useFilterProducts } from '../restapi/query'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import storeAltImg from '../public/assets/store.png'
+import { motion } from 'framer-motion'
+import useScrollY from '../hooks/Scroll'
 
 const MainLayout = dynamic(() => import('../layouts/MainLayout'))
 const AppHeader = dynamic(() => import('../components/layouts/AppHeader'))
@@ -108,6 +109,8 @@ function Home() {
     extra,
     ordering: order,
   })
+
+  const scrollY = useScrollY()
 
   const [mobileList, setMobileList] = useState(products)
 
@@ -404,11 +407,6 @@ function Home() {
               <div className="mr-3 mt-2" onClick={() => setListView(!listView)}>
                 {listView && <WindowIcon />}
                 {!listView && <TableRowsIcon />}
-              </div>
-              <div className="mr-2 mt-2" onClick={() => setFilterBar(true)}>
-                <Tooltip title="Filtrar" open={true} placement="top">
-                  <FilterAltOutlinedIcon />
-                </Tooltip>
               </div>
               <div className="flex w-28">
                 <FormControl fullWidth>
@@ -824,6 +822,27 @@ function Home() {
           {...{ openNotificationsTip, setOpenNotificationsTip }}
         />
       </div>
+      {size.width <= 768 && (
+        <div
+          className={`fixed overflow-hidden p-2 rounded-full ${
+            scrollY !== 0 ? 'top-[37rem]' : 'top-[41rem]'
+          } right-3 bg-text-blue text-background-100 flex flex-row justify-center items-center shadow-2xl hover:cursor-pointer`}
+          onClick={() => window.scrollTo(0, 0)}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ rotate: 360, scale: 1, opacity: 1 }}
+            transition={{
+              duration: 1,
+              repeatDelay: 3,
+              repeat: Infinity,
+            }}
+            onClick={() => setFilterBar(true)}
+          >
+            <FilterAltOutlinedIcon fontSize="large" />
+          </motion.div>
+        </div>
+      )}
     </>
   )
 }
@@ -871,7 +890,11 @@ function Home() {
 // }
 
 Home.getLayout = function getLayout(page) {
-  return <MainLayout pageProps={page}>{page}</MainLayout>
+  return (
+    <MainLayout pageProps={page} filterBar={true}>
+      {page}
+    </MainLayout>
+  )
 }
 
 export default Home

@@ -25,7 +25,7 @@ const CartSideBar = dynamic(() =>
 )
 const QuickTip = dynamic(() => import('../components/modals/QuickTip'))
 
-function MainLayout({ children }) {
+function MainLayout({ children, filterBar = false }) {
   const [categoriesSideBar, setCategoriesSideBar] = useState(false)
   const [mainSideBar, setMainSideBar] = useState(false)
   const [cartSideBar, setCartSideBar] = useState(false)
@@ -101,10 +101,10 @@ function MainLayout({ children }) {
                 <QuickTip {...{ openQuickTip, setOpenQuickTip }} />
                 {scrollY !== 0 && (
                   <div
-                    className="fixed overflow-hidden p-2 rounded bottom-8 right-3 bg-footer-background-300 text-background-100 flex flex-row justify-center items-center shadow-md hover:cursor-pointer"
+                    className="fixed overflow-hidden p-2 rounded-full bottom-8 right-3 bg-footer-background-300 text-background-100 flex flex-row justify-center items-center shadow-md hover:cursor-pointer"
                     onClick={() => window.scrollTo(0, 0)}
                   >
-                    <KeyboardArrowUpIcon />
+                    <KeyboardArrowUpIcon fontSize="large" />
                   </div>
                 )}
               </QueryClientProvider>
