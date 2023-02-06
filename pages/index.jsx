@@ -149,11 +149,11 @@ function Home() {
     resources.categories
       .all()
       .then((response) => setCategories(response.data.results))
-    if (!id) {
-      resources.suppliers.one(1).then((response) => {
-        setProvider({ label: response.data.nombre, id: response.data.pk })
-      })
-    }
+    // if (!id) {
+    //   resources.suppliers.one(1).then((response) => {
+    //     setProvider({ label: response.data.nombre, id: response.data.pk })
+    //   })
+    // }
   }, [])
 
   useEffect(() => {
