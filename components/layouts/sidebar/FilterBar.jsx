@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react'
-import Drawer from '@mui/material/Drawer'
-import HighlightOffIcon from '@mui/icons-material/HighlightOff'
-import resources from '../../../restapi/resources'
+import React, { useState, useEffect } from "react"
+import Drawer from "@mui/material/Drawer"
+import HighlightOffIcon from "@mui/icons-material/HighlightOff"
+import resources from "../../../restapi/resources"
 import {
   Autocomplete,
   TextField,
   FormControlLabel,
   Checkbox,
-} from '@mui/material'
-import { useTranslation } from 'react-i18next'
-import { CarouselProvider, Slider, Slide } from 'pure-react-carousel'
-import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import localFont from '@next/font/local'
+} from "@mui/material"
+import { useTranslation } from "react-i18next"
+import { CarouselProvider, Slider, Slide } from "pure-react-carousel"
+import Link from "next/link"
+import dynamic from "next/dynamic"
+import localFont from "@next/font/local"
 
 const CategoriesAccordion = dynamic(() =>
-  import('../../categories/CategoriesAccordion')
+  import("../../categories/CategoriesAccordion")
 )
 
-const arial = localFont({ src: '../../../public/assets/font/arial/Arial.ttf' })
+const arial = localFont({ src: "../../../public/assets/font/arial/Arial.ttf" })
 
 function FilterBar({
   filterBar = false,
@@ -35,8 +35,8 @@ function FilterBar({
   const [banners, setBanners] = useState([])
   const [brands, setBrands] = useState([])
   const [prices, setPrices] = useState([0, 1000])
-  const [brand, setBrand] = useState({ label: '', id: 0 })
-  const [provider, setProvider] = useState({ label: '', id: 0 })
+  const [brand, setBrand] = useState({ label: "", id: 0 })
+  const [provider, setProvider] = useState({ label: "", id: 0 })
   const { t } = useTranslation()
   const [promotions, setPromotions] = useState(false)
   const [recommendations, setRecommendations] = useState(false)
@@ -98,6 +98,20 @@ function FilterBar({
     setPrices(prices)
   }
 
+  const handleViewAll = async () => {
+    handleAllClick()
+    const filter = {
+      brand: { label: "", id: 0 },
+      provider: { label: "", id: 0 },
+      providerDisplay: undefined,
+      min: 0,
+      max: 1000,
+      extra: undefined,
+    }
+    handleMobileFilter(filter)
+    setFilterBar((filterBar) => !filterBar)
+  }
+
   const handleFilter = async () => {
     await resources.suppliers
       .one(provider.id)
@@ -130,8 +144,8 @@ function FilterBar({
     setCategory(undefined)
     setSubcategory(undefined)
     setSelectedCategory(undefined)
-    setProvider({ label: '', id: 0 })
-    setBrand({ label: '', id: 0 })
+    setProvider({ label: "", id: 0 })
+    setBrand({ label: "", id: 0 })
     setExtra(undefined)
     setPromotions(false)
     setRecommendations(false)
@@ -143,7 +157,7 @@ function FilterBar({
   const handleChangeType = (type) => {
     setExtra(undefined)
     switch (type) {
-      case 'promotions':
+      case "promotions":
         if (promotions) {
           setExist(false)
           setPromotions(false)
@@ -152,10 +166,10 @@ function FilterBar({
           setPromotions(true)
           setExist(false)
           setRecommendations(false)
-          setExtra('rebajados')
+          setExtra("rebajados")
         }
         break
-      case 'recommendations':
+      case "recommendations":
         if (recommendations) {
           setExist(false)
           setPromotions(false)
@@ -164,10 +178,10 @@ function FilterBar({
           setRecommendations(true)
           setExist(false)
           setPromotions(false)
-          setExtra('recomendados')
+          setExtra("recomendados")
         }
         break
-      case 'exist':
+      case "exist":
         if (exist) {
           setExist(false)
           setPromotions(false)
@@ -176,7 +190,7 @@ function FilterBar({
           setExist(true)
           setPromotions(false)
           setRecommendations(false)
-          setExtra('disponibles')
+          setExtra("disponibles")
         }
         break
     }
@@ -185,7 +199,7 @@ function FilterBar({
   return (
     <React.Fragment>
       <Drawer
-        anchor={'left'}
+        anchor={"left"}
         open={filterBar}
         onClose={() => setFilterBar(false)}
       >
@@ -200,7 +214,15 @@ function FilterBar({
               </button>
             </div>
             <div className="flex flex-col mt-10">
-              <p className="font-bold mb-2">{t('filter.category')}</p>
+              <div className="flex flex-row justify-between">
+                <p className="font-bold mb-2">{t("filter.category")}</p>
+                <div
+                  className="bg-footer-background-200 py-1 h-7 mt-1 text-background-100 text-sm px-2 mr-5 font-bold shadow-sm rounded-sm hover:cursor-pointer hover:opacity-90"
+                  onClick={handleViewAll}
+                >
+                  {t("filter.all")}
+                </div>
+              </div>
               <div className="">
                 {categories.map((item) => (
                   <div key={item.id} className="border-2 border-background-100">
@@ -214,71 +236,6 @@ function FilterBar({
                     />
                   </div>
                 ))}
-              </div>
-            </div>
-            <div className="flex flex-col my-4">
-              <FormControlLabel
-                value={promotions}
-                onChange={() => handleChangeType('promotions')}
-                control={<Checkbox size="small" checked={promotions} />}
-                label={t('filter.promotions')}
-              />
-              <FormControlLabel
-                value={recommendations}
-                onChange={() => handleChangeType('recommendations')}
-                control={<Checkbox size="small" checked={recommendations} />}
-                label={t('filter.recommendations')}
-              />
-              <FormControlLabel
-                value={exist}
-                onChange={() => handleChangeType('exist')}
-                control={<Checkbox size="small" checked={exist} />}
-                label={t('filter.exist')}
-              />
-            </div>
-            <div className="flex flex-col mt-2 mb-4">
-              <p className="font-bold mb-2">{t('filter.price')}</p>
-              <div className="w-[92%]">
-                <div
-                  className={`mb-1 hover:cursor-pointer ${
-                    selectedPrice === 1 ? 'text-button font-semibold' : ''
-                  } text-footer-background-300 hover:underline hover:text-button`}
-                  onClick={() => handlePriceFilter([0, 25])}
-                >
-                  US$0 {t('filter.to')} US$25
-                </div>
-                <div
-                  className={`mb-1 hover:cursor-pointer ${
-                    selectedPrice === 2 ? 'text-button font-semibold' : ''
-                  }`}
-                  onClick={() => handlePriceFilter([25, 50])}
-                >
-                  US$25 {t('filter.to')} US$50
-                </div>
-                <div
-                  className={`mb-1 hover:cursor-pointer ${
-                    selectedPrice === 3 ? 'text-button font-semibold' : ''
-                  }`}
-                  onClick={() => handlePriceFilter([50, 100])}
-                >
-                  US$50 {t('filter.to')} US$100
-                </div>
-                <div
-                  className={`mb-1 hover:cursor-pointer ${
-                    selectedPrice === 4 ? 'text-button font-semibold' : ''
-                  }`}
-                  onClick={() => handlePriceFilter([100, 200])}
-                >
-                  US$100 {t('filter.to')} US$200
-                </div>
-                <div
-                  className={`mb-1 hover:cursor-pointer ${
-                    selectedPrice === 5 ? 'text-button font-semibold' : ''
-                  }`}
-                  onClick={() => handlePriceFilter([200, 1000])}
-                >
-                  {t('filter.more')} US$200
-                </div>
               </div>
             </div>
             <div className="flex flex-col mt-2 mb-4 mr-4">
@@ -307,6 +264,71 @@ function FilterBar({
                 </Slider>
               </CarouselProvider>
             </div>
+            <div className="flex flex-col my-4">
+              <FormControlLabel
+                value={promotions}
+                onChange={() => handleChangeType("promotions")}
+                control={<Checkbox size="small" checked={promotions} />}
+                label={t("filter.promotions")}
+              />
+              <FormControlLabel
+                value={recommendations}
+                onChange={() => handleChangeType("recommendations")}
+                control={<Checkbox size="small" checked={recommendations} />}
+                label={t("filter.recommendations")}
+              />
+              <FormControlLabel
+                value={exist}
+                onChange={() => handleChangeType("exist")}
+                control={<Checkbox size="small" checked={exist} />}
+                label={t("filter.exist")}
+              />
+            </div>
+            <div className="flex flex-col mt-2 mb-4">
+              <p className="font-bold mb-2">{t("filter.price")}</p>
+              <div className="w-[92%]">
+                <div
+                  className={`mb-1 hover:cursor-pointer ${
+                    selectedPrice === 1 ? "text-button font-semibold" : ""
+                  } text-footer-background-300 hover:underline hover:text-button`}
+                  onClick={() => handlePriceFilter([0, 25])}
+                >
+                  US$0 {t("filter.to")} US$25
+                </div>
+                <div
+                  className={`mb-1 hover:cursor-pointer ${
+                    selectedPrice === 2 ? "text-button font-semibold" : ""
+                  }`}
+                  onClick={() => handlePriceFilter([25, 50])}
+                >
+                  US$25 {t("filter.to")} US$50
+                </div>
+                <div
+                  className={`mb-1 hover:cursor-pointer ${
+                    selectedPrice === 3 ? "text-button font-semibold" : ""
+                  }`}
+                  onClick={() => handlePriceFilter([50, 100])}
+                >
+                  US$50 {t("filter.to")} US$100
+                </div>
+                <div
+                  className={`mb-1 hover:cursor-pointer ${
+                    selectedPrice === 4 ? "text-button font-semibold" : ""
+                  }`}
+                  onClick={() => handlePriceFilter([100, 200])}
+                >
+                  US$100 {t("filter.to")} US$200
+                </div>
+                <div
+                  className={`mb-1 hover:cursor-pointer ${
+                    selectedPrice === 5 ? "text-button font-semibold" : ""
+                  }`}
+                  onClick={() => handlePriceFilter([200, 1000])}
+                >
+                  {t("filter.more")} US$200
+                </div>
+              </div>
+            </div>
             <div className="flex flex-col mb-4 w-[95%]">
               <Autocomplete
                 disablePortal
@@ -314,12 +336,12 @@ function FilterBar({
                 value={brand}
                 options={brands}
                 onChange={(event, newValue, reason) => {
-                  return reason === 'clear'
-                    ? setBrand({ label: '', id: 0 })
+                  return reason === "clear"
+                    ? setBrand({ label: "", id: 0 })
                     : setBrand({ label: newValue?.label, id: newValue?.id })
                 }}
                 renderInput={(params) => (
-                  <TextField {...params} label={t('filter.brand')} />
+                  <TextField {...params} label={t("filter.brand")} />
                 )}
                 size="small"
               />
@@ -331,43 +353,28 @@ function FilterBar({
                 value={provider}
                 options={suppliers}
                 onChange={(event, newValue, reason) => {
-                  reason === 'clear'
-                    ? setProvider({ label: '', id: 0 })
+                  reason === "clear"
+                    ? setProvider({ label: "", id: 0 })
                     : setProvider({ label: newValue?.label, id: newValue?.id })
                 }}
                 renderInput={(params) => (
-                  <TextField {...params} label={t('filter.provider')} />
+                  <TextField {...params} label={t("filter.provider")} />
                 )}
                 size="small"
               />
             </div>
-            {/* <div className='flex flex-col w-[95%]'>
-            <p className='font-bold my-2'>{t('filter.provider')}</p>
-            <RadioGroup
-              aria-labelledby="demo-controlled-radio-buttons-group"
-              name="controlled-radio-buttons-group"
-              value={provider}
-              onChange={handleProviderFilter}
-            >
-              <div className='flex flex-wrap'>
-                {suppliers?.results?.map((item) => (
-                  <FormControlLabel key={item.id} value={item.id} control={<Radio />} label={item.nombre} />
-                ))}
-              </div>
-            </RadioGroup>
-          </div> */}
             <div className="flex flex-row justify-between">
               <div
                 className="my-2 underline hover:cursor-pointer"
                 onClick={handleAllClick}
               >
-                {t('filter.clear')}
+                {t("filter.clear")}
               </div>
               <div
                 className="bg-footer-background-200 py-1 h-7 mt-1 text-background-100 text-sm px-2 font-bold shadow-sm rounded-sm hover:cursor-pointer hover:opacity-90"
                 onClick={handleFilter}
               >
-                {t('filter.filter')}
+                {t("filter.filter")}
               </div>
             </div>
           </div>

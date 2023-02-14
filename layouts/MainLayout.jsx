@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
-import { motion } from 'framer-motion'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { getCookie } from 'cookies-next'
-import { FavProvider } from '../store/fav/fav.context.jsx'
-import { CompareProvider } from '../store/compare/compare.context.jsx'
-import { CartProvider } from '../store/cart/cart.context.jsx'
-import { SessionProvider } from 'next-auth/react'
-import { addClicks, clicks } from '../libs/quick-tip'
-import useScrollY from '../hooks/Scroll.js'
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
-import dynamic from 'next/dynamic'
+import React, { useState, useEffect } from "react"
+import PropTypes from "prop-types"
+import { motion } from "framer-motion"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { getCookie } from "cookies-next"
+import { FavProvider } from "../store/fav/fav.context.jsx"
+import { CompareProvider } from "../store/compare/compare.context.jsx"
+import { CartProvider } from "../store/cart/cart.context.jsx"
+import { SessionProvider } from "next-auth/react"
+import { addClicks, clicks } from "../libs/quick-tip"
+import useScrollY from "../hooks/Scroll.js"
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
+import dynamic from "next/dynamic"
 
-const NavBar = dynamic(() => import('./NavBar'))
-const Footer = dynamic(() => import('./Footer'))
+const NavBar = dynamic(() => import("./NavBar"))
+const Footer = dynamic(() => import("./Footer"))
 const CategoriesSideBar = dynamic(() =>
-  import('../components/layouts/sidebar/CategoriesSideBar')
+  import("../components/layouts/sidebar/CategoriesSideBar")
 )
 const MainSideBar = dynamic(() =>
-  import('../components/layouts/sidebar/MainSideBar')
+  import("../components/layouts/sidebar/MainSideBar")
 )
 const CartSideBar = dynamic(() =>
-  import('../components/layouts/sidebar/CartSideBar')
+  import("../components/layouts/sidebar/CartSideBar")
 )
-const QuickTip = dynamic(() => import('../components/modals/QuickTip'))
+const QuickTip = dynamic(() => import("../components/modals/QuickTip"))
 
 function MainLayout({ children, filterBar = false }) {
   const [categoriesSideBar, setCategoriesSideBar] = useState(false)
@@ -31,7 +31,7 @@ function MainLayout({ children, filterBar = false }) {
   const [cartSideBar, setCartSideBar] = useState(false)
   const [openSelectPlace, setOpenSelectPlace] = useState(false)
   const [openQuickTip, setOpenQuickTip] = useState(false)
-  const NEXT_MUNICIPALITY = getCookie('NEXT_MUNICIPALITY')
+  const NEXT_MUNICIPALITY = getCookie("NEXT_MUNICIPALITY")
   const scrollY = useScrollY()
 
   useEffect(() => {
@@ -48,7 +48,7 @@ function MainLayout({ children, filterBar = false }) {
     if (!NEXT_MUNICIPALITY) {
       setOpenSelectPlace(true)
     }
-  })
+  }, [NEXT_MUNICIPALITY])
 
   const queryClient = new QueryClient()
 
@@ -64,7 +64,7 @@ function MainLayout({ children, filterBar = false }) {
                     opacity:
                       categoriesSideBar || mainSideBar || cartSideBar ? 0.5 : 1,
                   }}
-                  transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
+                  transition={{ type: "spring", bounce: 0, duration: 0.4 }}
                 >
                   <NavBar
                     {...{

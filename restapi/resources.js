@@ -1,31 +1,32 @@
-import { ENDPOINTS } from './endpoints'
-import axios from 'axios'
-import { getRequest, postRequest, putRequest, patchRequest } from '.'
+import { ENDPOINTS } from "./endpoints"
+import axios from "axios"
+import { getRequest, postRequest, putRequest, patchRequest } from "."
 
 const resources = {
   auth: {
     signup: async (data) => await postRequest(`${ENDPOINTS.USERS}`, data),
     signin: async (data) => await postRequest(`${ENDPOINTS.AUTH}`, data),
-    changePassword: async (data) => await postRequest(ENDPOINTS.CHANGE_PASSWORD, data)
+    changePassword: async (data) =>
+      await postRequest(ENDPOINTS.CHANGE_PASSWORD, data),
   },
 
   banner: {
-    all: async () => await getRequest(`${ENDPOINTS.BANNER}`)
+    all: async () => await getRequest(`${ENDPOINTS.BANNER}`),
   },
 
   job: {
-    all: async () => await getRequest(`${ENDPOINTS.JOBS}`)
+    all: async () => await getRequest(`${ENDPOINTS.JOBS}`),
   },
 
   bofa: async (data) => await postRequest(ENDPOINTS.BOFA, data),
 
   carousel: {
-    all: async () => await getRequest(`${ENDPOINTS.CAROUSEL}`)
+    all: async () => await getRequest(`${ENDPOINTS.CAROUSEL}`),
   },
 
   categories: {
     all: async () => await getRequest(ENDPOINTS.CATEGORY_SPECIAL),
-    paths: async () => await getRequest(`${ENDPOINTS.CATEGORIES_TREE}`)
+    paths: async () => await getRequest(`${ENDPOINTS.CATEGORIES_TREE}`),
   },
 
   checkout: async (data) => await postRequest(ENDPOINTS.CHECKOUT, data),
@@ -33,33 +34,46 @@ const resources = {
   comercial: async (data) => await postRequest(ENDPOINTS.COMERCIAL, data),
 
   component: {
-    get: async () => await getRequest(`${ENDPOINTS.COMPONENT}`)
+    get: async () => await getRequest(`${ENDPOINTS.COMPONENT}`),
   },
 
   contact: async (data) => await postRequest(ENDPOINTS.SEND_MAIL, data),
 
   delivery: {
     get: async (items, municipio) => {
-      const response = await axios.post('/api/checkout/checkdelivery', {
+      const response = await axios.post("/api/checkout/checkdelivery", {
         items,
-        municipio
+        municipio,
       })
       return response.data.total
     },
-    create: async (data) => await postRequest(ENDPOINTS.DELIVERY, data)
+    create: async (data) => await postRequest(ENDPOINTS.DELIVERY, data),
   },
 
   featured_products: {
-    all: async (municipalityId) => await getRequest(`${ENDPOINTS.PRODUCTS_FEATURED}/${municipalityId}/`)
+    all: async (municipalityId) =>
+      await getRequest(`${ENDPOINTS.PRODUCTS_FEATURED}/${municipalityId}/`),
   },
 
   order: {
-    get: async () => await getRequest(`${ENDPOINTS.ORDER}`)
+    get: async () => await getRequest(`${ENDPOINTS.ORDER}`),
   },
 
   products: {
     all: async (options) => {
-      const { offset, limit, municipality_id, min, max, category, subcategory, brand, provider, extra, ordering } = options
+      const {
+        offset,
+        limit,
+        municipality_id,
+        min,
+        max,
+        category,
+        subcategory,
+        brand,
+        provider,
+        extra,
+        ordering,
+      } = options
 
       let filter = `?offset=${offset}&limit=${limit}&municipios=${municipality_id}`
 
@@ -74,65 +88,75 @@ const resources = {
 
       return await getRequest(`${ENDPOINTS.PRODUCTS}/${filter}`)
     },
-    search: async (municipality, type) => await getRequest(`${ENDPOINTS.SEARCH}/${municipality}/${type}/`),
-    tip: async (municipality) => await getRequest(`${ENDPOINTS.TIP}${municipality}/`),
-    one: async (id) => await getRequest(`${ENDPOINTS.PRODUCTS}/${id}/`)
+    search: async (municipality, type) =>
+      await getRequest(`${ENDPOINTS.SEARCH}/${municipality}/${type}/`),
+    tip: async (municipality) =>
+      await getRequest(`${ENDPOINTS.TIP}${municipality}/`),
+    one: async (id) => await getRequest(`${ENDPOINTS.PRODUCTS}/${id}/`),
   },
 
   products_related: {
-    all: async (productId, municipalityId) => await getRequest(`${ENDPOINTS.PRODUCTS_RELATED}/${municipalityId}/${productId}`)
+    all: async (productId, municipalityId) =>
+      await getRequest(
+        `${ENDPOINTS.PRODUCTS_RELATED}/${municipalityId}/${productId}`
+      ),
   },
 
   recently_solds: {
-    all: async (municipalityId) => await getRequest(`${ENDPOINTS.PRODUCTS_BEST_SELLERS}/${municipalityId}/`)
+    all: async (municipalityId) =>
+      await getRequest(`${ENDPOINTS.PRODUCTS_BEST_SELLERS}/${municipalityId}/`),
   },
 
   today_recomendations: {
-    all: async (municipalityId) => await getRequest(`${ENDPOINTS.PRODUCTS_RECOMMENDED_DAY}/${municipalityId}/`)
+    all: async (municipalityId) =>
+      await getRequest(
+        `${ENDPOINTS.PRODUCTS_RECOMMENDED_DAY}/${municipalityId}/`
+      ),
   },
 
   brands: {
-    all: async () => await getRequest(ENDPOINTS.GET_BRANDS)
+    all: async () => await getRequest(ENDPOINTS.GET_BRANDS),
+    one: async (id) => await getRequest(`${ENDPOINTS.GET_BRANDS}${id}`),
   },
 
   suppliers: {
     all: async () => await getRequest(ENDPOINTS.GET_SUPPLIER),
-    one: async (id) => await getRequest(`${ENDPOINTS.GET_SUPPLIER}${id}`)
+    one: async (id) => await getRequest(`${ENDPOINTS.GET_SUPPLIER}${id}`),
   },
 
   tags: {
-    all: async () => await getRequest(ENDPOINTS.GET_TAGS)
+    all: async () => await getRequest(ENDPOINTS.GET_TAGS),
   },
 
   place: {
     district: {
       all: async () => await getRequest(ENDPOINTS.MUNICIPALITY),
-      one: async (id) => await getRequest(`${ENDPOINTS.MUNICIPALITY}${id}`)
+      one: async (id) => await getRequest(`${ENDPOINTS.MUNICIPALITY}${id}`),
     },
     city: {
       all: async () => await getRequest(ENDPOINTS.PROVINCES),
-      one: async (id) => await getRequest(`${ENDPOINTS.PROVINCES}${id}`)
+      one: async (id) => await getRequest(`${ENDPOINTS.PROVINCES}${id}`),
     },
     country: {
       all: async () => await getRequest(ENDPOINTS.COUNTRIES),
-      one: async (id) => await getRequest(`${ENDPOINTS.COUNTRIES}${id}`)
-    }
+      one: async (id) => await getRequest(`${ENDPOINTS.COUNTRIES}${id}`),
+    },
   },
 
   faq: {
-    all: async () => await getRequest(`${ENDPOINTS.FAQ}`)
+    all: async () => await getRequest(`${ENDPOINTS.FAQ}`),
   },
 
   help: {
-    all: async () => await getRequest(`${ENDPOINTS.HELP}`)
+    all: async () => await getRequest(`${ENDPOINTS.HELP}`),
   },
 
   contacts: {
-    get: async () => await getRequest(`${ENDPOINTS.CONTACT}`)
+    get: async () => await getRequest(`${ENDPOINTS.CONTACT}`),
   },
 
   configuration: {
-    get: async () => await getRequest(`${ENDPOINTS.CONFIGURACION}`)
+    get: async () => await getRequest(`${ENDPOINTS.CONFIGURACION}`),
   },
 
   users: {
@@ -140,17 +164,19 @@ const resources = {
     get: async (email) => {
       const users = await getRequest(`${ENDPOINTS.USERS}`)
       const { results } = users.data
-      return results.find(user => user.email === email)
+      return results.find((user) => user.email === email)
     },
-    update: async (id, data) => await patchRequest(`${ENDPOINTS.USERS}${id}/`, data)
+    update: async (id, data) =>
+      await patchRequest(`${ENDPOINTS.USERS}${id}/`, data),
   },
 
   recipients: {
     all: async () => await getRequest(ENDPOINTS.RECIPIENTS),
     one: async (id) => await getRequest(`${ENDPOINTS.RECIPIENTS}${id}/`),
     create: async (data) => await postRequest(ENDPOINTS.RECIPIENTS, data),
-    update: async (id, data) => await putRequest(`${ENDPOINTS.RECIPIENTS}${id}/`, data)
-  }
+    update: async (id, data) =>
+      await putRequest(`${ENDPOINTS.RECIPIENTS}${id}/`, data),
+  },
 }
 
 export default resources

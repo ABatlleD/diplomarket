@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import resources from '../restapi/resources'
+import React, { useState, useEffect } from "react"
+import resources from "../restapi/resources"
 import {
   FormControlLabel,
   Pagination,
@@ -10,63 +10,63 @@ import {
   InputLabel,
   MenuItem,
   Select,
-} from '@mui/material'
-import TableRowsIcon from '@mui/icons-material/TableRows'
-import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart'
-import WindowIcon from '@mui/icons-material/Window'
-import { useTranslation } from 'react-i18next'
-import { getCookie } from 'cookies-next'
-import { CarouselProvider, Slider, Slide } from 'pure-react-carousel'
-import useWindowSize from '../hooks/WindowSize'
-import CircularProgress from '@mui/material/CircularProgress'
-import MainCarousel from '../components/home/MainCarousel'
+} from "@mui/material"
+import TableRowsIcon from "@mui/icons-material/TableRows"
+import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart"
+import WindowIcon from "@mui/icons-material/Window"
+import { useTranslation } from "react-i18next"
+import { getCookie } from "cookies-next"
+import { CarouselProvider, Slider, Slide } from "pure-react-carousel"
+import useWindowSize from "../hooks/WindowSize"
+import CircularProgress from "@mui/material/CircularProgress"
+import MainCarousel from "../components/home/MainCarousel"
 
-import InfiniteScroll from 'react-infinite-scroll-component'
-import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined'
-import PriceCheckIcon from '@mui/icons-material/PriceCheck'
-import SentimentSatisfiedOutlinedIcon from '@mui/icons-material/SentimentSatisfiedOutlined'
-import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined'
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined'
-import { useSession } from 'next-auth/react'
-import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import { useAllCarousel, useFilterProducts } from '../restapi/query'
-import { useRouter } from 'next/router'
-import Image from 'next/image'
-import storeAltImg from '../public/assets/store.png'
-import { motion } from 'framer-motion'
-import useScrollY from '../hooks/Scroll'
+import InfiniteScroll from "react-infinite-scroll-component"
+import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined"
+import PriceCheckIcon from "@mui/icons-material/PriceCheck"
+import SentimentSatisfiedOutlinedIcon from "@mui/icons-material/SentimentSatisfiedOutlined"
+import CreditCardOutlinedIcon from "@mui/icons-material/CreditCardOutlined"
+import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined"
+import { useSession } from "next-auth/react"
+import Link from "next/link"
+import dynamic from "next/dynamic"
+import { useAllCarousel, useFilterProducts } from "../restapi/query"
+import { useRouter } from "next/router"
+import Image from "next/image"
+import storeAltImg from "../public/assets/store.png"
+import { motion } from "framer-motion"
+import useScrollY from "../hooks/Scroll"
 
-const MainLayout = dynamic(() => import('../layouts/MainLayout'))
-const AppHeader = dynamic(() => import('../components/layouts/AppHeader'))
+const MainLayout = dynamic(() => import("../layouts/MainLayout"))
+const AppHeader = dynamic(() => import("../components/layouts/AppHeader"))
 const ListProducts = dynamic(() =>
-  import('../components/products/ListProducts')
+  import("../components/products/ListProducts")
 )
 const CategoriesAccordion = dynamic(() =>
-  import('../components/categories/CategoriesAccordion')
+  import("../components/categories/CategoriesAccordion")
 )
 const FilterBar = dynamic(() =>
-  import('../components/layouts/sidebar/FilterBar')
+  import("../components/layouts/sidebar/FilterBar")
 )
-const ProductItem = dynamic(() => import('../components/products/ProductItem'))
+const ProductItem = dynamic(() => import("../components/products/ProductItem"))
 const AllProductsLoader = dynamic(() =>
-  import('../components/loaders/AllProducts')
+  import("../components/loaders/AllProducts")
 )
 const HorizontalProductItem = dynamic(() =>
-  import('../components/products/HorizontalProductItem')
+  import("../components/products/HorizontalProductItem")
 )
 
 const NotificationsTip = dynamic(
-  () => import('../components/modals/NotificationsTip'),
+  () => import("../components/modals/NotificationsTip"),
   {
-    loading: () => 'Loading...',
+    loading: () => "Loading...",
   }
 )
 
 function Home() {
-  const municipality = getCookie('NEXT_MUNICIPALITY')
+  const municipality = getCookie("NEXT_MUNICIPALITY")
   const router = useRouter()
-  const { id, categoryId, subcategoryId } = router.query
+  const { id, categoryId, subcategoryId, brandId } = router.query
   const { carousel, carouselCount, carouselIsLoading } = useAllCarousel()
   const size = useWindowSize()
   const { t, i18n } = useTranslation()
@@ -81,19 +81,19 @@ function Home() {
   const [recommendations, setRecommendations] = useState(false)
   const [exist, setExist] = useState(false)
   const [providerDisplay, setProviderDisplay] = useState(undefined)
-  const [storeImg, setStoreImg] = useState('')
+  const [storeImg, setStoreImg] = useState("")
 
   const [category, setCategory] = useState(undefined)
   const [selectedCategory, setSelectedCategory] = useState(undefined)
   const [offset, setOffset] = useState(0)
   const [banners, setBanners] = useState([])
   const [subcategory, setSubcategory] = useState(undefined)
-  const [brand, setBrand] = useState({ label: '', id: 0 })
-  const [provider, setProvider] = useState({ label: '', id: 0 })
+  const [brand, setBrand] = useState({ label: "", id: 0 })
+  const [provider, setProvider] = useState({ label: "", id: 0 })
   const [min, setMin] = useState(0)
   const [max, setMax] = useState(1000)
   const [extra, setExtra] = useState(undefined)
-  const [order, setOrder] = React.useState('recent')
+  const [order, setOrder] = React.useState("recent")
   const { status, data } = useSession()
   const [openNotificationsTip, setOpenNotificationsTip] = useState(false)
   const { products, productsTotal, productsIsLoading } = useFilterProducts({
@@ -149,15 +149,10 @@ function Home() {
     resources.categories
       .all()
       .then((response) => setCategories(response.data.results))
-    // if (!id) {
-    //   resources.suppliers.one(1).then((response) => {
-    //     setProvider({ label: response.data.nombre, id: response.data.pk })
-    //   })
-    // }
   }, [])
 
   useEffect(() => {
-    if (status !== 'unauthenticated' && data && !data.rss) {
+    if (status !== "unauthenticated" && data && !data.rss) {
       setOpenNotificationsTip(true)
     }
   }, [status])
@@ -189,8 +184,8 @@ function Home() {
 
   const handleAllClick = () => {
     setProviderDisplay(undefined)
-    setProvider({ label: '', id: 0 })
-    setBrand({ label: '', id: 0 })
+    setProvider({ label: "", id: 0 })
+    setBrand({ label: "", id: 0 })
     setCategory(undefined)
     setSubcategory(undefined)
     setSelectedCategory(undefined)
@@ -204,7 +199,7 @@ function Home() {
   }
 
   const handleMobileFilter = (mobileFilter) => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
     setProviderDisplay(mobileFilter.providerDisplay)
     setBrand(mobileFilter.brand)
     setProvider(mobileFilter.provider)
@@ -215,21 +210,8 @@ function Home() {
 
   useEffect(() => {
     if (size.width > 768) {
-      const element = document.getElementById('title')
+      const element = document.getElementById("title")
       element.scrollIntoView()
-      // const filter = {
-      //   offset,
-      //   municipality_id: municipality,
-      //   limit: 15,
-      //   category,
-      //   subcategory,
-      //   brand,
-      //   provider,
-      //   min,
-      //   max,
-      //   extra,
-      //   ordering: order,
-      // }
     }
   }, [
     offset,
@@ -247,40 +229,9 @@ function Home() {
   useEffect(() => {
     if (size.width <= 768) {
       setMobileList([])
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-      // const filter = {
-      //   offset: 0,
-      //   municipality_id: municipality,
-      //   limit: 15,
-      //   category,
-      //   subcategory,
-      //   brand,
-      //   provider,
-      //   min,
-      //   max,
-      //   extra,
-      //   ordering: order,
-      // }
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
     }
   }, [category, subcategory, brand, provider, min, max, extra, order])
-
-  useEffect(() => {
-    if (size.width <= 768) {
-      // const filter = {
-      //   offset,
-      //   municipality_id: municipality,
-      //   limit: 15,
-      //   category,
-      //   subcategory,
-      //   brand,
-      //   provider,
-      //   min,
-      //   max,
-      //   extra,
-      //   ordering: order,
-      // }
-    }
-  }, [offset])
 
   useEffect(() => {
     setMobileList((mobileList) => [...mobileList, ...products])
@@ -329,6 +280,11 @@ function Home() {
         setProviderDisplay(response.data)
       })
     }
+    if (brandId) {
+      resources.brands.one(brandId).then((response) => {
+        setBrand({ label: response.data.nombre, id: response.data.pk })
+      })
+    }
     if (categoryId) {
       setCategory(categoryId)
       setSelectedCategory(getCategory(categoryId))
@@ -337,12 +293,12 @@ function Home() {
       setSubcategory(subcategoryId)
       setSelectedCategory(getSubcategory(subcategoryId))
     }
-  }, [id, categoryId, subcategoryId])
+  }, [id, categoryId, subcategoryId, brandId])
 
   const handleChangeType = (type) => {
     setExtra(undefined)
     switch (type) {
-      case 'promotions':
+      case "promotions":
         if (promotions) {
           setExist(false)
           setPromotions(false)
@@ -351,10 +307,10 @@ function Home() {
           setPromotions(true)
           setExist(false)
           setRecommendations(false)
-          setExtra('rebajados')
+          setExtra("rebajados")
         }
         break
-      case 'recommendations':
+      case "recommendations":
         if (recommendations) {
           setExist(false)
           setPromotions(false)
@@ -363,10 +319,10 @@ function Home() {
           setRecommendations(true)
           setExist(false)
           setPromotions(false)
-          setExtra('recomendados')
+          setExtra("recomendados")
         }
         break
-      case 'exist':
+      case "exist":
         if (exist) {
           setExist(false)
           setPromotions(false)
@@ -375,7 +331,7 @@ function Home() {
           setExist(true)
           setPromotions(false)
           setRecommendations(false)
-          setExtra('disponibles')
+          setExtra("disponibles")
         }
         break
     }
@@ -383,7 +339,7 @@ function Home() {
 
   return (
     <>
-      <AppHeader title={t('pages.products')} />
+      <AppHeader title={t("pages.products")} />
       <div className="flex flex-col dark:bg-background-100">
         <div className="mb-3 md:mb-0">
           {!carouselIsLoading && (
@@ -394,13 +350,13 @@ function Home() {
           <div className="md:mx-3 flex md:hidden text-base mt-1 flex-row justify-between md:mb-3 mx-2">
             {selectedCategory && (
               <div className="font-bold mt-2">
-                {i18n.language === 'es'
+                {i18n.language === "es"
                   ? selectedCategory.nombre
                   : selectedCategory.nombre_ingles}
               </div>
             )}
             {!selectedCategory && (
-              <div className="font-bold mt-2">{t('filter.categories')}</div>
+              <div className="font-bold mt-2">{t("filter.categories")}</div>
             )}
             <div className="flex flex-row">
               <div className="mr-3 mt-2" onClick={() => setListView(!listView)}>
@@ -410,7 +366,7 @@ function Home() {
               <div className="flex w-28">
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">
-                    {t('filter.order.title')}
+                    {t("filter.order.title")}
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
@@ -420,28 +376,28 @@ function Home() {
                     size="small"
                     onChange={handleChange}
                   >
-                    <MenuItem value={'recent'}>
-                      {t('filter.order.recent')}
+                    <MenuItem value={"recent"}>
+                      {t("filter.order.recent")}
                     </MenuItem>
                     <MenuItem
                       value={
-                        data && data.mayorista ? 'precio_b2b_dsc' : 'precio_dsc'
+                        data && data.mayorista ? "precio_b2b_dsc" : "precio_dsc"
                       }
                     >
-                      {t('filter.order.asc_price')}
+                      {t("filter.order.asc_price")}
                     </MenuItem>
                     <MenuItem
                       value={
-                        data && data.mayorista ? 'precio_b2b_asc' : 'precio_asc'
+                        data && data.mayorista ? "precio_b2b_asc" : "precio_asc"
                       }
                     >
-                      {t('filter.order.desc_price')}
+                      {t("filter.order.desc_price")}
                     </MenuItem>
-                    <MenuItem value={'descuento_dsc'}>
-                      {t('filter.order.asc_discount')}
+                    <MenuItem value={"descuento_dsc"}>
+                      {t("filter.order.asc_discount")}
                     </MenuItem>
-                    <MenuItem value={'descuento_asc'}>
-                      {t('filter.order.desc_discount')}
+                    <MenuItem value={"descuento_asc"}>
+                      {t("filter.order.desc_discount")}
                     </MenuItem>
                   </Select>
                 </FormControl>
@@ -451,15 +407,15 @@ function Home() {
           <div className="md:flex hidden mr-1 flex-col w-1/6">
             <div className="flex flex-col">
               <div className="flex flex-row mb-2 justify-between">
-                <p className="font-bold">{t('filter.category')}</p>
+                <p className="font-bold">{t("filter.category")}</p>
                 <div
                   className="bg-footer-background-300 text-background-300 px-2 rounded-full hover:cursor-pointer mr-6"
                   onClick={handleAllClick}
                 >
-                  {t('filter.all')}
+                  {t("filter.all")}
                 </div>
               </div>
-              <div className="">
+              <div>
                 {categories.map((item) => (
                   <div key={item.id} className="border-2 border-background-100">
                     <CategoriesAccordion
@@ -472,61 +428,6 @@ function Home() {
                     />
                   </div>
                 ))}
-              </div>
-            </div>
-            <div className="flex flex-col my-4">
-              <FormControlLabel
-                value={promotions}
-                onChange={() => handleChangeType('promotions')}
-                control={<Checkbox size="small" checked={promotions} />}
-                label={t('filter.promotions')}
-              />
-              <FormControlLabel
-                value={recommendations}
-                onChange={() => handleChangeType('recommendations')}
-                control={<Checkbox size="small" checked={recommendations} />}
-                label={t('filter.recommendations')}
-              />
-              <FormControlLabel
-                value={exist}
-                onChange={() => handleChangeType('exist')}
-                control={<Checkbox size="small" checked={exist} />}
-                label={t('filter.exist')}
-              />
-            </div>
-            <div className="flex flex-col mt-2 mb-4">
-              <p className="font-bold mb-2">{t('filter.price')}</p>
-              <div className="w-[92%]">
-                <div
-                  className="hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button"
-                  onClick={() => handlePriceFilter([0, 25])}
-                >
-                  US$0 {t('filter.to')} US$25
-                </div>
-                <div
-                  className="hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button"
-                  onClick={() => handlePriceFilter([25, 50])}
-                >
-                  US$25 {t('filter.to')} US$50
-                </div>
-                <div
-                  className="hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button"
-                  onClick={() => handlePriceFilter([50, 100])}
-                >
-                  US$50 {t('filter.to')} US$100
-                </div>
-                <div
-                  className="hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button"
-                  onClick={() => handlePriceFilter([100, 200])}
-                >
-                  US$100 {t('filter.to')} US$200
-                </div>
-                <div
-                  className="hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button"
-                  onClick={() => handlePriceFilter([200, 1000])}
-                >
-                  {t('filter.more')} US$200
-                </div>
               </div>
             </div>
             <div className="flex flex-col mt-2 mb-4 mr-4">
@@ -555,6 +456,61 @@ function Home() {
                 </Slider>
               </CarouselProvider>
             </div>
+            <div className="flex flex-col my-4">
+              <FormControlLabel
+                value={promotions}
+                onChange={() => handleChangeType("promotions")}
+                control={<Checkbox size="small" checked={promotions} />}
+                label={t("filter.promotions")}
+              />
+              <FormControlLabel
+                value={recommendations}
+                onChange={() => handleChangeType("recommendations")}
+                control={<Checkbox size="small" checked={recommendations} />}
+                label={t("filter.recommendations")}
+              />
+              <FormControlLabel
+                value={exist}
+                onChange={() => handleChangeType("exist")}
+                control={<Checkbox size="small" checked={exist} />}
+                label={t("filter.exist")}
+              />
+            </div>
+            <div className="flex flex-col mt-2 mb-4">
+              <p className="font-bold mb-2">{t("filter.price")}</p>
+              <div className="w-[92%]">
+                <div
+                  className="hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button"
+                  onClick={() => handlePriceFilter([0, 25])}
+                >
+                  US$0 {t("filter.to")} US$25
+                </div>
+                <div
+                  className="hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button"
+                  onClick={() => handlePriceFilter([25, 50])}
+                >
+                  US$25 {t("filter.to")} US$50
+                </div>
+                <div
+                  className="hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button"
+                  onClick={() => handlePriceFilter([50, 100])}
+                >
+                  US$50 {t("filter.to")} US$100
+                </div>
+                <div
+                  className="hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button"
+                  onClick={() => handlePriceFilter([100, 200])}
+                >
+                  US$100 {t("filter.to")} US$200
+                </div>
+                <div
+                  className="hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button"
+                  onClick={() => handlePriceFilter([200, 1000])}
+                >
+                  {t("filter.more")} US$200
+                </div>
+              </div>
+            </div>
             <div className="flex flex-col mb-4 w-[95%]">
               <Autocomplete
                 disablePortal
@@ -562,12 +518,12 @@ function Home() {
                 value={brand}
                 options={brands}
                 onChange={(event, newValue, reason) => {
-                  return reason === 'clear'
-                    ? setBrand({ label: '', id: 0 })
+                  return reason === "clear"
+                    ? setBrand({ label: "", id: 0 })
                     : setBrand({ label: newValue?.label, id: newValue?.id })
                 }}
                 renderInput={(params) => (
-                  <TextField {...params} label={t('filter.brand')} />
+                  <TextField {...params} label={t("filter.brand")} />
                 )}
                 size="small"
               />
@@ -579,8 +535,8 @@ function Home() {
                 value={provider}
                 options={suppliers}
                 onChange={(event, newValue, reason) => {
-                  if (reason === 'clear') {
-                    setProvider({ label: '', id: 0 })
+                  if (reason === "clear") {
+                    setProvider({ label: "", id: 0 })
                     setProviderDisplay(undefined)
                   } else {
                     setProvider({ label: newValue?.label, id: newValue?.id })
@@ -590,7 +546,7 @@ function Home() {
                   }
                 }}
                 renderInput={(params) => (
-                  <TextField {...params} label={t('filter.provider')} />
+                  <TextField {...params} label={t("filter.provider")} />
                 )}
                 size="small"
               />
@@ -604,7 +560,7 @@ function Home() {
                     id="title"
                     className="font-bold w-1/2 ml-4 mb-2 text-xl hidden md:flex"
                   >
-                    {i18n.language === 'es'
+                    {i18n.language === "es"
                       ? selectedCategory.nombre
                       : selectedCategory.nombre_ingles}
                   </div>
@@ -614,13 +570,13 @@ function Home() {
                     id="title"
                     className="font-bold w-1/2 mb-2 text-xl hidden md:flex"
                   >
-                    {t('filter.categories')}
+                    {t("filter.categories")}
                   </div>
                 )}
                 <div className="hidden md:flex w-[25%]">
                   <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">
-                      {t('filter.order.title')}
+                      {t("filter.order.title")}
                     </InputLabel>
                     <Select
                       labelId="demo-simple-select-label"
@@ -630,32 +586,32 @@ function Home() {
                       size="small"
                       onChange={handleChange}
                     >
-                      <MenuItem value={'recent'}>
-                        {t('filter.order.recent')}
+                      <MenuItem value={"recent"}>
+                        {t("filter.order.recent")}
                       </MenuItem>
                       <MenuItem
                         value={
                           data && data.mayorista
-                            ? 'precio_b2b_dsc'
-                            : 'precio_dsc'
+                            ? "precio_b2b_dsc"
+                            : "precio_dsc"
                         }
                       >
-                        {t('filter.order.asc_price')}
+                        {t("filter.order.asc_price")}
                       </MenuItem>
                       <MenuItem
                         value={
                           data && data.mayorista
-                            ? 'precio_b2b_asc'
-                            : 'precio_asc'
+                            ? "precio_b2b_asc"
+                            : "precio_asc"
                         }
                       >
-                        {t('filter.order.desc_price')}
+                        {t("filter.order.desc_price")}
                       </MenuItem>
-                      <MenuItem value={'descuento_dsc'}>
-                        {t('filter.order.asc_discount')}
+                      <MenuItem value={"descuento_dsc"}>
+                        {t("filter.order.asc_discount")}
                       </MenuItem>
-                      <MenuItem value={'descuento_asc'}>
-                        {t('filter.order.desc_discount')}
+                      <MenuItem value={"descuento_asc"}>
+                        {t("filter.order.desc_discount")}
                       </MenuItem>
                     </Select>
                   </FormControl>
@@ -678,7 +634,6 @@ function Home() {
                     <p className="font-bold text-lg">
                       {providerDisplay.nombre}
                     </p>
-                    {/* <p className="text-text-100 underline">Detalles</p> */}
                   </div>
                 </div>
               )}
@@ -699,14 +654,14 @@ function Home() {
                       {mobileList.length <= 0 && !productsIsLoading && (
                         <RemoveShoppingCartIcon
                           sx={{
-                            fontSize: '10rem',
-                            color: '#6e717a',
-                            marginBottom: '1rem',
+                            fontSize: "10rem",
+                            color: "#6e717a",
+                            marginBottom: "1rem",
                           }}
                         />
                       )}
                       <h4 className="font-bold text-[#6e717a]">
-                        {t('no-more-products')}
+                        {t("no-more-products")}
                       </h4>
                     </div>
                   }
@@ -716,8 +671,8 @@ function Home() {
                       <div
                         className={
                           listView
-                            ? 'w-full mx-2 my-2'
-                            : 'w-[30%] md:w-1/4 xl:w-[19%] mb-4'
+                            ? "w-full mx-2 my-2"
+                            : "w-[30%] md:w-1/4 xl:w-[19%] mb-4"
                         }
                         key={data.id}
                       >
@@ -742,13 +697,13 @@ function Home() {
                   <div className="flex flex-col my-6 items-center w-full">
                     <RemoveShoppingCartIcon
                       sx={{
-                        fontSize: '30rem',
-                        color: '#6e717a',
-                        marginBottom: '1rem',
+                        fontSize: "30rem",
+                        color: "#6e717a",
+                        marginBottom: "1rem",
                       }}
                     />
                     <h4 className="font-bold text-[#6e717a] text-[2rem]">
-                      {t('no-more-products')}
+                      {t("no-more-products")}
                     </h4>
                   </div>
                 )}
@@ -781,39 +736,39 @@ function Home() {
         </div>
         <div className="flex md:flex-row flex-wrap justify-around text-footer-background-300 md:w-[95%] md:mx-auto md:my-28">
           <div className="flex flex-col items-center w-1/2 md:w-auto">
-            <LocalShippingOutlinedIcon sx={{ fontSize: '3rem' }} />
+            <LocalShippingOutlinedIcon sx={{ fontSize: "3rem" }} />
             <p className="text-footer-background-300 md:text-xl text-base">
-              {t('home.delivery.title')}
+              {t("home.delivery.title")}
             </p>
             <p className="text-text-100 md:text-lg text-xs">
-              {t('home.delivery.description')}
+              {t("home.delivery.description")}
             </p>
           </div>
           <div className="flex flex-col  items-center w-1/2 md:w-auto">
-            <PriceCheckIcon sx={{ fontSize: '3rem' }} />
+            <PriceCheckIcon sx={{ fontSize: "3rem" }} />
             <p className="text-footer-background-300 md:text-xl text-base">
-              {t('home.prices.title')}
+              {t("home.prices.title")}
             </p>
             <p className="text-text-100 md:text-lg text-xs">
-              {t('home.prices.description')}
+              {t("home.prices.description")}
             </p>
           </div>
           <div className="flex flex-col items-center my-12 md:my-0 w-1/2 md:w-auto">
-            <SentimentSatisfiedOutlinedIcon sx={{ fontSize: '3rem' }} />
+            <SentimentSatisfiedOutlinedIcon sx={{ fontSize: "3rem" }} />
             <p className="text-footer-background-300 md:text-xl text-base">
-              {t('home.customer.title')}
+              {t("home.customer.title")}
             </p>
             <p className="text-text-100 md:text-lg text-xs">
-              {t('home.customer.description')}
+              {t("home.customer.description")}
             </p>
           </div>
           <div className="flex flex-col items-center my-12 md:my-0  w-1/2 md:w-auto">
-            <CreditCardOutlinedIcon sx={{ fontSize: '3rem' }} />
+            <CreditCardOutlinedIcon sx={{ fontSize: "3rem" }} />
             <p className="text-footer-background-300 md:text-xl text-base">
-              {t('home.payments.title')}
+              {t("home.payments.title")}
             </p>
             <p className="text-text-100 md:text-lg text-xs">
-              {t('home.payments.description')}
+              {t("home.payments.description")}
             </p>
           </div>
         </div>
@@ -824,7 +779,7 @@ function Home() {
       {size.width <= 768 && (
         <div
           className={`fixed overflow-hidden p-2 rounded-full ${
-            scrollY !== 0 ? 'bottom-24' : 'bottom-8'
+            scrollY !== 0 ? "bottom-24" : "bottom-8"
           } right-3 bg-text-blue text-background-100 flex flex-row 
           justify-center items-center shadow-2xl hover:cursor-pointer`}
           onClick={() => window.scrollTo(0, 0)}
