@@ -433,14 +433,14 @@
   },
   "pay_error": {
     "title": "Payment error",
-    "description": "Algo salió mal, inténtelo más tarde. Si continúa el error, contacte con soporte."
+    "description": "Something went wrong, please try again later. If the error continues, contact support."
   },
   "pay_success": {
-    "title": "Pago completado",
-    "description": "Se ha completado satisfactoriamente el pago solicitado."
+    "title": "Payment success",
+    "description": "The requested payment has been successfully completed."
   },
-  "view_orders": "Ver mis órdenes",
-  "back": "Volver a inicio",
+  "view_orders": "See my orders",
+  "back": "Go home",
   "free_shipping": "Free",
   "no-more-products": "Nothing more to show",
   "category": "Category",
