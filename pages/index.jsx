@@ -282,7 +282,7 @@ function Home() {
     }
     if (brandId) {
       resources.brands.one(brandId).then((response) => {
-        setBrand({ label: response.data.nombre, id: response.data.pk })
+        setBrand({ label: response.data.nombre, id: response.data.id })
       })
     }
     if (categoryId) {
