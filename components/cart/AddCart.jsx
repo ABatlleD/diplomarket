@@ -1,41 +1,42 @@
-import React from 'react'
-import dynamic from 'next/dynamic'
-import { useCart } from '../../store/cart/cart.context'
-import { generateCartItem } from '../../store/cart/generate-cart-item'
-import { addClicks } from '../../libs/quick-tip'
-import { useSession } from 'next-auth/react'
+import React from "react"
+import dynamic from "next/dynamic"
+import { useCart } from "../../store/cart/cart.context"
+import { generateCartItem } from "../../store/cart/generate-cart-item"
+import { addClicks } from "../../libs/quick-tip"
+import { useSession } from "next-auth/react"
 
-const AddToCartBtn = dynamic(() => import('./AddCartBtn'))
-const AppCounter = dynamic(() => import('../AppCounter'))
+const AddToCartBtn = dynamic(() => import("./AddCartBtn"))
+const AppCounter = dynamic(() => import("../AppCounter"))
 
-function AddToCart ({
+function AddToCart({
   data,
+  cartPrice,
   counterClass,
   helium,
   variation,
   disabled,
   size,
   sizes,
-  text
+  text,
 }) {
   const {
     addItemToCart,
     removeItemFromCart,
     isInStock,
     getItemFromCart,
-    isInCart
+    isInCart,
   } = useCart()
   const item = generateCartItem(data, variation)
   const outOfStock = isInCart(`${item.id}`) && !isInStock(`${item.id}`)
   const session = useSession()
 
-  const handleAddClick = (
-    e
-  ) => {
+  const handleAddClick = (e) => {
     e.stopPropagation()
     addClicks()
     if (session && session.data && session.data.mayorista) {
       item.price = item.price_b2b
+    } else if (cartPrice) {
+      item.price = cartPrice
     }
     addItemToCart(item, 1)
   }
@@ -49,12 +50,12 @@ function AddToCart ({
   return (
     <>
       {!isInCart(`${item.id}`) && (
-      <AddToCartBtn
-        disabled={disabled || outOfStock}
-        onClick={handleAddClick}
-        dimensions={size}
-        text={text}
-      />
+        <AddToCartBtn
+          disabled={disabled || outOfStock}
+          onClick={handleAddClick}
+          dimensions={size}
+          text={text}
+        />
       )}
       {isInCart(`${item.id}`) && (
         <AppCounter
@@ -62,7 +63,7 @@ function AddToCart ({
           onDecrement={handleRemoveClick}
           onIncrement={handleAddClick}
           className={counterClass}
-          variant={helium ? 'helium' : 'details'}
+          variant={helium ? "helium" : "details"}
           disabled={outOfStock}
           size={sizes}
         />

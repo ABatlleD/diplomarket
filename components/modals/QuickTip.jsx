@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from 'react'
-import { Chip, Modal, Fade } from '@mui/material'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
-import HighlightOffIcon from '@mui/icons-material/HighlightOff'
-import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import { Carousel } from 'react-responsive-carousel'
-import { useTranslation } from 'react-i18next'
-import { useCart } from '../../store/cart/cart.context'
-import { generateCartItem } from '../../store/cart/generate-cart-item'
-import { useRouter } from 'next/router'
-import resources from '../../restapi/resources'
-import { getCookie } from 'cookies-next'
-import { useSession } from 'next-auth/react'
-import dynamic from 'next/dynamic'
-import localFont from '@next/font/local'
+import React, { useEffect, useState } from "react"
+import { Chip, Modal, Fade } from "@mui/material"
+import { createTheme, ThemeProvider } from "@mui/material/styles"
+import HighlightOffIcon from "@mui/icons-material/HighlightOff"
+import "react-responsive-carousel/lib/styles/carousel.min.css"
+import { Carousel } from "react-responsive-carousel"
+import { useTranslation } from "react-i18next"
+import { useCart } from "../../store/cart/cart.context"
+import { generateCartItem } from "../../store/cart/generate-cart-item"
+import { useRouter } from "next/router"
+import resources from "../../restapi/resources"
+import { getCookie } from "cookies-next"
+import { useSession } from "next-auth/react"
+import dynamic from "next/dynamic"
+import localFont from "@next/font/local"
 
-const AddToCart = dynamic(() => import('../cart/AddCart'))
-const AddToFav = dynamic(() => import('../fav/AddFav'))
+const AddToCart = dynamic(() => import("../cart/AddCart"))
+const AddToFav = dynamic(() => import("../fav/AddFav"))
 
-const arial = localFont({ src: '../../public/assets/font/arial/Arial.ttf' })
+const arial = localFont({ src: "../../public/assets/font/arial/Arial.ttf" })
 
 const theme = createTheme({
   palette: {
     error: {
-      main: '#b12024',
-      contrastText: '#fff',
+      main: "#b12024",
+      contrastText: "#fff",
     },
   },
 })
@@ -33,10 +33,23 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
   const { t, i18n } = useTranslation()
   const router = useRouter()
   const [product, setProduct] = useState({})
-  const municipality = getCookie('NEXT_MUNICIPALITY')
+  const municipality = getCookie("NEXT_MUNICIPALITY")
   const { data } = useSession()
 
   const { addItemToCart, isInCart } = useCart()
+
+  const [cartPrice, setCartPrice] = useState(undefined)
+
+  useEffect(() => {
+    if (product?.promocion?.activo) {
+      setCartPrice(
+        parseFloat(
+          product.precio.cantidad -
+            (product.precio.cantidad * product.promocion.descuento) / 100
+        ).toFixed(2)
+      )
+    }
+  }, [product])
 
   useEffect(() => {
     if (product.img_principal && product.galeria) {
@@ -54,11 +67,14 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
 
   const handleBuyNow = () => {
     const item = generateCartItem(product, 0)
+    if (cartPrice) {
+      item.price = cartPrice
+    }
     if (!isInCart(item.id)) {
       addItemToCart(item, 1)
-      router.push('/checkout')
+      router.push("/checkout")
     } else {
-      router.push('/checkout')
+      router.push("/checkout")
     }
   }
 
@@ -69,14 +85,14 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
         aria-describedby="transition-modal-description"
         open={openQuickTip}
         closeAfterTransition
-        sx={{ overflowY: 'scroll' }}
+        sx={{ overflowY: "scroll" }}
       >
         <Fade in={openQuickTip}>
           <main className={arial.className}>
             <div className="flex z-50 flex-col shadow-2xl bg-background-100 w-11/12 md:4/5 xl:w-2/5 p-2 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
               <div className="flex flex-row justify-between w-full mb-6">
                 <div className="font-bold text-footer-background-300 text-lg ml-2">
-                  {t('for-you')}
+                  {t("for-you")}
                 </div>
                 <HighlightOffIcon
                   className="hover:cursor-pointer text-footer-background-300"
@@ -92,7 +108,7 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
                     preventMovementUntilSwipeScrollTolerance
                     swipeScrollTolerance={100}
                     className={
-                      'border w-full flex flex-row items-center rounded-lg h-[16rem] md:h-[14rem]'
+                      "border w-full flex flex-row items-center rounded-lg h-[16rem] md:h-[14rem]"
                     }
                   >
                     {images.map((item) => (
@@ -104,9 +120,9 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
                           src={`${process.env.NEXT_PUBLIC_BACKEND}${item}`}
                           alt="..."
                           style={{
-                            maxHeight: '200px',
-                            borderRadius: '6px',
-                            objectFit: 'contain',
+                            maxHeight: "200px",
+                            borderRadius: "6px",
+                            objectFit: "contain",
                           }}
                         />
                       </div>
@@ -116,7 +132,7 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
                 <div className="md:w-[2%]"></div>
                 <div className="flex flex-col w-full px-4 md:w-[60%]">
                   <p className="text-lg md:text-base 2xl:text-lg text-text-blue">
-                    {i18n.language === 'es'
+                    {i18n.language === "es"
                       ? product.nombre
                       : product.nombre_ingles}
                   </p>
@@ -130,7 +146,7 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
                               sx={{
                                 marginRight: 1,
                                 marginBottom: 1,
-                                borderRadius: '6px',
+                                borderRadius: "6px",
                               }}
                               label={tag.nombre}
                               color="error"
@@ -142,8 +158,8 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
                     {product.sku && (
                       <p>
                         <span className="font-semibold text-sm md:text-base text-footer-background-300">
-                          SKU:{' '}
-                        </span>{' '}
+                          SKU:{" "}
+                        </span>{" "}
                         <span className="font-semibold text-sm md:text-base text-footer-background-300">
                           {product.sku}
                         </span>
@@ -172,27 +188,27 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
                               ((product.precio?.cantidad || product.precio) *
                                 product.promocion.descuento) /
                                 100
-                            ).toFixed(2)}{' '}
+                            ).toFixed(2)}{" "}
                           </p>
                           <div className="flex flex-row my-2">
                             <div className="bg-button flex rounded-md px-1 mr-1 text-background-100 text-sm md:text-base">
                               -{product.promocion.descuento}%
                             </div>
                             <p className="my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-sm md:text-base line-through">
-                              {' '}
+                              {" "}
                               US${product.precio?.cantidad || product.precio}
                             </p>
                           </div>
                         </div>
                       )}
-                      {typeof product.precioxlibra === 'number' &&
+                      {typeof product.precioxlibra === "number" &&
                         product.precioxlibra !== 0 && (
                           <div className="mb-2 md:mb-0 md:my-0 text-text-100 text-sm md:text-base">
                             US${product.precioxlibra}/{product.um}
                           </div>
                         )}
                       {product.precioxlibra?.cantidad !== undefined &&
-                        product.precioxlibra?.cantidad !== '0.00' && (
+                        product.precioxlibra?.cantidad !== "0.00" && (
                           <div className="mb-2 md:mb-0 md:my-0 text-text-100 text-sm md:text-base">
                             US${product.precioxlibra?.cantidad}/{product.um}
                           </div>
@@ -207,8 +223,9 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
                             {Number(product.cant_inventario) > 0 ? (
                               <AddToCart
                                 data={product}
+                                cartPrice={cartPrice}
                                 size={[26, 26]}
-                                text={t('home.addCart')}
+                                text={t("home.addCart")}
                               />
                             ) : (
                               <></>
@@ -221,7 +238,7 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
                           className="bg-footer-background-200 w-5/12 shadow-lg text-background-100 py-1 text-center text-sm md:text-base rounded-md hover:cursor-pointer hover:opacity-90"
                           onClick={handleBuyNow}
                         >
-                          {t('home.shopNow')}
+                          {t("home.shopNow")}
                         </div>
                       ) : (
                         <></>
@@ -230,8 +247,8 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
                     <div className="flex flex-row text-button hover:cursor-pointer hover:opacity-90 text-sm md:text-base">
                       <AddToFav
                         data={product}
-                        text={t('fav.add')}
-                        success={t('fav.in')}
+                        text={t("fav.add")}
+                        success={t("fav.in")}
                       />
                     </div>
                   </div>

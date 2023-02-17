@@ -19,6 +19,7 @@ function HorizontalProductItem({ product }) {
   const { t, i18n } = useTranslation()
   const router = useRouter()
   const [openQuickView, setOpenQuickView] = useState(false)
+  const [cartPrice, setCartPrice] = useState(undefined)
   const [masterTag, setMasterTag] = useState()
   const [tags, setTags] = useState(product.etiquetas)
   const size = useWindowSize()
@@ -29,6 +30,17 @@ function HorizontalProductItem({ product }) {
       ? `${string.slice(0, maxLength)}...`
       : string
   }
+
+  useEffect(() => {
+    if (product.promocion.activo) {
+      setCartPrice(
+        parseFloat(
+          product.precio.cantidad -
+            (product.precio.cantidad * product.promocion.descuento) / 100
+        ).toFixed(2)
+      )
+    }
+  })
 
   useEffect(() => {
     product.etiquetas.map((tag) => {
@@ -176,6 +188,7 @@ function HorizontalProductItem({ product }) {
               ) : Number(product.cant_inventario) > 0 ? (
                 <AddToCart
                   data={product}
+                  cartPrice={cartPrice}
                   text={t("home.addCart")}
                   sizes={{ width: 10, height: 10 }}
                 />

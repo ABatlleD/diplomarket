@@ -1,36 +1,36 @@
-import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
-import { Chip, Box, Tabs, Tab } from '@mui/material'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { useTranslation } from 'react-i18next'
-import resources from '../../restapi/resources'
-import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import { Carousel } from 'react-responsive-carousel'
-import { useCart } from '../../store/cart/cart.context'
-import { generateCartItem } from '../../store/cart/generate-cart-item'
-import AccessTimeIcon from '@mui/icons-material/AccessTime'
-import { useSession } from 'next-auth/react'
-import dynamic from 'next/dynamic'
-import Link from 'next/link'
-import { useOneProduct } from '../../restapi/query'
+import { useRouter } from "next/router"
+import React, { useEffect, useState } from "react"
+import { Chip, Box, Tabs, Tab } from "@mui/material"
+import { createTheme, ThemeProvider } from "@mui/material/styles"
+import { useTranslation } from "react-i18next"
+import resources from "../../restapi/resources"
+import "react-responsive-carousel/lib/styles/carousel.min.css"
+import { Carousel } from "react-responsive-carousel"
+import { useCart } from "../../store/cart/cart.context"
+import { generateCartItem } from "../../store/cart/generate-cart-item"
+import AccessTimeIcon from "@mui/icons-material/AccessTime"
+import { useSession } from "next-auth/react"
+import dynamic from "next/dynamic"
+import Link from "next/link"
+import { useOneProduct } from "../../restapi/query"
 
-const MainLayout = dynamic(() => import('../../layouts/MainLayout'))
-const AppHeader = dynamic(() => import('../../components/layouts/AppHeader'))
+const MainLayout = dynamic(() => import("../../layouts/MainLayout"))
+const AppHeader = dynamic(() => import("../../components/layouts/AppHeader"))
 const ProductsCarousel = dynamic(() =>
-  import('../../components/products/ProductsSwiper')
+  import("../../components/products/ProductsSwiper")
 )
-const AddToCart = dynamic(() => import('../../components/cart/AddCart'))
-const AddToFav = dynamic(() => import('../../components/fav/AddFav'))
-const AppTabPanel = dynamic(() => import('../../components/AppTabPanel'))
+const AddToCart = dynamic(() => import("../../components/cart/AddCart"))
+const AddToFav = dynamic(() => import("../../components/fav/AddFav"))
+const AppTabPanel = dynamic(() => import("../../components/AppTabPanel"))
 const RelatedCard = dynamic(() =>
-  import('../../components/products/RelatedCard')
+  import("../../components/products/RelatedCard")
 )
 
 const theme = createTheme({
   palette: {
     error: {
-      main: '#b12024',
-      contrastText: '#fff',
+      main: "#b12024",
+      contrastText: "#fff",
     },
   },
 })
@@ -38,7 +38,7 @@ const theme = createTheme({
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   }
 }
 
@@ -49,7 +49,7 @@ function Product() {
   const [relatedProducts, setRelatedProducts] = useState([])
   const [value, setValue] = React.useState(0)
   const [state, setState] = useState({
-    backgroundPosition: '0% 0%',
+    backgroundPosition: "0% 0%",
   })
   const [hover, setHover] = useState(false)
   const { data } = useSession()
@@ -63,6 +63,18 @@ function Product() {
   const { t, i18n } = useTranslation()
 
   const [images, setImages] = useState([])
+
+  const [cartPrice, setCartPrice] = useState(undefined)
+
+  useEffect(() => {
+    if (product?.promocion?.activo) {
+      setCartPrice(
+        parseFloat(
+          product.precio - (product.precio * product.promocion.descuento) / 100
+        ).toFixed(2)
+      )
+    }
+  }, [product])
 
   const handleMouseMove = (e) => {
     setHover(true)
@@ -92,11 +104,14 @@ function Product() {
       },
       0
     )
+    if (cartPrice) {
+      item.price = cartPrice
+    }
     if (!isInCart(item.id)) {
       addItemToCart(item, 1)
-      router.push('/checkout/')
+      router.push("/checkout/")
     } else {
-      router.push('/checkout/')
+      router.push("/checkout/")
     }
   }
 
@@ -106,7 +121,7 @@ function Product() {
 
   return (
     <div className="flex flex-col items-center mx-2 bg-background-100">
-      <AppHeader title={t('pages.products')} />
+      <AppHeader title={t("pages.products")} />
       <div className="flex flex-col md:flex-row w-full 2xl:w-[60%] xl:w-[75%] md:justify-between my-8">
         <div className="md:w-[45%] flex flex-row justify-center items-start">
           <Carousel
@@ -121,8 +136,8 @@ function Product() {
                   <img
                     src={`${process.env.NEXT_PUBLIC_BACKEND}${item}`}
                     style={{
-                      borderRadius: '6px',
-                      objectFit: 'contain',
+                      borderRadius: "6px",
+                      objectFit: "contain",
                     }}
                   />
                 </div>
@@ -130,7 +145,7 @@ function Product() {
             }
             preventMovementUntilSwipeScrollTolerance
             swipeScrollTolerance={100}
-            className={'w-full flex flex-col justify-center rounded-lg'}
+            className={"w-full flex flex-col justify-center rounded-lg"}
           >
             {images.map((item) => (
               <div
@@ -144,18 +159,18 @@ function Product() {
                   style={{
                     backgroundImage: hover
                       ? `url(${process.env.NEXT_PUBLIC_BACKEND}${item})`
-                      : '',
-                    borderRadius: '6px',
-                    objectFit: 'contain',
-                    backgroundColor: 'white',
+                      : "",
+                    borderRadius: "6px",
+                    objectFit: "contain",
+                    backgroundColor: "white",
                     ...state,
                   }}
                 >
                   <img
                     src={`${process.env.NEXT_PUBLIC_BACKEND}${item}`}
                     style={{
-                      borderRadius: '6px',
-                      objectFit: 'contain',
+                      borderRadius: "6px",
+                      objectFit: "contain",
                     }}
                   />
                 </figure>
@@ -165,7 +180,7 @@ function Product() {
         </div>
         <div className="flex flex-col md:mt-0 md:w-1/2">
           <p className="text-xl md:text-3xl text-text-blue mb-2 md:mt-0">
-            {i18n.language === 'es' ? product?.nombre : product?.nombre_ingles}
+            {i18n.language === "es" ? product?.nombre : product?.nombre_ingles}
           </p>
           <div className="flex flex-col">
             <ThemeProvider theme={theme}>
@@ -174,7 +189,7 @@ function Product() {
                   <Chip
                     key={tag.pk}
                     sx={{ marginRight: 1, marginBottom: 1 }}
-                    label={i18n.language === 'es' ? tag.nombre : tag.ingles}
+                    label={i18n.language === "es" ? tag.nombre : tag.ingles}
                     color="error"
                   />
                 ))}
@@ -182,7 +197,7 @@ function Product() {
             </ThemeProvider>
             {product?.sku && (
               <p className="my-2">
-                <span className="text-footer-background-300">SKU: </span>{' '}
+                <span className="text-footer-background-300">SKU: </span>{" "}
                 <span className="font-semibold text-footer-background-300">
                   {product.sku}
                 </span>
@@ -209,14 +224,14 @@ function Product() {
                     {parseFloat(
                       product?.precio -
                         (product?.precio * product?.promocion.descuento) / 100
-                    ).toFixed(2)}{' '}
+                    ).toFixed(2)}{" "}
                   </p>
                   <div className="flex flex-row my-2">
                     <div className="bg-button flex rounded-md px-1 mr-1 text-background-100 text-sm">
                       -{parseFloat(product?.promocion.descuento).toFixed(0)}%
                     </div>
                     <p className="my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-sm md:text-sm line-through">
-                      {' '}
+                      {" "}
                       US${parseFloat(product?.precio).toFixed(2)}
                     </p>
                   </div>
@@ -232,18 +247,18 @@ function Product() {
           )}
           <p className="mb-2">
             <span className="font-semibold text-footer-background-300">
-              {t('products.subcategory')}:
-            </span>{' '}
+              {t("products.subcategory")}:
+            </span>{" "}
             <span className="font-semibold text-text-100">
               {product?.subcategoria}
             </span>
           </p>
           <p className="mb-2">
             <span className="font-semibold text-footer-background-300">
-              {t('products.provider')}:
-            </span>{' '}
+              {t("products.provider")}:
+            </span>{" "}
             <Link
-              href={{ pathname: '/', query: { id: product?.proveedor?.pk } }}
+              href={{ pathname: "/", query: { id: product?.proveedor?.pk } }}
             >
               <span className="font-semibold text-text-100 underline hover:text-text-blue">
                 {product?.proveedor?.nombre}
@@ -252,15 +267,15 @@ function Product() {
           </p>
           <p className="mb-1">
             <span className="font-semibold text-footer-background-300">
-              {t('products.brand')}:
-            </span>{' '}
+              {t("products.brand")}:
+            </span>{" "}
             <span className="font-semibold text-text-100">
               {product?.marca?.nombre}
             </span>
           </p>
           <div
             className={`flex flex-wrap w-full ${
-              Number(product?.cant_inventario) > 0 ? 'mb-4' : 'mb-1'
+              Number(product?.cant_inventario) > 0 ? "mb-4" : "mb-1"
             } mt-4`}
           >
             {product?.grupos.map((item) => (
@@ -283,8 +298,9 @@ function Product() {
                             moneda: product?.precio_currency,
                           },
                         }}
+                        cartPrice={cartPrice}
                         size={[31.5, 26]}
-                        text={t('home.addCart')}
+                        text={t("home.addCart")}
                       />
                     </div>
                   </div>
@@ -293,26 +309,26 @@ function Product() {
                   className="bg-footer-background-200 w-6/12 shadow-lg text-background-100 py-1 text-center rounded-md hover:cursor-pointer hover:opacity-90"
                   onClick={handleBuyNow}
                 >
-                  {t('home.shopNow')}
+                  {t("home.shopNow")}
                 </div>
               </div>
             ) : (
               <div className="bg-button text-background-300 px-2 rounded-md mb-4 text-center w-1/3">
-                {t('oos')}
+                {t("oos")}
               </div>
             )}
             <div className="flex flex-row text-button mt-1 hover:cursor-pointer hover:opacity-90">
               <AddToFav
                 data={product}
-                text={'Añadir a favoritos'}
-                success={'En favoritos'}
+                text={"Añadir a favoritos"}
+                success={"En favoritos"}
               />
             </div>
             <div className="flex flex-row items-center text-text-100 mt-3">
               <div className="flex flex-row items-center">
                 <AccessTimeIcon fontSize="small" />
                 <span className="ml-1 mt-[0.2rem]">
-                  {i18n.language === 'es'
+                  {i18n.language === "es"
                     ? product?.tiempo_envio
                     : product?.tiempo_envio_ingles}
                 </span>
@@ -323,21 +339,21 @@ function Product() {
       </div>
       {productIsLoading && <>Loading...</>}
       <div className="w-full 2xl:w-[60%] xl:w-[75%] flex flex-col items-center md:mt-4 mb-8">
-        <Box sx={{ width: '95%', borderBottom: 1, borderColor: 'divider' }}>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Box sx={{ width: "95%", borderBottom: 1, borderColor: "divider" }}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs
               value={value}
-              sx={{ color: '#111b2c' }}
+              sx={{ color: "#111b2c" }}
               onChange={handleChange}
               aria-label="basic tabs example"
             >
-              <Tab label={t('products.description')} {...a11yProps(0)} />
-              <Tab label={t('products.shipmentsFrom')} {...a11yProps(1)} />
+              <Tab label={t("products.description")} {...a11yProps(0)} />
+              <Tab label={t("products.shipmentsFrom")} {...a11yProps(1)} />
             </Tabs>
           </Box>
           <AppTabPanel value={value} index={0}>
             <p className="text-footer-background-300">
-              {i18n.language === 'es'
+              {i18n.language === "es"
                 ? product?.descripcion
                 : product?.descripcion_ingles}
             </p>
@@ -351,7 +367,7 @@ function Product() {
       </div>
       <div className="w-full 2xl:w-[90%] xl:w-[80%] mb-20 mt-10">
         <p className="font-bold text-center text-xl mb-2 md:mb-4">
-          {t('products.relatedProducts')}
+          {t("products.relatedProducts")}
         </p>
         <ProductsCarousel products={relatedProducts} />
       </div>

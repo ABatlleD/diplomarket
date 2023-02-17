@@ -24,6 +24,18 @@ function ProductItem({ product }) {
   const [tags, setTags] = useState(product.etiquetas)
   const size = useWindowSize()
   const { data } = useSession()
+  const [cartPrice, setCartPrice] = useState(undefined)
+
+  useEffect(() => {
+    if (product.promocion.activo) {
+      setCartPrice(
+        parseFloat(
+          product.precio.cantidad -
+            (product.precio.cantidad * product.promocion.descuento) / 100
+        ).toFixed(2)
+      )
+    }
+  })
 
   const resizeTitle = (string, maxLength) => {
     return string.length > maxLength
@@ -200,6 +212,7 @@ function ProductItem({ product }) {
             ) : Number(product.cant_inventario) > 0 ? (
               <AddToCart
                 data={product}
+                cartPrice={cartPrice}
                 text={size.width < 768 ? undefined : t("home.addCart")}
                 sizes={{ width: 11, height: 11 }}
               />
