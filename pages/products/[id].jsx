@@ -47,6 +47,7 @@ function Product() {
   const { id } = router.query
   const { product, productIsLoading } = useOneProduct(id)
   const [relatedProducts, setRelatedProducts] = useState([])
+  const [noBuys, setNoBuys] = useState(false)
   const [value, setValue] = React.useState(0)
   const [state, setState] = useState({
     backgroundPosition: "0% 0%",
@@ -65,6 +66,15 @@ function Product() {
   const [images, setImages] = useState([])
 
   const [cartPrice, setCartPrice] = useState(undefined)
+
+  useEffect(() => {
+    product?.etiquetas.map((tag) => {
+      if (tag.no_compras) {
+        setNoBuys(true)
+      }
+      return true
+    })
+  }, [product])
 
   useEffect(() => {
     if (product?.promocion?.activo) {
@@ -287,30 +297,40 @@ function Product() {
           <div className="flex flex-col">
             {Number(product?.cant_inventario) > 0 ? (
               <div className="flex flex-row justify-between w-11/12 mb-4">
-                <div className="w-6/12 md:w-5/12">
-                  <div className="flex flex-row justify-between">
-                    <div className="hover:cursor-pointer">
-                      <AddToCart
-                        data={{
-                          ...product,
-                          precio: {
-                            cantidad: product?.precio,
-                            moneda: product?.precio_currency,
-                          },
-                        }}
-                        cartPrice={cartPrice}
-                        size={[31.5, 26]}
-                        text={t("home.addCart")}
-                      />
+                {noBuys ? (
+                  <></>
+                ) : Number(product.cant_inventario) > 0 ? (
+                  <>
+                    <div className="w-6/12 md:w-5/12">
+                      <div className="flex flex-row justify-between">
+                        <div className="hover:cursor-pointer">
+                          <AddToCart
+                            data={{
+                              ...product,
+                              precio: {
+                                cantidad: product?.precio,
+                                moneda: product?.precio_currency,
+                              },
+                            }}
+                            cartPrice={cartPrice}
+                            size={[31.5, 26]}
+                            text={t("home.addCart")}
+                          />
+                        </div>
+                      </div>
                     </div>
+                    <div
+                      className="bg-footer-background-200 w-6/12 shadow-lg text-background-100 py-1 text-center rounded-md hover:cursor-pointer hover:opacity-90"
+                      onClick={handleBuyNow}
+                    >
+                      {t("home.shopNow")}
+                    </div>
+                  </>
+                ) : (
+                  <div className="bg-button text-background-300 px-2 rounded-md">
+                    {t("oos")}
                   </div>
-                </div>
-                <div
-                  className="bg-footer-background-200 w-6/12 shadow-lg text-background-100 py-1 text-center rounded-md hover:cursor-pointer hover:opacity-90"
-                  onClick={handleBuyNow}
-                >
-                  {t("home.shopNow")}
-                </div>
+                )}
               </div>
             ) : (
               <div className="bg-button text-background-300 px-2 rounded-md mb-4 text-center w-1/3">
