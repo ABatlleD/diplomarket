@@ -48,7 +48,7 @@ function MainLayout({ children, filterBar = false }) {
     if (!NEXT_MUNICIPALITY) {
       setOpenSelectPlace(true)
     }
-  }, [NEXT_MUNICIPALITY])
+  })
 
   const queryClient = new QueryClient()
 

@@ -153,7 +153,7 @@ function Home() {
   }, [])
 
   useEffect(() => {
-    if (status !== "unauthenticated" && data && !data.rss) {
+    if (status !== "unauthenticated" && data && !data.rss && municipality) {
       setOpenNotificationsTip(true)
     }
   }, [status])
