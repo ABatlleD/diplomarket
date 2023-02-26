@@ -82,6 +82,7 @@ function Home() {
   const [exist, setExist] = useState(false)
   const [providerDisplay, setProviderDisplay] = useState(undefined)
   const [storeImg, setStoreImg] = useState("")
+  const [loading, setLoading] = useState(false)
 
   const [category, setCategory] = useState(undefined)
   const [selectedCategory, setSelectedCategory] = useState(undefined)
@@ -275,14 +276,18 @@ function Home() {
 
   useEffect(() => {
     if (id) {
+      setLoading(true)
       resources.suppliers.one(id).then((response) => {
         setProvider({ label: response.data.nombre, id: response.data.pk })
         setProviderDisplay(response.data)
+        setLoading(false)
       })
     }
     if (brandId) {
+      setLoading(true)
       resources.brands.one(brandId).then((response) => {
         setBrand({ label: response.data.nombre, id: response.data.id })
+        setLoading(false)
       })
     }
     if (categoryId) {
@@ -293,7 +298,7 @@ function Home() {
       setSubcategory(subcategoryId)
       setSelectedCategory(getSubcategory(subcategoryId))
     }
-  }, [id, categoryId, subcategoryId, brandId])
+  }, [id, brandId, categoryId, subcategoryId])
 
   const handleChangeType = (type) => {
     setExtra(undefined)
@@ -637,7 +642,12 @@ function Home() {
                   </div>
                 </div>
               )}
-              {size.width <= 768 && municipality && (
+              {size.width <= 768 && loading && (
+                <div className="flex flex-row w-full justify-center my-6 text-text-blue">
+                  <CircularProgress />
+                </div>
+              )}
+              {size.width <= 768 && municipality && !loading && (
                 <InfiniteScroll
                   dataLength={mobileList.length}
                   next={getMorePost}
@@ -683,7 +693,7 @@ function Home() {
                   </div>
                 </InfiniteScroll>
               )}
-              {size.width > 768 && productsIsLoading && (
+              {size.width > 768 && (productsIsLoading || loading) && (
                 <div className="ml-4">
                   <AllProductsLoader />
                 </div>
