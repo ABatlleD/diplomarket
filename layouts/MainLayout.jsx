@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import PropTypes from "prop-types"
 import { motion } from "framer-motion"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { getCookie } from "cookies-next"
@@ -10,20 +9,13 @@ import { SessionProvider } from "next-auth/react"
 import { addClicks, clicks } from "../libs/quick-tip"
 import useScrollY from "../hooks/Scroll.js"
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
-import dynamic from "next/dynamic"
-
-const NavBar = dynamic(() => import("./NavBar"))
-const Footer = dynamic(() => import("./Footer"))
-const CategoriesSideBar = dynamic(() =>
-  import("../components/layouts/sidebar/CategoriesSideBar")
-)
-const MainSideBar = dynamic(() =>
-  import("../components/layouts/sidebar/MainSideBar")
-)
-const CartSideBar = dynamic(() =>
-  import("../components/layouts/sidebar/CartSideBar")
-)
-const QuickTip = dynamic(() => import("../components/modals/QuickTip"))
+import PreLoader from "../components/PreLoader.jsx"
+import NavBar from "./NavBar"
+import Footer from "./Footer"
+import CategoriesSideBar from "../components/layouts/sidebar/CategoriesSideBar"
+import MainSideBar from "../components/layouts/sidebar/MainSideBar"
+import CartSideBar from "../components/layouts/sidebar/CartSideBar"
+import QuickTip from "../components/modals/QuickTip"
 
 function MainLayout({ children, filterBar = false }) {
   const [categoriesSideBar, setCategoriesSideBar] = useState(false)
@@ -51,6 +43,19 @@ function MainLayout({ children, filterBar = false }) {
   })
 
   const queryClient = new QueryClient()
+
+  const [done, setDone] = useState(false)
+
+  useEffect(() => {
+    setTimeout(() => setDone(true), 500)
+  }, [])
+
+  if (!done)
+    return (
+      <div style={{ margin: 20 }}>
+        <PreLoader />
+      </div>
+    )
 
   return (
     <>
@@ -114,10 +119,6 @@ function MainLayout({ children, filterBar = false }) {
       </SessionProvider>
     </>
   )
-}
-
-MainLayout.propTypes = {
-  children: PropTypes.node,
 }
 
 export default MainLayout

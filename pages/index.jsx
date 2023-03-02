@@ -14,6 +14,7 @@ import {
 import TableRowsIcon from "@mui/icons-material/TableRows"
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart"
 import WindowIcon from "@mui/icons-material/Window"
+import StoreMallDirectoryIcon from "@mui/icons-material/StoreMallDirectory"
 import { useTranslation } from "react-i18next"
 import { getCookie } from "cookies-next"
 import { CarouselProvider, Slider, Slide } from "pure-react-carousel"
@@ -29,39 +30,21 @@ import CreditCardOutlinedIcon from "@mui/icons-material/CreditCardOutlined"
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
-import dynamic from "next/dynamic"
 import { useAllCarousel, useFilterProducts } from "../restapi/query"
 import { useRouter } from "next/router"
 import Image from "next/image"
 import storeAltImg from "../public/assets/store.png"
 import { motion } from "framer-motion"
 import useScrollY from "../hooks/Scroll"
-
-const MainLayout = dynamic(() => import("../layouts/MainLayout"))
-const AppHeader = dynamic(() => import("../components/layouts/AppHeader"))
-const ListProducts = dynamic(() =>
-  import("../components/products/ListProducts")
-)
-const CategoriesAccordion = dynamic(() =>
-  import("../components/categories/CategoriesAccordion")
-)
-const FilterBar = dynamic(() =>
-  import("../components/layouts/sidebar/FilterBar")
-)
-const ProductItem = dynamic(() => import("../components/products/ProductItem"))
-const AllProductsLoader = dynamic(() =>
-  import("../components/loaders/AllProducts")
-)
-const HorizontalProductItem = dynamic(() =>
-  import("../components/products/HorizontalProductItem")
-)
-
-const NotificationsTip = dynamic(
-  () => import("../components/modals/NotificationsTip"),
-  {
-    loading: () => "Loading...",
-  }
-)
+import ListProducts from "../components/products/ListProducts"
+import MainLayout from "../layouts/MainLayout"
+import AppHeader from "../components/layouts/AppHeader"
+import CategoriesAccordion from "../components/categories/CategoriesAccordion"
+import FilterBar from "../components/layouts/sidebar/FilterBar"
+import ProductItem from "../components/products/ProductItem"
+import AllProductsLoader from "../components/loaders/AllProducts"
+import HorizontalProductItem from "../components/products/HorizontalProductItem"
+import NotificationsTip from "../components/modals/NotificationsTip"
 
 function Home() {
   const municipality = getCookie("NEXT_MUNICIPALITY")
@@ -212,7 +195,7 @@ function Home() {
   useEffect(() => {
     if (size.width > 768) {
       const element = document.getElementById("title")
-      element.scrollIntoView()
+      element?.scrollIntoView()
     }
   }, [
     offset,
@@ -364,6 +347,11 @@ function Home() {
               <div className="font-bold mt-2">{t("filter.categories")}</div>
             )}
             <div className="flex flex-row">
+              <div className="mr-3 mt-2" onClick={() => setListView(!listView)}>
+                <Link href={"/providers"}>
+                  <StoreMallDirectoryIcon />
+                </Link>
+              </div>
               <div className="mr-3 mt-2" onClick={() => setListView(!listView)}>
                 {listView && <WindowIcon />}
                 {!listView && <TableRowsIcon />}

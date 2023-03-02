@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import FacebookIcon from '@mui/icons-material/Facebook'
-import TwitterIcon from '@mui/icons-material/Twitter'
-import TelegramIcon from '@mui/icons-material/Telegram'
-import InstagramIcon from '@mui/icons-material/Instagram'
-import { useTranslation } from 'react-i18next'
-import Link from 'next/link'
-import resources from '../../../restapi/resources'
+import React, { useEffect, useState } from "react"
+import FacebookIcon from "@mui/icons-material/Facebook"
+import TwitterIcon from "@mui/icons-material/Twitter"
+import TelegramIcon from "@mui/icons-material/Telegram"
+import InstagramIcon from "@mui/icons-material/Instagram"
+import { useTranslation } from "react-i18next"
+import Link from "next/link"
+import resources from "../../../restapi/resources"
 
 function FooterBox({ cartSideBar, setCartSideBar }) {
   const { t } = useTranslation()
@@ -16,10 +16,10 @@ function FooterBox({ cartSideBar, setCartSideBar }) {
     const answer = []
     resources.contacts.get().then((response) => {
       response.data.results.map((item) =>
-        item.tipo === 'facebook' ||
-        item.tipo === 'telegram' ||
-        item.tipo === 'twitter' ||
-        item.tipo === 'instagram'
+        item.tipo === "facebook" ||
+        item.tipo === "telegram" ||
+        item.tipo === "twitter" ||
+        item.tipo === "instagram"
           ? answer.push(item)
           : true
       )
@@ -48,7 +48,7 @@ function FooterBox({ cartSideBar, setCartSideBar }) {
           alt="..."
         />
         <p className="text-text-200 text-justify italic font-semibold">
-          {t('footer.description')}
+          {t("footer.description")}
         </p>
         <div className="flex flex-row text-background-100 w-1/2 mt-4">
           {socialMedias.map((social) => (
@@ -68,68 +68,68 @@ function FooterBox({ cartSideBar, setCartSideBar }) {
       <div className="flex flex-row justify-between md:w-4/12">
         <div className="flex flex-col md:w-5/12 text-text-200 font-semibold mb-6">
           <h2 className="mb-3 font-bold text-background-100">
-            {t('footer.about.title')}
+            {t("footer.about.title")}
           </h2>
           <Link href="/about">
             <p className="mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500">
-              {t('footer.about.aboutUs')}
+              {t("footer.about.aboutUs")}
             </p>
           </Link>
           <Link href="/privacy">
             <p className="mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500">
-              {t('footer.about.privacyPolicy')}
+              {t("footer.about.privacyPolicy")}
             </p>
           </Link>
           <Link href="/terms">
             <p className="mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500">
-              {t('footer.about.terms')}
+              {t("footer.about.terms")}
             </p>
           </Link>
           <Link href="/contact">
             <p className="mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500">
-              {t('footer.about.contact')}
+              {t("footer.about.contact")}
             </p>
           </Link>
           <Link href="/help">
-            <p className="transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500">
-              {t('footer.about.help')}
+            <p className="mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500">
+              {t("footer.about.help")}
             </p>
           </Link>
-          <Link href="#">
+          <Link href="/community">
             <p className="transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500">
-              {t('footer.about.community')}
+              {t("footer.about.community")}
             </p>
           </Link>
         </div>
         <div className="flex flex-col md:w-5/12 text-text-200 font-semibold mb-6">
           <h2 className="mb-3 font-bold text-background-100">
-            {t('footer.account.title')}
+            {t("footer.account.title")}
           </h2>
-          <Link href={'/auth/signup'}>
+          <Link href={"/auth/signup"}>
             <p className="mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500">
-              {t('footer.account.signOut')}
+              {t("footer.account.signOut")}
             </p>
           </Link>
           <p
             onClick={() => setCartSideBar(true)}
             className="mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500"
           >
-            {t('footer.account.cart')}
+            {t("footer.account.cart")}
           </p>
-          <Link href={'/wishlist'}>
+          <Link href={"/wishlist"}>
             <p className="mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500">
-              {t('footer.account.wishes')}
+              {t("footer.account.wishes")}
             </p>
           </Link>
-          <Link href={'/account/orders'}>
+          <Link href={"/account/orders"}>
             <p className="transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500">
-              {t('footer.account.orders')}
+              {t("footer.account.orders")}
             </p>
           </Link>
         </div>
       </div>
       <div className="flex flex-col md:w-3/12 text-background-100">
-        <h2 className="mb-4 font-semibold">{t('footer.app')}</h2>
+        <h2 className="mb-4 font-semibold">{t("footer.app")}</h2>
         <a href="https://play.google.com/store/apps/details?id=com.octagi.diplomarket&hl=es&gl=US">
           <img
             src="/assets/google-play.png"

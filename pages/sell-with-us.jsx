@@ -6,10 +6,8 @@ import { ToastContainer, toast } from 'react-toastify'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/bootstrap.css'
 import modalBg from '../public/assets/theme/logo-preloader.png'
-import dynamic from 'next/dynamic'
-
-const MainLayout = dynamic(() => import('../layouts/MainLayout'))
-const AppHeader = dynamic(() => import('../components/layouts/AppHeader'))
+import MainLayout from '../layouts/MainLayout'
+import AppHeader from '../components/layouts/AppHeader'
 
 function SellWithUs() {
   const [nombre_entidad, setNombreEntidad] = useState('')

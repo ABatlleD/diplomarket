@@ -20,7 +20,8 @@
     "settings": "Ajustes",
     "wishlist": "Favoritos",
     "providers": "Proveedores",
-    "jobs": "Empleos"
+    "jobs": "Empleos",
+    "community": "Comunidad"
   },
   "layout": {
     "navbar": {
@@ -125,6 +126,10 @@
   "about": {
     "title": "SOBRE NOSOTROS",
     "text": "Diplomarket es una tienda Online desarrollada por CUSPINERA SURL en función de satisfacer sus compras y entregas, tanto para usted como para sus familiares. Nos place llevarles LO MEJOR… SIEMPRE!!!. La empresa trabaja bajo las leyes de los Estados Unidos, donde también se incluyen a todos los actores económicos, tales como proveedores, comercializadores, según sus licencias y regulaciones. Todo lo que usted compre aquí, se exporta."
+  },
+  "community": {
+    "title": "Comunidad",
+    "text": "El dinero recaudado por concepto de donaciones es estrictamente empleado para comprar productos con el fin de ser entregados en instituciones como el Instituto Nacional de Oncologia y Radiología."
   },
   "privacy": {
     "sections": {

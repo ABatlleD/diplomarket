@@ -1,36 +1,42 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next'
-import { getSession } from 'next-auth/react'
-import resources from '../restapi/resources.js'
+import React from "react"
+import { useTranslation } from "react-i18next"
+import { getSession } from "next-auth/react"
+import resources from "../restapi/resources.js"
 import {
   getCountries,
   getProvinces,
   getMunicipalities,
   getCountriesId,
   getProvincesId,
-  getMunicipalitiesId
-} from '../restapi/get-places'
-import { getCookie } from 'cookies-next'
-import dynamic from 'next/dynamic'
-
-const MainLayout = dynamic(() => import('../layouts/MainLayout'))
-const AppHeader = dynamic(() => import('../components/layouts/AppHeader'))
-const Checkout = dynamic(() => import('../components/checkout/CheckoutApp'))
+  getMunicipalitiesId,
+} from "../restapi/get-places"
+import { getCookie } from "cookies-next"
+import MainLayout from "../layouts/MainLayout"
+import AppHeader from "../components/layouts/AppHeader"
+import Checkout from "../components/checkout/CheckoutApp"
 
 const CheckoutPage = ({ get_user_addresses }) => {
   const { t } = useTranslation()
-  const NEXT_MUNICIPALITY = getCookie('NEXT_MUNICIPALITY')
+  const NEXT_MUNICIPALITY = getCookie("NEXT_MUNICIPALITY")
   const municipality_id = NEXT_MUNICIPALITY
   const {
     addressees = [],
     countries = [],
     municipalities = [],
-    provinces = []
+    provinces = [],
   } = get_user_addresses
   return (
     <>
-      <AppHeader title={t('pages.checkout')} />
-      <Checkout address={{ addressees, countries, municipalities, provinces, municipality_id }}/>
+      <AppHeader title={t("pages.checkout")} />
+      <Checkout
+        address={{
+          addressees,
+          countries,
+          municipalities,
+          provinces,
+          municipality_id,
+        }}
+      />
     </>
   )
 }
@@ -79,7 +85,7 @@ export const getServerSideProps = async ({ req, res }) => {
           pais: await getCountriesId(items.pais),
           provincia: await getProvincesId(items.provincia),
           municipio: await getMunicipalitiesId(items.municipio),
-          activo: items?.activo
+          activo: items?.activo,
         }
         addressees_user_filters.push(addressees_user)
       }
@@ -89,34 +95,30 @@ export const getServerSideProps = async ({ req, res }) => {
             addressees: addressees_user_filters,
             countries,
             municipalities,
-            provinces
-          }
-        }
+            provinces,
+          },
+        },
       }
     } else {
       return {
         redirect: {
           permanent: false,
-          destination: '/auth/signin'
-        }
+          destination: "/auth/signin",
+        },
       }
     }
   } else {
     return {
       redirect: {
         permanent: false,
-        destination: '/auth/signin'
-      }
+        destination: "/auth/signin",
+      },
     }
   }
 }
 
 CheckoutPage.getLayout = function getLayout(page) {
-  return (
-    <MainLayout pageProps={page}>
-      {page}
-    </MainLayout>
-  )
+  return <MainLayout pageProps={page}>{page}</MainLayout>
 }
 
 export default CheckoutPage

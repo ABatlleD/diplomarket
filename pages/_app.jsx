@@ -1,21 +1,22 @@
-import React from 'react'
-import NextNProgress from 'nextjs-progressbar'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import '../i18n'
-import 'swiper/css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import '../styles/globals.css'
-import '@fontsource/josefin-sans/300.css'
-import '@fontsource/josefin-sans/400.css'
-import '@fontsource/josefin-sans/500.css'
-import '@fontsource/josefin-sans/700.css'
-import SwiperCore, { Autoplay } from 'swiper'
-import { SessionProvider } from 'next-auth/react'
-import localFont from '@next/font/local'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
-import dynamic from 'next/dynamic'
+import React from "react"
+import NextNProgress from "nextjs-progressbar"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import "../i18n"
+import "swiper/css"
+import "bootstrap/dist/css/bootstrap.min.css"
+import "../styles/globals.css"
+import "../styles/preloader.css"
+import "@fontsource/josefin-sans/300.css"
+import "@fontsource/josefin-sans/400.css"
+import "@fontsource/josefin-sans/500.css"
+import "@fontsource/josefin-sans/700.css"
+import SwiperCore, { Autoplay } from "swiper"
+import { SessionProvider } from "next-auth/react"
+import localFont from "@next/font/local"
+import { createTheme, ThemeProvider } from "@mui/material/styles"
+import dynamic from "next/dynamic"
 
-const WebChat = dynamic(() => import('../components/WebChat'))
+const WebChat = dynamic(() => import("../components/WebChat"))
 
 const theme = createTheme({
   typography: {
@@ -27,7 +28,7 @@ const theme = createTheme({
   },
 })
 
-const arial = localFont({ src: '../public/assets/font/arial/Arial.ttf' })
+const arial = localFont({ src: "../public/assets/font/arial/Arial.ttf" })
 
 SwiperCore.use([Autoplay])
 
