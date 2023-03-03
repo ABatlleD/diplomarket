@@ -36,15 +36,33 @@ import Image from "next/image"
 import storeAltImg from "../public/assets/store.png"
 import { motion } from "framer-motion"
 import useScrollY from "../hooks/Scroll"
-import ListProducts from "../components/products/ListProducts"
-import MainLayout from "../layouts/MainLayout"
-import AppHeader from "../components/layouts/AppHeader"
-import CategoriesAccordion from "../components/categories/CategoriesAccordion"
-import FilterBar from "../components/layouts/sidebar/FilterBar"
-import ProductItem from "../components/products/ProductItem"
-import AllProductsLoader from "../components/loaders/AllProducts"
-import HorizontalProductItem from "../components/products/HorizontalProductItem"
-import NotificationsTip from "../components/modals/NotificationsTip"
+import dynamic from "next/dynamic"
+
+const MainLayout = dynamic(() => import("../layouts/MainLayout"))
+const AppHeader = dynamic(() => import("../components/layouts/AppHeader"))
+const ListProducts = dynamic(() =>
+  import("../components/products/ListProducts")
+)
+const CategoriesAccordion = dynamic(() =>
+  import("../components/categories/CategoriesAccordion")
+)
+const FilterBar = dynamic(() =>
+  import("../components/layouts/sidebar/FilterBar")
+)
+const ProductItem = dynamic(() => import("../components/products/ProductItem"))
+const AllProductsLoader = dynamic(() =>
+  import("../components/loaders/AllProducts")
+)
+const HorizontalProductItem = dynamic(() =>
+  import("../components/products/HorizontalProductItem")
+)
+
+const NotificationsTip = dynamic(
+  () => import("../components/modals/NotificationsTip"),
+  {
+    loading: () => "Loading...",
+  }
+)
 
 function Home() {
   const municipality = getCookie("NEXT_MUNICIPALITY")

@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react"
 import { useCompare } from "../store/compare/compare.context"
 import { useTranslation } from "react-i18next"
 import LayersClearIcon from "@mui/icons-material/LayersClear"
-import MainLayout from "../layouts/MainLayout"
-import AppHeader from "../components/layouts/AppHeader"
-import CompareItem from "../components/compare/CompareItem"
+import dynamic from "next/dynamic"
+
+const MainLayout = dynamic(() => import("../layouts/MainLayout"))
+const AppHeader = dynamic(() => import("../components/layouts/AppHeader"))
+const CompareItem = dynamic(() => import("../components/compare/CompareItem"))
 
 function Compare() {
   const { items } = useCompare()

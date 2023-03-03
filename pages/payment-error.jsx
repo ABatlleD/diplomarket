@@ -5,7 +5,9 @@ import Router from "next/router"
 import { useCart } from "../store/cart/cart.context"
 import { useTranslation } from "react-i18next"
 import ErrorPayImg from "../public/assets/user-message/105614.png"
-import MainLayout from "../layouts/MainLayout"
+import dynamic from "next/dynamic"
+
+const MainLayout = dynamic(() => import("../layouts/MainLayout"))
 
 const PaymentError = () => {
   const { t } = useTranslation()

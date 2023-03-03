@@ -11,8 +11,10 @@ import { useSession } from "next-auth/react"
 import { useRouter } from "next/router"
 import axios from "axios"
 import parsePhoneNumber from "libphonenumber-js"
-import MainLayout from "../layouts/MainLayout"
-import AppHeader from "../components/layouts/AppHeader"
+import dynamic from "next/dynamic"
+
+const MainLayout = dynamic(() => import("../layouts/MainLayout"))
+const AppHeader = dynamic(() => import("../components/layouts/AppHeader"))
 
 function Contact() {
   const { t, i18n } = useTranslation()

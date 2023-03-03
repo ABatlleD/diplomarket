@@ -11,9 +11,11 @@ import {
   getMunicipalitiesId,
 } from "../restapi/get-places"
 import { getCookie } from "cookies-next"
-import MainLayout from "../layouts/MainLayout"
-import AppHeader from "../components/layouts/AppHeader"
-import Checkout from "../components/checkout/CheckoutApp"
+import dynamic from "next/dynamic"
+
+const MainLayout = dynamic(() => import("../layouts/MainLayout"))
+const AppHeader = dynamic(() => import("../components/layouts/AppHeader"))
+const Checkout = dynamic(() => import("../components/checkout/CheckoutApp"))
 
 const CheckoutPage = ({ get_user_addresses }) => {
   const { t } = useTranslation()

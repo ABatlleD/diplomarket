@@ -5,7 +5,9 @@ import Router from "next/router"
 import { useCart } from "../store/cart/cart.context"
 import { useTranslation } from "react-i18next"
 import SuccessPayImg from "../public/assets/user-message/1067281.png"
-import MainLayout from "../layouts/MainLayout"
+import dynamic from "next/dynamic"
+
+const MainLayout = dynamic(() => import("../layouts/MainLayout"))
 
 const PaymentComplete = () => {
   const { t } = useTranslation()
