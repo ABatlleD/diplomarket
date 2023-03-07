@@ -34,7 +34,6 @@ import { useAllCarousel, useFilterProducts } from "../restapi/query"
 import { useRouter } from "next/router"
 import Image from "next/image"
 import storeAltImg from "../public/assets/store.png"
-import { motion } from "framer-motion"
 import useScrollY from "../hooks/Scroll"
 import dynamic from "next/dynamic"
 
@@ -800,18 +799,9 @@ function Home() {
           justify-center items-center shadow-2xl hover:cursor-pointer`}
           onClick={() => window.scrollTo(0, 0)}
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ rotate: 360, scale: 1, opacity: 1 }}
-            transition={{
-              duration: 1,
-              repeatDelay: 3,
-              repeat: Infinity,
-            }}
-            onClick={() => setFilterBar(true)}
-          >
+          <div onClick={() => setFilterBar(true)}>
             <FilterAltOutlinedIcon fontSize="large" />
-          </motion.div>
+          </div>
         </div>
       )}
     </>
