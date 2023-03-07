@@ -114,7 +114,7 @@ function HorizontalProductItem({ product }) {
               {product.promocion.activo && (
                 <div className="hidden md:flex">
                   <div className="bg-button hidden md:flex px-1 rounded-r-full text-background-100 font-weight-light text-[0.5rem] md:text-xs">
-                    -{product.promocion.descuento}%
+                    -{product.promocion.descuento.toFixed(0)}%
                   </div>
                 </div>
               )}
@@ -160,7 +160,7 @@ function HorizontalProductItem({ product }) {
                   </p>
                   <div className="flex flex-row">
                     <div className="bg-button flex md:hidden rounded-md px-1 mr-1 text-background-100 text-xs">
-                      -{product.promocion.descuento}%
+                      -{product.promocion.descuento.toFixed(0)}%
                     </div>
                     <p className="my-0 md:ml-1 md:pt-[0.15rem] text-text-100 text-xs md:text-sm line-through">
                       {" "}

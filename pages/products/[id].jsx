@@ -357,6 +357,12 @@ function Product() {
           </div>
         </div>
       </div>
+      <div className="w-full 2xl:w-[90%] xl:w-[80%] mb-20 mt-10">
+        <p className="font-bold text-center text-xl mb-2 md:mb-4">
+          {t("products.relatedProducts")}
+        </p>
+        <ProductsCarousel products={relatedProducts} />
+      </div>
       {productIsLoading && <>Loading...</>}
       <div className="w-full 2xl:w-[60%] xl:w-[75%] flex flex-col items-center md:mt-4 mb-8">
         <Box sx={{ width: "95%", borderBottom: 1, borderColor: "divider" }}>
@@ -384,12 +390,6 @@ function Product() {
             </p>
           </AppTabPanel>
         </Box>
-      </div>
-      <div className="w-full 2xl:w-[90%] xl:w-[80%] mb-20 mt-10">
-        <p className="font-bold text-center text-xl mb-2 md:mb-4">
-          {t("products.relatedProducts")}
-        </p>
-        <ProductsCarousel products={relatedProducts} />
       </div>
     </div>
   )
