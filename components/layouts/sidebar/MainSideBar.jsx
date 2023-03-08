@@ -12,7 +12,7 @@ import Link from "next/link"
 import resources from "../../../restapi/resources"
 import parsePhoneNumber from "libphonenumber-js"
 import dynamic from "next/dynamic"
-import { provinceAtom } from "../../../store/place"
+import { municipalityAtom } from "../../../store/place"
 import { useAtom } from "jotai"
 
 const AppButton = dynamic(() => import("../../AppButton"))
@@ -25,7 +25,7 @@ function MainSideBar({
 }) {
   const { t } = useTranslation()
   const [contacts, setContacts] = useState([])
-  const [province] = useAtom(provinceAtom)
+  const [municipality] = useAtom(municipalityAtom)
 
   useEffect(() => {
     const answer = []
@@ -83,7 +83,7 @@ function MainSideBar({
             <span className="mt-[-3px] mr-1">
               <AddLocationAltOutlinedIcon fontSize="small" />
             </span>{" "}
-            {province?.nombre} <span className="mt-[-1px]"></span>
+            {municipality?.nombre} <span className="mt-[-1px]"></span>
           </AppButton>
         </div>
         <div className="flex flex-col mx-4">

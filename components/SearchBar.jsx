@@ -14,7 +14,7 @@ import useWindowSize from "../hooks/WindowSize"
 import { Search } from "@mui/icons-material"
 import dynamic from "next/dynamic"
 import { useAtom } from "jotai"
-import { municipalityAtom, provinceAtom } from "../store/place"
+import { municipalityAtom } from "../store/place"
 
 const AppButton = dynamic(() => import("./AppButton"))
 const SearchResult = dynamic(() => import("./products/SearchResult"))
@@ -40,7 +40,6 @@ const CssOutlinedInput = styled(OutlinedInput)({
 function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
   const size = useWindowSize()
   const { t } = useTranslation()
-  const [province] = useAtom(provinceAtom)
   const [municipality] = useAtom(municipalityAtom)
   const [inputValue, setInputValue] = useState("")
   const [options, setOptions] = useState([])
@@ -96,8 +95,8 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
               </span>
               <span className="">
                 {size.width < 1900
-                  ? resizeTitle(province?.nombre, 6)
-                  : resizeTitle(province?.nombre, 14)}
+                  ? resizeTitle(municipality?.nombre, 6)
+                  : resizeTitle(municipality?.nombre, 14)}
               </span>
             </AppButton>
           </div>

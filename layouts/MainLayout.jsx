@@ -22,6 +22,7 @@ const MainSideBar = dynamic(() =>
 const CartSideBar = dynamic(() =>
   import("../components/layouts/sidebar/CartSideBar")
 )
+const SelectPlace = dynamic(() => import("../components/modals/SelectPlace"))
 const QuickTip = dynamic(() => import("../components/modals/QuickTip"))
 
 function MainLayout({ children, filterBar = false }) {
@@ -44,13 +45,29 @@ function MainLayout({ children, filterBar = false }) {
     return () => clearInterval(interval)
   }, [])
 
-  useEffect(() => {
-    if (!municipality || !province) {
-      setOpenSelectPlace(true)
-    }
-  }, [municipality, province])
+  // useEffect(() => {
+  //   if (!municipality || !province) {
+  //     setOpenSelectPlace(true)
+  //   }
+  // }, [])
 
   const queryClient = new QueryClient()
+
+  if (!municipality || !province) {
+    return (
+      <SessionProvider session={children.session}>
+        <CompareProvider>
+          <FavProvider>
+            <CartProvider>
+              <QueryClientProvider client={queryClient}>
+                <SelectPlace openSelectPlace={true}></SelectPlace>
+              </QueryClientProvider>
+            </CartProvider>
+          </FavProvider>
+        </CompareProvider>
+      </SessionProvider>
+    )
+  }
 
   return (
     <>
