@@ -11,23 +11,9 @@ import {
   MenuItem,
   Select,
 } from "@mui/material"
-import TableRowsIcon from "@mui/icons-material/TableRows"
-import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart"
-import WindowIcon from "@mui/icons-material/Window"
-import StoreMallDirectoryIcon from "@mui/icons-material/StoreMallDirectory"
 import { useTranslation } from "react-i18next"
 import { getCookie } from "cookies-next"
-import { CarouselProvider, Slider, Slide } from "pure-react-carousel"
 import useWindowSize from "../hooks/WindowSize"
-import CircularProgress from "@mui/material/CircularProgress"
-import MainCarousel from "../components/home/MainCarousel"
-
-import InfiniteScroll from "react-infinite-scroll-component"
-import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined"
-import PriceCheckIcon from "@mui/icons-material/PriceCheck"
-import SentimentSatisfiedOutlinedIcon from "@mui/icons-material/SentimentSatisfiedOutlined"
-import CreditCardOutlinedIcon from "@mui/icons-material/CreditCardOutlined"
-import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
 import { useAllCarousel, useFilterProducts } from "../restapi/query"
@@ -36,12 +22,35 @@ import Image from "next/image"
 import storeAltImg from "../public/assets/store.png"
 import useScrollY from "../hooks/Scroll"
 import dynamic from "next/dynamic"
-
+import InfiniteScroll from "react-infinite-scroll-component"
+import { CarouselProvider, Slider, Slide } from "pure-react-carousel"
+const CircularProgress = dynamic(() => import("@mui/material/CircularProgress"))
+const MainCarousel = dynamic(() => import("../components/home/MainCarousel"))
+const StoreMallDirectoryIcon = dynamic(() =>
+  import("@mui/icons-material/StoreMallDirectory")
+)
+const RemoveShoppingCartIcon = dynamic(() =>
+  import("@mui/icons-material/RemoveShoppingCart")
+)
+const PriceCheckIcon = dynamic(() => import("@mui/icons-material/PriceCheck"))
+const LocalShippingOutlinedIcon = dynamic(() =>
+  import("@mui/icons-material/LocalShippingOutlined")
+)
+const CreditCardOutlinedIcon = dynamic(() =>
+  import("@mui/icons-material/CreditCardOutlined")
+)
+const FilterAltOutlinedIcon = dynamic(() =>
+  import("@mui/icons-material/FilterAltOutlined")
+)
+const SentimentSatisfiedOutlinedIcon = dynamic(() =>
+  import("@mui/icons-material/SentimentSatisfiedOutlined")
+)
 const MainLayout = dynamic(() => import("../layouts/MainLayout"))
 const AppHeader = dynamic(() => import("../components/layouts/AppHeader"))
 const ListProducts = dynamic(() =>
   import("../components/products/ListProducts")
 )
+const Img = dynamic(() => import("../components/Img"))
 const CategoriesAccordion = dynamic(() =>
   import("../components/categories/CategoriesAccordion")
 )
@@ -363,15 +372,27 @@ function Home() {
             {!selectedCategory && (
               <div className="font-bold mt-2">{t("filter.categories")}</div>
             )}
-            <div className="flex flex-row">
+            <div className="flex flex-row items-center">
               <div className="mr-3 mt-2" onClick={() => setListView(!listView)}>
                 <Link href={"/providers"}>
                   <StoreMallDirectoryIcon />
                 </Link>
               </div>
               <div className="mr-3 mt-2" onClick={() => setListView(!listView)}>
-                {listView && <WindowIcon />}
-                {!listView && <TableRowsIcon />}
+                {listView && (
+                  <Img
+                    src={"/assets/icons/grid-view.svg"}
+                    alt="Rows Fill Icon"
+                    className="relative w-6 h-6"
+                  />
+                )}
+                {!listView && (
+                  <Img
+                    src={"/assets/icons/rows-fill.svg"}
+                    alt="Rows Fill Icon"
+                    className="relative w-6 h-6"
+                  />
+                )}
               </div>
               <div className="flex w-28">
                 <FormControl fullWidth>

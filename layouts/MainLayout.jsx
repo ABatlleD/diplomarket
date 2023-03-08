@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import { motion } from "framer-motion"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { getCookie } from "cookies-next"
 import { FavProvider } from "../store/fav/fav.context.jsx"
@@ -58,13 +57,7 @@ function MainLayout({ children, filterBar = false }) {
           <FavProvider>
             <CartProvider>
               <QueryClientProvider client={queryClient}>
-                <motion.div
-                  animate={{
-                    opacity:
-                      categoriesSideBar || mainSideBar || cartSideBar ? 0.5 : 1,
-                  }}
-                  transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-                >
+                <div>
                   <NavBar
                     {...{
                       categoriesSideBar,
@@ -84,7 +77,7 @@ function MainLayout({ children, filterBar = false }) {
                       setCartSideBar,
                     }}
                   />
-                </motion.div>
+                </div>
                 <CategoriesSideBar
                   {...{ categoriesSideBar, setCategoriesSideBar }}
                 />
