@@ -10,8 +10,9 @@ import {
   getProvincesId,
   getMunicipalitiesId,
 } from "../restapi/get-places"
-import { getCookie } from "cookies-next"
 import dynamic from "next/dynamic"
+import { municipalityAtom } from "../store/place.js"
+import { useAtom } from "jotai"
 
 const MainLayout = dynamic(() => import("../layouts/MainLayout"))
 const AppHeader = dynamic(() => import("../components/layouts/AppHeader"))
@@ -19,8 +20,8 @@ const Checkout = dynamic(() => import("../components/checkout/CheckoutApp"))
 
 const CheckoutPage = ({ get_user_addresses }) => {
   const { t } = useTranslation()
-  const NEXT_MUNICIPALITY = getCookie("NEXT_MUNICIPALITY")
-  const municipality_id = NEXT_MUNICIPALITY
+  const [municipality] = useAtom(municipalityAtom)
+  const municipality_id = municipality?.id
   const {
     addressees = [],
     countries = [],

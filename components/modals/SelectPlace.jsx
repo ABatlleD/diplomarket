@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react"
 import {
   Button,
   Modal,
@@ -7,29 +7,31 @@ import {
   InputLabel,
   MenuItem,
   Select,
-} from '@mui/material'
-import HighlightOffIcon from '@mui/icons-material/HighlightOff'
-import resources from '../../restapi/resources'
-import { getCookie, setCookie } from 'cookies-next'
-import { useTranslation } from 'react-i18next'
-import Link from 'next/link'
-import { useCart } from '../../store/cart/cart.context'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import localFont from '@next/font/local'
+} from "@mui/material"
+import HighlightOffIcon from "@mui/icons-material/HighlightOff"
+import resources from "../../restapi/resources"
+import { useTranslation } from "react-i18next"
+import { useCart } from "../../store/cart/cart.context"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+import localFont from "@next/font/local"
+import { useAtom } from "jotai"
+import { municipalityAtom, provinceAtom } from "../../store/place"
 
-const arial = localFont({ src: '../../public/assets/font/arial/Arial.ttf' })
+const arial = localFont({ src: "../../public/assets/font/arial/Arial.ttf" })
 
 function SelectPlace({
   openSelectPlace = false,
   setOpenSelectPlace = () => {},
 }) {
+  const [prov, setProv] = useState(null)
+  const [mun, setMun] = useState(null)
+  const [province, setProvince] = useAtom(provinceAtom)
+  const [municipality, setMunicipality] = useAtom(municipalityAtom)
   const { t } = useTranslation()
   const [cities, setCities] = useState({})
   const [districts, setDistricts] = useState([])
   const [pivots, setPivots] = useState({})
-  const [state, setState] = useState({})
-  const [district, setDistrict] = useState({})
 
   const { resetCart } = useCart()
 
@@ -38,8 +40,13 @@ function SelectPlace({
     resources.place.district.all().then((response) => setPivots(response.data))
   }, [])
 
+  useEffect(() => {
+    setMun(municipality)
+    setProv(province)
+  }, [province, municipality])
+
   const handleStateChange = (event) => {
-    setState(event.target.value)
+    setProv(event.target.value)
     const _arr = []
     for (const item of pivots.results) {
       if (event.target.value.id === item.provincia) {
@@ -50,40 +57,27 @@ function SelectPlace({
   }
 
   const handleDistrictChange = (event) => {
-    setDistrict(event.target.value)
+    setMun(event.target.value)
   }
 
   const handleClose = () => {
-    if (getCookie('NEXT_MUNICIPALITY')) {
+    if (municipality && province) {
       setOpenSelectPlace(false)
     } else {
-      toast.error('Debe seleccionar una ubicación')
+      toast.error("Debe seleccionar una ubicación")
     }
   }
 
   const handleSubmit = () => {
-    const municipality = getCookie('NEXT_MUNICIPALITY')
-    if (municipality) {
-      // eslint-disable-next-line eqeqeq
-      if (municipality != district.id) {
-        setCookie('NEXT_MUNICIPALITY', district.id)
-        setCookie('NEXT_STATE', state.id)
-        setCookie('NEXT_DISTRICT', district.nombre)
-        resetCart()
-        window.location.reload(false)
-      } else {
-        setOpenSelectPlace(false)
-      }
+    if (prov && mun) {
+      console.log("🚀 ~ file: SelectPlace.jsx:76 ~ handleSubmit ~ mun:", mun)
+      console.log("🚀 ~ file: SelectPlace.jsx:76 ~ handleSubmit ~ prov:", prov)
+      setMunicipality(mun)
+      setProvince(prov)
+      resetCart()
+      return window.location.reload()
     } else {
-      if (district && district.id) {
-        setCookie('NEXT_MUNICIPALITY', district.id)
-        setCookie('NEXT_STATE', state.id)
-        setCookie('NEXT_DISTRICT', district.nombre)
-        resetCart()
-        window.location.reload(false)
-      } else {
-        toast.error('Debe seleccionar una ubicación')
-      }
+      toast.error("Debe seleccionar una ubicación")
     }
   }
 
@@ -99,7 +93,7 @@ function SelectPlace({
         BackdropProps={{
           timeout: 500,
         }}
-        sx={{ overflowY: 'scroll' }}
+        sx={{ overflowY: "scroll" }}
       >
         <Fade in={openSelectPlace}>
           <div className={arial.className}>
@@ -112,7 +106,7 @@ function SelectPlace({
               </div>
               <div className="flex flex-row justify-center mt-4">
                 <p className="font-bold text-xl text-footer-background-100">
-                  {t('place.title')}
+                  {t("place.title")}
                 </p>
               </div>
               <div className="flex flex-row justify-center mt-4">
@@ -124,19 +118,19 @@ function SelectPlace({
               </div>
               <div className="flex flex-row justify-center mt-4 mx-2">
                 <p className="font-semibold text-footer-background-100 text-justify">
-                  {t('place.subtitle')}
+                  {t("place.subtitle")}
                 </p>
               </div>
               <div className="flex flex-col md:flex-row justify-between mx-2 mt-8">
                 <div className="md:w-[49%] mb-4 md:mb-0">
                   <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">
-                      {t('place.state')}
+                      {t("place.state")}
                     </InputLabel>
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
-                      value={state}
+                      value={prov}
                       label="State"
                       onChange={handleStateChange}
                     >
@@ -151,12 +145,12 @@ function SelectPlace({
                 <div className="md:w-[49%]">
                   <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">
-                      {t('place.district')}
+                      {t("place.district")}
                     </InputLabel>
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
-                      value={district}
+                      value={mun}
                       label="District"
                       onChange={handleDistrictChange}
                     >
@@ -170,18 +164,16 @@ function SelectPlace({
                 </div>
               </div>
               <div className="mx-2 my-4">
-                <Link href={'/'}>
-                  <Button
-                    variant="contained"
-                    sx={{
-                      width: '100%',
-                      backgroundColor: '#b12024 !important',
-                    }}
-                    onClick={handleSubmit}
-                  >
-                    {t('place.accept')}
-                  </Button>
-                </Link>
+                <Button
+                  variant="contained"
+                  sx={{
+                    width: "100%",
+                    backgroundColor: "#b12024 !important",
+                  }}
+                  onClick={handleSubmit}
+                >
+                  {t("place.accept")}
+                </Button>
               </div>
             </div>
           </div>

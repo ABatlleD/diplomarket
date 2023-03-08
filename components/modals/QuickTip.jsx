@@ -9,10 +9,11 @@ import { useCart } from "../../store/cart/cart.context"
 import { generateCartItem } from "../../store/cart/generate-cart-item"
 import { useRouter } from "next/router"
 import resources from "../../restapi/resources"
-import { getCookie } from "cookies-next"
 import { useSession } from "next-auth/react"
 import dynamic from "next/dynamic"
 import localFont from "@next/font/local"
+import { useAtom } from "jotai"
+import { municipalityAtom } from "../../store/place"
 
 const AddToCart = dynamic(() => import("../cart/AddCart"))
 const AddToFav = dynamic(() => import("../fav/AddFav"))
@@ -33,7 +34,7 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
   const { t, i18n } = useTranslation()
   const router = useRouter()
   const [product, setProduct] = useState({})
-  const municipality = getCookie("NEXT_MUNICIPALITY")
+  const [municipality] = useAtom(municipalityAtom)
   const { data } = useSession()
 
   const { addItemToCart, isInCart } = useCart()
@@ -59,7 +60,7 @@ function QuickTip({ openQuickTip = false, setOpenQuickTip = () => {} }) {
 
   useEffect(() => {
     if (municipality) {
-      resources.products.tip(municipality).then((response) => {
+      resources.products.tip(municipality?.id).then((response) => {
         setProduct(response.data[0])
       })
     }

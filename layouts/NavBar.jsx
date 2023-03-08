@@ -1,13 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Josefin_Sans } from '@next/font/google'
-import localFont from '@next/font/local'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
-import dynamic from 'next/dynamic'
+import React from "react"
+import PropTypes from "prop-types"
+import localFont from "@next/font/local"
+import { createTheme, ThemeProvider } from "@mui/material/styles"
+import dynamic from "next/dynamic"
 
-const TopBar = dynamic(() => import('../components/layouts/navbar/TopBar'))
+const TopBar = dynamic(() => import("../components/layouts/navbar/TopBar"))
 const BottomOptions = dynamic(() =>
-  import('../components/layouts/navbar/BottomOptions')
+  import("../components/layouts/navbar/BottomOptions")
 )
 
 const theme = createTheme({
@@ -20,12 +19,7 @@ const theme = createTheme({
   },
 })
 
-const js = Josefin_Sans({
-  weight: '400',
-  subsets: ['latin'],
-})
-
-const arial = localFont({ src: '../public/assets/font/arial/Arial.ttf' })
+const arial = localFont({ src: "../public/assets/font/arial/Arial.ttf" })
 
 function NavBar({
   categoriesSideBar,

@@ -12,7 +12,6 @@ import {
   Select,
 } from "@mui/material"
 import { useTranslation } from "react-i18next"
-import { getCookie } from "cookies-next"
 import useWindowSize from "../hooks/WindowSize"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
@@ -24,6 +23,8 @@ import useScrollY from "../hooks/Scroll"
 import dynamic from "next/dynamic"
 import InfiniteScroll from "react-infinite-scroll-component"
 import { CarouselProvider, Slider, Slide } from "pure-react-carousel"
+import { useAtom } from "jotai"
+import { municipalityAtom } from "../store/place"
 const CircularProgress = dynamic(() => import("@mui/material/CircularProgress"))
 const MainCarousel = dynamic(() => import("../components/home/MainCarousel"))
 const StoreMallDirectoryIcon = dynamic(() =>
@@ -73,7 +74,7 @@ const NotificationsTip = dynamic(
 )
 
 function Home() {
-  const municipality = getCookie("NEXT_MUNICIPALITY")
+  const [municipality] = useAtom(municipalityAtom)
   const router = useRouter()
   const { id, categoryId, subcategoryId, brandId } = router.query
   const { carousel, carouselCount, carouselIsLoading } = useAllCarousel()
@@ -108,7 +109,7 @@ function Home() {
   const [openNotificationsTip, setOpenNotificationsTip] = useState(false)
   const { products, productsTotal, productsIsLoading } = useFilterProducts({
     offset,
-    municipality_id: municipality,
+    municipality_id: municipality?.id,
     limit: 15,
     category,
     subcategory,

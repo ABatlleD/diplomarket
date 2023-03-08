@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from 'react'
-import Drawer from '@mui/material/Drawer'
-import LangSelector from '../navbar/LangSelector'
-import LockIcon from '@mui/icons-material/Lock'
-import HighlightOffIcon from '@mui/icons-material/HighlightOff'
-import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined'
-import { useTranslation } from 'react-i18next'
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
-import WhatsAppBusinessIcon from '../../icons/whats-app-business-icon'
-import { getCookie } from 'cookies-next'
-import Link from 'next/link'
-import resources from '../../../restapi/resources'
-import parsePhoneNumber from 'libphonenumber-js'
-import dynamic from 'next/dynamic'
+import React, { useEffect, useState } from "react"
+import Drawer from "@mui/material/Drawer"
+import LangSelector from "../navbar/LangSelector"
+import LockIcon from "@mui/icons-material/Lock"
+import HighlightOffIcon from "@mui/icons-material/HighlightOff"
+import AddLocationAltOutlinedIcon from "@mui/icons-material/AddLocationAltOutlined"
+import { useTranslation } from "react-i18next"
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight"
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined"
+import WhatsAppBusinessIcon from "../../icons/whats-app-business-icon"
+import Link from "next/link"
+import resources from "../../../restapi/resources"
+import parsePhoneNumber from "libphonenumber-js"
+import dynamic from "next/dynamic"
+import { provinceAtom } from "../../../store/place"
+import { useAtom } from "jotai"
 
-const AppButton = dynamic(() => import('../../AppButton'))
+const AppButton = dynamic(() => import("../../AppButton"))
 
 function MainSideBar({
   mainSideBar = false,
@@ -24,14 +25,13 @@ function MainSideBar({
 }) {
   const { t } = useTranslation()
   const [contacts, setContacts] = useState([])
-  const NEXT_DISTRICT = getCookie('NEXT_DISTRICT')
-  const [district, setDistrict] = useState('')
+  const [province] = useAtom(provinceAtom)
 
   useEffect(() => {
     const answer = []
     resources.contacts.get().then((response) => {
       response.data.results.map((item) =>
-        (item.tipo === 'email' || item.tipo === 'whatsapp') && item.sidebar
+        (item.tipo === "email" || item.tipo === "whatsapp") && item.sidebar
           ? answer.push(item)
           : true
       )
@@ -39,14 +39,10 @@ function MainSideBar({
     })
   }, [])
 
-  useEffect(() => {
-    setDistrict(NEXT_DISTRICT)
-  }, [NEXT_DISTRICT])
-
   return (
     <React.Fragment>
       <Drawer
-        anchor={'left'}
+        anchor={"left"}
         open={mainSideBar}
         onClose={() => setMainSideBar(false)}
       >
@@ -58,9 +54,9 @@ function MainSideBar({
             className="flex flex-row mt-4 md:mt-6 ml-1 md:ml-[-10px] text-text-100 xl:text-sm"
             onClick={() => {}}
           >
-            USD{' '}
+            USD{" "}
             <span className="mt-[-3px]">
-              <LockIcon fontSize={'small'} />
+              <LockIcon fontSize={"small"} />
             </span>
           </div>
           <button
@@ -76,7 +72,7 @@ function MainSideBar({
               fontSize: 15,
               borderTopRightRadius: 0,
               borderBottomRightRadius: 0,
-              width: '100%',
+              width: "100%",
             }}
             className="bg-button rounded-full"
             onClick={() => {
@@ -86,8 +82,8 @@ function MainSideBar({
           >
             <span className="mt-[-3px] mr-1">
               <AddLocationAltOutlinedIcon fontSize="small" />
-            </span>{' '}
-            {district} <span className="mt-[-1px]"></span>
+            </span>{" "}
+            {province?.nombre} <span className="mt-[-1px]"></span>
           </AppButton>
         </div>
         <div className="flex flex-col mx-4">
@@ -97,9 +93,9 @@ function MainSideBar({
           >
             <Link href="/about">
               <p className="hover:cursor-pointer hover:underline">
-                {t('layout.navbar.about')}{' '}
+                {t("layout.navbar.about")}{" "}
                 <span>
-                  <KeyboardArrowRightIcon sx={{ marginTop: '-1px' }} />
+                  <KeyboardArrowRightIcon sx={{ marginTop: "-1px" }} />
                 </span>
               </p>
             </Link>
@@ -110,9 +106,9 @@ function MainSideBar({
           >
             <Link href="/sell-with-us">
               <p className="hover:cursor-pointer hover:underline">
-                {t('layout.navbar.sell-with-us')}{' '}
+                {t("layout.navbar.sell-with-us")}{" "}
                 <span>
-                  <KeyboardArrowRightIcon sx={{ marginTop: '-1px' }} />
+                  <KeyboardArrowRightIcon sx={{ marginTop: "-1px" }} />
                 </span>
               </p>
             </Link>
@@ -123,9 +119,9 @@ function MainSideBar({
           >
             <Link href="/contact">
               <p className="hover:cursor-pointer hover:underline">
-                {t('layout.navbar.contact')}{' '}
+                {t("layout.navbar.contact")}{" "}
                 <span>
-                  <KeyboardArrowRightIcon sx={{ marginTop: '-1px' }} />
+                  <KeyboardArrowRightIcon sx={{ marginTop: "-1px" }} />
                 </span>
               </p>
             </Link>
@@ -136,9 +132,9 @@ function MainSideBar({
           >
             <Link href="/providers">
               <p className="hover:cursor-pointer hover:underline">
-                {t('layout.navbar.providers')}{' '}
+                {t("layout.navbar.providers")}{" "}
                 <span>
-                  <KeyboardArrowRightIcon sx={{ marginTop: '-1px' }} />
+                  <KeyboardArrowRightIcon sx={{ marginTop: "-1px" }} />
                 </span>
               </p>
             </Link>
@@ -149,9 +145,9 @@ function MainSideBar({
           >
             <Link href="/empleos">
               <p className="hover:cursor-pointer hover:underline">
-                {t('pages.jobs')}{' '}
+                {t("pages.jobs")}{" "}
                 <span>
-                  <KeyboardArrowRightIcon sx={{ marginTop: '-1px' }} />
+                  <KeyboardArrowRightIcon sx={{ marginTop: "-1px" }} />
                 </span>
               </p>
             </Link>
@@ -161,30 +157,30 @@ function MainSideBar({
               key={item.id}
               className="mt-4 text-footer-background-200 hover:text-footer-background-100 text-lg"
             >
-              {item.tipo === 'email' && (
+              {item.tipo === "email" && (
                 <p>
                   <span>
-                    <EmailOutlinedIcon sx={{ marginTop: '-3px' }} />
+                    <EmailOutlinedIcon sx={{ marginTop: "-3px" }} />
                   </span>
                   <a
                     className="hover:underline"
                     href={`mailto:${item.contenido}`}
                   >
-                    {' '}
+                    {" "}
                     {item.contenido}
                   </a>
                 </p>
               )}
-              {item.tipo === 'whatsapp' && (
+              {item.tipo === "whatsapp" && (
                 <p className="flex flex-row">
                   <span>
                     <WhatsAppBusinessIcon />
-                  </span>{' '}
+                  </span>{" "}
                   <a
                     href={`https://api.whatsapp.com/send?phone=${item.contenido}&text=Hola,%20Diplomarket%E2%84%A2`}
                   >
                     <span className="ml-1 mt-[-0.2rem] hover:underline">
-                      {' '}
+                      {" "}
                       {parsePhoneNumber(
                         `+${item.contenido}`
                       )?.formatInternational()}

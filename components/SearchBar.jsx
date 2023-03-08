@@ -1,37 +1,38 @@
-import React, { useState, useEffect } from 'react'
-import Autocomplete from '@mui/material/Autocomplete'
+import React, { useState, useEffect } from "react"
+import Autocomplete from "@mui/material/Autocomplete"
 import {
   FormControl,
   OutlinedInput,
   InputAdornment,
   IconButton,
-} from '@mui/material'
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles'
-import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined'
-import { useTranslation } from 'react-i18next'
-import { getCookie } from 'cookies-next'
-import resources from '../restapi/resources'
-import useWindowSize from '../hooks/WindowSize'
-import { Search } from '@mui/icons-material'
-import dynamic from 'next/dynamic'
+} from "@mui/material"
+import { styled, createTheme, ThemeProvider } from "@mui/material/styles"
+import AddLocationAltOutlinedIcon from "@mui/icons-material/AddLocationAltOutlined"
+import { useTranslation } from "react-i18next"
+import resources from "../restapi/resources"
+import useWindowSize from "../hooks/WindowSize"
+import { Search } from "@mui/icons-material"
+import dynamic from "next/dynamic"
+import { useAtom } from "jotai"
+import { municipalityAtom, provinceAtom } from "../store/place"
 
-const AppButton = dynamic(() => import('./AppButton'))
-const SearchResult = dynamic(() => import('./products/SearchResult'))
+const AppButton = dynamic(() => import("./AppButton"))
+const SearchResult = dynamic(() => import("./products/SearchResult"))
 
 const theme = createTheme({
   palette: {
     error: {
-      main: '#b12024',
-      contrastText: '#fff',
+      main: "#b12024",
+      contrastText: "#fff",
     },
   },
 })
 
 const CssOutlinedInput = styled(OutlinedInput)({
-  '& .MuiInputBase-input': {
+  "& .MuiInputBase-input": {
     padding: 3,
   },
-  '& .MuiInputBase-focused': {
+  "& .MuiInputBase-focused": {
     padding: 3,
   },
 })
@@ -39,20 +40,15 @@ const CssOutlinedInput = styled(OutlinedInput)({
 function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
   const size = useWindowSize()
   const { t } = useTranslation()
-  const NEXT_DISTRICT = getCookie('NEXT_DISTRICT')
-  const NEXT_MUNICIPALITY = getCookie('NEXT_MUNICIPALITY')
-  const [district, setDistrict] = useState('')
-  const [inputValue, setInputValue] = useState('')
+  const [province] = useAtom(provinceAtom)
+  const [municipality] = useAtom(municipalityAtom)
+  const [inputValue, setInputValue] = useState("")
   const [options, setOptions] = useState([])
-
-  useEffect(() => {
-    setDistrict(NEXT_DISTRICT)
-  }, [NEXT_DISTRICT])
 
   useEffect(() => {
     if (inputValue.length > 2) {
       resources.products
-        .search(NEXT_MUNICIPALITY, inputValue)
+        .search(municipality?.id, inputValue)
         .then((response) => setOptions(response.data))
     } else {
       setOptions([])
@@ -67,7 +63,7 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
 
   const searchSubmit = (e, value) => {
     e.preventDefault()
-    if (value && value !== 'undefined') {
+    if (value && value !== "undefined") {
       setInputValue(value)
     }
   }
@@ -85,7 +81,7 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
                   md: 12,
                 },
                 borderTopRightRadius: 0,
-                width: '100%',
+                width: "100%",
                 borderBottomRightRadius: 0,
               }}
               className="bg-button"
@@ -94,14 +90,14 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
               <span className="mr-1 -mt-[0.2rem]">
                 <AddLocationAltOutlinedIcon
                   sx={{
-                    fontSize: '1rem',
+                    fontSize: "1rem",
                   }}
                 />
               </span>
               <span className="">
                 {size.width < 1900
-                  ? resizeTitle(district, 6)
-                  : resizeTitle(district, 14)}
+                  ? resizeTitle(province?.nombre, 6)
+                  : resizeTitle(province?.nombre, 14)}
               </span>
             </AppButton>
           </div>
@@ -116,9 +112,9 @@ function SearchBar({ openSelectPlace, setOpenSelectPlace }) {
               }
               return inputValue
             }}
-            noOptionsText={<p>{t('no_options')}</p>}
+            noOptionsText={<p>{t("no_options")}</p>}
             style={{
-              width: '100%',
+              width: "100%",
             }}
             freeSolo
             renderInput={(params) => {

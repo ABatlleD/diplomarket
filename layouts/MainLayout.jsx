@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { getCookie } from "cookies-next"
 import { FavProvider } from "../store/fav/fav.context.jsx"
 import { CompareProvider } from "../store/compare/compare.context.jsx"
 import { CartProvider } from "../store/cart/cart.context.jsx"
@@ -9,6 +8,8 @@ import { addClicks, clicks } from "../libs/quick-tip"
 import useScrollY from "../hooks/Scroll.js"
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 import dynamic from "next/dynamic.js"
+import { useAtom } from "jotai"
+import { municipalityAtom, provinceAtom } from "../store/place.js"
 
 const NavBar = dynamic(() => import("./NavBar"))
 const Footer = dynamic(() => import("./Footer"))
@@ -29,7 +30,8 @@ function MainLayout({ children, filterBar = false }) {
   const [cartSideBar, setCartSideBar] = useState(false)
   const [openSelectPlace, setOpenSelectPlace] = useState(false)
   const [openQuickTip, setOpenQuickTip] = useState(false)
-  const NEXT_MUNICIPALITY = getCookie("NEXT_MUNICIPALITY")
+  const [municipality] = useAtom(municipalityAtom)
+  const [province] = useAtom(provinceAtom)
   const scrollY = useScrollY()
 
   useEffect(() => {
@@ -43,10 +45,10 @@ function MainLayout({ children, filterBar = false }) {
   }, [])
 
   useEffect(() => {
-    if (!NEXT_MUNICIPALITY) {
+    if (!municipality || !province) {
       setOpenSelectPlace(true)
     }
-  })
+  }, [municipality, province])
 
   const queryClient = new QueryClient()
 
