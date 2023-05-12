@@ -36,9 +36,21 @@
         "es": "Español",
         "en": "Inglés"
       },
+      "coin": {
+        "usd": "$ - USD - dólar estadounidense",
+        "euro": "€ - EURO"
+      },
+      "view": "Ver",
+      "my_orders": "Mis pedidos",
+      "change_language": "CAMBIAR IDIOMA",
+      "change_currency": "CAMBIAR MONEDA",
       "search": "Buscar",
       "account": {
+        "hello": "Hola",
+        "account_wishlist": "Cuenta y Favoritos",
         "signin": "Iniciar Sesión",
+        "wishlist": "Mis Favoritos",
+        "is_new_signup": "¿Es un cliente nuevo?",
         "signup": "Registrarse",
         "details": "Mi Cuenta",
         "recipients": "Mis Destinatarios",

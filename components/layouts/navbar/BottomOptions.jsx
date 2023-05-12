@@ -87,7 +87,7 @@ function BottomOptions({
             </div>
           </div>
         </div>
-        <div className="hidden xl:flex font-semibold justify-between items-center py-1.5 text-footer-background-100 hover:text-footer-background-300 w-full mx-4">
+        <div className="hidden xl:flex font-semibold justify-between items-center text-footer-background-100 hover:text-footer-background-300 w-full mx-4">
           <div className="text-lg leading-4">
             <ul className="flex gap-4 items-center">
               <li>
