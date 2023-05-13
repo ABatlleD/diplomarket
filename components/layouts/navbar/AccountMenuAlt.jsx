@@ -51,9 +51,9 @@ function AccountMenu ({ totalFav }) {
               </div>
             </IconButton>
           </div>
-          <div className="hidden xl:flex mx-2 mr-4 justify-center items-center cursor-pointer" onClick={handleOpenAccountMenu}>
+          <div className="hidden xl:flex mx-2 justify-center items-center cursor-pointer" onClick={handleOpenAccountMenu}>
             <div className="flex flex-col text-sm leading-tight text-left">
-              <p className="text-gray-700 font-bold tracking-tight">
+              <p className="text-gray-700 font-bold tracking-tight max-w-[10rem] truncate">
                 {t('layout.navbar.account.hello')}, {status === 'authenticated' ? data?.user : t('layout.navbar.account.signin')}
               </p>
               <div className="flex flex-wrap items-center">
