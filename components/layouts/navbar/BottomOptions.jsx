@@ -12,7 +12,7 @@ import resources from '../../../restapi/resources'
 import parsePhoneNumber from 'libphonenumber-js'
 import dynamic from 'next/dynamic'
 
-const SearchBar = dynamic(() => import('../../SearchBar'))
+const SearchBar = dynamic(() => import('../../SearchBarAlt'))
 const AppButton = dynamic(() => import('../../AppButton'))
 const LangSelector = dynamic(() => import('./LangSelector'))
 
@@ -52,8 +52,8 @@ function BottomOptions({
   return (
     <>
       <div className="dark:bg-background-100 md:bg-background-300 dark:md:bg-background-300 flex flex-col md:flex-row md:justify-between p-2 md:p-4">
-        <div className="md:w-[98%] md:ml-4 xl:hidden">
-          <SearchBar {...{ openSelectPlace, setOpenSelectPlace }} />
+        <div className="flex flex-grow xl:hidden items-center rounded-md shadow-sm mx-2">
+          <SearchBar {...{ setOpenSelectPlace }} />
         </div>
         <div className="hidden md:hidden flex-row justify-between mt-1">
           <AppButton

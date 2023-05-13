@@ -1,22 +1,12 @@
 import React, { useState, useEffect } from "react"
 import Autocomplete from "@mui/material/Autocomplete"
-import {
-  FormControl,
-  OutlinedInput,
-  InputAdornment,
-  IconButton,
-} from "@mui/material"
-import { styled, createTheme, ThemeProvider } from "@mui/material/styles"
-import AddLocationAltOutlinedIcon from "@mui/icons-material/AddLocationAltOutlined"
+import { createTheme, ThemeProvider } from "@mui/material/styles"
 import { useTranslation } from "react-i18next"
 import resources from "../restapi/resources"
-import useWindowSize from "../hooks/WindowSize"
-import { Search } from "@mui/icons-material"
 import dynamic from "next/dynamic"
 import { useAtom } from "jotai"
 import { municipalityAtom } from "../store/place"
 
-const AppButton = dynamic(() => import("./AppButton"))
 const SearchResult = dynamic(() => import("./products/SearchResult"))
 
 const theme = createTheme({
@@ -28,17 +18,7 @@ const theme = createTheme({
   },
 })
 
-const CssOutlinedInput = styled(OutlinedInput)({
-  "& .MuiInputBase-input": {
-    padding: 3,
-  },
-  "& .MuiInputBase-focused": {
-    padding: 3,
-  },
-})
-
 function SearchBar({ setOpenSelectPlace }) {
-  const size = useWindowSize()
   const { t } = useTranslation()
   const [municipality] = useAtom(municipalityAtom)
   const [inputValue, setInputValue] = useState("")
@@ -70,7 +50,7 @@ function SearchBar({ setOpenSelectPlace }) {
             className="flex mx-1"
             onClick={() => setOpenSelectPlace(true)}
           >
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center text-gray-900">
               <div className="h-5 w-5 flex justify-center items-start">
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" width="32" height="32" aria-hidden="true" role="presentation" focusable="false" viewBox="0 0 16 16">
                   <path fill="currentColor" d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4Zm6 3c0 2.874-3.097 6.016-4.841 7.558a1.74 1.74 0 0 1-2.318 0C5.097 13.016 2 9.874 2 7a6 6 0 1 1 12 0Zm-1 0A5 5 0 0 0 3 7c0 1.108.615 2.395 1.57 3.683c.934 1.258 2.087 2.377 2.933 3.126a.74.74 0 0 0 .994 0c.846-.749 2-1.867 2.933-3.126C12.385 9.395 13 8.108 13 7Z"/>
@@ -78,9 +58,11 @@ function SearchBar({ setOpenSelectPlace }) {
               </div>
               <div className="flex flex-col text-sm leading-tight text-left">
                 <p className="text-gray-700 font-bold tracking-tight">
-                  Hello, select
+                { municipality?.id ? t("layout.navbar.delivery_button.delivery") : t("layout.navbar.delivery_button.hello") }
                 </p>
-                <p className="font-bold text-sm leading-4">Your delivery city</p>
+                <p className="font-bold text-sm max-w-[10rem] truncate">
+                  { municipality?.id ? municipality?.nombre : t("layout.navbar.delivery_button.select") }
+                </p>
               </div>
             </div>
           </button>
@@ -96,17 +78,18 @@ function SearchBar({ setOpenSelectPlace }) {
             }
             return inputValue
           }}
-          noOptionsText={<p>{t("no_options")}</p>}
+          noOptionsText={<p>{t("layout.navbar.search.no_options")}</p>}
           style={{
             width: "100%",
           }}
           freeSolo
           renderInput={(params) => {
             return (
-              <div className="relative hidden xl:flex rounded-md shadow-sm" ref={params.InputProps.ref}>
+              <div className="relative flex rounded-md shadow-sm" ref={params.InputProps.ref}>
                 <input
                   {...params.inputProps}
                   type="text"
+                  placeholder={t('layout.navbar.search.placeholder')}
                   className="py-2.5 px-4 pr-11 block w-full border border-gray-300 shadow-sm rounded-md text-sm md:text-base outline-none focus:z-10 focus:ring-1 focus:border-dm-red focus:ring-dm-red"
                   autoFocus
                 />

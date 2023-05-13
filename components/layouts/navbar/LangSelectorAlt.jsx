@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import Tooltip from '@mui/material/Tooltip'
-import IconButton from '@mui/material/IconButton'
-import Divider from '@mui/material/Divider'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import { US, ES } from 'country-flag-icons/react/1x1'
@@ -37,7 +35,7 @@ function LangSelector () {
   }
 
   return (
-    <div className='LangSelector mx-2'>
+    <div className='LangSelector hidden sm:flex mx-2'>
       <Tooltip title='Select Language'>
         <div 
           className="flex flex-row hover:text-gray-700 text-gray-600 font-semibold items-center cursor-pointer" 

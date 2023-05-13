@@ -4,7 +4,6 @@ import IconButton from '@mui/material/IconButton'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import PersonIcon from '@mui/icons-material/Person'
-import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
@@ -13,7 +12,6 @@ import GroupIcon from '@mui/icons-material/Group'
 import ListAltIcon from '@mui/icons-material/ListAlt'
 import SettingsIcon from '@mui/icons-material/Settings'
 import LogoutIcon from '@mui/icons-material/Logout'
-import HeartIcon from '../../icons/heart-icon'
 
 function AccountMenu () {
   const [anchorElAccount, setAnchorElAccount] = useState(null)
@@ -60,7 +58,7 @@ function AccountMenu () {
                   {t('layout.navbar.account.account_wishlist')}
                 </p>
                 <svg className="ml-1 w-2.5 h-2.5 text-gray-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                  <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
                 </svg>
               </div>
             </div>

@@ -44,7 +44,15 @@
       "my_orders": "Mis pedidos",
       "change_language": "CAMBIAR IDIOMA",
       "change_currency": "CAMBIAR MONEDA",
-      "search": "Buscar",
+      "search": {
+        "no_options": "No se encuentran opciones",
+        "placeholder": "Buscar en Diplomarket"
+      },
+      "delivery_button": {
+        "hello": "Hola, seleccione",
+        "select": "Municipio de entrega",
+        "delivery": "Enviar a"
+      },
       "account": {
         "hello": "Hola",
         "account_wishlist": "Cuenta y Favoritos",
