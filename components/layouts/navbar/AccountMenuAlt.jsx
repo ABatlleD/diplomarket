@@ -13,7 +13,10 @@ import ListAltIcon from '@mui/icons-material/ListAlt'
 import SettingsIcon from '@mui/icons-material/Settings'
 import LogoutIcon from '@mui/icons-material/Logout'
 
-function AccountMenu () {
+import ListItemText from '@mui/material/ListItemText'
+import Typography from '@mui/material/Typography'
+
+function AccountMenu ({ totalFav }) {
   const [anchorElAccount, setAnchorElAccount] = useState(null)
   const { t } = useTranslation()
   const { data, status } = useSession()
@@ -110,18 +113,25 @@ function AccountMenu () {
           <span className="flex flex-col py-2 px-3 md:px-6"></span>
         </div>
         <MenuItem onClick={handleCloseAccountMenu}>
-          <Link href={'/wishlist'}>
-            <div className="flex flex-row justify-between w-full">
-              <div className='flex flex-row'>
-                <span className='pr-2'>
-                <svg className="flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20">
-                  <path fill="currentColor" d="M7.085 3A1.5 1.5 0 0 1 8.5 2h3a1.5 1.5 0 0 1 1.415 1H14.5A1.5 1.5 0 0 1 16 4.5v4.503a3.86 3.86 0 0 0-1 .173V4.5a.5.5 0 0 0-.5-.5h-1.585A1.5 1.5 0 0 1 11.5 5h-3a1.5 1.5 0 0 1-1.415-1H5.5a.5.5 0 0 0-.5.5v12a.5.5 0 0 0 .5.5h5.055l1 1H5.5A1.5 1.5 0 0 1 4 16.5v-12A1.5 1.5 0 0 1 5.5 3h1.585ZM8.5 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3Zm1.335 7.835a2.85 2.85 0 0 1 4.031 0l.136.136l.137-.136a2.85 2.85 0 0 1 4.031 4.031l-3.814 3.814a.5.5 0 0 1-.707 0l-3.814-3.814a2.85 2.85 0 0 1 0-4.031Z"/>
-                </svg>
-                </span>
-                <span>{t('layout.navbar.account.wishlist')}</span>
+          <ListItemText>
+            <Link href={'/wishlist'}>
+              <div className="flex flex-row justify-between w-full">
+                <div className='flex flex-row'>
+                  <span className='pr-2'>
+                  <svg className="flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20">
+                    <path fill="currentColor" d="M7.085 3A1.5 1.5 0 0 1 8.5 2h3a1.5 1.5 0 0 1 1.415 1H14.5A1.5 1.5 0 0 1 16 4.5v4.503a3.86 3.86 0 0 0-1 .173V4.5a.5.5 0 0 0-.5-.5h-1.585A1.5 1.5 0 0 1 11.5 5h-3a1.5 1.5 0 0 1-1.415-1H5.5a.5.5 0 0 0-.5.5v12a.5.5 0 0 0 .5.5h5.055l1 1H5.5A1.5 1.5 0 0 1 4 16.5v-12A1.5 1.5 0 0 1 5.5 3h1.585ZM8.5 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3Zm1.335 7.835a2.85 2.85 0 0 1 4.031 0l.136.136l.137-.136a2.85 2.85 0 0 1 4.031 4.031l-3.814 3.814a.5.5 0 0 1-.707 0l-3.814-3.814a2.85 2.85 0 0 1 0-4.031Z"/>
+                  </svg>
+                  </span>
+                  <span>{t('layout.navbar.account.wishlist')}</span>
+                </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </ListItemText>
+          <Typography variant="body2" color="text.secondary">
+            <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-dm-red rounded-full">
+              {totalFav > 99 ? "+99" : totalFav}
+            </span>
+          </Typography>
         </MenuItem>
         <MenuItem onClick={handleCloseAccountMenu}>
           <Link href={'/account/details'}>

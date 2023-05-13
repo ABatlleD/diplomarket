@@ -76,7 +76,7 @@ function TopBar({
                 </div>
               </div>
             </a> */}
-            <AccountMenu />
+            <AccountMenu {...{ totalFav }} />
             {/* <!-- end login --> */}
           
             {/* <!-- start orders --> */}
