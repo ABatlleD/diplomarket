@@ -29,7 +29,7 @@ function TopBar({
   return (
     <>
       <nav className="w-full flex flex-col relative z-10 text-footer-background-300">
-        <div className="w-full flex justify-between items-center mx-auto px-3 py-1">
+        <div className="w-full flex justify-between items-center mx-auto md:px-3 py-1">
           <div className="flex items-center">
             <div
               className="ml-1 xl:hidden"
