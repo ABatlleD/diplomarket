@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import Tooltip from '@mui/material/Tooltip'
-import IconButton from '@mui/material/IconButton'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import { US, ES } from 'country-flag-icons/react/1x1'
 import { useTranslation } from 'react-i18next'
 
-const languages = ['en', 'es']
+const languages = ['es', 'en']
+const currency = ['usd', 'euro']
 
 function LangSelector () {
   const [t, i18n] = useTranslation()
@@ -35,17 +35,22 @@ function LangSelector () {
   }
 
   return (
-    <div className='LangSelector'>
+    <div className='LangSelector hidden sm:flex mx-2'>
       <Tooltip title='Select Language'>
-        <IconButton onClick={handleOpenLanguageMenu}>
-        <div className='flex flex-row'>
-          { language === 'es'
-            ? <ES title="Español" className="w-7 h-5 shadow-brown shadow-lg"/>
-            : <US title="English" className="w-7 h-5 shadow-brown shadow-lg"/>
+        <div 
+          className="flex flex-row hover:text-gray-700 text-gray-600 font-semibold items-center cursor-pointer" 
+          onClick={handleOpenLanguageMenu}
+        >
+          { 
+            language === 'es'
+              ? <span className="flex mr-1"><ES title="Español" className="w-7 h-5 mr-1 shadow-brown shadow-lg"/> ES</span>
+              : <span className="flex mr-1"><US title="English" className="w-7 h-5 mr-1 shadow-brown shadow-lg"/> EN</span>
           }
+          <span>
+            | ($) USD
+          </span>
           <ArrowDropDownIcon />
         </div>
-        </IconButton>
       </Tooltip>
       <Menu
         sx={{ mt: '30px' }}
@@ -63,23 +68,52 @@ function LangSelector () {
         open={Boolean(anchorElLanguage)}
         onClose={handleCloseLanguageMenu}
       >
+        <div className="px-4 py-2 font-medium">
+          <span className="text-base font-semibold uppercase text-gray-600">{t('layout.navbar.change_language')}</span>
+        </div>
         {languages.map((lang) => (
           <MenuItem
             key={lang}
             onClick={(event) => handleSelectLanguage(event, lang)}
           >
             { lang === 'en'
-              ? <div className='flex flex-row'>
-                  <span className='pr-2'>
-                    <US title="English" className="w-7 h-5 shadow-brown shadow-lg"/>
-                  </span>
-                  <span>{t('layout.navbar.lang.en')}</span>
+              ? <div className="flex items-center">
+                  <input type="radio" name="hs-lang" className="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 cursor-pointer" id="hs-lang-en-1" checked={lang === language} />
+                  <label htmlFor="hs-lang-en-1" className="flex items-center text-base text-gray-600 font-semibold pl-2 cursor-pointer">
+                    <US title="English" className="w-7 h-5 mr-1 shadow-brown shadow-lg"/>
+                    {t('layout.navbar.lang.en')} - EN
+                  </label>
                 </div>
-              : <div className='flex flex-row'>
-                  <span className='pr-2'>
-                    <ES title="English" className="w-7 h-5 mt-1 shadow-brown shadow-lg"/>
-                  </span>
-                  <span>{t('layout.navbar.lang.es')}</span>
+              : <div className="flex items-center">
+                  <input type="radio" name="hs-lang" className="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 cursor-pointer" id="hs-lang-es-1" checked={lang === language} />
+                  <label htmlFor="hs-lang-es-1" className="flex items-center text-base text-gray-600 font-semibold pl-2 cursor-pointer">
+                    <ES title="Español" className="w-7 h-5 mr-1 shadow-brown shadow-lg"/>
+                    {t('layout.navbar.lang.es')} - ES
+                  </label>
+                </div>
+            }
+          </MenuItem>
+        ))}
+        <div className="my-2 border-t border-gray-100"></div>
+        <div className="px-4 py-2 font-medium">
+          <span className="text-base font-semibold uppercase text-gray-600">{t('layout.navbar.change_currency')}</span>
+        </div>
+        {currency.map((coin) => (
+          <MenuItem
+            key={coin}
+          >
+            { coin === 'usd'
+              ? <div className="flex items-center opacity-40">
+                  <input type="radio" name="hs-coin" className="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 cursor-pointer" id="hs-coin-usd-1" checked disabled />
+                  <label htmlFor="hs-coin-usd-1" className="flex items-center text-base text-gray-600 font-semibold pl-2 cursor-pointer">
+                    {t('layout.navbar.coin.usd')}
+                  </label>
+                </div>
+              : <div className="flex items-center opacity-40">
+                  <input type="radio" name="hs-coin" className="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 cursor-pointer" id="hs-coin-euro-1" disabled />
+                  <label htmlFor="hs-coin-euro-1" className="flex items-center text-base text-gray-600 font-semibold pl-2 cursor-pointer">
+                    {t('layout.navbar.coin.euro')}
+                  </label>
                 </div>
             }
           </MenuItem>

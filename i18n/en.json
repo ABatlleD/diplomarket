@@ -36,9 +36,25 @@
         "es": "Spanish",
         "en": "English"
       },
-      "search": "Search",
+      "coin": {
+        "usd": "$ - USD - US dollar",
+        "euro": "€ - EURO"
+      },
+      "change_language": "CHANGE LANGUAGE",
+      "change_currency": "CHANGE CURRENCY",
+      "search": {
+        "no_options": "No options found",
+        "placeholder": "Search in Diplomarket"
+      },
+      "delivery_button": {
+        "hello": "Hello, select",
+        "select": "Your delivery city",
+        "delivery": "Delivery to"
+      },
       "account": {
         "signin": "Sign In",
+        "wishlist": "My Wishlist",
+        "is_new_signup": "New customer?",
         "signup": "Sign Up",
         "details": "My Account",
         "recipients": "My Addresses",

@@ -36,9 +36,25 @@
         "es": "Español",
         "en": "Inglés"
       },
-      "search": "Buscar",
+      "coin": {
+        "usd": "$ - USD - dólar estadounidense",
+        "euro": "€ - EURO"
+      },
+      "change_language": "CAMBIAR IDIOMA",
+      "change_currency": "CAMBIAR MONEDA",
+      "search": {
+        "no_options": "No se encuentran opciones",
+        "placeholder": "Buscar en Diplomarket"
+      },
+      "delivery_button": {
+        "hello": "Hola, seleccione",
+        "select": "Municipio de entrega",
+        "delivery": "Enviar a"
+      },
       "account": {
         "signin": "Iniciar Sesión",
+        "wishlist": "Mis Favoritos",
+        "is_new_signup": "¿Es un cliente nuevo?",
         "signup": "Registrarse",
         "details": "Mi Cuenta",
         "recipients": "Mis Destinatarios",

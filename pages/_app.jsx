@@ -3,7 +3,7 @@ import NextNProgress from "nextjs-progressbar"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import "../i18n"
 import "swiper/css"
-import "bootstrap/dist/css/bootstrap.min.css"
+/* import "bootstrap/dist/css/bootstrap.min.css" */
 import "../styles/globals.css"
 import "../styles/preloader.css"
 import "@fontsource/josefin-sans/300.css"
