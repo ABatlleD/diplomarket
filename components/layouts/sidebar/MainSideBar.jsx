@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Drawer from "@mui/material/Drawer"
 import LangSelector from "../navbar/LangSelector"
-import LockIcon from "@mui/icons-material/Lock"
 import HighlightOffIcon from "@mui/icons-material/HighlightOff"
 import AddLocationAltOutlinedIcon from "@mui/icons-material/AddLocationAltOutlined"
 import { useTranslation } from "react-i18next"
@@ -46,22 +45,13 @@ function MainSideBar({
         open={mainSideBar}
         onClose={() => setMainSideBar(false)}
       >
-        <div className="flex flex-row justify-between mx-4 mt-4">
-          <div className="flex mt-3 mr-[-7px]">
+        <div className="flex flex-row justify-between mx-4 mt-6">
+          <div className="flex">
             <LangSelector />
-          </div>
-          <div
-            className="flex flex-row mt-4 md:mt-6 ml-1 md:ml-[-10px] text-text-100 xl:text-sm"
-            onClick={() => {}}
-          >
-            USD{" "}
-            <span className="mt-[-3px]">
-              <LockIcon fontSize={"small"} />
-            </span>
           </div>
           <button
             onClick={() => setMainSideBar((mainSideBar) => !mainSideBar)}
-            className="bg-white text-black h-4 w-4 pt-[1.3rem] mr-2 block rounded-full"
+            className="bg-white text-black h-4 w-4 mr-2 block rounded-full"
           >
             <HighlightOffIcon />
           </button>

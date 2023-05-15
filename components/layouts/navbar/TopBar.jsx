@@ -40,7 +40,13 @@ function TopBar({
             {/* <!-- start logo --> */}
             <div className="inline-flex">
               <Link href="/">
-                <img src="/logo-navbar.png" width="128" height="52" alt="Diplomark Logo" />
+                <img 
+                  src="/logo-navbar.png" 
+                  className="max-w-max h-14"  
+                  width={"128"} 
+                  height={"52"} 
+                  alt="Diplomark Logo" 
+                />
               </Link>
             </div>
             {/* <!-- end logo --> */}
@@ -55,7 +61,9 @@ function TopBar({
           {/* <!-- end search bar --> */}
           <div className="flex items-center">
             {/* <!-- start lang/currency --> */}
-            <LangSelector />
+            <div className="hidden sm:flex mx-2">
+              <LangSelector />
+            </div>
             {/* <!-- end lang/currency --> */}
 
             {/* <!-- start login --> */}

@@ -307,7 +307,7 @@
       "orders": "Track My Orders"
     },
     "app": "INSTALL APP",
-    "bottom": "© 2022 Diplomarket is a Web/Logo with all rights reserved."
+    "bottom": "Diplomarket is a Web/Logo with all rights reserved."
   },
   "signin": {
     "no_active_error": "Login error: user not active",

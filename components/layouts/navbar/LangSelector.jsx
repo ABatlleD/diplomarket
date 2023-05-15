@@ -35,7 +35,7 @@ function LangSelector () {
   }
 
   return (
-    <div className='LangSelector hidden sm:flex mx-2'>
+    <div className='LangSelector'>
       <Tooltip title='Select Language'>
         <div 
           className="flex flex-row hover:text-gray-700 text-gray-600 font-semibold items-center cursor-pointer" 
