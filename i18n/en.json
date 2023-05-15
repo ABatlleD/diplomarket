@@ -40,8 +40,6 @@
         "usd": "$ - USD - US dollar",
         "euro": "€ - EURO"
       },
-      "view": "Track",
-      "my_orders": "My Orders",
       "change_language": "CHANGE LANGUAGE",
       "change_currency": "CHANGE CURRENCY",
       "search": {
@@ -54,8 +52,6 @@
         "delivery": "Delivery to"
       },
       "account": {
-        "hello": "Hello",
-        "account_wishlist": "Account & Wishlist",
         "signin": "Sign In",
         "wishlist": "My Wishlist",
         "is_new_signup": "New customer?",

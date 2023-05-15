@@ -4,7 +4,6 @@ import DensityMediumIcon from '@mui/icons-material/DensityMedium'
 import { useFav } from '../../../store/fav/fav.context'
 import { useCart } from '../../../store/cart/cart.context'
 import dynamic from 'next/dynamic'
-import { useTranslation } from 'react-i18next'
 
 const LangSelector = dynamic(() => import('./LangSelectorAlt'))
 const SearchBar = dynamic(() => import('../../SearchBarAlt'))
@@ -17,7 +16,6 @@ function TopBar({
   openSelectPlace,
   setOpenSelectPlace,
 }) {
-  const [ t ] = useTranslation()
   const { totalUniqueItemsFav } = useFav()
   const { totalUniqueItems } = useCart()
   const [totalFav, setTotalFav] = useState(0)
@@ -78,25 +76,6 @@ function TopBar({
             </a> */}
             <AccountMenu {...{ totalFav }} />
             {/* <!-- end login --> */}
-          
-            {/* <!-- start orders --> */}
-            <div className="hidden xl:flex mx-2 mr-4">
-              <Link href={'/account/orders'}>
-                <div className="flex justify-center items-center">
-                  <div className="flex flex-col text-sm leading-tight text-left">
-                    <p className="text-gray-700 font-bold tracking-tight">
-                      {t('layout.navbar.view')}
-                    </p>
-                    <div className="flex flex-wrap items-center">
-                      <p className="font-bold text-sm leading-4">
-                        {t('layout.navbar.my_orders')}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </div>
-            {/* <!-- end orders --> */}
           
             {/* <!-- start cart --> */}
             <button 

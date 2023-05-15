@@ -19,7 +19,7 @@ import Typography from '@mui/material/Typography'
 function AccountMenu ({ totalFav }) {
   const [anchorElAccount, setAnchorElAccount] = useState(null)
   const { t } = useTranslation()
-  const { data, status } = useSession()
+  const { status } = useSession()
 
   const handleOpenAccountMenu = (event) => {
     setAnchorElAccount(event.currentTarget)
@@ -39,33 +39,16 @@ function AccountMenu ({ totalFav }) {
     <div className='AccountMenu'>
       <Tooltip title='Select Account'>
         <div>
-          <div className="xl:hidden">
-            <IconButton onClick={handleOpenAccountMenu}>
-              <div className='flex flex-row text-[#000000]'>
-                { status === 'authenticated' && (
-                  <AccountCircleIcon fontSize='large' className='text-button' />
-                )}
-                { status === 'unauthenticated' && (
-                  <AccountCircleIcon fontSize='large' />
-                )}
-              </div>
-            </IconButton>
-          </div>
-          <div className="hidden xl:flex mx-2 justify-center items-center cursor-pointer" onClick={handleOpenAccountMenu}>
-            <div className="flex flex-col text-sm leading-tight text-left">
-              <p className="text-gray-700 font-bold tracking-tight max-w-[10rem] truncate">
-                {t('layout.navbar.account.hello')}, {status === 'authenticated' ? data?.user : t('layout.navbar.account.signin')}
-              </p>
-              <div className="flex flex-wrap items-center">
-                <p className="font-bold text-sm leading-4">
-                  {t('layout.navbar.account.account_wishlist')}
-                </p>
-                <svg className="ml-1 w-2.5 h-2.5 text-gray-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
-                </svg>
-              </div>
+          <IconButton onClick={handleOpenAccountMenu}>
+            <div className='flex flex-row text-[#000000]'>
+              { status === 'authenticated' && (
+                <AccountCircleIcon fontSize='large' className='text-button' />
+              )}
+              { status === 'unauthenticated' && (
+                <AccountCircleIcon fontSize='large' />
+              )}
             </div>
-          </div>
+          </IconButton>
         </div>
       </Tooltip>
       <Menu
