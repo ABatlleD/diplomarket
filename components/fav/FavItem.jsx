@@ -46,7 +46,7 @@ function FavItem({ id }) {
 
   return (
     <>
-      <div className="flex flex-col hover:shadow-button w-full border rounded-lg h-[14rem] md:h-[20rem] 2xl:h-[26.2rem]">
+      <div className="flex flex-col w-full border rounded-lg h-[14rem] md:h-[20rem] 2xl:h-[26.2rem]">
         <div className="w-full relative flex flex-row justify-center self-center h-24 md:h-44 2xl:h-60">
           {product.img_principal && (
             <Link href={`/products/${product.id}`}>

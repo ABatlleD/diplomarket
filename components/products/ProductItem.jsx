@@ -73,7 +73,7 @@ function ProductItem({ product }) {
 
   return (
     <>
-      <div className="flex flex-col hover:shadow-button shadow-sm w-full border rounded-lg h-[14.5rem] md:h-[20rem] 2xl:h-[25.4rem]">
+      <div className="flex flex-col shadow-sm w-full border rounded-lg h-[14.5rem] md:h-[20rem] 2xl:h-[25.4rem]">
         <div className="w-full relative flex flex-row justify-center self-center md:mb-1 h-24 md:h-44 2xl:h-60">
           <Link href={`/products/${product.id}`}>
             <Image

@@ -5,9 +5,9 @@ import { useFav } from '../../../store/fav/fav.context'
 import { useCart } from '../../../store/cart/cart.context'
 import dynamic from 'next/dynamic'
 
-const LangSelector = dynamic(() => import('./LangSelectorAlt'))
-const SearchBar = dynamic(() => import('../../SearchBarAlt'))
-const AccountMenu = dynamic(() => import('./AccountMenuAlt'))
+const LangSelector = dynamic(() => import('./LangSelector'))
+const SearchBar = dynamic(() => import('../../SearchBar'))
+const AccountMenu = dynamic(() => import('./AccountMenu'))
 const SelectPlace = dynamic(() => import('../../modals/SelectPlace'))
 
 function TopBar({
