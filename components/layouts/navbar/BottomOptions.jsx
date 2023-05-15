@@ -12,7 +12,7 @@ import resources from '../../../restapi/resources'
 import parsePhoneNumber from 'libphonenumber-js'
 import dynamic from 'next/dynamic'
 
-const SearchBar = dynamic(() => import('../../SearchBarAlt'))
+const SearchBar = dynamic(() => import('../../SearchBar'))
 const AppButton = dynamic(() => import('../../AppButton'))
 const LangSelector = dynamic(() => import('./LangSelector'))
 

@@ -4,7 +4,7 @@ import localFont from "@next/font/local"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import dynamic from "next/dynamic"
 
-const TopBar = dynamic(() => import("../components/layouts/navbar/TopBarAlt"))
+const TopBar = dynamic(() => import("../components/layouts/navbar/TopBar"))
 const BottomOptions = dynamic(() =>
   import("../components/layouts/navbar/BottomOptions")
 )

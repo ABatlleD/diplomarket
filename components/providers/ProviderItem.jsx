@@ -10,7 +10,7 @@ function ProviderItem({ provider }) {
 
   return (
     <>
-      <div className="flex flex-col hover:shadow-button shadow-sm w-full border rounded-lg h-[15.5rem] md:h-[20rem] 2xl:h-[16rem]">
+      <div className="flex flex-col shadow-sm w-full border rounded-lg h-[15.5rem] md:h-[20rem] 2xl:h-[16rem]">
         <div className="w-full relative flex flex-col justify-center self-center md:mb-1 h-36 md:h-44">
           <Link href={{ pathname: '/', query: { id: provider.pk } }}>
             <Image
