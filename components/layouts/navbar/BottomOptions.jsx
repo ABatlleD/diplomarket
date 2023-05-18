@@ -97,7 +97,7 @@ function BottomOptions({
                   onClick={() => setMainSideBar((mainSideBar) => !mainSideBar)}
                 >
                   <DensityMediumIcon />
-                  All
+                  {t('layout.navbar.all')}
                 </button>
               </li>
               <li className="hover:underline">
