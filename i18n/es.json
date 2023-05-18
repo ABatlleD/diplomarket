@@ -25,6 +25,7 @@
   },
   "layout": {
     "navbar": {
+      "all": "Todos",
       "allProducts": "Todos los productos",
       "about": "¿Quienes somos?",
       "contact": "Contáctenos",

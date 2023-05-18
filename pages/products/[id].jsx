@@ -283,17 +283,6 @@ function Product() {
               {product?.marca?.nombre}
             </span>
           </p>
-          <div
-            className={`flex flex-wrap w-full ${
-              Number(product?.cant_inventario) > 0 ? "mb-4" : "mb-1"
-            } mt-4`}
-          >
-            {product?.grupos.map((item) => (
-              <div className="text-footer-background-300 w-1/4" key={item.pk}>
-                <RelatedCard item={item} />
-              </div>
-            ))}
-          </div>
           <div className="flex flex-col">
             {Number(product?.cant_inventario) > 0 ? (
               <div className="flex flex-row justify-between w-11/12 mb-4">
@@ -355,15 +344,19 @@ function Product() {
               </div>
             </div>
           </div>
+          <div
+            className={`flex flex-wrap w-full ${
+              Number(product?.cant_inventario) > 0 ? "mb-4" : "mb-1"
+            } mt-4`}
+          >
+            {product?.grupos.map((item) => (
+              <div className="text-footer-background-300 w-1/4" key={item.pk}>
+                <RelatedCard item={item} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-      <div className="w-full 2xl:w-[90%] xl:w-[80%] mb-20 mt-10">
-        <p className="font-bold text-center text-xl mb-2 md:mb-4">
-          {t("products.relatedProducts")}
-        </p>
-        <ProductsCarousel products={relatedProducts} />
-      </div>
-      {productIsLoading && <>Loading...</>}
       <div className="w-full 2xl:w-[60%] xl:w-[75%] flex flex-col items-center md:mt-4 mb-8">
         <Box sx={{ width: "95%", borderBottom: 1, borderColor: "divider" }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -391,6 +384,13 @@ function Product() {
           </AppTabPanel>
         </Box>
       </div>
+      <div className="w-full 2xl:w-[90%] xl:w-[80%] mb-20 mt-10">
+        <p className="font-bold text-center text-xl mb-2 md:mb-4">
+          {t("products.relatedProducts")}
+        </p>
+        <ProductsCarousel products={relatedProducts} />
+      </div>
+      {productIsLoading && <>Loading...</>}
     </div>
   )
 }
