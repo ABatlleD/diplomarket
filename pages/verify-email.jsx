@@ -35,7 +35,7 @@ const PaymentError = () => {
                         color="primary"
                         sx={{ mt: 2, }}
                         onClick={() => {
-                          Router.push('/account/signin');
+                          Router.push('/auth/signin');
                         }}
                     >
                         {t("pages.signin")}
