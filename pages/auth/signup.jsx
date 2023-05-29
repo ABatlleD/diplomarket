@@ -150,7 +150,7 @@ function SignUp() {
       }
       resources.auth.signup(data)
         .then((response) => {
-          router.push('/auth/signin')
+          router.push('/verify-email')
           setLoading(false)
           return toast.success('Usuario guardado satisfactoriamente.')
         })

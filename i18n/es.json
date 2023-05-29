@@ -461,6 +461,10 @@
     "title": "Pago completado",
     "description": "Se ha completado satisfactoriamente el pago solicitado."
   },
+  "verify_email": {
+    "title": "Verifique su correo",
+    "description": "Revise la bandeja de entrada de su correo, para verificar su cuenta; de no estar ahí, revise en spam, puede que su proveedor de correo lo haya enviado ahí. Puede tardarse alrededor de 1 minuto en llegar a bandeja."
+  },
   "view_orders": "Ver mis órdenes",
   "back": "Volver a inicio",
   "free_shipping": "Gratis",

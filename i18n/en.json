@@ -461,6 +461,10 @@
     "title": "Payment success",
     "description": "The requested payment has been successfully completed."
   },
+  "verify_email": {
+    "title": "Verify your email address",
+    "description": "Please review your email inbox to verify your account; if it is not there, check your spam folder, it may have been sent there by your email provider. It may take about 1 minute to arrive in the inbox."
+  },
   "view_orders": "See my orders",
   "back": "Go home",
   "free_shipping": "Free",

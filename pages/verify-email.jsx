@@ -4,7 +4,7 @@ import { Button } from "@mui/material"
 import Router from "next/router"
 import { useCart } from "../store/cart/cart.context"
 import { useTranslation } from "react-i18next"
-import ErrorPayImg from "../public/assets/user-message/105614.png"
+import VerifyEmailImg from "../public/assets/user-message/2165310.png"
 import dynamic from "next/dynamic"
 
 const MainLayout = dynamic(() => import("../layouts/MainLayout"))
@@ -18,16 +18,28 @@ const PaymentError = () => {
             <div className="container max-w-sm">
                 <div className="flex flex-wrap justify-center">
                     <div className="mb-3 text-center relative w-40 h-32">
-                        <Image src={ErrorPayImg} layout="fill" alt="logo" />
+                        <Image src={VerifyEmailImg} layout="fill" alt="logo" />
                     </div>
                     <div className="w-full text-center mb-4">
                         <h3 className="heading mt-2 mb-1 text-2xl font-bold">
-                            {t("pay_error.title")}
+                            {t("verify_email.title")}
                         </h3>
                     </div>
                     <div className="mt-1 mb-3 text-justify">
-                        <p>{t("pay_error.description")}</p>
+                        <p>{t("verify_email.description")}</p>
                     </div>
+                    <Button
+                        className="bg-dm-blue"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        sx={{ mt: 2, }}
+                        onClick={() => {
+                          Router.push('/account/signin');
+                        }}
+                    >
+                        {t("pages.signin")}
+                    </Button>
                     <Button
                         className="bg-button"
                         fullWidth
