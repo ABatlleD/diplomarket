@@ -17,7 +17,7 @@ const PaymentError = () => {
         <div className="flex justify-center py-10">
             <div className="container max-w-sm">
                 <div className="flex flex-wrap justify-center">
-                    <div className="mb-3 text-center relative w-40 h-32">
+                    <div className="mb-3 text-center relative w-28 h-28">
                         <Image src={VerifyEmailImg} layout="fill" alt="logo" />
                     </div>
                     <div className="w-full text-center mb-4">

@@ -55,7 +55,7 @@ function TopBar({
           {/* <!-- end delivery location --> */}
       
           {/* <!-- start search bar --> */}
-          <div className="hidden xl:flex flex-grow items-center rounded-md shadow-sm mx-2">
+          <div className="hidden xl:flex flex-grow items-center rounded-md mx-2">
             <SearchBar {...{ setOpenSelectPlace }} />
           </div>
           {/* <!-- end search bar --> */}

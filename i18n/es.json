@@ -455,7 +455,7 @@
   },
   "pay_error": {
     "title": "Error en el pago",
-    "description": "Algo salió mal, inténtelo más tarde. Si continúa el error, contacte con soporte."
+    "description": "El pago no ha sido completado. Puede revisar su orden y/o contactar con atención al cliente."
   },
   "pay_success": {
     "title": "Pago completado",
@@ -466,6 +466,7 @@
     "description": "Revise la bandeja de entrada de su correo, para verificar su cuenta; de no estar ahí, revise en spam, puede que su proveedor de correo lo haya enviado ahí. Puede tardarse alrededor de 1 minuto en llegar a bandeja."
   },
   "view_orders": "Ver mis órdenes",
+  "support": "Servicio al cliente",
   "back": "Volver a inicio",
   "free_shipping": "Gratis",
   "no-more-products": "No hay más productos para mostrar",

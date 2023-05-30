@@ -455,7 +455,7 @@
   },
   "pay_error": {
     "title": "Payment error",
-    "description": "Something went wrong, please try again later. If the error continues, contact support."
+    "description": "The payment has not been completed. You can review your order and/or contact customer service."
   },
   "pay_success": {
     "title": "Payment success",
@@ -466,6 +466,7 @@
     "description": "Please review your email inbox to verify your account; if it is not there, check your spam folder, it may have been sent there by your email provider. It may take about 1 minute to arrive in the inbox."
   },
   "view_orders": "See my orders",
+  "support": "Customer service",
   "back": "Go home",
   "free_shipping": "Free",
   "no-more-products": "Nothing more to show",
