@@ -201,7 +201,7 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
             <input
               type="tel"
               name="number"
-              className="py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-offset-white focus:ring-blue-600 transition-all dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+              className="py-2.5 px-4 block w-full border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-offset-white focus:ring-blue-600 transition-all dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
               placeholder={t('checkout.review.placeholder.card')}
               pattern="[\d| ]{16,22}"
               required
@@ -214,7 +214,7 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
               <input
                 type="tel"
                 name="expiry"
-                className="py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-offset-white focus:ring-blue-600 transition-all dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                className="py-2.5 px-4 block w-full border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-offset-white focus:ring-blue-600 transition-all dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
                 placeholder={t('checkout.review.placeholder.expiry')}
                 pattern="\d\d/\d\d"
                 required
@@ -226,7 +226,7 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
               <input
                 type="tel"
                 name="cvc"
-                className="py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-offset-white focus:ring-blue-600 transition-all dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                className="py-2.5 px-4 block w-full border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-offset-white focus:ring-blue-600 transition-all dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
                 placeholder={t('checkout.review.placeholder.cvc')}
                 pattern="\d{3,4}"
                 required
@@ -264,7 +264,7 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
                 <input
                   type="text"
                   name="estado"
-                  className="py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-offset-white focus:ring-blue-600 transition-all dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                  className="py-2.5 px-4 block w-full border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-offset-white focus:ring-blue-600 transition-all dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
                   placeholder={t('checkout.review.placeholder.state')}
                   required
                   onChange={handleInputChange}
@@ -278,7 +278,7 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
               <input
                 type="text"
                 name="locacion"
-                className="py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-offset-white focus:ring-blue-600 transition-all dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                className="py-2.5 px-4 block w-full border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-offset-white focus:ring-blue-600 transition-all dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
                 placeholder={t('checkout.review.placeholder.city')}
                 required
                 onChange={handleInputChange}
@@ -289,7 +289,7 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
               <input
                 type="text"
                 name="postal"
-                className="py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-offset-white focus:ring-blue-600 transition-all dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                className="py-2.5 px-4 block w-full border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-offset-white focus:ring-blue-600 transition-all dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
                 placeholder={t('checkout.review.placeholder.zip')}
                 required
                 onChange={handleInputChange}
@@ -301,7 +301,7 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
             <input
               type="text"
               name="direccion"
-              className="py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-offset-white focus:ring-blue-600 transition-all dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+              className="py-2.5 px-4 block w-full border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-offset-white focus:ring-blue-600 transition-all dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
               placeholder={t('checkout.review.placeholder.address')}
               required
               onChange={handleInputChange}
