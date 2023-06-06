@@ -197,7 +197,7 @@ function SignUp() {
         <div className="Fullname mb-4 w-11/12 md:w-1/3">
           <TextField
             required
-            id="outlined-required"
+            id="outlined-fullname-required"
             label={t('auth.signup.fullname')}
             error={fullnameError}
             onChange={(e) => {
@@ -217,7 +217,7 @@ function SignUp() {
         <div className="Email mb-4 w-11/12 md:w-1/3">
           <TextField
             required
-            id="outlined-required"
+            id="outlined-email-required"
             label={t('auth.signup.email')}
             type={'email'}
             error={emailError}
@@ -266,7 +266,7 @@ function SignUp() {
         <div className="ConfirmPassword mb-4 w-11/12 md:w-1/3">
           <TextField
             required
-            id="outlined-password-input"
+            id="outlined-password-confirm-input"
             label={t('auth.signup.confirm')}
             type={values.showConfirmPassword ? 'text' : 'password'}
             value={values.confirmPassword}
@@ -294,7 +294,7 @@ function SignUp() {
         <div className="Address mb-4 w-11/12 md:w-1/3">
           <TextField
             required
-            id="outlined-required"
+            id="outlined-address-required"
             label={t('auth.signup.address')}
             error={addressError}
             onChange={(e) => {
@@ -353,7 +353,7 @@ function SignUp() {
         <div className="State mb-4 w-11/12 md:w-1/3">
           <TextField
             required
-            id="outlined-required"
+            id="outlined-state-required"
             label={t('auth.signup.state')}
             error={stateError}
             onChange={(e) => {
@@ -373,7 +373,7 @@ function SignUp() {
         <div className="City mb-4 w-11/12 md:w-1/3">
           <TextField
             required
-            id="outlined-required"
+            id="outlined-city-required"
             label={t('auth.signup.city')}
             error={cityError}
             onChange={(e) => {
@@ -392,7 +392,7 @@ function SignUp() {
         </div>
         <div className="Zip Code mb-4 w-11/12 md:w-1/3">
           <TextField
-            id="outlined-required"
+            id="outlined-zip-required"
             label={t('auth.signup.zip')}
             type={'number'}
             onChange={(e) => {
