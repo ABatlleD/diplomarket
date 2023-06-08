@@ -26,7 +26,7 @@ const DirectPayment = ({ openDirectModal, setOpenDirectModal, modalData }) => {
       aria-describedby="transition-modal-description"
       open={openDirectModal}
       onClose={() => {
-        push('/').then()
+        push(`/payment-direct?notification=${encodeURIComponent(modalData?.ticket?.whatsapp_notification)}`).then()
         setOpenDirectModal(false)
       }}
       closeAfterTransition
@@ -88,7 +88,7 @@ const DirectPayment = ({ openDirectModal, setOpenDirectModal, modalData }) => {
               <Grid item xs={12} md={6}>
                 <div className='bg-button'>
                   <Button variant="contained" color="error" fullWidth type="submit" onClick={() => {
-                    push('/').then()
+                    push(`/payment-direct?notification=${encodeURIComponent(modalData?.ticket?.whatsapp_notification)}`).then()
                     setOpenDirectModal(false)
                   }}>{t('direct.close')}</Button>
                 </div>

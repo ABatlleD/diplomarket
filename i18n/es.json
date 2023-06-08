@@ -466,6 +466,10 @@
     "title": "Verifique su correo",
     "description": "Revise la bandeja de entrada de su correo, para verificar su cuenta; de no estar ahí, revise en spam, puede que su proveedor de correo lo haya enviado ahí. Puede tardarse alrededor de 1 minuto en llegar a bandeja."
   },
+  "pay_direct": {
+    "title": "Orden Creada Exitosamente",
+    "description": "Procesamos su orden, puede enviarla como notificación a nuestro What's App, siguiendo el botón de abajo, Notificar Orden. Puede revisar su orden."
+  },
   "view_orders": "Ver mis órdenes",
   "support": "Servicio al cliente",
   "back": "Volver a inicio",

@@ -466,6 +466,10 @@
     "title": "Verify your email address",
     "description": "Please review your email inbox to verify your account; if it is not there, check your spam folder, it may have been sent there by your email provider. It may take about 1 minute to arrive in the inbox."
   },
+  "pay_direct": {
+    "title": "Order Created Successfully",
+    "description": "We process your order, you can send it as a notification to our What's App number by following the button below, Notify Order. You can review your order."
+  },
   "view_orders": "See my orders",
   "support": "Customer service",
   "back": "Go home",
