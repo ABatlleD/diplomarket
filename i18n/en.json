@@ -445,6 +445,7 @@
     "copied": "Ticked copied",
     "message_first": "We have received your purchase request. We will contact you as soon as possible, in the same way you can contact us at",
     "message_second": ". Your ticket is unique and non-transferable, do not share it with anyone.",
+    "notification_order": "Notify Order",
     "close": "Close"
   },
   "zelle": {

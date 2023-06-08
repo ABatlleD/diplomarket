@@ -6,6 +6,7 @@ import { Modal, Fade } from '@mui/material'
 import Button from '@mui/material/Button'
 import ContentPasteIcon from '@mui/icons-material/ContentPaste'
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn'
+import WhatsAppBusinessIcon from '../icons/whats-app-business-icon'
 import { useTranslation } from 'react-i18next'
 
 import { useRouter } from 'next/router'
@@ -37,15 +38,15 @@ const DirectPayment = ({ openDirectModal, setOpenDirectModal, modalData }) => {
             {t('direct.title')}
           </h1>
           <div className="h-full">
-            <Grid container>
-              <div className='w-full flex justify-center mb-4'>
+            <Grid container spacing={2}>
+              <div className='w-full flex justify-center'>
                 <Grid item xs={10} md={6}>
                   <img className="mx-auto h-32" src="/assets/payment/directo/ticket.svg"></img>
                 </Grid>
               </div>
               <Grid item xs={12}>
                 <div className="text-center">
-                  <h1 className='mb-2'>{t('direct.ticket')}: </h1>
+                  <h1>{t('direct.ticket')}: </h1>
                   <div className="flex flex-grow justify-center">
                     <input className="border-blue-500 border-solid border w-32 rounded py-2 px-2" type="text" placeholder={modalData?.ticket?.code} value={modalData?.ticket?.code} disabled />
                     <button
@@ -69,11 +70,22 @@ const DirectPayment = ({ openDirectModal, setOpenDirectModal, modalData }) => {
                 <p className="mx-auto mb-2 mt-4 text-justify font-weight-bold">
                   Total: ${ parseFloat(modalData?.total).toFixed(2) } USD
                 </p>
-                <p className="mx-auto text-justify mb-4">
+                <p className="mx-auto text-justify">
                   {t('direct.message_first')} <span className="underline text-red-700">{directo_email}</span>{t('direct.message_second')}{/* <span className="underline text-red-700"><a href="mailto:ordenes@diplomarket.com">ordenes@diplomarket.com</a></span> */}
                 </p>
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} md={6}>
+                <a 
+                  className="py-[5px] px-3 w-full cursor-pointer inline-flex justify-center items-center gap-2 uppercase border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-dm-red transition-all text-sm"
+                  target="_blank"
+                  rel="noreferrer"
+                  href={modalData?.ticket?.whatsapp_notification}
+                >
+                  <WhatsAppBusinessIcon />
+                  {t('direct.notification_order')}
+                </a>
+              </Grid>
+              <Grid item xs={12} md={6}>
                 <div className='bg-button'>
                   <Button variant="contained" color="error" fullWidth type="submit" onClick={() => {
                     push('/').then()
