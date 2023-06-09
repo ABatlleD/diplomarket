@@ -91,7 +91,6 @@ function SearchBar({ setOpenSelectPlace }) {
                   type="text"
                   placeholder={t('layout.navbar.search.placeholder')}
                   className="py-2.5 px-4 pr-11 block w-full border border-gray-300 shadow-sm rounded-md text-sm md:text-base outline-none focus:z-10 focus:ring-1 focus:border-dm-red focus:ring-dm-red"
-                  autoFocus
                 />
                 <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none z-20 pr-4">
                   <svg className="h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">

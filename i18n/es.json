@@ -381,6 +381,7 @@
       "subtotal": "Subtotal productos",
       "delivery": "Precio de entrega",
       "paypal": "Importe PayPal",
+      "zelle": "Descuento Zelle",
       "total": "Total",
       "recipients": "Datos del remitente",
       "delivery_data": "Información de entrega",
@@ -445,7 +446,7 @@
     "copied": "Ticked copiado",
     "message_first": "Hemos recibido su solicitud de compra. Contactaremos con usted lo antes posible, de igual manera puede contactarnos a",
     "message_second": ". Su ticket es único e intransferible, no lo comparta con nadie.",
-    "notification_order": "Notificar Orden",
+    "notification_order": "Enviar Orden",
     "close": "Cerrar"
   },
   "zelle": {
@@ -468,7 +469,7 @@
   },
   "pay_direct": {
     "title": "Orden Creada Exitosamente",
-    "description": "Procesamos su orden, puede enviarla como notificación a nuestro What's App, siguiendo el botón de abajo, Notificar Orden. Puede revisar su orden."
+    "description": "Por favor, envíe la orden por WhatsApp para ser procesada."
   },
   "view_orders": "Ver mis órdenes",
   "support": "Servicio al cliente",

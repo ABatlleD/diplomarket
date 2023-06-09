@@ -56,7 +56,7 @@ function Checkout({ address }) {
   const [activeProvince, setActiveProvince] = useState({})
   const [activeDistrict, setActiveDistrict] = useState({})
   const [municipality] = useAtom(municipalityAtom)
-  const [getTypePay, setTypePay] = useState("paypal")
+  const [getTypePay, setTypePay] = useState(undefined)
   const [recipient, setRecipient] = useState(undefined)
   const [getAddressees, setAddressees] = useState(addressees)
   const [getCountries, setCountries] = useState(countries)
@@ -86,7 +86,9 @@ function Checkout({ address }) {
     if (sede) {
       activeAddressees = recipient
     }
-    if (!activeAddressees) toast.error("Seleccione el destinatario.")
+    if (activeStep === 1 && !getTypePay)
+      toast.error("Seleccione un método de pago.")
+    else if (!activeAddressees) toast.error("Seleccione el destinatario.")
     else if (
       !(
         !!activeAddressees.nombre_remitente &&

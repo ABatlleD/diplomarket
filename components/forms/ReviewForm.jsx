@@ -186,6 +186,13 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
     currencyCode: currency,
   })
 
+  const { price: totalPriceWithDeliveryForZelle } = usePrice({
+    amount: !free ? 
+      (Number(checkCart()?.total) * 0.95) + totalDelivery : 
+      Number(checkCart()?.total) * 0.95,
+    currencyCode: currency,
+  })
+
   const { price: totalPriceWithDeliveryAndTax } = usePrice({
     amount: deliveryAndTotal * 0.05 + 0.49,
     currencyCode: currency,
@@ -281,6 +288,22 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
             </Typography>
           </ListItem>
         )}
+        {getTypePay === "zelle" && (
+          <ListItem
+            sx={{
+              py: 1,
+              px: 0.5,
+              borderBottom: "2px solid #e4e7ea",
+              borderLeft: "2px solid #e4e7ea",
+              borderRight: "2px solid #e4e7ea",
+            }}
+          >
+            <ListItemText primary={t("checkout.review.zelle")} />
+            <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+              5%
+            </Typography>
+          </ListItem>
+        )}
         {getTypePay === "paypal" ? (
           <ListItem
             sx={{
@@ -302,6 +325,30 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
               {typeof totalDelivery === "undefined"
                 ? t("loadingMessage")
                 : totalPriceWithDeliveryForPaypal}{" "}
+              {currency}
+            </Typography>
+          </ListItem>
+        ) : getTypePay === "zelle" ? (
+          <ListItem
+            sx={{
+              py: 1,
+              px: 0.5,
+              borderBottom: "2px solid #e4e7ea",
+              borderLeft: "2px solid #e4e7ea",
+              borderRight: "2px solid #e4e7ea",
+            }}
+          >
+            <ListItemText
+              primary={
+                <Typography type="body2" style={{ fontWeight: "bold" }}>
+                  {t("checkout.review.total")}
+                </Typography>
+              }
+            />
+            <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+              {typeof totalDelivery === "undefined"
+                ? t("loadingMessage")
+                : totalPriceWithDeliveryForZelle}{" "}
               {currency}
             </Typography>
           </ListItem>
@@ -424,13 +471,7 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
                                   const ticket = payment?.data?.data ?? false
                                   const failed = payment?.data?.failed ?? false
                                   if (ticket) {
-                                    setModalData({
-                                      ticket,
-                                      total:
-                                        Number(checkCart()?.total) +
-                                        totalDelivery,
-                                    })
-                                    setOpenDirectModal(true)
+                                    push(`/payment-direct?notification=${encodeURIComponent(ticket?.whatsapp_notification)}`).then()
                                     resetCart()
                                   } else if (failed) {
                                     toast.error(

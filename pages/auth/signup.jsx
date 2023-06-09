@@ -113,7 +113,7 @@ function SignUp() {
       setLoading(true)
       if (!executeRecaptcha) {
         setLoading(false)
-        return toast.error('execute-recapcha')
+        return toast.error(t('signin.error_recaptcha_fail'))
       }
       checkFieldError()
       if (!(
@@ -126,7 +126,7 @@ function SignUp() {
         !!values.phone
       )) {
         setLoading(false)
-        return toast.error('register-fill-error')
+        return toast.error(t('signin.error_recaptcha_form'))
       }
       if (!values.email.replace(/\s+/g, '').match(emailRegex)) {
         setLoading(false)
