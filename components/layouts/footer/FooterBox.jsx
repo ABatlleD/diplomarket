@@ -95,7 +95,7 @@ function FooterBox({ cartSideBar, setCartSideBar }) {
               {t("footer.about.help")}
             </p>
           </Link>
-          <Link href="/community">
+          <Link href="/comunidad">
             <p className="transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500">
               {t("footer.about.community")}
             </p>
