@@ -7,7 +7,7 @@ import PersonIcon from '@mui/icons-material/Person'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
-import { useSession, signOut } from 'next-auth/react'
+import { useSession, signIn, signOut } from 'next-auth/react'
 import GroupIcon from '@mui/icons-material/Group'
 import ListAltIcon from '@mui/icons-material/ListAlt'
 import SettingsIcon from '@mui/icons-material/Settings'
@@ -26,6 +26,12 @@ function AccountMenu ({ totalFav }) {
   }
 
   const handleCloseAccountMenu = () => {
+    setAnchorElAccount(null)
+  }
+
+  const handleLogin = async (event) => {
+    event.preventDefault()
+    await signIn()
     setAnchorElAccount(null)
   }
 
@@ -71,11 +77,9 @@ function AccountMenu ({ totalFav }) {
           <div className="flex flex-col pt-2 px-3 md:px-6 col-span-2">
             {status === 'unauthenticated' && (
               <>
-                <Link href={'/auth/signin'}>
-                  <div className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md w-full border border-transparent font-semibold bg-dm-red text-white hover:bg-dm-red/90 focus:outline-none focus:ring-2 focus:ring-dm-red/70 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-                    {t('layout.navbar.account.signin')}
-                  </div>
-                </Link>
+                <div onClick={handleLogin} className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md w-full border border-transparent font-semibold bg-dm-red text-white hover:bg-dm-red/90 focus:outline-none focus:ring-2 focus:ring-dm-red/70 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                  {t('layout.navbar.account.signin')}
+                </div>
                 <p className="text-center mt-2 text-gray-600">
                   {t('layout.navbar.account.is_new_signup')}
                   <Link href={'/auth/signup'}>

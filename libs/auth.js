@@ -1,10 +1,13 @@
-import { prisma } from "@/lib/prisma";
-import { compare } from "bcryptjs";
-import CredentialsProvider from "next-auth/providers/credentials";
+import CredentialsProvider from 'next-auth/providers/credentials'
+import { isEmpty } from '../libs/serialize'
+import resources from '../restapi/resources'
+import axios from 'axios'
+
+const googleServerKey = process.env.SECRET_RECAPTCHA
 
 export const authOptions = {
   pages: {
-    signIn: "/login",
+    signIn: "/auth/signin",
   },
   session: {
     strategy: "jwt",
@@ -21,29 +24,29 @@ export const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials.password) {
-          return null;
+        try {
+          if (!credentials?.gReCaptchaToken)
+            throw new Error('error_recaptcha_fail')
+          const recaptchaVerify = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${googleServerKey}&response=${credentials?.gReCaptchaToken}`,
+            {}, {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+          })
+          const recaptchaVerifyData = await recaptchaVerify?.data
+          if (recaptchaVerifyData?.score && recaptchaVerifyData?.score < 0.5) {
+            throw new Error('error_recaptcha_fail')
+          }
+        } catch (err) {
+          throw new Error('error_recaptcha_form')
         }
-
-        const user = await prisma.user.findUnique({
-          where: {
-            email: credentials.email,
-          },
-        });
-
-        if (!user || !(await compare(credentials.password, user.password))) {
-          return null;
-        }
-
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          randomKey: "Hey cool",
-        };
+        const username = credentials.username.replace(/\s+/g, '').toLowerCase()
+        const password = credentials.password
+        return loginUser({ username, password })
       },
     }),
   ],
+  secret: "nqN7ozH0sUJej00ZXhqdAECD/4PTqwHhljVl6FOebqQ=",
   callbacks: {
     session: ({ session, token }) => {
       return {
@@ -51,7 +54,6 @@ export const authOptions = {
         user: {
           ...session.user,
           id: token.id,
-          randomKey: token.randomKey,
         },
       };
     },
@@ -61,10 +63,58 @@ export const authOptions = {
         return {
           ...token,
           id: u.id,
-          randomKey: u.randomKey,
+          ...u,
         };
       }
       return token;
     },
   },
 };
+
+const clientUser = async (username, password) => {
+  try {
+    const auth = await resources.auth.signin({
+      username,
+      password
+    })
+    const auth_response = auth.data
+    if (auth_response?.token) {
+      const users = await resources.users.all()
+      const { results } = users.data
+      const user = results.find((user) => user.email === username)
+      const { 
+        email, name, direccion, ciudad, 
+        codigo_postal, is_active, id, premium, 
+        fecha_inicio, fecha_fin, rss, mayorista 
+      } = user ?? {}
+      if (is_active) {
+        return (
+          {
+            email, name, direccion, is_active,
+            ciudad, codigo_postal, id, premium,
+            fecha_inicio, fecha_fin, rss, mayorista
+          } ?? {}
+        )
+      } else {
+        return { error: 'Confirme su correo' }
+      }
+    }
+  } catch (_) {
+    if (_?.response?.data?.detail === 'USR_NOT_EXISTS') { return { error: '404' } } else if (_?.response?.data?.detail === 'USR_NOT_ACTIVE') { return { error: '403' } } else { return undefined }
+  }
+}
+
+export const loginUser = async ({ username, password }) => {
+  if (!password) {
+    throw new Error('Accounts Have to login with password.')
+  }
+  const user = await clientUser(username, password)
+  if (user?.error === '404') {
+    throw new Error('404')
+  } else if (user?.error === '403') {
+    throw new Error('403')
+  } else if (user === undefined && isEmpty(user)) {
+    throw new Error('Login Incorrect.')
+  }
+  return user
+}

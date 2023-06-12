@@ -1,6 +1,7 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { getSession } from "next-auth/react"
+import { authOptions } from "../libs/auth";
+import { getServerSession } from "next-auth/next"
 import resources from "../restapi/resources.js"
 import {
   getCountries,
@@ -47,7 +48,8 @@ const CheckoutPage = ({ get_user_addresses }) => {
 export const getServerSideProps = async ({ req, res }) => {
   const users = await resources.users.all()
   const { results } = users.data
-  const session = await getSession({ req })
+  const session = await getServerSession(req, res, authOptions)
+
   if (session && session?.user) {
     const user = results.find((user) => user.email === session.user.email)
     if (user && user.id) {
