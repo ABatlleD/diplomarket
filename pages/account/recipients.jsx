@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { getServerSession } from 'next-auth/next'
-import { authOptions } from '../../../libs/auth'
+import { authOptions } from '../../libs/auth'
 import resources from '../../restapi/resources.js'
 import {
   getCountries,

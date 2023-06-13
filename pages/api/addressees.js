@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth/next'
-import { authOptions } from '../../../libs/auth'
+import { authOptions } from '../../libs/auth'
 
 import { isEmpty } from '../../libs/serialize'
 import resources from '../../restapi/resources'

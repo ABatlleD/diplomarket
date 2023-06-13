@@ -25,9 +25,9 @@ export const authOptions = {
       },
       async authorize(credentials) {
         try {
-          if (!credentials?.gReCaptchaToken)
+          if (!credentials?.recaptcha)
             throw new Error('error_recaptcha_fail')
-          const recaptchaVerify = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${googleServerKey}&response=${credentials?.gReCaptchaToken}`,
+          const recaptchaVerify = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${googleServerKey}&response=${credentials?.recaptcha}`,
             {}, {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'

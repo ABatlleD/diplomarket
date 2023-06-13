@@ -77,7 +77,7 @@ function AccountMenu ({ totalFav }) {
           <div className="flex flex-col pt-2 px-3 md:px-6 col-span-2">
             {status === 'unauthenticated' && (
               <>
-                <div onClick={handleLogin} className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md w-full border border-transparent font-semibold bg-dm-red text-white hover:bg-dm-red/90 focus:outline-none focus:ring-2 focus:ring-dm-red/70 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                <div onClick={handleLogin} className="py-3 px-4 inline-flex cursor-pointer justify-center items-center gap-2 rounded-md w-full border border-transparent font-semibold bg-dm-red text-white hover:bg-dm-red/90 focus:outline-none focus:ring-2 focus:ring-dm-red/70 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                   {t('layout.navbar.account.signin')}
                 </div>
                 <p className="text-center mt-2 text-gray-600">
