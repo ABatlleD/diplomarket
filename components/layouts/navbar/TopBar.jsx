@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Link from 'next/link'
 import DensityMediumIcon from '@mui/icons-material/DensityMedium'
 import { useFav } from '../../../store/fav/fav.context'
 import { useCart } from '../../../store/cart/cart.context'
