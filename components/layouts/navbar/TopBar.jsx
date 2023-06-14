@@ -39,7 +39,7 @@ function TopBar({
             </div>
             {/* <!-- start logo --> */}
             <div className="inline-flex">
-              <Link href="/">
+              <a href="/">
                 <img 
                   src="/logo-navbar.png" 
                   className="max-w-max h-14"  
@@ -47,7 +47,7 @@ function TopBar({
                   height={"52"} 
                   alt="Diplomark Logo" 
                 />
-              </Link>
+              </a>
             </div>
             {/* <!-- end logo --> */}
           </div>

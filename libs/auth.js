@@ -49,24 +49,17 @@ export const authOptions = {
   secret: "nqN7ozH0sUJej00ZXhqdAECD/4PTqwHhljVl6FOebqQ=",
   callbacks: {
     session: ({ session, token }) => {
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          id: token.id,
-        },
-      };
+      if (token) {
+        session.id = token.id
+      }
+      const { email, exp, iat, jti, name, ...rest } = token
+      return { ...session, ...rest }
     },
     jwt: ({ token, user }) => {
       if (user) {
-        const u = user;
-        return {
-          ...token,
-          id: u.id,
-          ...u,
-        };
+        token.id = user.id
       }
-      return token;
+      return { ...token, ...user }
     },
   },
 };
