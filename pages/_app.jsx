@@ -11,7 +11,7 @@ import "@fontsource/josefin-sans/400.css"
 import "@fontsource/josefin-sans/500.css"
 import "@fontsource/josefin-sans/700.css"
 import SwiperCore, { Autoplay } from "swiper"
-/* import { SessionProvider } from "next-auth/react" */
+import { SessionProvider } from "next-auth/react"
 import localFont from "@next/font/local"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import dynamic from "next/dynamic"
@@ -39,17 +39,17 @@ function MyApp({ Component, pageProps }) {
 
   return getLayout(
     <>
-      <NextNProgress color="#b12024" />
-      {/* <SessionProvider session={pageProps.session}> */}
-        <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+        <NextNProgress color="#b12024" />
+        <SessionProvider session={pageProps.session}>
           <QueryClientProvider client={queryClient}>
             <main className={arial.className}>
               <Component {...pageProps} />
             </main>
           </QueryClientProvider>
-          <WebChat />
-        </ThemeProvider>
-      {/* </SessionProvider> */}
+        </SessionProvider>
+        <WebChat />
+      </ThemeProvider>
     </>
   )
 }

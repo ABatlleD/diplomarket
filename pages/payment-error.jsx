@@ -44,7 +44,7 @@ const PaymentError = () => {
     }, [])
 
     return (
-        <div className="flex justify-center py-10 mx-5">
+        <div className="flex justify-center py-10">
             <div className="container max-w-sm">
                 <div className="flex flex-wrap justify-center">
                     <div className="mb-3 text-center relative w-28 h-28">

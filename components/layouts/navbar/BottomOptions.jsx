@@ -51,7 +51,7 @@ function BottomOptions({
 
   return (
     <>
-      <div className="dark:bg-background-100 md:bg-background-300 dark:md:bg-background-300 xl:bg-dm-blue flex flex-col md:flex-row md:justify-between py-2 md:p-3">
+      <div className="dark:bg-background-100 md:bg-background-300 dark:md:bg-background-300 flex flex-col md:flex-row md:justify-between py-2 md:p-3">
         <div className="flex flex-grow xl:hidden items-center rounded-md shadow-sm mx-2">
           <SearchBar {...{ setOpenSelectPlace }} />
         </div>
@@ -87,7 +87,7 @@ function BottomOptions({
             </div>
           </div>
         </div>
-        <div className="hidden xl:flex font-semibold justify-between items-center text-gray-50 hover:text-gray-200 w-full">
+        <div className="hidden xl:flex font-semibold justify-between items-center text-footer-background-100 hover:text-footer-background-300 w-full">
           <div className="text-lg leading-4">
             <ul className="flex gap-4 items-center">
               <li>

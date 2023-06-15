@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
-import { TextField, InputAdornment, IconButton } from '@mui/material'
+import React, { useRef, useState } from 'react'
+import { TextField, Button, InputAdornment, IconButton } from '@mui/material'
 import Link from 'next/link'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import { useTranslation } from 'react-i18next'
-import { ToastContainer } from 'react-toastify'
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty'
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 import dynamic from 'next/dynamic'
-import BtnSignIn from './BtnSignIn'
 
 const AppHeader = dynamic(() => import('../../components/layouts/AppHeader'))
 
@@ -16,6 +18,8 @@ const googleSiteKey = process.env.NEXT_PUBLIC_CLIENT_RECAPTCHA
 
 function SignIn() {
   const { t } = useTranslation()
+  const router = useRouter()
+  const buttonRef = useRef(null)
   const [loading, setLoading] = useState(false)
 
   const [values, setValues] = useState({
@@ -41,6 +45,37 @@ function SignIn() {
     event.preventDefault()
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (!loading) {
+      setLoading(true)
+      const res = await signIn('credentials', { redirect: false, username: values.username, password: values.password })
+        .then((res) => {
+          setLoading(false)
+          return res
+        })
+      if (res.error === '403') {
+        return toast.error(t('signin.no_active_error'))
+      } else if (res.error === '404') {
+        return toast.error(t('signin.no_exist_error'))
+      } else if (res.error === 'error_recaptcha_fail') {
+        return toast.error(t('signin.error_recaptcha_fail'))
+      } else if (res.error === 'error_recaptcha_form') {
+        return toast.error(t('signin.error_recaptcha_form'))
+      } else if (res.error) {
+        return toast.error(t('signin.login_error'))
+      }
+      toast.success(t('signin.login_success'))
+      setTimeout(() => {
+        router.push('/')
+      }, 500)
+    }
+  }
+  const handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      handleSubmit(e)
+    }
+  }
   return (
     <>
       <AppHeader title={t('pages.signin')} />
@@ -69,6 +104,7 @@ function SignIn() {
               }}
               value={values.username}
               onChange={handleChange('username')}
+              onKeyDown={handleKeyPress}
             />
           </div>
           <div className="Password mb-4 w-11/12 md:w-1/3 xl:w-1/4">
@@ -79,6 +115,7 @@ function SignIn() {
               type={values.showPassword ? 'text' : 'password'}
               value={values.password}
               onChange={handleChange('password')}
+              onKeyDown={handleKeyPress}
               autoComplete="current-password"
               InputProps={{
                 endAdornment: <InputAdornment position="end">
@@ -97,7 +134,22 @@ function SignIn() {
               }}
             />
           </div>
-          <BtnSignIn loading={loading} setLoading={setLoading} values={values} />
+          <div className={`Submit mb-4 w-11/12 md:w-1/3 xl:w-1/4 ${!loading && 'bg-footer-background-100 text-background-100'}`}>
+            <Button
+              ref={buttonRef}
+              disabled={loading}
+              variant="contained"
+              sx={{
+                width: '100%',
+                '&:hover': {
+                  backgroundColor: '#111b2c'
+                }
+              }}
+              onClick={handleSubmit}
+            >
+              <div className='flex flex-row'>{loading && <HourglassEmptyIcon fontSize='small' />} <div className='flex mt-[0.05rem]'>{t('auth.signin.submit')}</div></div>
+            </Button>
+          </div>
           <div className="Links flex flex-row justify-between w-11/12 md:w-1/3 xl:w-1/4">
             <Link href={'/'}>
               <p className='text-footer-background-100 font-bold underline hover:cursor-pointer hover:text-footer-background-200'>{t('auth.signin.back')}</p>

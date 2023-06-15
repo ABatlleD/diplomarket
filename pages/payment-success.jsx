@@ -9,12 +9,12 @@ import dynamic from "next/dynamic"
 
 const MainLayout = dynamic(() => import("../layouts/MainLayout"))
 
-const PaymentSuccess = () => {
+const PaymentError = () => {
     const { t } = useTranslation()
     const { resetCart } = useCart()
     resetCart()
     return (
-        <div className="flex justify-center py-10 mx-5">
+        <div className="flex justify-center py-10">
             <div className="container max-w-sm">
                 <div className="flex flex-wrap justify-center">
                     <div className="mb-3 text-center relative w-28 h-28">
@@ -58,8 +58,8 @@ const PaymentSuccess = () => {
     )
 }
 
-PaymentSuccess.getLayout = function getLayout(page) {
+PaymentError.getLayout = function getLayout(page) {
     return <MainLayout pageProps={page}>{page}</MainLayout>
 }
 
-export default PaymentSuccess
+export default PaymentError
