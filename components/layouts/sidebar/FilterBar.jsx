@@ -10,6 +10,7 @@ import {
 } from "@mui/material"
 import { useTranslation } from "react-i18next"
 import { CarouselProvider, Slider, Slide } from "pure-react-carousel"
+import Link from "next/link"
 import dynamic from "next/dynamic"
 import localFont from "@next/font/local"
 
@@ -249,15 +250,15 @@ function FilterBar({
                 <Slider>
                   {banners?.results?.map((result) => {
                     return (
-                      <a key={result.imagen} href={result.enlace}>
-                        <Slide index={result.imagen}>
+                      <Slide key={result.imagen} index={result.imagen}>
+                        <Link href={result.enlace}>
                           <img
                             src={`${process.env.NEXT_PUBLIC_BACKEND}${result.imagen}`}
                             className="w-full hover:cursor-pointer h-full"
                             alt="..."
                           />
-                        </Slide>
-                      </a>
+                        </Link>
+                      </Slide>
                     )
                   })}
                 </Slider>

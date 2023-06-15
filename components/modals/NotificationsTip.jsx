@@ -61,7 +61,7 @@ function NotificationsTip({
         <Fade in={openNotificationsTip}>
           <main className={arial.className}>
             <div className="flex z-50 flex-row space-x-2 rounded-xl shadow-2xl bg-background-100 w-11/12 md:4/5 xl:w-2/5 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
-              <div className="sm:flex flex-row hidden overflow-hidden items-center justify-center shadow-lg w-1/3">
+              <div className="md:flex flex-row hidden overflow-hidden items-center justify-center shadow-lg w-1/3">
                 <div className="Img mb-4">
                   <img
                     src="/favicon.png"

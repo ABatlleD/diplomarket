@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '../../libs/auth'
+import { getSession } from 'next-auth/react'
 // import { useRouter } from 'next/router'
 import resources from '../../restapi/resources.js'
 import { styled } from '@mui/material/styles'
@@ -162,7 +161,7 @@ const getProductGroup = async (id, req) => {
 export const getServerSideProps = async ({ req, res }) => {
   const users = await resources.users.all()
   const { results } = users.data
-  const session = await getServerSession(req, res, authOptions)
+  const session = await getSession({ req })
   if (session && session.user) {
     const userSession = results.find(user => user.email === session.user.email)
     if (userSession && userSession.id) {

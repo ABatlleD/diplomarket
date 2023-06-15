@@ -53,48 +53,42 @@ function Terms() {
           <h1 className="font-bold text-[2rem] text-footer-background-300 mb-4">
             {t("terms.sections.5.title")}
           </h1>
-          <p className="text-xl text-justify">{t("terms.sections.5.text.1")}</p>
-        </div>
-        <div className="flex flex-col mb-8 text-footer-background-300">
-          <h1 className="font-bold text-[2rem] text-footer-background-300 mb-4">
-            {t("terms.sections.6.title")}
-          </h1>
-          <p className="text-xl text-justify">{t("terms.sections.6.text")}</p>
+          <p className="text-xl text-justify">{t("terms.sections.5.text")}</p>
         </div>
         <div className="flex text-footer-background-300 flex-col mb-8">
           <h1 className="font-bold text-[2rem] text-footer-background-300 mb-4">
-            {t("terms.sections.7.title")}
+            {t("terms.sections.6.title")}
           </h1>
           <p className="text-xl text-justify mb-4">
-            {t("terms.sections.7.text.1")}{" "}
+            {t("terms.sections.6.text.1")}{" "}
             <span>
               {" "}
               <Link href="https://www.state.gov/cuba-restricted-list/list-of-restricted-entities-and-subentities-associated-with-cuba-effective-january-8-2021/">
                 <span className="font-bold underline italic hover:cursor-pointer">
-                  {t("terms.sections.7.text.2")}
+                  {t("terms.sections.6.text.2")}
                 </span>
               </Link>
             </span>
           </p>
           <p className="text-xl text-justify mb-4">
-            {t("terms.sections.7.text.3")}
+            {t("terms.sections.6.text.3")}
           </p>
           <p className="text-xl text-justify mb-4">
-            {t("terms.sections.7.text.4")}
+            {t("terms.sections.6.text.4")}
           </p>
         </div>
         <div className="flex text-footer-background-300 flex-col mb-8">
           <h1 className="font-bold text-[2rem] text-footer-background-300 mb-4">
-            {t("terms.sections.8.title")}
+            {t("terms.sections.7.title")}
           </h1>
           <p className="text-xl text-justify">
-            <span>{t("terms.sections.8.text.1")} </span>
+            <span>{t("terms.sections.7.text.1")} </span>
             <Link href="/">
               <span className="underline hover:cursor-pointer font-bold italic">
                 diplomarket.com
               </span>
             </Link>
-            <span> {t("terms.sections.8.text.2")}</span>
+            <span> {t("terms.sections.7.text.2")}</span>
           </p>
         </div>
       </div>

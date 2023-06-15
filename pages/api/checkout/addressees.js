@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from 'uuid'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '../../../libs/auth'
+import { getSession } from 'next-auth/react'
 import { DateTime } from 'luxon'
 import { isEmpty } from '../../../libs/serialize'
 import resources from '../../../restapi/resources'
@@ -10,7 +9,7 @@ const handler = async (req, res) => {
   try {
     if (req.method === 'POST') {
       const { amount, currency, products, addresses, details, type } = req.body
-      const session = await getServerSession(req, res, authOptions)
+      const session = await getSession({ req })
       if (!session?.user?.email) {
         return res.status(401).json({ statusCode: 401, message: 'Error en la solicitud.' })
       }
