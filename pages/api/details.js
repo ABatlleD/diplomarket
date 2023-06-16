@@ -1,12 +1,11 @@
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '../../libs/auth'
+import { getSession } from 'next-auth/react'
 import resources from '../../restapi/resources'
 
 const handler = async (req, res) => {
   try {
     if (req.method === 'POST') {
       const { account: [activeAccount] } = req.body
-      await getServerSession(req, res, authOptions).then(async (response) => {
+      await getSession({ req }).then(async (response) => {
         if (!response?.user?.email) {
           return res.status(401).json({ statusCode: 401, message: 'Error en la solicitud.' })
         }

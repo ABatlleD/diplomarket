@@ -1,5 +1,4 @@
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '../../libs/auth'
+import { getSession } from 'next-auth/react'
 
 import { isEmpty } from '../../libs/serialize'
 import resources from '../../restapi/resources'
@@ -10,7 +9,7 @@ const handler = async (req, res) => {
       const {
         addressee: [addressees, country, municipality, province]
       } = req.body
-      const session = await getServerSession(req, res, authOptions)
+      const session = await getSession({ req })
       if (!session?.user?.email) {
         return res
           .status(401)
