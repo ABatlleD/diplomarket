@@ -48,7 +48,6 @@ export const getServerSideProps = async ({ req, res }) => {
   const users = await resources.users.all()
   const { results } = users.data
   const session = await getSession({ req })
-
   if (session && session?.user) {
     const user = results.find((user) => user.email === session.user.email)
     if (user && user.id) {
