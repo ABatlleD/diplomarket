@@ -16,6 +16,7 @@ export const ENDPOINTS = {
   COUNTRIES: '/pais/',
   USERS: '/usuario/',
   JOBS: '/empleo/',
+  COMMUNITY: '/comunidad/',
   AUTH: '/autenticacion/',
   CATEGORIES: '/producto/arbol',
   CATEGORIES_TREE: '/categoria/arbol/',

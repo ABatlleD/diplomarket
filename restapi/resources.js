@@ -18,6 +18,10 @@ const resources = {
     all: async () => await getRequest(`${ENDPOINTS.JOBS}`),
   },
 
+  community: {
+    all: async () => await getRequest(`${ENDPOINTS.COMMUNITY}`),
+  },
+
   bofa: async (data) => await postRequest(ENDPOINTS.BOFA, data),
 
   carousel: {
