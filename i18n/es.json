@@ -207,10 +207,16 @@
         }
       },
       "5": {
+        "title": "DEVOLUCIONES",
+        "text": {
+          "1": "Los productos de tipo alimento y aseo son finales (no se aceptan devoluciones), debe verificar los productos en el momento de la entrega."
+        }
+      },
+      "6": {
         "title": "QUIEN PUEDE COMPRAR EN ESTA WEB*",
         "text": "- debido al interés de las partes que intervienen dentro de esta web, las limitadas cantidades de productos o servicios disponibles, la necesidad de tener licencias específicas en E.U.A., el tipo de moneda cobrar (USD) autorizadas por bancos extranjeros, esta web está limitada solo a los clientes específicos. Contacte para más información"
       },
-      "6": {
+      "7": {
         "title": "PROHIBICIONES / LIMITACIONES DE COMPRAR EN ESTA PÁGINA WEB",
         "text": {
           "1": "Además de aquellas entidades restringidas por las regulaciones del Departamento de Estado de los EUA, para saber más por favor",
@@ -219,7 +225,7 @@
           "4": "No obstante, debido a que existe regulaciones que aplican para casos específicos, sean para personas naturales o extranjeras, estatales o privadas, nuestras empresas están dispuestas a trabajar de conjunto y según regulaciones vigentes en E.U.A. al momento que usted lea nuestra web, por favor contáctenos"
         }
       },
-      "7": {
+      "8": {
         "title": "SOBRE LA WEB",
         "text": {
           "1": "Cualquier información brindada o proceso realizado fuera del ámbito...",
