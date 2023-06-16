@@ -1,3 +1,6 @@
+/* eslint-disable prefer-const */
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable eqeqeq */
 import React from "react";
 const Iframe = ({ url, allowFullScreen, position, display, height, width, overflow, styles, onLoad, onMouseOver, onMouseOut, scrolling, id, frameBorder, ariaHidden, sandbox, allow, className, title, ariaLabel, ariaLabelledby, name, target, loading, importance, referrerpolicy, allowpaymentrequest, src, key }) => {
     const defaultProps = Object.assign({
