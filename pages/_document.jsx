@@ -32,6 +32,7 @@ class MyDocument extends Document {
             name="keywords"
             content="Diplomarket,diplomarket,Diplomático,diplomático,embajada,Embajada,importar,franquicia,franquicia diplomática,import from USA,servicio a diplomáticos,sector diplomático,office supplies,appliances,purchases in USA,Embassy,embassies,import,franchise,without customs payments,diplomats purchase office supplies,appliances,purchases in USA,ventas sector diplomático,ventas a diplomáticos,Sales to diplomats,offers,promotions,ofertas,promociones"
           />
+          <meta name="format-detection" content="telephone=no, date=no, email=no, address=no" />
         </Head>
         <body>
           <Main />

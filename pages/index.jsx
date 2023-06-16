@@ -474,7 +474,7 @@ function Home() {
                 <Slider>
                   {banners?.results?.map((result) => {
                     return (
-                      <Link key={result.imagen} href={result.enlace}>
+                      <a key={result.imagen} href={result.enlace}>
                         <Slide index={result.imagen}>
                           <img
                             src={`${process.env.NEXT_PUBLIC_BACKEND}${result.imagen}`}
@@ -482,7 +482,7 @@ function Home() {
                             alt="..."
                           />
                         </Slide>
-                      </Link>
+                      </a>
                     )
                   })}
                 </Slider>
