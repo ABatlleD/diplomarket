@@ -17,8 +17,8 @@ function Community({ comunidades }) {
     <>
       <AppHeader title={t("pages.community")} />
       <main className={arial.className}>
-        <div className="flex flex-col mt-8 mb-8 xl:mb-24 mx-4 xl:mx-44 2xl:mb-96">
-          <h1 className="font-bold text-center text-lg md:text-2xl text-footer-background-300 mb-4">
+        <div className="flex flex-col gap-4 mt-8 mb-8 xl:mb-24 mx-4 xl:mx-44 2xl:mb-96">
+          <h1 className="font-bold text-center text-lg md:text-2xl text-footer-background-300">
             {t("community.title")}
           </h1>
           
@@ -27,13 +27,11 @@ function Community({ comunidades }) {
               <p className="md:text-lg text-justify text-footer-background-300">
                 {i18n.language === 'es' ? element?.descripcion : element?.descripcion_ingles}
               </p>
-              <div className="relative flex justify-center items-center mt-4">
+              <div className="relative flex justify-center items-center">
                 <Iframe
 			          	url={element?.link}
 			          	width="640px"
 			          	height="320px"
-			          	id=""
-			          	className=""
 			            sandbox={["allow-same-origin", "allow-scripts"]}
 			          	display="block"
 			          	position="relative"
