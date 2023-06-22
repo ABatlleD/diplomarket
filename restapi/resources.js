@@ -164,9 +164,9 @@ const resources = {
   },
 
   users: {
-    all: async () => await getRequest(`${ENDPOINTS.USERS}`),
+    all: async () => await getRequest(`${ENDPOINTS.USERS}?limit=10000&offset=0`),
     get: async (email) => {
-      const users = await getRequest(`${ENDPOINTS.USERS}`)
+      const users = await getRequest(`${ENDPOINTS.USERS}?limit=10000&offset=0`)
       const { results } = users.data
       return results.find((user) => user.email === email)
     },
