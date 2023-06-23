@@ -9,9 +9,7 @@ const handler = async (req, res) => {
         if (!response?.user?.email) {
           return res.status(401).json({ statusCode: 401, message: 'Error en la solicitud.' })
         }
-        const users = await resources.users.all()
-        const { results } = users.data
-        const user = results.find(user => user.email === response?.user?.email)
+        const user = await resources.users.get(response?.user?.email)
         if (!!activeAccount && activeAccount?.id === user?.id) {
           const {
             id,

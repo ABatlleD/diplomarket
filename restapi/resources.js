@@ -166,9 +166,8 @@ const resources = {
   users: {
     all: async () => await getRequest(`${ENDPOINTS.USERS}?limit=10000&offset=0`),
     get: async (email) => {
-      const users = await getRequest(`${ENDPOINTS.USERS}?limit=10000&offset=0`)
-      const { results } = users.data
-      return results.find((user) => user.email === email)
+      const user = await getRequest(`${ENDPOINTS.USER}${encodeURIComponent(email)}`)
+      return user.data
     },
     update: async (id, data) =>
       await patchRequest(`${ENDPOINTS.USERS}${id}/`, data),

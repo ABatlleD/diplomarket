@@ -37,20 +37,21 @@ function Details() {
   }
 
   useEffect(() => {
-    resources.users.get(session?.user?.email)
-      .then((res) => {
-        setId(res?.id)
-        setIsu(res?.is_superuser)
-        setEmail(res?.email)
-        setName(res?.name)
-        setAddress(res?.direccion)
-        setPhone(res?.telefono)
-        setCountry(res?.pais)
-        setState(res?.estado)
-        setCity(res?.ciudad)
-        setZip(res?.codigo_postal)
-        setRss(res?.rss)
-      })
+    if (session?.user?.email)
+      resources.users.get(session?.user?.email)
+        .then((res) => {
+          setId(res?.id)
+          setIsu(res?.is_superuser)
+          setEmail(res?.email)
+          setName(res?.name)
+          setAddress(res?.direccion)
+          setPhone(res?.telefono)
+          setCountry(res?.pais)
+          setState(res?.estado)
+          setCity(res?.ciudad)
+          setZip(res?.codigo_postal)
+          setRss(res?.rss)
+        })
   }, [session])
 
   const handleSubmit = async () => {

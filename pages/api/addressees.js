@@ -15,9 +15,7 @@ const handler = async (req, res) => {
           .status(401)
           .json({ statusCode: 401, message: 'Error en la solicitud.' })
       }
-      const users = await resources.users.all()
-      const { results } = users.data
-      const user = results.find((user) => user.email === session?.user?.email)
+      const user = await resources.users.get(session?.user?.email)
       if (addressees && country && municipality && province) {
         const { id, pais, email, provincia, municipio, activo, ...restAddressees } =
           addressees

@@ -9,9 +9,7 @@ const handler = async (req, res) => {
       if (!session?.user?.email) {
         return res.status(200).json({ statusCode: 401, message: 'Error en la solicitud.' })
       }
-      const users = await resources.users.all()
-      const { results } = users.data
-      const user = results.find(user => user.email === session?.user?.email)
+      const user = await resources.users.get(session?.user?.email)
       if (message) {
         await resources.contact({ mensaje: message, respondida: false, usuario: user?.id })
         return res.status(200).json({ statusCode: 200, status: 'ok', message: 'Comentario enviado.' })

@@ -38,11 +38,9 @@ function Recipients({ get_user_addresse }) {
 }
 
 export const getServerSideProps = async ({ req, res }) => {
-  const users = await resources.users.all()
-  const { results } = users.data
   const session = await getSession({ req })
   if (session && session?.user) {
-    const user = results.find((user) => user.email === session.user.email)
+    const user = await resources.users.get(session?.user?.email)
     if (user && user.id) {
       const addressee = await resources.recipients.all()
       const addressee_response = addressee.data.results

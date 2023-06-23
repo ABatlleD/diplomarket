@@ -14,9 +14,7 @@ const handler = async (req, res) => {
         return res.status(401).json({ statusCode: 401, message: 'Error en la solicitud.' })
       }
       let deliveryPay = null
-      const users = await resources.users.all()
-      const { results } = users.data
-      const user = results.find(user => user.email === session?.user?.email)
+      const user = await resources.users.get(session?.user?.email)
       if (amount && currency && products && addresses && details) {
         const free = !isEmpty(products) && products?.every((item) => {
           return item?.free_shipping === true

@@ -148,7 +148,7 @@ Orders.getLayout = function getLayout(page) {
 
 const getProductGroup = async (id, req) => {
   try {
-    const product_group = await resources.users.get(id)
+    const product_group = await resources.products.one(id)
     return {
       name: product_group?.data?.nombre ?? null,
       imagen: product_group?.data?.img_principal ?? null
@@ -159,11 +159,9 @@ const getProductGroup = async (id, req) => {
 }
 
 export const getServerSideProps = async ({ req, res }) => {
-  const users = await resources.users.all()
-  const { results } = users.data
   const session = await getSession({ req })
   if (session && session.user) {
-    const userSession = results.find(user => user.email === session.user.email)
+    const userSession = await resources.users.get(session?.user?.email)
     if (userSession && userSession.id) {
       const components = await resources.component.get()
       const components_response = components.data

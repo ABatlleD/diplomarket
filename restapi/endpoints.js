@@ -15,6 +15,7 @@ export const ENDPOINTS = {
   PROVINCES: '/provincia/',
   COUNTRIES: '/pais/',
   USERS: '/usuario/',
+  USER: '/usuario/email/',
   JOBS: '/empleo/',
   COMMUNITY: '/comunidad/',
   AUTH: '/autenticacion/',

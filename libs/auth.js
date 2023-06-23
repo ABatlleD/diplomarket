@@ -72,9 +72,7 @@ const clientUser = async (username, password) => {
     })
     const auth_response = auth.data
     if (auth_response?.token) {
-      const users = await resources.users.all()
-      const { results } = users.data
-      const user = results.find((user) => user.email === username)
+      const user = await resources.users.get(username)
       const { 
         email, name, direccion, ciudad, 
         codigo_postal, is_active, id, premium, 
