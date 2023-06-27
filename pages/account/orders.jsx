@@ -171,7 +171,7 @@ export const getServerSideProps = async ({ req, res }) => {
       const orders_components_filters = []
       for await (const items of orders_user) {
         const components_order = components_response.results?.filter(({ orden }) => orden === items?.uuid)
-        for await (const component of components_order) { if (component?.grupo) component.grupo_producto = await getProductGroup(component?.grupo, req) ?? null }
+        for await (const component of components_order) { if (component?.grupo) component.grupo_producto = await getProductGroup(component?.grupo?.uuid, req) ?? null }
         const orders_components = {
           id: items?.uuid,
           fecha_creada: items?.fecha_creada,

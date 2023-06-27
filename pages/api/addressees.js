@@ -1,4 +1,5 @@
-import { getSession } from 'next-auth/react'
+import { authOptions } from '../../libs/auth'
+import { getServerSession } from "next-auth/next"
 
 import { isEmpty } from '../../libs/serialize'
 import resources from '../../restapi/resources'
@@ -9,7 +10,7 @@ const handler = async (req, res) => {
       const {
         addressee: [addressees, country, municipality, province]
       } = req.body
-      const session = await getSession({ req })
+      const session = await getServerSession(req, res, authOptions)
       if (!session?.user?.email) {
         return res
           .status(401)
@@ -78,6 +79,7 @@ const handler = async (req, res) => {
       .status(401)
       .json({ statusCode: 401, message: 'Error en la solicitud.' })
   } catch (_) {
+    console.log(_)
     return res
       .status(200)
       .json({ statusCode: 500, message: 'Contacte al administrator' })

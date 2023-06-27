@@ -46,7 +46,7 @@ export const authOptions = {
       },
     }),
   ],
-  secret: "nqN7ozH0sUJej00ZXhqdAECD/4PTqwHhljVl6FOebqQ=",
+  // secret: "GGJ1q3ZhAKc0D+n75f8+Xc5J3aC407clNZOcmrGscVUiaa4w1xmZ1ZAHSg1UBh85UBZ7azRc4/UrwMdrIB9PXA==",
   callbacks: {
     session: ({ session, token }) => {
       if (token) {
