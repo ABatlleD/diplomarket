@@ -27,7 +27,6 @@ const handler = async (req, res) => {
           try {
             await resources.users.update(user?.id, accounts)
           } catch (err) {
-            console.log(err)
             return res.status(500).json({ statusCode: 500, message: 'Contacte al administrator' })
           }
           return res.status(200).json({ statusCode: 200, message: 'Datos guardados' })
@@ -37,7 +36,6 @@ const handler = async (req, res) => {
       })
     }
   } catch (err) {
-    console.log(err)
     res.status(500).json({ statusCode: 500, message: 'Contacte al administrator' })
   }
 }
