@@ -10,6 +10,7 @@ const DEFAULT_CONFIG = {
   social_media: [],
   zelle_email: '',
   zelle_time: null,
+  descuento_zelle: 0,
   directo_email: '',
   moneda: false
 }
@@ -169,13 +170,15 @@ export function useContact() {
           ...DEFAULT_CONFIG.social_media
         ],
         correo_zelle: DEFAULT_CONFIG.zelle_email,
-        tiempo_espera_zelle: DEFAULT_CONFIG.zelle_time
+        tiempo_espera_zelle: DEFAULT_CONFIG.zelle_time,
+        descuento_zelle: DEFAULT_CONFIG.descuento_zelle
       }]
     })
   )
   const contactos = data?.results
   const zelle_email = data?.results[0]?.correo_zelle ?? DEFAULT_CONFIG.zelle_email
   const zelle_time = data?.results[0]?.tiempo_espera_zelle ?? DEFAULT_CONFIG.zelle_time
+  const descuento_zelle = data?.results[0]?.descuento_zelle ?? DEFAULT_CONFIG.descuento_zelle
   const emails = !isEmpty(contactos)
     ? !isEmpty(contactos?.filter(
       (data) =>
@@ -263,7 +266,8 @@ export function useContact() {
       address,
       zelle: {
         zelle_email,
-        zelle_time
+        zelle_time,
+        descuento_zelle
       }
     },
     isLoading,

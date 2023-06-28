@@ -25,7 +25,11 @@ const ZellePayment = ({ openZelleModal, setOpenZelleModal, modalData }) => {
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={openZelleModal}
-        onClose={() => setOpenZelleModal(false)}
+        onClose={() => {
+          if (!modalData?.no_redirect)
+            push('/').then()
+          setOpenZelleModal(false)
+        }}
         closeAfterTransition
         sx={{ overflowY: 'scroll' }}
       >
@@ -58,7 +62,7 @@ const ZellePayment = ({ openZelleModal, setOpenZelleModal, modalData }) => {
                       {!clip ? <ContentPasteIcon /> : <AssignmentTurnedInIcon />}
                     </button>
                   </div>
-                  <p className={`mt-1 text-footer-background-100 ${!clip ? 'd-none' : 'd-block'}`}>
+                  <p className={`mt-1 text-footer-background-100 ${!clip ? 'hidden' : 'block'}`}>
                     {t('direct.copied')}
                   </p>
                 </div>
@@ -74,7 +78,8 @@ const ZellePayment = ({ openZelleModal, setOpenZelleModal, modalData }) => {
               <Grid item xs={12}>
                 <div className='bg-button'>
                   <Button variant="contained" color="error" fullWidth type="submit" onClick={() => {
-                    push('/').then()
+                    if (!modalData?.no_redirect)
+                      push('/').then()
                     setOpenZelleModal(false)
                   }}>{t('direct.close')}</Button>
                 </div>

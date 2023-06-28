@@ -7,6 +7,7 @@ const DEFAULT_CONFIG = {
   social_media: [],
   zelle_email: '',
   zelle_time: null,
+  descuento_zelle: 0,
   directo_email: '',
   moneda: false
 }
@@ -20,6 +21,7 @@ export function useConfig() {
   const [banco, setBanco] = useState(false)
   const [zelle_email, setZelleEmail] = useState(DEFAULT_CONFIG.zelle_email)
   const [zelle_time, setZelleTime] = useState(DEFAULT_CONFIG.zelle_time)
+  const [descuento_zelle, setDescuentoZelle] = useState(DEFAULT_CONFIG.descuento_zelle)
   const [directo_email, setDirectoEmail] = useState(DEFAULT_CONFIG.directo_email)
   const [moneda, setMoneda] = useState(DEFAULT_CONFIG.moneda)
 
@@ -29,7 +31,6 @@ export function useConfig() {
         setConfiguration(res?.data?.results[0])
       })
   }, [])
-
   useEffect(() => {
     if (configuration) {
       setPaypal(configuration?.pasarelas[0]?.pasarela_paypal ?? false)
@@ -39,6 +40,7 @@ export function useConfig() {
       setBanco(configuration?.pasarelas[0]?.pasarela_bofa ?? false)
       setZelleEmail(configuration?.correo_zelle ?? DEFAULT_CONFIG.zelle_email)
       setZelleTime(configuration?.tiempo_espera_zelle ?? DEFAULT_CONFIG.zelle_time)
+      setDescuentoZelle(configuration?.descuento_zelle ?? DEFAULT_CONFIG.descuento_zelle)
       setDirectoEmail(configuration?.correo_pago_directo ?? DEFAULT_CONFIG.directo_email)
       setMoneda(configuration?.moneda ?? DEFAULT_CONFIG.moneda)
     }
@@ -54,7 +56,8 @@ export function useConfig() {
     },
     zelle: {
       zelle_email,
-      zelle_time
+      zelle_time,
+      descuento_zelle
     },
     directo_email,
     moneda

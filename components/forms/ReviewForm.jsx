@@ -33,7 +33,7 @@ const ZellePayment = dynamic(() => import("../modals/ZellePayment"))
 const errorsAtom = atom(false)
 
 function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
-  const { pasarelas } = useConfig()
+  const { pasarelas, zelle: { descuento_zelle } } = useConfig()
   const [openZelleModal, setOpenZelleModal] = useState(false)
   const [openDirectModal, setOpenDirectModal] = useState(false)
   const [modalData, setModalData] = useState({})
@@ -188,8 +188,8 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
 
   const { price: totalPriceWithDeliveryForZelle } = usePrice({
     amount: !free ? 
-      (Number(checkCart()?.total) * 0.95) + totalDelivery : 
-      Number(checkCart()?.total) * 0.95,
+      Number(parseFloat((Number(checkCart()?.total) * (1 - descuento_zelle / 100)) + totalDelivery).toFixed(2)) : 
+      Number(parseFloat((Number(checkCart()?.total) * (1 - descuento_zelle / 100))).toFixed(2)),
     currencyCode: currency,
   })
 
@@ -300,7 +300,7 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
           >
             <ListItemText primary={t("checkout.review.zelle")} />
             <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-              5%
+              {descuento_zelle}%
             </Typography>
           </ListItem>
         )}
@@ -550,7 +550,7 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
                                     setModalData({
                                       ticket,
                                       total:
-                                        Number(checkCart()?.total) +
+                                        (Number(checkCart()?.total) * (1 - descuento_zelle / 100)) +
                                         totalDelivery,
                                     })
                                     setOpenZelleModal(true)

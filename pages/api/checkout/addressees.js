@@ -109,7 +109,9 @@ const handler = async (req, res) => {
           // eslint-disable-next-line no-unused-vars
           const timeZone = 'Europe/Madrid'
           const fecha_creada = DateTime.now().toFormat('yyyy-MM-dd HH:mm:ss')
-          const discount = 0.95;
+          const config = await resources.configuration.get()
+          const descuento_zelle = config?.data?.results[0].descuento_zelle ?? 0
+          const discount = (1 - descuento_zelle / 100)
           const total = parseFloat((amount * discount) + (!free ? deliveryPay : 0)).toFixed(2)
           const user_id = user?.id
           const destinatario = addresses.id

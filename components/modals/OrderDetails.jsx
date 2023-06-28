@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Modal, Fade } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic'
 import localFont from '@next/font/local'
 
 const OrderProductItem = dynamic(() => import('../orders/OrderProductItem'))
+const ZellePayment = dynamic(() => import("../modals/ZellePayment"))
 
 const arial = localFont({ src: '../../public/assets/font/arial/Arial.ttf' })
 
@@ -14,8 +15,11 @@ function OrderDetails({
   setOpenOrderDetails = () => {},
   item,
 }) {
+  const [modalData, setModalData] = useState({})
+  const [openZelleModal, setOpenZelleModal] = useState(false)
   return (
     <>
+      <ZellePayment {...{ openZelleModal, setOpenZelleModal, modalData }} />
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -56,6 +60,26 @@ function OrderDetails({
                 <span className="font-bold">Total: </span>US$
                 {parseFloat(item.total).toFixed(2)}
               </p>
+              <div className="w-full rounded-lg text-xl font-bold">
+                <button
+                  className="rounded-lg"
+                >
+                  <img
+                    src="/assets/payment/zelle/boton-zelle.png"
+                    className="bg-white"
+                    onClick={() => {
+                      setModalData({
+                        ticket: {
+                          code: item.id,
+                        },
+                        total: item.total,
+                        no_redirect: true,
+                      })
+                      setOpenZelleModal(true) 
+                    }}
+                  />
+                </button>
+              </div>
               <div className="mt-2">
                 <p className="text-text-100 font-semibold mb-2">
                   Datos del destinatario:

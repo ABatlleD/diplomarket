@@ -61,7 +61,7 @@ const DirectPayment = ({ openDirectModal, setOpenDirectModal, modalData }) => {
                       {!clip ? <ContentPasteIcon /> : <AssignmentTurnedInIcon />}
                     </button>
                   </div>
-                  <p className={`mt-1 text-footer-background-100 ${!clip ? 'd-none' : 'd-block'}`}>
+                  <p className={`mt-1 text-footer-background-100 ${!clip ? 'hidden' : 'block'}`}>
                     {t('direct.copied')}
                   </p>
                 </div>
