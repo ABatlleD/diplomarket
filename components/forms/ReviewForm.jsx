@@ -288,7 +288,7 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
             </Typography>
           </ListItem>
         )}
-        {getTypePay === "zelle" && (
+        {getTypePay === "zelle" && !!descuento_zelle ? (
           <ListItem
             sx={{
               py: 1,
@@ -303,7 +303,7 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
               {descuento_zelle}%
             </Typography>
           </ListItem>
-        )}
+        ) : (<></>)}
         {getTypePay === "paypal" ? (
           <ListItem
             sx={{
