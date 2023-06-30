@@ -33,7 +33,7 @@ const DirectPayment = ({ openDirectModal, setOpenDirectModal, modalData }) => {
       sx={{ overflowY: 'scroll' }}
     >
       <Fade in={openDirectModal}>
-        <div className="min-h-screen bg-white p-5 sm:p-8 md:min-h-0 md:rounded-xl w-full md:w-auto md:max-w-xl absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+        <div className="flex z-50 flex-col shadow-2xl bg-background-100 md:rounded-xl w-full md:w-auto md:max-w-xl my-4 md:my-10 mx-auto p-4">
           <h1 className="mb-4 md:mb-6 text-center text-lg font-bold">
             {t('direct.title')}
           </h1>

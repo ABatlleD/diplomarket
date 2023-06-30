@@ -29,7 +29,7 @@ function OrderDetails({
         sx={{ overflowY: 'scroll' }}
       >
         <Fade in={openOrderDetails}>
-          <div className="flex z-50 flex-col shadow-2xl bg-background-100 w-11/12 md:4/5 xl:w-1/3 mt-4 md:mt-10 mx-auto p-4">
+          <div className="flex z-50 flex-col shadow-2xl bg-background-100 w-11/12 md:4/5 xl:w-1/3 my-4 md:my-10 mx-auto p-4">
             <div className={arial.className}>
               <div className="flex flex-row justify-between mb-6">
                 <div className="font-bold text-lg">Orden: {item.id}</div>
