@@ -456,6 +456,9 @@
     "close": "Cerrar"
   },
   "zelle": {
+    "from_pay": "Pagar a:",
+    "from_name": "Nombre:",
+    "message": "Usted debe pagar vía Zelle el TOTAL correspondiente, poniendo el ticket de compra en el apartado 'MEMO'. Puede suceder que de no realizarse el pago en el menor tiempo posible, los productos se agoten, si aún desea pagar la orden pasado un tiempo, es recomendable contactarnos. No compartir el ticket con nadie.",
     "message_first": "Usted debe enviar el 'Total' reflejado en este mensaje a la dirección de correo electrónico",
     "message_second": "minutos para realizar el pago o su orden será cancelada. Pasado ese tiempo, si desea aún pagar la factura debe contactar al correo",
     "message_three": "o a nuestro servicio de chat en línea. Su ticket es único e intransferible, no lo comparta con nadie.",

@@ -14,6 +14,7 @@ import 'react-toastify/dist/ReactToastify.min.css'
 import { useConfig } from '../../restapi/config'
 
 const ZellePayment = ({ openZelleModal, setOpenZelleModal, modalData }) => {
+  // eslint-disable-next-line no-unused-vars
   const { zelle: { zelle_email, zelle_time } } = useConfig()
   const [clip, setClip] = useState(false)
   const { push } = useRouter()
@@ -68,11 +69,25 @@ const ZellePayment = ({ openZelleModal, setOpenZelleModal, modalData }) => {
                 </div>
               </Grid>
               <Grid item xs={12}>
-                <p className="mx-auto mb-2 mt-4 text-justify font-weight-bold">
-                  Total: ${ parseFloat(modalData?.total).toFixed(2) } USD
+                <p className="mx-auto mb-2 mt-4 text-justify font-bold">
+                  TOTAL: ${ parseFloat(modalData?.total).toFixed(2) } USD
+                </p>
+                <p className="mx-auto text-justify font-bold mb-2">
+                  {t('zelle.from_pay')} <span className="underline text-red-700 font-normal cursor-pointer" onClick={() => {
+                        if (navigator) {
+                          navigator.clipboard.writeText(zelle_email)
+                        }
+                      }}>{zelle_email}</span>
+                </p>
+                <p className="mx-auto text-justify font-bold mb-4">
+                  {t('zelle.from_name')} <span className="underline text-red-700 font-normal cursor-pointer" onClick={() => {
+                        if (navigator) {
+                          navigator.clipboard.writeText("Cuspinera Surl, LLc")
+                        }
+                      }}>Cuspinera Surl, LLc</span>
                 </p>
                 <p className="mx-auto text-justify mb-4">
-                  {t('zelle.message_first')} <span className="underline text-red-700">{zelle_email}</span> <span className="font-weight-bold">{t('zelle.exclusively')} {zelle_time}</span> {t('zelle.message_second')} <span className="underline text-red-700"><a href="mailto:ordenes@diplomarket.com">ordenes@diplomarket.com</a></span> {t('zelle.message_three')}
+                  {t('zelle.message')}
                 </p>
               </Grid>
               <Grid item xs={12}>

@@ -456,6 +456,9 @@
     "close": "Close"
   },
   "zelle": {
+    "from_pay": "Pay to:",
+    "from_name": "Name:",
+    "message": "You must pay via Zelle the corresponding TOTAL amount, putting the purchase receipt in the 'MEMO' section. It may happen that if the payment is not made in the shortest possible time, the products are sold out, if you still want to pay the order after some time, it is advisable to contact us. Do not share the ticket with anyone.",
     "message_first": "You must send the 'Total' reflected in this message to the email address",
     "message_second": "minutes to make the payment or your order will be cancelled. After that time, if you still want to pay the invoice, you must contact the email",
     "message_three": "or our online chat service. Your ticket is unique and non-transferable, do not share it with anyone.",
