@@ -263,18 +263,6 @@ function Product() {
               {product?.subcategoria}
             </span>
           </p>
-          <p className="mb-2">
-            <span className="font-semibold text-footer-background-300">
-              {t("products.provider")}:
-            </span>{" "}
-            <Link
-              href={{ pathname: "/", query: { id: product?.proveedor?.pk } }}
-            >
-              <span className="font-semibold text-text-100 underline hover:text-text-blue">
-                {product?.proveedor?.nombre}
-              </span>
-            </Link>
-          </p>
           <p className="mb-1">
             <span className="font-semibold text-footer-background-300">
               {t("products.brand")}:
