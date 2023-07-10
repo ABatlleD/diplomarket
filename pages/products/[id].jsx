@@ -11,7 +11,6 @@ import { generateCartItem } from "../../store/cart/generate-cart-item"
 import AccessTimeIcon from "@mui/icons-material/AccessTime"
 import { useSession } from "next-auth/react"
 import dynamic from "next/dynamic"
-import Link from "next/link"
 import { useOneProduct } from "../../restapi/query"
 
 const MainLayout = dynamic(() => import("../../layouts/MainLayout"))
