@@ -74,6 +74,7 @@ const resources = {
         category,
         subcategory,
         brand,
+        // eslint-disable-next-line no-unused-vars
         provider,
         extra,
         ordering,
@@ -86,7 +87,7 @@ const resources = {
       if (category) filter += `&categoria=${category}`
       if (subcategory) filter += `&subcategoria=${subcategory}`
       if (brand.id > 0) filter += `&marca=${brand.id}`
-      if (provider.id > 0) filter += `&proveedor=${provider.id}`
+      /* if (provider.id > 0) filter += `&proveedor=${provider.id}` */
       if (extra) filter += `&extra=${extra}`
       if (ordering) filter += `&ordering=${ordering}`
 

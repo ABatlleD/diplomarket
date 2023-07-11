@@ -107,9 +107,9 @@ function FavItem({ id }) {
               </Link>
             )}
           </div>
-          <div className="mx-2 my-0 md:my-0 text-button text-sm md:text-base">
+          {/* <div className="mx-2 my-0 md:my-0 text-button text-sm md:text-base">
             {product.proveedor?.nombre}
-          </div>
+          </div> */}
           {data && data.mayorista ? (
             <>
               <div className="mx-2 my-0 md:mb-0 md:my-0 text-button font-bold text-sm md:text-base">

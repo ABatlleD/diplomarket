@@ -30,7 +30,7 @@ function FilterBar({
   setSelectedCategory = () => false,
 }) {
   const [categories, setCategories] = useState([])
-  const [suppliers, setSuppliers] = useState([])
+  /* const [suppliers, setSuppliers] = useState([]) */
   const [banners, setBanners] = useState([])
   const [brands, setBrands] = useState([])
   const [prices, setPrices] = useState([0, 1000])
@@ -55,7 +55,7 @@ function FilterBar({
       })
       return setBrands(answer)
     })
-    resources.suppliers.all().then((response) => {
+    /* resources.suppliers.all().then((response) => {
       const answer = []
       response.data.results.map((item) => {
         const el = {
@@ -65,7 +65,7 @@ function FilterBar({
         return answer.push(el)
       })
       return setSuppliers(answer)
-    })
+    }) */
     resources.banner.all().then((response) => setBanners(response.data))
     resources.categories
       .all()
@@ -112,7 +112,16 @@ function FilterBar({
   }
 
   const handleFilter = async () => {
-    await resources.suppliers
+    const filter = {
+      brand,
+      provider,
+      min: prices[0],
+      max: prices[1],
+      extra,
+    }
+    handleMobileFilter(filter)
+    setFilterBar((filterBar) => !filterBar)
+    /* await resources.suppliers
       .one(provider.id)
       .then((response) => {
         const filter = {
@@ -136,7 +145,7 @@ function FilterBar({
         }
         handleMobileFilter(filter)
         setFilterBar((filterBar) => !filterBar)
-      })
+      }) */
   }
 
   const handleAllClick = () => {
@@ -345,7 +354,7 @@ function FilterBar({
                 size="small"
               />
             </div>
-            <div className="flex flex-col mb-4 w-[95%]">
+            {/* <div className="flex flex-col mb-4 w-[95%]">
               <Autocomplete
                 disablePortal
                 id="combo-box-demo"
@@ -361,7 +370,7 @@ function FilterBar({
                 )}
                 size="small"
               />
-            </div>
+            </div> */}
             <div className="flex flex-row justify-between">
               <div
                 className="my-2 underline hover:cursor-pointer"

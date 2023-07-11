@@ -10,7 +10,7 @@ const CategoriesAccordion = dynamic(() => import('../components/categories/Categ
 
 function FilterLayout({ children, props }) {
   const { categories } = useTreeCategories()
-  const [suppliers, setSuppliers] = useState()
+  /* const [suppliers, setSuppliers] = useState() */
   const [brands, setBrands] = useState()
   const [tags, setTags] = useState()
   const menuItems = serialize(categories?.data)
@@ -19,8 +19,8 @@ function FilterLayout({ children, props }) {
   useEffect(() => {
     resources.brands.all()
       .then(response => setBrands(response.data))
-    resources.suppliers.all()
-      .then(response => setSuppliers(response.data))
+    /* resources.suppliers.all()
+      .then(response => setSuppliers(response.data)) */
     resources.tags.all()
       .then(response => setTags(response.data))
   }, [])
@@ -70,14 +70,14 @@ function FilterLayout({ children, props }) {
             ))}
           </div>
         </div>
-        <div className='flex flex-col w-[95%]'>
+        {/* <div className='flex flex-col w-[95%]'>
           <p className='font-bold my-2'>Providers</p>
           <div className='flex flex-wrap'>
             {suppliers?.results?.map((item) => (
               <FormControlLabel key={item.id} control={<Checkbox />} label={item.nombre} />
             ))}
           </div>
-        </div>
+        </div> */}
         <div className='flex flex-col w-[95%]'>
           <p className='font-bold my-2'>Tags</p>
           <div className='flex flex-wrap w-full'>

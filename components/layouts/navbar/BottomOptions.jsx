@@ -115,7 +115,7 @@ function BottomOptions({
                   {t('layout.navbar.contact')}
                 </Link>
               </li>
-              <li className="hover:underline">
+              {/* <li className="hover:underline">
                 <Link href="/providers">
                   {t('layout.navbar.providers')}
                 </Link>
@@ -124,7 +124,7 @@ function BottomOptions({
                 <Link href="/empleos">
                   {t('layout.navbar.jobs')}
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="text-xl leading-4">

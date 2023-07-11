@@ -14,10 +14,12 @@ import {
 import { useTranslation } from "react-i18next"
 import useWindowSize from "../hooks/WindowSize"
 import { useSession } from "next-auth/react"
-import Link from "next/link"
+/* import Link from "next/link" */
 import { useAllCarousel, useFilterProducts } from "../restapi/query"
 import { useRouter } from "next/router"
+// eslint-disable-next-line no-unused-vars
 import Image from "next/image"
+// eslint-disable-next-line no-unused-vars
 import storeAltImg from "../public/assets/store.png"
 import useScrollY from "../hooks/Scroll"
 import dynamic from "next/dynamic"
@@ -27,9 +29,9 @@ import { useAtom } from "jotai"
 import { municipalityAtom } from "../store/place"
 const CircularProgress = dynamic(() => import("@mui/material/CircularProgress"))
 const MainCarousel = dynamic(() => import("../components/home/MainCarousel"))
-const StoreMallDirectoryIcon = dynamic(() =>
+/* const StoreMallDirectoryIcon = dynamic(() =>
   import("@mui/icons-material/StoreMallDirectory")
-)
+) */
 const RemoveShoppingCartIcon = dynamic(() =>
   import("@mui/icons-material/RemoveShoppingCart")
 )
@@ -85,12 +87,14 @@ function Home() {
   const [pages, setPages] = useState(1)
   const [page, setPage] = useState(1)
   const [categories, setCategories] = useState([])
+  // eslint-disable-next-line no-unused-vars
   const [suppliers, setSuppliers] = useState([])
   const [brands, setBrands] = useState([])
   const [promotions, setPromotions] = useState(false)
   const [recommendations, setRecommendations] = useState(false)
   const [exist, setExist] = useState(false)
   const [providerDisplay, setProviderDisplay] = useState(undefined)
+  // eslint-disable-next-line no-unused-vars
   const [storeImg, setStoreImg] = useState("")
   const [loading, setLoading] = useState(false)
 
@@ -374,11 +378,11 @@ function Home() {
               <div className="font-bold mt-2">{t("filter.categories")}</div>
             )}
             <div className="flex flex-row items-center">
-              <div className="mr-3 mt-2" onClick={() => setListView(!listView)}>
+              {/* <div className="mr-3 mt-2" onClick={() => setListView(!listView)}>
                 <Link href={"/providers"}>
                   <StoreMallDirectoryIcon />
                 </Link>
-              </div>
+              </div> */}
               <div className="mr-3 mt-2" onClick={() => setListView(!listView)}>
                 {listView && (
                   <Img
@@ -560,7 +564,7 @@ function Home() {
                 size="small"
               />
             </div>
-            <div className="flex flex-col mb-4 w-[95%]">
+            {/* <div className="flex flex-col mb-4 w-[95%]">
               <Autocomplete
                 disablePortal
                 id="combo-box-demo"
@@ -582,7 +586,7 @@ function Home() {
                 )}
                 size="small"
               />
-            </div>
+            </div> */}
           </div>
           <div className="flex flex-row w-full md:w-5/6">
             <div className="flex flex-col items-center w-full">
@@ -649,7 +653,7 @@ function Home() {
                   </FormControl>
                 </div>
               </div>
-              {providerDisplay && (
+              {/* {providerDisplay && (
                 <div className="flex flex-row items-center h-24 w-[98%] bg-background-200 mb-1 md:mb-3 rounded-lg">
                   <div className="flex ml-4 relative items-center justify-center h-20 w-20 rounded-full">
                     <Image
@@ -668,7 +672,7 @@ function Home() {
                     </p>
                   </div>
                 </div>
-              )}
+              )} */}
               {size.width <= 768 && loading && (
                 <div className="flex flex-row w-full justify-center my-6 text-text-blue">
                   <CircularProgress />

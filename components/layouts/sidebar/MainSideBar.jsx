@@ -116,7 +116,7 @@ function MainSideBar({
               </p>
             </Link>
           </div>
-          <div
+          {/* <div
             onClick={() => setMainSideBar((mainSideBar) => false)}
             className="mt-4 text-footer-background-200 hover:text-footer-background-100 font-semibold text-lg"
           >
@@ -128,7 +128,7 @@ function MainSideBar({
                 </span>
               </p>
             </Link>
-          </div>
+          </div> */}
           <div
             onClick={() => setMainSideBar((mainSideBar) => false)}
             className="mt-4 text-footer-background-200 hover:text-footer-background-100 font-semibold text-lg"
