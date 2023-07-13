@@ -59,7 +59,7 @@ function CartSideBar ({ cartSideBar = false, setCartSideBar = () => {} }) {
             </div>
           )}
           <Link href={'/checkout/'}>
-            <div className="flex flex-row justify-between p-2 hover:cursor-pointer rounded-full bg-button my-7" onClick={() => setCartSideBar(false)}>
+            <div className="flex flex-row justify-between p-2 hover:cursor-pointer rounded-full bg-button mt-4" onClick={() => setCartSideBar(false)}>
               <h1 className='text-background-100 text-2xl ml-6 mt-1'>{t('cart.pay')}</h1>
               <div className='bg-background-100 py-2 px-4 rounded-full text-lg font-semibold text-button'>
                 {totalPrice} {currency}

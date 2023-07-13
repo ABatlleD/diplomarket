@@ -13,6 +13,7 @@ const DEFAULT_CONFIG = {
 }
 
 export function useConfig() {
+  const [loading, setLoading] = useState(true)
   const [configuration, setConfiguration] = useState(undefined)
   const [paypal, setPaypal] = useState(false)
   const [tropipay, setTropipay] = useState(false)
@@ -43,6 +44,7 @@ export function useConfig() {
       setDescuentoZelle(configuration?.descuento_zelle ?? DEFAULT_CONFIG.descuento_zelle)
       setDirectoEmail(configuration?.correo_pago_directo ?? DEFAULT_CONFIG.directo_email)
       setMoneda(configuration?.moneda ?? DEFAULT_CONFIG.moneda)
+      setLoading(false)
     }
   }, [configuration])
 
@@ -60,6 +62,7 @@ export function useConfig() {
       descuento_zelle
     },
     directo_email,
-    moneda
+    moneda,
+    loading
   }
 }

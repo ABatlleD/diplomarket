@@ -380,7 +380,8 @@
     "back": "Back",
     "payment_method": {
       "title": "Payment method",
-      "paypal_tax": "Extra fees may apply"
+      "paypal_tax": "Extra fees may apply",
+      "empty": "Sorry, payment methods are under maintenance."
     },
     "review": {
       "title": "Order summary",

@@ -14,7 +14,6 @@ import {
 import { useTranslation } from "react-i18next"
 import useWindowSize from "../hooks/WindowSize"
 import { useSession } from "next-auth/react"
-/* import Link from "next/link" */
 import { useAllCarousel, useFilterProducts } from "../restapi/query"
 import { useRouter } from "next/router"
 // eslint-disable-next-line no-unused-vars
@@ -27,7 +26,7 @@ import InfiniteScroll from "react-infinite-scroll-component"
 import { CarouselProvider, Slider, Slide } from "pure-react-carousel"
 import { useAtom } from "jotai"
 import { municipalityAtom } from "../store/place"
-const CircularProgress = dynamic(() => import("@mui/material/CircularProgress"))
+import PreLoader from "../components/PreLoader"
 const MainCarousel = dynamic(() => import("../components/home/MainCarousel"))
 /* const StoreMallDirectoryIcon = dynamic(() =>
   import("@mui/icons-material/StoreMallDirectory")
@@ -675,7 +674,7 @@ function Home() {
               )} */}
               {size.width <= 768 && loading && (
                 <div className="flex flex-row w-full justify-center my-6 text-text-blue">
-                  <CircularProgress />
+                  <PreLoader />
                 </div>
               )}
               {size.width <= 768 && municipality && !loading && (
@@ -687,7 +686,7 @@ function Home() {
                   }
                   loader={
                     <div className="flex flex-row w-full justify-center my-6 text-text-blue">
-                      <CircularProgress />
+                      <PreLoader />
                     </div>
                   }
                   endMessage={

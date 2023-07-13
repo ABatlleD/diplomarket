@@ -380,7 +380,8 @@
     "back": "Atrás",
     "payment_method": {
       "title": "Método de pago",
-      "paypal_tax": "Se aplicarán cargos extras."
+      "paypal_tax": "Se aplicarán cargos extras.",
+      "empty": "Lo sentimos, los métodos de pago están en mantenimiento."
     },
     "review": {
       "title": "Resumen de la orden",
