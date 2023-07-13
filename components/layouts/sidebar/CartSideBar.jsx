@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Drawer from '@mui/material/Drawer'
 import { Divider } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
@@ -21,6 +21,13 @@ function CartSideBar ({ cartSideBar = false, setCartSideBar = () => {} }) {
     amount: total,
     currencyCode: currency
   })
+
+  useEffect(() => {
+    if (cartSideBar)
+      document.body.classList.add('cart-open')
+    else
+      document.body.classList.remove('cart-open')
+  }, [cartSideBar]);
 
   return (
     <React.Fragment>

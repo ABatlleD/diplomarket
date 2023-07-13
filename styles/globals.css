@@ -110,3 +110,7 @@ a:hover {
   .MuiOutlinedInput-root {
   padding-right: 9px !important;
 }
+
+.cart-open > #onweb_chatimage_div, .cart-open > #onwbchat_window {
+  display: none !important;
+}
