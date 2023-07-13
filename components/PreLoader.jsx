@@ -7,9 +7,9 @@ function PreLoader() {
     <>
       <div id="pulseloader">
         <span style={{display: "inherit", textAlign: "center"}}>
-          <span className="bg-dm-red w-3.5 h-3.5 m-0.5 rounded-full inline-block animate-pulseloader-1"></span>
-          <span className="bg-dm-red w-3.5 h-3.5 m-0.5 rounded-full inline-block animate-pulseloader-2"></span>
-          <span className="bg-dm-red w-3.5 h-3.5 m-0.5 rounded-full inline-block animate-pulseloader-3"></span>
+          <span className="bg-dm-red w-3.5 h-3.5 m-0.5 rounded-full inline-block animate-pulseloader-default"></span>
+          <span className="bg-dm-red w-3.5 h-3.5 m-0.5 rounded-full inline-block animate-pulseloader-delay"></span>
+          <span className="bg-dm-red w-3.5 h-3.5 m-0.5 rounded-full inline-block animate-pulseloader-default"></span>
           <p className="text-dm-blue">{t("loadingMessage")}...</p>
         </span>
       </div>

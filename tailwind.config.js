@@ -7,6 +7,16 @@ module.exports = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        pulseloaderloop: {
+          "50%": { transform: "scale(0.75)", opacity: "0.2", },
+          "100%": { transform: "scale(1)", opacity: "1", },
+        },
+      },
+      animation: {
+        "pulseloader-default": "1.07692s linear 0s infinite normal both running pulseloaderloop",
+        "pulseloader-delay": "1.07692s linear 0.538462s infinite normal both running pulseloaderloop",
+      },
       backgroundImage: {
         swus: "url('/public/assets/theme/logo-preloader.png')"
       },
