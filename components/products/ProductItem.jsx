@@ -82,7 +82,7 @@ function ProductItem({ product }) {
               alt="Diplomarket product"
               placeholder="blur"
               blurDataURL="/loading.gif"
-              className="hover:cursor-pointer rounded-t-lg"
+              className="hover:cursor-pointer rounded-t-lg object-contain h-full"
             />
           </Link>
           <div className="absolute right-0 top-[4.5rem] md:top-0">
