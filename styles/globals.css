@@ -114,3 +114,16 @@ a:hover {
 .cart-open > #onweb_chatimage_div, .cart-open > #onwbchat_window {
   display: none !important;
 }
+
+.ck-content a {
+  @apply font-semibold text-blue-600 decoration-2
+}
+.ck-content a:hover {
+  @apply font-semibold underline text-blue-700 decoration-2
+}
+:is(.dark .ck-content a:hover) {
+  @apply font-semibold underline text-blue-400 decoration-2
+}
+:is(.dark .ck-content a) {
+  @apply font-semibold text-blue-500 decoration-2
+}

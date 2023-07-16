@@ -168,15 +168,9 @@ function SignUp() {
     }
   }
 
-  const privacy = (
-    <Link href={'/privacy'}>
-      <span className='text-footer-background-200 underline hover:cursor-pointer font-bold'>{t('auth.signup.privacy')}</span>
-    </Link>
-  )
-
-  const terms = (
-    <Link href={'/terms'}>
-      <span className='text-footer-background-200 underline hover:cursor-pointer font-bold'>{t('auth.signup.terms')}</span>
+  const termsprivacy = (
+    <Link href={'/terminos-privacidad'}>
+      <span className='text-footer-background-200 underline hover:cursor-pointer font-bold'>{t('terms-privacy.title')}</span>
     </Link>
   )
 
@@ -418,7 +412,7 @@ function SignUp() {
             }}
           />
           <p className='text-justify text-footer-background-100 font-semibold ml-2 mt-[0.75rem]'>
-            {t('auth.signup.agree')} {terms} {t('auth.signup.and')} {privacy}.
+            {t('auth.signup.agree')} {termsprivacy}.
           </p>
         </div>
         <div className={`"Submit mb-4 w-11/12 md:w-1/3 ${(!loading && values.terms) && 'bg-footer-background-100 text-background-100'}`}>

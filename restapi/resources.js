@@ -22,6 +22,10 @@ const resources = {
     all: async () => await getRequest(`${ENDPOINTS.COMMUNITY}`),
   },
 
+  termsprivacy: {
+    all: async () => await getRequest(`${ENDPOINTS.TERMSPRIVACY}`),
+  },
+
   bofa: async (data) => await postRequest(ENDPOINTS.BOFA, data),
 
   carousel: {

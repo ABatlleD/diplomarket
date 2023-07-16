@@ -75,14 +75,9 @@ function FooterBox({ cartSideBar, setCartSideBar }) {
               {t("footer.about.aboutUs")}
             </p>
           </Link>
-          <Link href="/privacy">
+          <Link href="/terminos-privacidad">
             <p className="mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500">
-              {t("footer.about.privacyPolicy")}
-            </p>
-          </Link>
-          <Link href="/terms">
-            <p className="mb-1 transition ease-in-out delay-150 hover:text-button hover:translate-x-2 hover:cursor-pointer duration-500">
-              {t("footer.about.terms")}
+              {t('terms-privacy.title')}
             </p>
           </Link>
           <Link href="/contact">

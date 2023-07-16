@@ -18,6 +18,7 @@ export const ENDPOINTS = {
   USER: '/usuario/email/',
   JOBS: '/empleo/',
   COMMUNITY: '/comunidad/',
+  TERMSPRIVACY: '/terminosprivacidad/',
   AUTH: '/autenticacion/',
   CATEGORIES: '/producto/arbol',
   CATEGORIES_TREE: '/categoria/arbol/',

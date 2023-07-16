@@ -160,19 +160,9 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
     amount: total,
   })
 
-  const privacy = (
-    <Link href={"/privacy"}>
-      <span className="text-footer-background-200 underline hover:cursor-pointer font-bold">
-        {t("auth.signup.privacy")}
-      </span>
-    </Link>
-  )
-
-  const terms = (
-    <Link href={"/terms"}>
-      <span className="text-footer-background-200 underline hover:cursor-pointer font-bold">
-        {t("auth.signup.terms")}
-      </span>
+  const termsprivacy = (
+    <Link href={'/terminos-privacidad'}>
+      <span className='text-footer-background-200 underline hover:cursor-pointer font-bold'>{t('terms-privacy.title')}</span>
     </Link>
   )
 
@@ -401,7 +391,7 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
           <div className="ZipCode flex flex-row mx-2">
             <Checkbox onChange={() => setCheck(!check)} />
             <p className="text-justify text-footer-background-300 font-semibold mt-[0.6rem]">
-              {t("auth.signup.agree")} {terms} {t("auth.signup.and")} {privacy}.
+              {t("auth.signup.agree")} {termsprivacy}.
             </p>
           </div>
         )}

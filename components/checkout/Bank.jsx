@@ -173,15 +173,9 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
   }
   const { name, number, expiry, cvc, pais, focused, issuer } = data
 
-  const privacy = (
-    <Link href={'/privacy'}>
-      <span className='text-footer-background-200 underline hover:cursor-pointer font-bold'>{t('auth.signup.privacy')}</span>
-    </Link>
-  )
-
-  const terms = (
-    <Link href={'/terms'}>
-      <span className='text-footer-background-200 underline hover:cursor-pointer font-bold'>{t('auth.signup.terms')}</span>
+  const termsprivacy = (
+    <Link href={'/terminos-privacidad'}>
+      <span className='text-footer-background-200 underline hover:cursor-pointer font-bold'>{t('terms-privacy.title')}</span>
     </Link>
   )
 
@@ -312,11 +306,11 @@ const Bank = ({ user, updateCart, checkCart, resetCart, addressee, delivery }) =
           <div className="ZipCode flex flex-row mt-2">
             <Checkbox onChange={() => setCheck(!check)} />
             <p className='text-justify text-sm text-footer-background-300 font-semibold mt-[0.75rem]'>
-              {t('auth.signup.agree')} {terms} {t('auth.signup.and')} {privacy}.
+              {t('auth.signup.agree')} {termsprivacy}.
             </p>
           </div>
           <div className="my-2">
-            <button disabled={!check} className={`p-2 rounded-xl bg-dm-red text-white w-full bg-button uppercase ${!check ? 'opacity-30 hover:cursor-not-allowed' : ''}`}>{t('checkout.review.placeholder.pay')}</button>
+            <button disabled={!check} className={`p-2 rounded-xl bg-dm-red text-white w-full uppercase ${!check ? 'opacity-30 hover:cursor-not-allowed' : ''}`}>{t('checkout.review.placeholder.pay')}</button>
           </div>
         </form>
       </div>
