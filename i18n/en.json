@@ -367,7 +367,13 @@
         "submit": "Add"
       }
     },
-    "orders": {},
+    "orders": {
+      "ready_link": "Link ready",
+      "error_link": "Link Not Found",
+      "error_request": "Error in the request",
+      "error_contact": "Contact the administrator",
+      "recipient_data": "Recipient's data"
+    },
     "settings": {
       "premium_title": "Update to Premium",
       "premium_subtitle": "This feature it's not currently available.",

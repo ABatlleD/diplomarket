@@ -367,7 +367,13 @@
         "submit": "Añadir"
       }
     },
-    "orders": {},
+    "orders": {
+      "ready_link": "Enlace listo",
+      "error_link": "Enlace No Encontrado",
+      "error_request": "Error en la solicitud",
+      "error_contact": "Contacte al administrador",
+      "recipient_data": "Datos del destinatario"
+    },
     "settings": {
       "premium_title": "Actualizar a Premium",
       "premium_subtitle": "Esta funcionalidad no está disponible por el momento",

@@ -4,6 +4,10 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import dynamic from 'next/dynamic'
 import localFont from '@next/font/local'
+import { useTranslation } from "react-i18next"
+import axios from 'axios'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 const OrderProductItem = dynamic(() => import('../orders/OrderProductItem'))
 const ZellePayment = dynamic(() => import("../modals/ZellePayment"))
@@ -15,8 +19,15 @@ function OrderDetails({
   setOpenOrderDetails = () => {},
   item,
 }) {
+  const { t } = useTranslation()
   const [modalData, setModalData] = useState({})
   const [openZelleModal, setOpenZelleModal] = useState(false)
+  const toast_message = {
+    ready_link: t('profile.orders.ready_link'),
+    error_link: t('profile.orders.error_link'),
+    error_request: t('profile.orders.error_request'),
+    error_contact: t('profile.orders.error_contact'),
+  }
   return (
     <>
       <ZellePayment {...{ openZelleModal, setOpenZelleModal, modalData }} />
@@ -30,6 +41,7 @@ function OrderDetails({
       >
         <Fade in={openOrderDetails}>
           <div className="flex z-50 flex-col shadow-2xl bg-background-100 w-11/12 md:4/5 xl:w-1/3 my-4 md:my-10 mx-auto p-4">
+            <ToastContainer />
             <div className={arial.className}>
               <div className="flex flex-row justify-between mb-6">
                 <div className="font-bold text-lg">Orden: {item.id}</div>
@@ -81,12 +93,35 @@ function OrderDetails({
                     />
                   </button>
                 </div>
-              ) : (
-                <></>
-              )}
+              ) : item.tipo === "tropipay" && item.status !== "COMPLETED" ? (
+                <div className="w-full rounded-lg text-xl font-bold">
+                  <button
+                    className="rounded-lg"
+                  >
+                    <img
+                      src="/assets/payment/tropipay/boton-tropipay.png"
+                      className="bg-white"
+                      onClick={() => {
+                        axios.post('/api/checkout/tpp', {order_id: item?.id}).then((payment) => {
+                          const payment_data = payment?.data;
+                          const url = payment_data?.enlace ?? '';
+                          if (payment_data?.error) {
+                            toast.error(toast_message[payment_data?.message]);
+                          } else if (window && !!url) {
+                            toast.info(toast_message[payment?.data?.message]);
+                            window.open(url, '_blank', 'noopener');
+                          } else {
+                            toast.error(toast_message.error_contact);
+                          }
+                        })
+                      }}
+                    />
+                  </button>
+                </div>
+              ) : (<></>)}
               <div className="mt-2">
                 <p className="text-text-100 font-semibold mb-2">
-                  Datos del destinatario:
+                  {t('profile.orders.recipient_data')}:
                 </p>
                 <div className="border p-2 bg-[#f2f2f2]">
                   <p style={{ whiteSpace: 'pre-wrap' }}>{item.destinatario}</p>
