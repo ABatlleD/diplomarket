@@ -26,7 +26,7 @@ class MyDocument extends Document {
         <Head>
           <meta
             name="description"
-            content="Diplomarket™ is an online store developed by CUSPINERA SURL, in order to satisfy your purchases and deliveries, both for you and dearest. We are pleased to bring you the BEST! .... ALWAYS!!!"
+            content="Diplomarket™ is an online store developed, in order to satisfy your purchases and deliveries, both for you and dearest. We are pleased to bring you the BEST! .... ALWAYS!!!"
           />
           <meta
             name="keywords"
