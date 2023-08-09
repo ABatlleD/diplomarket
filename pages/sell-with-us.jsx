@@ -1,8 +1,6 @@
 import React, { useRef, useState, useEffect } from "react"
 import { useRouter } from "next/router"
-import axios from "axios"
 import { useTranslation } from "react-i18next"
-import { ToastContainer, toast } from "react-toastify"
 import "react-phone-input-2/lib/bootstrap.css"
 import modalBg from "../public/assets/theme/logo-preloader.png"
 import dynamic from "next/dynamic"
@@ -12,11 +10,6 @@ const AppHeader = dynamic(() => import("../components/layouts/AppHeader"))
 
 function SellWithUs() {
 
-  const [resena, setResena] = useState("")
-
-  const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
-
-  const { push } = useRouter()
 
 
   const { t } = useTranslation()
