@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from "react"
-import { useRouter } from "next/router"
 import { useTranslation } from "react-i18next"
 import "react-phone-input-2/lib/bootstrap.css"
 import modalBg from "../public/assets/theme/logo-preloader.png"
@@ -34,7 +33,7 @@ function SellWithUs() {
   return (
     <>
       <AppHeader title={t("pages.swus")} />
-      <ToastContainer />
+     
       <div className="max-w-screen-xl text-footer-background-300 my-8 relative px-6 md:px-12 lg:px-16 xl:px-20 lg:py-16 md:py-8 py-6 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg">
         <div>
           <div
