@@ -119,12 +119,12 @@ function SellWithUs() {
             </div>
 			
             <form className="Hidden" onSubmit={handleSubmit}>
-              <label className="col-span-full xl:col-span-1 lg:col-span-1">
-                <span className="font-bold font-soft text-slate-600">
+              <label className="Hidden">
+                <span className="Hidden">
                   {t("sell_with_us.forms.name")}:
                 </span>
                 <input
-                  className="w-full bg-gray-300 text-gray-900 border mt-2 p-3 rounded-lg ring-offset-1 ring-offset-dm-blue ring-dm-blue focus:outline-none select-none focus:ring-1"
+                  className="Hidden"
                   type="text"
                   onChange={(e) => {
                     setNombreEntidad(e.target.value)
@@ -132,12 +132,12 @@ function SellWithUs() {
                   required
                 />
               </label>
-              <label className="col-span-full xl:col-span-1 lg:col-span-1">
-                <span className="font-bold font-soft text-slate-600">
+              <label className="Hidden">
+                <span className="Hidden">
                   {t("sell_with_us.forms.name_agent")}:
                 </span>
                 <input
-                  className="w-full bg-gray-300 border text-gray-900 mt-2 p-3 rounded-lg ring-offset-1 ring-offset-dm-blue ring-dm-blue focus:outline-none select-none focus:ring-1"
+                  className="Hidden"
                   type="text"
                   onChange={(e) => {
                     setNombreRepresentanteEntidad(e.target.value)
@@ -145,8 +145,8 @@ function SellWithUs() {
                   required
                 />
               </label>
-              <label className="col-span-full">
-                <span className="font-bold font-soft text-slate-600">
+              <label className="Hidden">
+                <span className="Hidden">
                   {t("sell_with_us.forms.address")}:
                 </span>
                 <div className="relative">
@@ -155,7 +155,7 @@ function SellWithUs() {
                     onChange={(e) => {
                       setDirecion(e.target.value)
                     }}
-                    className="w-full h-16 bg-gray-300 text-gray-900 mt-2 p-3 border rounded-lg ring-offset-1 ring-offset-dm-blue ring-dm-blue focus:outline-none select-none focus:ring-1"
+                    className="Hidden"
                   />
                 </div>
               </label>
@@ -164,7 +164,7 @@ function SellWithUs() {
                   {t("sell_with_us.forms.email")}:
                 </span>
                 <input
-                  className="w-full bg-gray-300 text-gray-900 border mt-2 p-3 rounded-lg ring-offset-1 ring-offset-dm-blue ring-dm-blue focus:outline-none select-none focus:ring-1"
+                  className="Hidden"
                   type="email"
                   onChange={(e) => {
                     setEmail(e.target.value)
@@ -172,8 +172,8 @@ function SellWithUs() {
                   required
                 />
               </label>
-              <label className="col-span-full xl:col-span-1 lg:col-span-1 md:col-span-1">
-                <span className="font-bold font-soft text-slate-600">
+              <label className="Hidden">
+                <span className="Hidden">
                   {t("sell_with_us.forms.phone")}:
                 </span>
                 <PhoneInput
@@ -182,7 +182,7 @@ function SellWithUs() {
                     required: true,
                   }}
                   inputClass={
-                    "bg-gray-300 text-gray-900 mt-2 rounded-lg ring-offset-1 ring-offset-dm-blue ring-dm-blue focus:outline-none select-none focus:ring-1"
+                    "Hidden"
                   }
                   specialLabel={""}
                   country={"cu"}
@@ -199,27 +199,27 @@ function SellWithUs() {
                 {/* <input className="w-full bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg ring-offset-1 ring-offset-dm-blue ring-dm-blue focus:outline-none select-none focus:ring-1"
               type="text" /> */}
               </label>
-              <label className="col-span-full">
-                <span className="font-bold font-soft text-slate-600">
+              <label className="Hidden">
+                <span className="Hidden">
                   {t("sell_with_us.forms.review")}:
                 </span>
-                <div className="relative">
+                <div className="Hidden">
                   <textarea
                     ref={maximumChar}
                     onChange={changeMaximum}
                     maxLength={250}
                     placeholder={t("sell_with_us.placeholder")}
-                    className="w-full h-32 bg-gray-300 border text-gray-900 mt-2 p-3 rounded-lg ring-offset-1 ring-offset-dm-blue ring-dm-blue focus:outline-none select-none focus:ring-1"
+                    className="Hidden"
                   />
-                  <span className="absolute px-2 py-1 bg-footer-background-100 text-xs text-white bg-dm-blue rounded right-1 bottom-2">
+                  <span className="Hidden">
                     {calculate}
                   </span>
                 </div>
               </label>
-              <div className="col-span-full m-auto">
+              <div className="Hidden">
                 <button
                   disabled={loading}
-                  className="uppercase w-40 text-sm font-bold tracking-wide bg-dm-blue text-gray-100 p-3 rounded-lg bg-footer-background-100 text-background-100 ring-offset-1 ring-offset-gray-500 ring-gray-500 focus:outline-none select-none focus:ring-1"
+                  className="Hidden"
                 >
                   {t("sell_with_us.buttonText")}
                 </button>
