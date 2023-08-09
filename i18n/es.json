@@ -142,7 +142,7 @@
   },
   "about": {
     "title": "SOBRE NOSOTROS",
-    "text": "Diplomarket es una tienda online donde los clientes pueden hacer compras para enviar alimentos a Cuba, pagar productos y servicios, así como artículos de ferretería, electrodomésticos y útiles del hogar. Los productos y servicios están orientados a cumplir con los intereses y necesidades de nuestros clientes que desean realizar compras y envíos rápidos y seguros para su familia en Cuba. Nos place llevarles LO MEJOR… SIEMPRE!!!. La empresa trabaja bajo las leyes de los Estados Unidos."
+    "text": "Diplomarket es una tienda Online desarrollada en función de satisfacer sus compras, envios y entregas, para sus familiars en Cuba. Nos place llevarles LO MEJOR… SIEMPRE!!!. La empresa trabaja bajo las leyes de los Estados Unidos. Todo lo que usted compre aquí, se le envia y entrega a sus familiares."
   },
   "community": {
     "title": "Comunidad",
@@ -248,7 +248,7 @@
     "text_message": "Mensaje",
     "message": "Somos una plataforma electrónica que le permite un mayor rendimiento a sus productos y servicios, ser más competitivo… ¿Cómo?",
     "description": {
-      "1": "- Conectamos de manera más rápida a fabricantes, distribuidores, comercializadores, con los clientes, variada, barata y constante.",
+      "1": "Diplomarket le ofrece a comerciantes poder vender con nosotros. Negocios privados que comercializan sus productos y servicios, con sus entregas en Cuba, tienen posibilidad a traves de nuesta web Contacte ahora con nuestro equipo al: comercial@diplomarket.com",
       "2": "- Productos de primera necesidad llegarán a sus hogares, en todo el país.",
       "3": "- Aplicamos porcientos (%) de servicios más baratos que otros. Sus productos y servicios llegarán más barato para el cliente/comprador.",
       "4": "- Nos encargamos de que sus productos se les hagan entregas a domicilios, más rápido, en menor tiempo, con las mismas garantías y cuidado de cuando está en su negocio.",
@@ -299,7 +299,7 @@
     }
   },
   "footer": {
-    "description": "Diplomarket es una tienda Online desarrollada, en función de satisfacer sus compras y entregas, tanto para usted como para sus familiares. Nos place llevarles LO MEJOR….SIEMPRE!!!",
+    "description": "Diplomarket es una tienda Online desarrollada en función de satisfacer sus compras, envios y entregas, para sus familiars en Cuba. Nos place llevarles LO MEJOR… SIEMPRE!!!. La empresa trabaja bajo las leyes de los Estados Unidos. Todo lo que usted compre aquí, se le envia y entrega a sus familiares",
     "about": {
       "title": "ACERCA DE",
       "aboutUs": "¿Quienes somos?",

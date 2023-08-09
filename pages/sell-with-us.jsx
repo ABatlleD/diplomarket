@@ -106,64 +106,19 @@ function SellWithUs() {
             }}
           ></div>
           <div className="relative" style={{ zIndex: "2" }}>
-            <h2 className="text-3xl font-bold text-justify leading-tight mb-2">
-              {t("sell_with_us.title")}
-            </h2>
+
             <div className="flex flex-col justify-between">
               <div>
-                <p className="text-lg text-justify leading-tight font-bold mb-2">
-                  {t("sell_with_us.message")}
-                </p>
                 <p
                   className="text-lg text-justify leading-tight align-center"
                   style={{ whiteSpace: "pre-wrap" }}
                 >
                   {t("sell_with_us.description.1")}
-                </p>
-                <p
-                  className="text-lg text-justify leading-tight align-center"
-                  style={{ whiteSpace: "pre-wrap" }}
-                >
-                  {t("sell_with_us.description.2")}
-                </p>
-                <p
-                  className="text-lg text-justify leading-tight align-center"
-                  style={{ whiteSpace: "pre-wrap" }}
-                >
-                  {t("sell_with_us.description.3")}
-                </p>
-                <p
-                  className="text-lg text-justify leading-tight align-center"
-                  style={{ whiteSpace: "pre-wrap" }}
-                >
-                  {t("sell_with_us.description.4")}
-                </p>
-                <p
-                  className="text-lg text-justify leading-tight align-center"
-                  style={{ whiteSpace: "pre-wrap" }}
-                >
-                  {t("sell_with_us.description.5")}
-                </p>
-                <p
-                  className="text-lg text-justify leading-tight align-center"
-                  style={{ whiteSpace: "pre-wrap" }}
-                >
-                  {t("sell_with_us.description.6")}
-                </p>
-                <p
-                  className="text-lg text-justify leading-tight align-center mb-2"
-                  style={{ whiteSpace: "pre-wrap" }}
-                >
-                  {t("sell_with_us.description.7")}
-                </p>
+                </p>                
               </div>
             </div>
-            <div>
-              <p className="text-lg text-justify leading-tight font-bold mb-4">
-                {t("sell_with_us.message_forms")}
-              </p>
-            </div>
-            <form className="grid grid-cols-2 gap-4" onSubmit={handleSubmit}>
+			
+            <form className="Hidden" onSubmit={handleSubmit}>
               <label className="col-span-full xl:col-span-1 lg:col-span-1">
                 <span className="font-bold font-soft text-slate-600">
                   {t("sell_with_us.forms.name")}:
