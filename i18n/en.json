@@ -96,7 +96,7 @@
     "brand": "Brand",
     "category": "Category",
     "description": "Description",
-    "shipmentsFrom": "Shipments From",
+    "shipmentsFrom": "Shipments to",
     "relatedProducts": "Related Products"
   },
   "filter": {
@@ -142,7 +142,7 @@
   },
   "about": {
     "title": "ABOUT US",
-    "text": "Diplomarket is an online store developed in order to satisfy your purchases and deliveries, for you and dearest. We are pleased to bring you the BEST...ALWAYS!!!. The company works under the laws of the United States, which also includes all economic actors, such as suppliers, traders, according to their licenses and regulations. Everything you buy here is exported."
+    "text": "Diplomarket is an online store where customers can shop to delivery food to Cuba, pay for products and services, as well as hardware, appliances and household goods. The products and services are geared to meet the interests and needs of our customers who want to make fast and safe purchases and deliveries for their family in Cuba. We are pleased to bring you the BEST...ALWAYS!!!. The company works under the laws of the United States."
   },
   "community": {
     "title": "COMMUNITY",
