@@ -52,7 +52,7 @@ function FilterLayout({ children, props }) {
               onChange={handleChange}
               valueLabelDisplay="auto"
               color='secondary'
-              max={1000}
+              max={100000}
             />
           </div>
           <div className='flex flex-row justify-between w-[92%]'>

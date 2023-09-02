@@ -105,7 +105,7 @@ function Home() {
   const [brand, setBrand] = useState({ label: "", id: 0 })
   const [provider, setProvider] = useState({ label: "", id: 0 })
   const [min, setMin] = useState(0)
-  const [max, setMax] = useState(1000)
+  const [max, setMax] = useState(100000)
   const [extra, setExtra] = useState(undefined)
   const [order, setOrder] = React.useState("recent")
   const { status, data } = useSession()
@@ -209,7 +209,7 @@ function Home() {
     setExtra(undefined)
     setExist(false)
     setMin(0)
-    setMax(1000)
+    setMax(100000)
   }
 
   const handleMobileFilter = (mobileFilter) => {
@@ -540,7 +540,7 @@ function Home() {
                 </div>
                 <div
                   className="hover:cursor-pointer text-footer-background-300 hover:underline hover:text-button"
-                  onClick={() => handlePriceFilter([200, 1000])}
+                  onClick={() => handlePriceFilter([200, 100000])}
                 >
                   {t("filter.more")} US$200
                 </div>

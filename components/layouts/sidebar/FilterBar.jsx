@@ -33,7 +33,7 @@ function FilterBar({
   /* const [suppliers, setSuppliers] = useState([]) */
   const [banners, setBanners] = useState([])
   const [brands, setBrands] = useState([])
-  const [prices, setPrices] = useState([0, 1000])
+  const [prices, setPrices] = useState([0, 100000])
   const [brand, setBrand] = useState({ label: "", id: 0 })
   const [provider, setProvider] = useState({ label: "", id: 0 })
   const { t } = useTranslation()
@@ -104,7 +104,7 @@ function FilterBar({
       provider: { label: "", id: 0 },
       providerDisplay: undefined,
       min: 0,
-      max: 1000,
+      max: 100000,
       extra: undefined,
     }
     handleMobileFilter(filter)
@@ -158,7 +158,7 @@ function FilterBar({
     setPromotions(false)
     setRecommendations(false)
     setExist(false)
-    setPrices([0, 1000])
+    setPrices([0, 100000])
     setSelectedPrice(0)
   }
 
@@ -331,7 +331,7 @@ function FilterBar({
                   className={`mb-1 hover:cursor-pointer ${
                     selectedPrice === 5 ? "text-button font-semibold" : ""
                   }`}
-                  onClick={() => handlePriceFilter([200, 1000])}
+                  onClick={() => handlePriceFilter([200, 100000])}
                 >
                   {t("filter.more")} US$200
                 </div>
