@@ -418,7 +418,8 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
             <div className="w-full rounded-lg text-xl font-bold">
               <button
                 className="rounded-lg"
-                onClick={() => {
+                onClick={(event) => {
+                  event.currentTarget.disabled = true;
                   setLoading(true)
                   axios
                     .post("/api/checkout/checkproducts", {
@@ -494,7 +495,8 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
             <div className="w-full rounded-lg text-xl font-bold">
               <button
                 className="rounded-lg"
-                onClick={() => {
+                onClick={(event) => {
+                  event.currentTarget.disabled = true;
                   setLoading(true)
                   axios
                     .post("/api/checkout/checkproducts", {
@@ -577,7 +579,8 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
             pasarelas?.tropipay ? (
             <div className="w-full rounded-lg text-xl font-bold">
               <button
-                onClick={() => {
+                onClick={(event) => {
+                  event.currentTarget.disabled = true;
                   setLoading(true)
                   axios
                     .post("/api/checkout/checkproducts", {
