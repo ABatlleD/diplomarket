@@ -419,7 +419,9 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
               <button
                 className="rounded-lg"
                 onClick={(event) => {
-                  event.currentTarget.disabled = true;
+                  setTimeout(function() {
+                    event.target.disabled = true;
+                  }, 0);
                   setLoading(true)
                   axios
                     .post("/api/checkout/checkproducts", {
@@ -496,7 +498,9 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
               <button
                 className="rounded-lg"
                 onClick={(event) => {
-                  event.currentTarget.disabled = true;
+                  setTimeout(function() {
+                    event.target.disabled = true;
+                  }, 0);
                   setLoading(true)
                   axios
                     .post("/api/checkout/checkproducts", {
@@ -580,7 +584,9 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
             <div className="w-full rounded-lg text-xl font-bold">
               <button
                 onClick={(event) => {
-                  event.currentTarget.disabled = true;
+                  setTimeout(function() {
+                    event.target.disabled = true;
+                  }, 0);
                   setLoading(true)
                   axios
                     .post("/api/checkout/checkproducts", {
