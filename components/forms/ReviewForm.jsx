@@ -629,7 +629,13 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
                                   const url = payment?.data?.url ?? ""
                                   const failed = payment?.data?.failed ?? false
                                   if (window && url) {
-                                    window.open(url, "_blank", "noopener")
+                                    const handle = window.open(url, "_blank", "noopener")
+                                    if (!handle) {
+                                      const link = document.createElement('a');
+                                      link.href = url; 
+                                      link.target = '_blank';
+                                      link.click();
+                                    }
                                     push("/").then()
                                     resetCart()
                                   } else if (failed) {
