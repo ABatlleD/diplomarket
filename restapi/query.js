@@ -10,6 +10,7 @@ export function useFilterProducts(options) {
     return {
       products: data?.data?.results ?? [],
       productsTotal: data?.data?.total ?? 0,
+      productsTotalPages: data?.data?.total_pages ?? 1,
       productsCount: data?.data?.count ?? 0,
       productsIsLoading: isLoading,
       productsError: error,
@@ -18,6 +19,7 @@ export function useFilterProducts(options) {
     return {
       products: [],
       productsTotal: 0,
+      productsTotalPages: 1,
       productsCount: 0,
       productsIsLoading: false,
       productsError: false,

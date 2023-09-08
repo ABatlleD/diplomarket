@@ -70,8 +70,10 @@ const resources = {
   products: {
     all: async (options) => {
       const {
-        offset,
-        limit,
+        // eslint-disable-next-line no-unused-vars
+        offset= '',
+        // eslint-disable-next-line no-unused-vars
+        limit = '',
         municipality_id,
         min,
         max,
@@ -82,9 +84,11 @@ const resources = {
         provider,
         extra,
         ordering,
+        version = 1,
+        page = 1,
       } = options
 
-      let filter = `?offset=${offset}&limit=${limit}&municipios=${municipality_id}`
+      let filter = `?version=${version}&page=${page}&municipios=${municipality_id}`
 
       if (min) filter += `&min=${min}`
       if (max) filter += `&max=${max}`
@@ -95,7 +99,7 @@ const resources = {
       if (extra) filter += `&extra=${extra}`
       if (ordering) filter += `&ordering=${ordering}`
 
-      return await getRequest(`${ENDPOINTS.PRODUCTS}/${filter}`)
+      return await getRequest(`${version === 2 ? '/dm' : ''}${ENDPOINTS.PRODUCTS}/${filter}`)
     },
     search: async (municipality, type) =>
       await getRequest(`${ENDPOINTS.SEARCH}/${municipality}/${type}/`),
