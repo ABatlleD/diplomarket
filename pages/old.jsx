@@ -16,8 +16,10 @@ import useWindowSize from "../hooks/WindowSize"
 import { useSession } from "next-auth/react"
 import { useAllCarousel, useFilterProducts } from "../restapi/query"
 import { useRouter } from "next/router"
-/* import Image from "next/image" */
-/* import storeAltImg from "../public/assets/store.png" */
+// eslint-disable-next-line no-unused-vars
+import Image from "next/image"
+// eslint-disable-next-line no-unused-vars
+import storeAltImg from "../public/assets/store.png"
 import useScrollY from "../hooks/Scroll"
 import dynamic from "next/dynamic"
 import InfiniteScroll from "react-infinite-scroll-component"
@@ -108,12 +110,10 @@ function Home() {
   const [order, setOrder] = React.useState("recent")
   const { status, data } = useSession()
   const [openNotificationsTip, setOpenNotificationsTip] = useState(false)
-  const { products, productsTotal, productsTotalPages, productsIsLoading } = useFilterProducts({
-    version: 2,
+  const { products, productsTotal, productsIsLoading } = useFilterProducts({
     offset,
     municipality_id: municipality?.id,
     limit: 15,
-    page,
     category,
     subcategory,
     brand,
@@ -133,7 +133,7 @@ function Home() {
   }
 
   const getMorePost = async () => {
-    setPage(page => page + 1)
+    setOffset(offset + 15)
   }
 
   useEffect(() => {
@@ -262,7 +262,11 @@ function Home() {
   }
 
   useEffect(() => {
-    setPages(productsTotalPages)
+    if (productsTotal % 15 !== 0) {
+      setPages(Math.floor(productsTotal / 15) + 1)
+    } else {
+      setPages(productsTotal / 15)
+    }
   }, [productsTotal])
 
   const getCategory = (id) => {
