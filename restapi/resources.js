@@ -67,6 +67,14 @@ const resources = {
     get: async () => await getRequest(`${ENDPOINTS.ORDER}`),
   },
 
+  orders: {
+    get: async (options) => {
+      const { email, page = 1 } = options
+      const filter = `?page=${page}`
+      return await getRequest(`/dm${ENDPOINTS.ORDER}${encodeURIComponent(email)}/${filter}`)
+    },
+  },
+
   products: {
     all: async (options) => {
       const {

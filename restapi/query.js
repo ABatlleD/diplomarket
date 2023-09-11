@@ -27,6 +27,31 @@ export function useFilterProducts(options) {
   }
 }
 
+export function useOrders(options) {
+  if (options.email) {
+    const { data, isLoading, error } = useQuery(
+      ["orders", options],
+      () => resources.orders.get(options)
+    );
+    return {
+      orders: data?.data?.results ?? [],
+      ordersIsLoading: isLoading,
+      ordersIsNext: data?.data?.is_next ?? false,
+      ordersError: error,
+    };
+  } else {
+    return {
+      orders: [],
+      ordersTotal: 0,
+      ordersTotalPages: 1,
+      ordersCount: 0,
+      ordersIsLoading: false,
+      ordersIsNext: false,
+      ordersError: false,
+    };
+  }
+}
+
 export function useOneProduct(id) {
   const { data, isLoading, error } = useQuery(
     [`/one-product`, id],

@@ -3,11 +3,11 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { useTranslation } from 'react-i18next'
 
-function OrderProductItem({ item, variant }) {
+function OrderProductItem({ item }) {
   const { i18n } = useTranslation()
   return (
     <motion.div
-      key={item.id}
+      key={item.nombre}
       initial={{ opacity: 0, x: 100 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 100, rotate: 10 }}
@@ -16,7 +16,7 @@ function OrderProductItem({ item, variant }) {
     >
       <div className="w-[20%] md:w-24 ml-1 overflow-hidden bg-gray-100 h-full mr-2 shrink-0 relative">
         <Image
-          src={`${process.env.NEXT_PUBLIC_BACKEND}${item.image || item.producto.img_principal}`}
+          src={`${process.env.NEXT_PUBLIC_BACKEND}${item.imagen}`}
           layout='fill'
           placeholder='blur'
           blurDataURL='/loading.gif'
@@ -24,7 +24,7 @@ function OrderProductItem({ item, variant }) {
         />
       </div>
       <div className='w-[60%] flex flex-row justify-center h-full items-center'>
-        <h3 className="font-bold text-heading text-text-blue">{i18n.language === 'es' ? item.producto.nombre : item.producto.nombre_ingles}</h3>
+        <h3 className="font-bold text-heading text-text-blue">{i18n.language === 'es' ? item.nombre : item.nombre_ingles}</h3>
       </div>
       <div className='flex flex-row w-[24%] h-full items-center'>
         <p>{item.cantidad}X</p>

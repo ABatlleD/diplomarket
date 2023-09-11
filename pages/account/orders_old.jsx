@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { authOptions } from '../../libs/auth'
 import { getServerSession } from "next-auth/next"
 
-import { useOrders } from "../../restapi/query"
-
+// import { useRouter } from 'next/router'
 import resources from '../../restapi/resources.js'
 import { styled } from '@mui/material/styles'
-import Button from '@mui/material/Button'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell, { tableCellClasses } from '@mui/material/TableCell'
@@ -46,27 +44,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   }
 }))
 
-function Orders({ email }) {
+function Orders({ orders }) {
   const { t } = useTranslation()
+  // const router = useRouter()
+  // const { status } = useSession()
   const size = useWindowSize()
-  const [ordersList, setOrdersList] = useState([])
-  const [page, setPage] = useState(1)
   const [details, setDetails] = useState({})
-  const [openOrderDetails, setOpenOrderDetails] = useState(false)
+  const [openOrderDetails, setOpenOrderDetails] = useState()
 
-  const { 
-    orders,
-    ordersIsLoading,
-    ordersIsNext,
-  } = useOrders({email, page})
-
-  useEffect(() => {
-    setOrdersList((ordersList) => [...ordersList, ...orders])
-  }, [orders])
-
-  const getMorePost = async () => {
-    setPage(page => page + 1)
-  }
+  // if (status === 'unauthenticated') {
+  //   router.push('/auth/signin')
+  // }
 
   return (
     <>
@@ -76,7 +64,7 @@ function Orders({ email }) {
         <p className='font-bold text-footer-background-200 sm:text-xl md:text-4xl mb-2'>Consulta tus órdenes</p>
         {size.width <= 700 && (
           <>
-            {ordersList.map((item) => (
+            {orders.map((item) => (
               <div key={item.id} className='flex flex-row border rounded-lg mb-2 justify-between'>
                 <div className='relative w-[30%] h-15 m-2'>
                   <Image
@@ -116,7 +104,7 @@ function Orders({ email }) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {ordersList.map((item) => (
+                {orders.map((item) => (
                   <StyledTableRow key={item.id}>
                     <StyledTableCell align="center">
                       <div className='relative w-3/6 sm:h-9 md:h-14 xl:h-14 2xl:h-[4.5rem]'>
@@ -145,23 +133,6 @@ function Orders({ email }) {
             </Table>
           </TableContainer>
         )}
-        {ordersIsNext && <Button
-          disabled={ordersIsLoading}
-          variant="contained"
-          sx={ordersIsLoading
-            ? {
-                height: '2.1rem'
-              }
-            : {
-                height: '2.1rem',
-                color: '#ffffff',
-                backgroundColor: '#111b2c !important'
-              }
-          }
-          onClick={getMorePost}
-        >
-          Cargar más
-        </Button>}
       </div>
     </>
   )
@@ -177,14 +148,48 @@ Orders.getLayout = function getLayout(page) {
   )
 }
 
+const getProductGroup = async (id, req) => {
+  try {
+    const product_group = await resources.products.one(id)
+    return {
+      name: product_group?.data?.nombre ?? null,
+      imagen: product_group?.data?.img_principal ?? null
+    }
+  } catch (_) {
+    return null
+  }
+}
+
 export const getServerSideProps = async ({ req, res }) => {
   const session = await getServerSession(req, res, authOptions)
   if (session && session.user) {
     const userSession = await resources.users.get(session?.user?.email)
     if (userSession && userSession.id) {
+      const components = await resources.component.get()
+      const components_response = components.data
+      const orders = await resources.order.get()
+      const orders_response = await orders.data
+      const orders_user = orders_response.results?.filter(({ user }) => user === userSession.id)
+      const orders_components_filters = []
+      for await (const items of orders_user) {
+        const components_order = components_response.results?.filter(({ orden }) => orden === items?.uuid)
+        for await (const component of components_order) { if (component?.grupo) component.grupo_producto = await getProductGroup(component?.grupo?.uuid, req) ?? null }
+        const orders_components = {
+          id: items?.uuid,
+          fecha_creada: items?.fecha_creada,
+          total: items?.total,
+          currency: items?.currency,
+          status: items?.status,
+          tipo: items?.tipo,
+          precio_envio: items?.precio_envio,
+          destinatario: items?.destinatario,
+          components: [...components_order]
+        }
+        orders_components_filters.push(orders_components)
+      }
       return {
         props: {
-          email: userSession.email
+          orders: orders_components_filters
         }
       }
     } else {

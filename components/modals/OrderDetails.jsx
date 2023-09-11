@@ -52,12 +52,11 @@ function OrderDetails({
               </div>
               <div className="font-bold">Productos</div>
               <div className="overflow-auto mb-4">
-                {item.components?.length > 0 ? (
-                  item.components.map((item, key) => (
+                {item.componentes?.length > 0 ? (
+                  item.componentes.map((item, key) => (
                     <OrderProductItem
-                      item={item}
                       key={key}
-                      variant={'pillVertical'}
+                      item={item}
                     />
                   ))
                 ) : (
