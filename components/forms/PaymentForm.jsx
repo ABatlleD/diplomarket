@@ -40,7 +40,7 @@ function PaymentForm({ address }) {
               }}>
                 <img className={getTypePay === 'paypal' ? 'border-2 rounded-lg border-button w-auto' : 'w-auto'} src="/assets/payment/paypal/paypal.png" alt="paypal" />
               </a>
-              {getTypePay === 'paypal' && <p className="text-md pt-1 text-button text-sm">{t('checkout.payment_method.paypal_tax')}</p>}
+              {getTypePay === 'paypal' && <p className="text-md pt-1 text-button text-sm">{t('checkout.payment_method.paypal_info')}</p>}
             </Grid>}
             {pasarelas?.tropipay && <Grid item xs={6}>
               <a href="#!" onClick={() => {
@@ -48,6 +48,7 @@ function PaymentForm({ address }) {
               }}>
                 <img className={getTypePay === 'tropipay' ? 'border-2 rounded-lg border-button w-auto' : 'w-auto'} src="/assets/payment/tropipay/tropipay.png" alt="tropipay" />
               </a>
+              {getTypePay === 'tropipay' && <p className="text-md pt-1 text-button text-sm">{t('checkout.payment_method.tropipay_info')}</p>}
             </Grid>}
             {pasarelas?.zelle && <Grid item xs={6}>
               <a href="#!" onClick={() => {

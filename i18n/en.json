@@ -389,7 +389,8 @@
     "back": "Back",
     "payment_method": {
       "title": "Payment method",
-      "paypal_tax": "Extra fees may apply",
+      "paypal_info": "Extra fees may apply",
+      "tropipay_info": "Accepts credit/debit cards.",
       "empty": "Sorry, payment methods are under maintenance."
     },
     "review": {
