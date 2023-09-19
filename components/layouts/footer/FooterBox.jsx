@@ -154,7 +154,7 @@ function FooterBox({ cartSideBar, setCartSideBar }) {
               alt="..."
             />
           )}
-          {configurations.pasarela_bofa && (
+          {configurations.pasarela_tropipay && (
             <>
               <img
                 src="/assets/payment/bofa/card-visa.png"
