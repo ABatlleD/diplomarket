@@ -36,6 +36,7 @@ export const ENDPOINTS = {
   FAQ: '/faq/',
   HELP: '/ayuda/',
   DELIVERY: '/entrega/',
+  COUPON: '/comprobar/cupon/',
   PREMIUM: '/premium/',
   CONFIGURACION: '/configuracion/',
   CONTACT: '/contactoempresa/',

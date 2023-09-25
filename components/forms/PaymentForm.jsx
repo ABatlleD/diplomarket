@@ -35,41 +35,41 @@ function PaymentForm({ address }) {
           </> :
           <>
             {pasarelas?.paypal && <Grid item xs={6}>
-              <a href="#!" className="" onClick={() => {
+              <button onClick={() => {
                 setTypePay('paypal')
               }}>
-                <img className={getTypePay === 'paypal' ? 'border-2 rounded-lg border-button w-auto' : 'w-auto'} src="/assets/payment/paypal/paypal.png" alt="paypal" />
-              </a>
+                <img className={getTypePay === 'paypal' ? 'border-2 rounded-lg border-button w-auto' : 'rounded-lg w-auto'} src="/assets/payment/paypal/paypal.png" alt="paypal" />
+              </button>
               {getTypePay === 'paypal' && <p className="text-md pt-1 text-button text-sm">{t('checkout.payment_method.paypal_info')}</p>}
             </Grid>}
             {pasarelas?.tropipay && <Grid item xs={6}>
-              <a href="#!" onClick={() => {
+              <button onClick={() => {
                 setTypePay('tropipay')
               }}>
-                <img className={getTypePay === 'tropipay' ? 'border-2 rounded-lg border-button w-auto' : 'w-auto'} src="/assets/payment/tropipay/tropipay.png" alt="tropipay" />
-              </a>
+                <img className={getTypePay === 'tropipay' ? 'border-2 rounded-lg border-button w-auto' : 'rounded-lg w-auto'} src="/assets/payment/tropipay/tropipay.png" alt="tropipay" />
+              </button>
               {getTypePay === 'tropipay' && <p className="text-md pt-1 text-button text-sm">{t('checkout.payment_method.tropipay_info')}</p>}
             </Grid>}
             {pasarelas?.zelle && <Grid item xs={6}>
-              <a href="#!" onClick={() => {
+              <button onClick={() => {
                 setTypePay('zelle')
               }}>
-                <img className={getTypePay === 'zelle' ? 'border-2 rounded-lg border-button w-auto' : 'w-auto'} src="/assets/payment/zelle/zelle.png" alt="zelle" />
-              </a>
+                <img className={getTypePay === 'zelle' ? 'border-2 rounded-lg border-button w-auto' : 'rounded-lg w-auto'} src="/assets/payment/zelle/zelle.png" alt="zelle" />
+              </button>
             </Grid>}
             {pasarelas?.directo && <Grid item xs={6}>
-              <a href="#!" onClick={() => {
+              <button onClick={() => {
                 setTypePay('directo')
               }}>
-                <img className={getTypePay === 'directo' ? 'border-2 rounded-lg border-button w-auto' : 'w-auto'} src="/assets/payment/directo/directo.png" alt="directo" />
-              </a>
+                <img className={getTypePay === 'directo' ? 'border-2 rounded-lg border-button w-auto' : 'rounded-lg w-auto'} src="/assets/payment/directo/directo.png" alt="directo" />
+              </button>
             </Grid>}
             {pasarelas?.banco && <Grid item xs={6}>
-              <a href="#!" onClick={() => {
+              <button onClick={() => {
                 setTypePay('banco')
               }}>
-                <img className={getTypePay === 'banco' ? 'border-2 rounded-lg border-button w-auto' : 'w-auto'} src="/assets/payment/bofa/banco.png" alt="banco" />
-              </a>
+                <img className={getTypePay === 'banco' ? 'border-2 rounded-lg border-button w-auto' : 'rounded-lg w-auto'} src="/assets/payment/bofa/banco.png" alt="banco" />
+              </button>
             </Grid>}
           </>
         }

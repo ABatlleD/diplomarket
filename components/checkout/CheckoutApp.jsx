@@ -22,6 +22,7 @@ import { useAtom } from "jotai"
 const AddressForm = dynamic(() => import("../forms/RecipientsForm"))
 const HeadquarterForm = dynamic(() => import("../forms/HeadquarterForm"))
 const PaymentForm = dynamic(() => import("../forms/PaymentForm"))
+const CouponForm = dynamic(() => import("../forms/CouponForm"))
 const Review = dynamic(() => import("../forms/ReviewForm"))
 
 function Copyright() {
@@ -46,6 +47,7 @@ function Checkout({ address }) {
   const steps = [
     `${t("deliveryAddress")}`,
     `${t("paymentMethod")}`,
+    `${t("coupon")}`,
     `${t("pay")}`,
   ]
   const [sede, setSede] = useState(false)
@@ -57,6 +59,7 @@ function Checkout({ address }) {
   const [activeDistrict, setActiveDistrict] = useState({})
   const [municipality] = useAtom(municipalityAtom)
   const [getTypePay, setTypePay] = useState(undefined)
+  const [getCoupon, setCoupon] = useState(undefined)
   const [recipient, setRecipient] = useState(undefined)
   const [getAddressees, setAddressees] = useState(addressees)
   const [getCountries, setCountries] = useState(countries)
@@ -80,9 +83,21 @@ function Checkout({ address }) {
     municipalities: [getMunicipalities, setMunicipalities],
     provinces: [getProvinces, setProvinces],
     typePay: [getTypePay, setTypePay],
+    coupon: [getCoupon, setCoupon],
   }
 
-  const handleNext = () => {
+  const comprobarCoupon = (isBack = false) => {
+    return resources.coupon.all().then((response) => {
+      if (!response.data?.cupon && ((activeStep === 1 && !isBack) || activeStep === 3)) {
+        setCoupon(undefined)
+        return 2
+      }
+      else
+        return 1
+    })
+  }
+
+  const handleNext = async () => {
     if (sede) {
       activeAddressees = recipient
     }
@@ -115,11 +130,15 @@ function Checkout({ address }) {
     } else if (!activeAddressees.ci.match(ciValid)) {
       toast.error("Introduzca un ci válido.")
     } else if (isEmpty(items)) toast.error("Su carrito esta vacío.")
-    else setActiveStep(activeStep + 1)
+    else {
+      const is_cupon = await comprobarCoupon()
+      setActiveStep(activeStep + is_cupon)
+    }
   }
 
-  const handleBack = () => {
-    setActiveStep(activeStep - 1)
+  const handleBack = async () => {
+    const is_cupon = await comprobarCoupon(true)
+    setActiveStep(activeStep - is_cupon)
   }
 
   useEffect(() => {
@@ -157,6 +176,8 @@ function Checkout({ address }) {
       case 1:
         return <PaymentForm address={addressee} />
       case 2:
+        return <CouponForm address={addressee} />
+      case 3:
         return (
           <Review
             recipient={recipient}

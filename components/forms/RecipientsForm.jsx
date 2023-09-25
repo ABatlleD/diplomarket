@@ -138,7 +138,7 @@ function AddressForm({ address }) {
                 name='addressee'
                 value={activeAddressees?.nombre ?? ''}
                 onChange={handleChangeAddressee}
-                label='Address Name'
+                label={t('profile.recipients.name')}
                 fullWidth
               >
                 {/* <MenuItem value="">
@@ -310,7 +310,7 @@ function AddressForm({ address }) {
             onChange={handleChangeField}
           />
       <h6 className='mt-5'>
-      {t('profile.recipients.subtitle2')}:
+      {t('profile.recipients.subtitle2')}
       </h6>
           <TextField
             id="optionalName"

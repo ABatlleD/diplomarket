@@ -9,7 +9,8 @@ import { AxiosInstanceApi } from '../../../restapi'
 const handler = async (req, res) => {
   try {
     if (req.method === 'POST') {
-      const { amount, currency, products, addresses, details, type } = req.body
+      const { amount, currency, products, addresses, details, coupon, type } = req.body
+      const couponPercent = coupon || 0
       const session = await getServerSession(req, res, authOptions)
       if (!session?.user?.email) {
         return res.status(401).json({ statusCode: 401, message: 'Error en la solicitud.' })
@@ -70,7 +71,7 @@ const handler = async (req, res) => {
           }
           const timeZone = 'Europe/Madrid'
           const fecha_creada = DateTime.local().setZone(timeZone).toFormat('yyyy-MM-dd HH:mm:ss')
-          const total = parseFloat((amount + (!free ? deliveryPay : 0))).toFixed(2)
+          const total = parseFloat((amount * (1 - couponPercent / 100) + (!free ? deliveryPay : 0))).toFixed(2)
           const user_id = user?.id
           const destinatario = addresses.id
           const componente = []
@@ -111,7 +112,7 @@ const handler = async (req, res) => {
           const fecha_creada = DateTime.now().toFormat('yyyy-MM-dd HH:mm:ss')
           const config = await resources.configuration.get()
           const descuento_zelle = config?.data?.results[0].descuento_zelle ?? 0
-          const discount = (1 - descuento_zelle / 100)
+          const discount = (1 - (descuento_zelle + couponPercent) / 100)
           const total = parseFloat((amount * discount) + (!free ? deliveryPay : 0)).toFixed(2)
           const user_id = user?.id
           const destinatario = addresses.id
@@ -137,9 +138,9 @@ const handler = async (req, res) => {
           }
           try {
             const makePayment = await resources.checkout(order)
-            return res.status(200).json({ statusCode: 200, data: makePayment?.data, message: 'Pago completo.' })
+            return res.status(200).json({ statusCode: 200, data: makePayment?.data, message: 'Pago completo.', total })
           } catch (_) {
-            if (_?.response?.status === '401') { return res.status(200).json({ statusCode: 200, data: _?.response?.data, message: 'Pago completo.' }) }
+            if (_?.response?.status === '401') { return res.status(200).json({ statusCode: 200, data: _?.response?.data, message: 'Pago completo.', total }) }
             return res.status(200).json({ statusCode: 500, failed: true, message: 'Contacte al administrator' })
           }
         } else if (type === 'directo') {
@@ -150,7 +151,7 @@ const handler = async (req, res) => {
           // eslint-disable-next-line no-unused-vars
           const timeZone = 'Europe/Madrid'
           const fecha_creada = DateTime.now().toFormat('yyyy-MM-dd HH:mm:ss')
-          const total = parseFloat((amount + (!free ? deliveryPay : 0))).toFixed(2)
+          const total = parseFloat((amount * (1 - couponPercent / 100) + (!free ? deliveryPay : 0))).toFixed(2)
           const user_id = user?.id
           const destinatario = addresses.id
           const componente = []

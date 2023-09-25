@@ -58,6 +58,11 @@ const resources = {
     create: async (data) => await postRequest(ENDPOINTS.DELIVERY, data),
   },
 
+  coupon: {
+    all: async (coupon) => await getRequest(`/dm${ENDPOINTS.COUPON}`),
+    get: async (coupon) => await getRequest(`/dm${ENDPOINTS.COUPON}${encodeURIComponent(coupon)}/`),
+  },
+
   featured_products: {
     all: async (municipalityId) =>
       await getRequest(`${ENDPOINTS.PRODUCTS_FEATURED}/${municipalityId}/`),

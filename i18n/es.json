@@ -393,6 +393,12 @@
       "tropipay_info": "Acepta tarjetas de crédito/débito.",
       "empty": "Lo sentimos, los métodos de pago están en mantenimiento."
     },
+    "coupon": {
+      "title": "Cupón de promoción",
+      "not_exist": "El cupón de descuento aplicado no es válido.",
+      "valid": "El cupón aplicado tiene un descuento de:",
+      "apply": "Aplicar cupón"
+    },
     "review": {
       "title": "Resumen de la orden",
       "subtotal": "Subtotal productos",
@@ -460,7 +466,7 @@
   "direct": {
     "title": "Orden Creada Exitosamente",
     "ticket": "Su ticket de compra",
-    "copied": "Ticked copiado",
+    "copied": "Ticket copiado",
     "message_first": "Hemos recibido su solicitud de compra. Contactaremos con usted lo antes posible, de igual manera puede contactarnos a",
     "message_second": ". Su ticket es único e intransferible, no lo comparta con nadie.",
     "notification_order": "Enviar Orden",

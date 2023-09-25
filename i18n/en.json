@@ -393,6 +393,12 @@
       "tropipay_info": "Accepts credit/debit cards.",
       "empty": "Sorry, payment methods are under maintenance."
     },
+    "coupon": {
+      "title": "Promotion coupon",
+      "not_exist": "The discount coupon applied is not valid.",
+      "valid": "The coupon applied has a discount of:",
+      "apply": "Apply coupon"
+    },
     "review": {
       "title": "Order summary",
       "subtotal": "Subtotal products",
@@ -460,7 +466,7 @@
   "direct": {
     "title": "Order Created Successfully",
     "ticket": "Your purchase ticket",
-    "copied": "Ticked copied",
+    "copied": "Ticket copied",
     "message_first": "We have received your purchase request. We will contact you as soon as possible, in the same way you can contact us at",
     "message_second": ". Your ticket is unique and non-transferable, do not share it with anyone.",
     "notification_order": "Send order",

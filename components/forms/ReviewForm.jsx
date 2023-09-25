@@ -44,13 +44,15 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
   const [disableButton, setDisableButton] = useState(false)
   const [check, setCheck] = useState(false)
   const [amountTotal, setAmountTotal] = useState(0)
-  const { addressees, countries, municipalities, provinces, typePay } = address
+  const { addressees, countries, municipalities, provinces, typePay, coupon } = address
   const [getAddressees] = addressees
   const [getCountries] = countries
   const [getMunicipalities] = municipalities
   const [getProvinces] = provinces
   const [getTypePay] = typePay
+  const [getCoupon] = coupon
   const [currency, setCurrency] = React.useState("USD")
+  const [descuentoZelleWithCoupon, setDescuentoZelleWithCoupon] = React.useState(0)
   if (sede) {
     recipient.activo = true
   }
@@ -117,6 +119,10 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
   }, [checkCart()?.total])
 
   useEffect(() => {
+    setDescuentoZelleWithCoupon(descuento_zelle + (getCoupon?.descuento || 0))
+  }, [getCoupon, descuento_zelle])
+
+  useEffect(() => {
     if (loading && !isEmpty(items)) {
       const cartItems = Promise.all(
         items.map((obj) => resources.products.one(obj?.id))
@@ -159,6 +165,14 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
   const { price: totalPrice } = usePrice({
     amount: total,
   })
+  // TODO: Precio con coupon
+  const { price: totalPriceWithCoupon } = usePrice({
+    amount: Number(parseFloat((Number(total) * (1 - getCoupon?.descuento / 100))).toFixed(2)),
+  })
+  // TODO: Precio con coupon
+  const { price: totalPriceWithZelleWithCoupon } = usePrice({
+    amount: Number(parseFloat((Number(total) * (1 - descuentoZelleWithCoupon / 100))).toFixed(2)),
+  })
 
   const termsprivacy = (
     <Link href={'/terminos-privacidad'}>
@@ -171,6 +185,12 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
     currencyCode: currency,
   })
 
+  // TODO: Precio con coupon
+  const { price: totalPriceWithDeliveryWithCoupon } = usePrice({
+    amount: !free ? total * (1 - getCoupon?.descuento / 100) + totalDelivery : total * (1 - getCoupon?.descuento / 100),
+    currencyCode: currency,
+  })
+
   const { price: totalPriceWithDeliveryForPaypal } = usePrice({
     amount: deliveryAndTotal + deliveryAndTotal * 0.05 + 0.49,
     currencyCode: currency,
@@ -180,6 +200,14 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
     amount: !free ? 
       Number(parseFloat((Number(checkCart()?.total) * (1 - descuento_zelle / 100)) + totalDelivery).toFixed(2)) : 
       Number(parseFloat((Number(checkCart()?.total) * (1 - descuento_zelle / 100))).toFixed(2)),
+    currencyCode: currency,
+  })
+
+  // TODO: Precio con coupon
+  const { price: totalPriceWithDeliveryForZelleWithCoupon } = usePrice({
+    amount: !free ? 
+      Number(parseFloat((Number(checkCart()?.total) * (1 - descuentoZelleWithCoupon / 100)) + totalDelivery).toFixed(2)) : 
+      Number(parseFloat((Number(checkCart()?.total) * (1 - descuentoZelleWithCoupon / 100))).toFixed(2)),
     currencyCode: currency,
   })
 
@@ -221,9 +249,16 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
           }}
         >
           <ListItemText primary={t("checkout.review.subtotal")} />
+          {getTypePay === "zelle" && getCoupon?.descuento ? <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+            {totalPriceWithZelleWithCoupon} {currency}
+          </Typography> :
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            {totalPrice} {currency}
+            {getCoupon?.descuento ? totalPriceWithCoupon : totalPrice} {currency}
           </Typography>
+          }
+          {getCoupon?.cupon && <Typography variant="subtitle1" sx={{ fontWeight: 700, ml: 1, textDecoration: "line-through" }}>
+            {totalPrice} {currency}
+          </Typography>}
         </ListItem>
         <ListItem
           sx={{
@@ -338,9 +373,15 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
             <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
               {typeof totalDelivery === "undefined"
                 ? t("loadingMessage")
-                : totalPriceWithDeliveryForZelle}{" "}
+                : getCoupon?.descuento ? totalPriceWithDeliveryForZelleWithCoupon : totalPriceWithDeliveryForZelle}{" "}
               {currency}
             </Typography>
+            {getCoupon?.descuento && <Typography variant="subtitle1" sx={{ fontWeight: 700, ml: 1, textDecoration: "line-through" }}>
+              {typeof totalDelivery === "undefined"
+                ? t("loadingMessage")
+                : totalPriceWithDeliveryForZelle}{" "}
+              {currency}
+            </Typography>}
           </ListItem>
         ) : (
           <ListItem
@@ -362,11 +403,18 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
             <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
               {typeof totalDelivery === "undefined"
                 ? t("loadingMessage")
-                : totalPriceWithDelivery}{" "}
+                : getCoupon?.descuento ? totalPriceWithDeliveryWithCoupon : totalPriceWithDelivery}{" "}
               {currency}
             </Typography>
+            {getCoupon?.descuento && <Typography variant="subtitle1" sx={{ fontWeight: 700, ml: 1, textDecoration: "line-through" }}>
+              {typeof totalDelivery === "undefined"
+                ? t("loadingMessage")
+                : totalPriceWithDelivery}{" "}
+              {currency}
+            </Typography>}
           </ListItem>
         )}
+        {getCoupon?.descuento && <p className="font-bold pt-1 text-button">{getCoupon?.message}</p>}
       </List>
       <Grid container spacing={2}>
         <Grid item container direction="column" xs={12} sm={6}>
@@ -457,6 +505,7 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
                                   products: checkCart()?.items,
                                   addresses: saveAddressee.data.data,
                                   delivery: totalDelivery,
+                                  coupon: getCoupon?.descuento,
                                   details,
                                   type: "directo",
                                 })
@@ -536,18 +585,18 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
                                   products: checkCart()?.items,
                                   addresses: saveAddressee.data.data,
                                   delivery: totalDelivery,
+                                  coupon: getCoupon?.descuento,
                                   details,
                                   type: "zelle",
                                 })
                                 .then((payment) => {
                                   const ticket = payment?.data?.data ?? false
                                   const failed = payment?.data?.failed ?? false
+                                  const total = payment?.data?.total ?? 0
                                   if (ticket) {
                                     setModalData({
                                       ticket,
-                                      total:
-                                        (Number(checkCart()?.total) * (1 - descuento_zelle / 100)) +
-                                        totalDelivery,
+                                      total,
                                     })
                                     setOpenZelleModal(true)
                                     resetCart()
@@ -622,6 +671,7 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
                                   products: checkCart()?.items,
                                   addresses: saveAddressee.data.data,
                                   delivery: totalDelivery,
+                                  coupon: getCoupon?.descuento,
                                   details,
                                   type: "tropipay",
                                 })
@@ -747,6 +797,7 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
                                     addresses: saveAddressee.data.data,
                                     details,
                                     delivery: totalDelivery,
+                                    coupon: getCoupon?.descuento,
                                     type: "paypal",
                                   })
                                   .then((payment) => {
