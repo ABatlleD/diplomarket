@@ -678,17 +678,16 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
                                 .then((payment) => {
                                   const url = payment?.data?.url ?? ""
                                   const failed = payment?.data?.failed ?? false
-                                  if (window && url) {
-                                    const link = document.createElement('a');
-                                    link.href = url; 
-                                    link.target = '_blank';
-                                    link.click();
-                                    push("/").then()
+                                  if (url && url !== "message:Invalid Parameter") {
+                                    push(`/payment-direct?tpp=${encodeURIComponent(url)}`).then()
                                     resetCart()
                                   } else if (failed) {
                                     toast.error(
                                       "Revise los productos de su carrito."
                                     )
+                                  } else {
+                                    push("/error/payment").then()
+                                    resetCart()
                                   }
                                 })
                             } else {

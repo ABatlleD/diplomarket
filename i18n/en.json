@@ -497,6 +497,10 @@
     "title": "Order Created Successfully",
     "description": "Please send the order by WhatsApp to be processed."
   },
+  "pay_tpp": {
+    "description": "To proceed to pay, press the 'Payment Link' button.",
+    "notification_order": "Payment link"
+  },
   "view_orders": "See my orders",
   "support": "Customer service",
   "back": "Go home",

@@ -497,6 +497,10 @@
     "title": "Orden Creada Exitosamente",
     "description": "Por favor, envíe la orden por WhatsApp para ser procesada."
   },
+  "pay_tpp": {
+    "description": "Para proceder a pagar, presione el botón 'Enlace del pago'",
+    "notification_order": "Enlace del pago"
+  },
   "view_orders": "Ver mis órdenes",
   "support": "Servicio al cliente",
   "back": "Volver a inicio",
