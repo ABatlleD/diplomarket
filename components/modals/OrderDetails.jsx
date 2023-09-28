@@ -62,7 +62,7 @@ function OrderDetails({
                 <span className="font-bold">Total: </span>US$
                 {parseFloat(item.total).toFixed(2)}
               </p>
-              {item.tipo === "zelle" && item.status !== "COMPLETED" ? (
+              {item.tipo === "zelle" && item.status === "PENDING" ? (
                 <div className="w-full rounded-lg text-xl font-bold">
                   <button
                     className="rounded-lg"
@@ -83,7 +83,7 @@ function OrderDetails({
                     />
                   </button>
                 </div>
-              ) : item.tipo === "tropipay" && item.status !== "COMPLETED" && item.enlace !== "CONSUMIDO" ? (
+              ) : item.tipo === "tropipay" && item.status === "PENDING" ? (
                 <div className="w-full rounded-lg text-xl font-bold">
                   <a
                     href={item.enlace}
