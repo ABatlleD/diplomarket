@@ -358,6 +358,7 @@
       "address": "Address",
       "subtitle2": "Alternative contact details:",
       "optional": "Optional Name",
+      "note_label": "Notes",
       "note": "ex: delivery schedule, ring doorbell 3 times, floor #2, description of address or person with disabilities on delivery.",
       "submit": "Save Changes",
       "modal": {

@@ -337,7 +337,8 @@ function AddressForm({ address }) {
           <TextField
             id="Note"
             name="nota_entrega"
-            label={t('profile.recipients.note')}
+            label={t('profile.recipients.note_label')}
+            helperText={t('profile.recipients.note')}
             multiline
             maxRows={4}
             value={activeAddressees?.nota_entrega ?? ''}

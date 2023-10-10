@@ -358,6 +358,7 @@
       "address": "Dirección",
       "subtitle2": "Contacto alternativo:",
       "optional": "Nombre opcional",
+      "note_label": "Notas",
       "note": "ej: horario de entrega, tocar el timbre 3 veces, piso #2, descripcion de direccion o persona discapacitada en la entrega.",
       "submit": "Guardar Cambios",
       "modal": {
