@@ -219,7 +219,7 @@ function AddressForm({ address }) {
                 id="ci"
                 name="ci"
                 sx={{ marginBottom: 2, width: '100%' }}
-                label='CI'
+                label='Carnet de Identidad'
                 value={activeAddressees?.ci ?? ''}
                 autoComplete="personal-identification"
                 variant="standard"
