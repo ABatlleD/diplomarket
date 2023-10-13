@@ -124,14 +124,14 @@ function SelectPlace({
               <div className="flex flex-col md:flex-row justify-between mx-2 mt-8">
                 <div className="md:w-[49%] mb-4 md:mb-0">
                   <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">
+                    <InputLabel id="demo-simple-select-prov-label">
                       {t("place.state")}
                     </InputLabel>
                     <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
+                      labelId="demo-simple-select-prov-label"
+                      id="demo-simple-select-prov"
                       value={prov}
-                      label="State"
+                      label={t("place.state")}
                       onChange={handleStateChange}
                     >
                       {cities?.results?.map((item) => (
@@ -144,14 +144,14 @@ function SelectPlace({
                 </div>
                 <div className="md:w-[49%]">
                   <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">
+                    <InputLabel id="demo-simple-select-mun-label">
                       {t("place.district")}
                     </InputLabel>
                     <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
+                      labelId="demo-simple-select-mun-label"
+                      id="demo-simple-select-mun"
                       value={mun}
-                      label="District"
+                      label={t("place.district")}
                       onChange={handleDistrictChange}
                     >
                       {districts?.map((item) => (

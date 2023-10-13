@@ -33,7 +33,7 @@ function NavBar({
 }) {
   return (
     <ThemeProvider theme={theme}>
-      <main className={arial.className}>
+      <div className={arial.className}>
         <div className="flex flex-col">
           <TopBar
             {...{
@@ -58,7 +58,7 @@ function NavBar({
             }}
           />
         </div>
-      </main>
+      </div>
     </ThemeProvider>
   )
 }
