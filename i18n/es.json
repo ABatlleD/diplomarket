@@ -370,7 +370,7 @@
     },
     "orders": {
       "ready_link": "Enlace listo",
-      "error_link": "Enlace No Encontrado",
+      "error_link": "Enlace expirado o cambió de precio un producto.",
       "error_request": "Error en la solicitud",
       "error_contact": "Contacte al administrador",
       "recipient_data": "Datos del destinatario"
@@ -484,7 +484,7 @@
   },
   "pay_error": {
     "title": "Error en el pago",
-    "description": "El pago no ha sido completado. Puede revisar su orden y/o contactar con atención al cliente."
+    "description": "El pago no ha sido completado. Puede revisar su orden, si no existe, es posible que haya cambiado el precio de los productos agregados. Si persiste este error, contactar con atención al cliente."
   },
   "pay_success": {
     "title": "Pago completado",

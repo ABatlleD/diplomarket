@@ -370,7 +370,7 @@
     },
     "orders": {
       "ready_link": "Link ready",
-      "error_link": "Link Not Found",
+      "error_link": "Link expired or changed price of a product.",
       "error_request": "Error in the request",
       "error_contact": "Contact the administrator",
       "recipient_data": "Recipient's data"
@@ -484,7 +484,7 @@
   },
   "pay_error": {
     "title": "Payment error",
-    "description": "The payment has not been completed. You can review your order and/or contact customer service."
+    "description": "Payment has not been completed. You can check your order, if it doesn't exist, they may have changed the price of the added products. If this error persists, contact customer support."
   },
   "pay_success": {
     "title": "Payment success",

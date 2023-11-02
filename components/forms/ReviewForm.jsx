@@ -676,7 +676,7 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
                                   type: "tropipay",
                                 })
                                 .then((payment) => {
-                                  const url = payment?.data?.url ?? ""
+                                                                    const url = payment?.data?.url ?? ""
                                   const failed = payment?.data?.failed ?? false
                                   if (url && url !== "message:Invalid Parameter") {
                                     push(`/payment-direct?tpp=${encodeURIComponent(url)}`).then()
@@ -689,6 +689,9 @@ function Review({ address, recipient, sede, activeProvince, activeDistrict }) {
                                     push("/error/payment").then()
                                     resetCart()
                                   }
+                                })
+                                .catch(() => {
+                                  push("/error/payment").then()
                                 })
                             } else {
                               push("/error/payment").then()
